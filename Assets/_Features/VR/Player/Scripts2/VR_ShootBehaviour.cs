@@ -7,12 +7,12 @@ namespace Gameplay.VR.Player
 {
     public class VR_ShootBehaviour : MonoBehaviour
     {
-        [SerializeField] [FoldoutGroup("SteamVR Components")] SteamVR_Action_Boolean shootAction;
-        SteamVR_Behaviour_Pose controllerPose;
+        [SerializeField] SteamVR_Action_Boolean shootAction = null;
+        SteamVR_Behaviour_Pose controllerPose = null;
         SteamVR_Input_Sources handSource;
 
         [SerializeField] [FoldoutGroup("Shooting")] LayerMask shootingLayer;
-        [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail;
+        [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
 
         RaycastHit hitInfo;
 

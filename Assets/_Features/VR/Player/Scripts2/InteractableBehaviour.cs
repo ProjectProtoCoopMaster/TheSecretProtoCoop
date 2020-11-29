@@ -10,6 +10,7 @@ namespace Gameplay.VR
 
         private void Awake()
         {
+            if (gameObject.tag != "Interactable") gameObject.tag = "Interactable";
             rigidBody = GetComponent<Rigidbody>();
         }
     }

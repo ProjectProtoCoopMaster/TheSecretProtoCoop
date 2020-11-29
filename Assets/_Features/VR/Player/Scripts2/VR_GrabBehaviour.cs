@@ -7,7 +7,7 @@ namespace Gameplay.VR.Player
 {
     public class VR_GrabBehaviour : MonoBehaviour
     {
-        [SerializeField] [FoldoutGroup("SteamVR Components")] SteamVR_Action_Boolean grabAction = null;
+        [SerializeField] SteamVR_Action_Boolean grabAction = null;
         SteamVR_Behaviour_Pose controllerPose = null;
         SteamVR_Input_Sources handSource;
 
