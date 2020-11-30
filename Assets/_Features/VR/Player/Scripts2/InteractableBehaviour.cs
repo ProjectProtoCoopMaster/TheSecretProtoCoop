@@ -68,7 +68,7 @@ namespace Gameplay.VR
                     for (int j = 0; j < hitInfo.Length; j++)
                     {
                         // if the sound has to pass through a wall
-                        if (!hitInfo[j].collider.CompareTag("Enemy"))
+                        if (hitInfo[j].collider.CompareTag("Wall"))
                         {
                             noiseRange *= .5F;
                             Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
@@ -81,8 +81,13 @@ namespace Gameplay.VR
                 if ((agentsInScene[i].transform.position - transform.position).sqrMagnitude < noiseRange * noiseRange)
                 {
                     Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
-                    agentsInScene[i].SetDistraction(transform.position);
-                    agentsInScene[i].GetComponent<AgentManager>().SwitchState(StateType.Distraction);
+
+                    AgentManager agent = agentsInScene[i].GetComponent<AgentManager>();
+
+                    DistractionBehavior distractionBehavior = agent.agentBehaviors[StateType.Distraction] as DistractionBehavior;
+                    distractionBehavior.SetDistraction(transform.position);
+
+                    agent.SwitchState(StateType.Distraction);
                 }
             }
         }
