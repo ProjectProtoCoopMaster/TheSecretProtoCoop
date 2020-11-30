@@ -26,6 +26,9 @@ namespace Gameplay.VR
         protected float sqrDistToTarget;
         protected bool poweredOn;
 
+        [SerializeField] protected int pingFrequency;
+        public int frames;
+
         private void Awake()
         {
             if (playerHead == null)

@@ -6,11 +6,9 @@ namespace Gameplay.VR
 {
     public class OverwatchBehavior : EntityVisionDataInterface
     {
-        public int frames;
+        bool detectedGuard = false;
 
-        [SerializeField] int pingFrequency;
-
-        private void Awake()
+        private void Start()
         {
             poweredOn = true;
             /*
@@ -42,13 +40,13 @@ namespace Gameplay.VR
         // every couple of frames, ping for dead guards
         private void Update()
         {
-            if (poweredOn == true)
+            if (poweredOn)
             {
                 frames++;
                 if (frames % pingFrequency == 0)
                 {
+                    PingForDeadGuards();
                     frames = 0;
-                    if (poweredOn) PingForDeadGuards();
                 }
             }
 
@@ -78,10 +76,11 @@ namespace Gameplay.VR
                     targetDir = awarenessManager.deadGuards[i].transform.position - myFinalPos;
                     Debug.DrawLine(transform.forward, targetDir, Color.green);
                     //...if the angle between the looking dir of the tneity and a dead guard is less than the cone of vision, then you can see him
-                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f)
+                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f && !detectedGuard)
                     {
                         Debug.Log(gameObject.name + " can see a dead friendly");
-                        awarenessManager.RaiseAlarm();
+                        awarenessManager.RaiseAlarm(this); 
+                        detectedGuard = true;
                     }
                 }
             }
@@ -90,6 +89,7 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
+            if (awarenessManager.alarmRaisers.Contains(this)) awarenessManager.alarmRaisers.Remove(this);
             awarenessManager.deadGuards.Add(gameObject);
             enabled = false;
         }

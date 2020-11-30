@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,18 +16,26 @@ namespace Gameplay.VR
 
     public class AwarenessManager : MonoBehaviour
     {
+        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityVisionDataInterface> alarmRaisers = new List<EntityVisionDataInterface>();
+
         [SerializeField] internal List<GameObject> deadGuards = new List<GameObject>();
-        [SerializeField] float alarmRaiseDuration;
-        [SerializeField] float time = 0f;
-        [SerializeField] bool raisingAlarm = false;
-        [SerializeField] CallableFunction gameOver;
+        [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
+        [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")][FoldoutGroup("Alarm Raising")] float reflexModeMultiplier;
+        [SerializeField][FoldoutGroup("Debugging")] float timePassed = 0f;
+
+        [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false;
+        [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
+
 
         // called by Detection Behaviour
-        internal void RaiseAlarm()
+        internal void RaiseAlarm(EntityVisionDataInterface alarmRaiser)
         {
+            alarmRaisers.Add(alarmRaiser);
+
             if (raisingAlarm != true)
             {
-                Time.timeScale /= 2f;
+                raisingAlarm = true;
+                Time.timeScale /= reflexModeMultiplier;
             }
             else return;
         }
@@ -34,12 +43,15 @@ namespace Gameplay.VR
         private void Update()
         {
             if (raisingAlarm)
-                time += Time.unscaledDeltaTime;
+                timePassed += Time.unscaledDeltaTime;
 
-            if (raisingAlarm && time >= alarmRaiseDuration)
+            if (raisingAlarm && timePassed >= alarmRaiseDuration)
             {
-                gameOver.Raise();
+                // if there are still entities raising the alarm, it's game over
+                if(alarmRaisers.Count > 0 ) gameOver.Raise();
+                else Time.timeScale *= reflexModeMultiplier;
                 raisingAlarm = false;
+                timePassed = 0f;
             }
 
         }

@@ -14,6 +14,7 @@ namespace Gameplay.VR
         {
             deathEvent.Invoke();
             ragdollBehavior.ActivateRagdoll();
+            enabled = false;
         }
     } 
 }
