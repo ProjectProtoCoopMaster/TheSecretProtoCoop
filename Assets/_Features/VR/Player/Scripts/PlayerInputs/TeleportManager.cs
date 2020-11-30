@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 namespace Gameplay.VR.Player
 {
-    public class AgentVRTeleportationManager : MonoBehaviour
+    public class TeleportManager : MonoBehaviour
     {
         [SerializeField] [FoldoutGroup("Teleportation Transition")] float tweenDuration = .25f;
         [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;

@@ -10,7 +10,7 @@ namespace Gameplay.VR.Player
         SteamVR_Behaviour_Pose controllerPose = null;
         SteamVR_Input_Sources handSource;
 
-        [SerializeField] AgentVRTeleportationManager teleportationManager = null;
+        [SerializeField] TeleportManager teleportationManager = null;
 
         private void Awake()
         {

@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace Gameplay.VR.Player
 {
-    public class AgentPCTeleportationBehaviour : MonoBehaviour
+    public class PC_TeleportBehaviour : MonoBehaviour
     {
         Transform playerHead;
         public Transform mouseOrigin;
-        AgentVRTeleportationManager manager;
+        TeleportManager manager;
         [SerializeField] float mouseSensitivity;
         float xRotation = 0f;
 
         private void Awake()
         {
-            manager = GetComponent<AgentVRTeleportationManager>();
+            manager = GetComponent<TeleportManager>();
             playerHead = manager.playerHead;
         }
 

@@ -6,7 +6,7 @@ namespace Gameplay.VR.Player
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
     [RequireComponent(typeof(MeshCollider))]
-    public class TeleportationArea : MonoBehaviour
+    public class TeleportArea : MonoBehaviour
     {
 
     } 
