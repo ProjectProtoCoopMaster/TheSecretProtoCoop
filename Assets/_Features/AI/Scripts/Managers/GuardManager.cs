@@ -20,18 +20,23 @@ namespace Gameplay.AI
         {
             agentBehaviors = new Dictionary<StateType, AgentBehavior>();
 
-            agentBehaviors.Add(StateType.Distraction, distractionBehavior);
-            if (guardType == GuardType.Patrol) agentBehaviors.Add(StateType.Patrol, patrolBehavior);
+            agentBehaviors.Add(StateType.Distraction, distractionBehavior); distractionBehavior.agent = this;
+            if (guardType == GuardType.Patrol) { agentBehaviors.Add(StateType.Patrol, patrolBehavior); patrolBehavior.agent = this; }
         }
 
         void Start()
         {
             if (guardType == GuardType.Patrol)
             {
-                currentState = StateType.Patrol;
-
-                agentBehaviors[currentState].Begin();
+                SwitchAgentState(StateType.Patrol, Usage.Start, false);
             }
+        }
+
+        public void DistractTo(Vector3 destination)
+        {
+            distractionBehavior.SetDistraction(destination);
+
+            SwitchAgentState(StateType.Distraction, Usage.Start, true);
         }
     } 
 }

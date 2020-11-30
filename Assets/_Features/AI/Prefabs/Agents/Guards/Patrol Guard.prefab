@@ -3055,6 +3055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3d3d7d5cf215a478e1ea6879049547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   guardType: 0
   patrolBehavior: {fileID: 8424401980289362238}
   distractionBehavior: {fileID: 8424401980289362236}
@@ -3206,7 +3207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6669204620637733675}
         m_TargetAssemblyTypeName: Gameplay.AI.AgentManager, Assembly-CSharp
-        m_MethodName: Stop
+        m_MethodName: KillAgent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -27,12 +27,9 @@ public class SoundObject : MonoBehaviour
             //Debug.Log(col.transform.parent.name);
             if (col.transform.parent.tag == "Enemy")
             {
-                AgentManager agent = col.transform.parent.GetComponent<AgentManager>();
+                GuardManager guard = col.transform.parent.GetComponent<GuardManager>();
 
-                DistractionBehavior distractionBehavior = agent.agentBehaviors[StateType.Distraction] as DistractionBehavior;
-                distractionBehavior.SetDistraction(transform.position);
-
-                agent.SwitchState(StateType.Distraction);
+                guard.DistractTo(transform.position);
             }
         }
 
