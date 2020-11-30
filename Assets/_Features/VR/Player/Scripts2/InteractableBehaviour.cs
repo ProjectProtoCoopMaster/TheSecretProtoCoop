@@ -82,12 +82,9 @@ namespace Gameplay.VR
                 {
                     Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
 
-                    AgentManager agent = agentsInScene[i].GetComponent<AgentManager>();
+                    GuardManager guard = agentsInScene[i].GetComponent<GuardManager>();
 
-                    DistractionBehavior distractionBehavior = agent.agentBehaviors[StateType.Distraction] as DistractionBehavior;
-                    distractionBehavior.SetDistraction(transform.position);
-
-                    agent.SwitchState(StateType.Distraction);
+                    guard.DistractTo(transform.position);
                 }
             }
         }

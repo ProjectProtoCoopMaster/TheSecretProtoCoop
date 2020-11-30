@@ -81,7 +81,7 @@ namespace Gameplay.AI
 
         protected int actionIndex;
 
-        public AgentBehavior previousBehavior { get; set; }
+        internal AgentManager agent;
 
         #region Get
         void Awake()
@@ -143,11 +143,19 @@ namespace Gameplay.AI
             if (actions.Count == actionIndex)
             {
                 if (loop) Begin();
-                else if (previousBehavior != null) { previousBehavior.Resume(); previousBehavior = null; actionIndex = 0; active = false; }
-                else { actionIndex = 0; active = false; }
+
+                else End();
             }
 
             else SetAction(actionIndex);
+        }
+
+        protected void End()
+        {
+            actionIndex = 0;
+            active = false;
+
+            agent.SwitchAgentState();
         }
         #endregion
 
