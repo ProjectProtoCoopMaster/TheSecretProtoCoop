@@ -169,7 +169,6 @@ namespace Gameplay.VR.Player
             // if you hit something with the Tall Ray, define it as the endpoint
             if (Physics.Raycast(tallRay, out hitTallInfo, 500, layerMask))
             {
-                Debug.Log(hitTallInfo.collider.gameObject.layer);
                 if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
                 {
                     canTeleport = true;

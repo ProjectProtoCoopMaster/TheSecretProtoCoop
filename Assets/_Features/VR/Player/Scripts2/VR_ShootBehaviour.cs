@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Valve.VR;
@@ -22,12 +23,13 @@ namespace Gameplay.VR.Player
             handSource = controllerPose.inputSource;
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            shootAction.AddOnStateDownListener(Shoot, handSource);
+            if (shootAction.GetStateDown(handSource)) 
+                Shooting();
         }
 
-        private void Shoot(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        void Shooting()
         {
             shotTrail.transform.position = transform.position;
             shotTrail.transform.rotation = transform.rotation;
@@ -39,7 +41,7 @@ namespace Gameplay.VR.Player
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
                 if (hitInfo.collider.CompareTag("Enemy"))
-                    hitInfo.collider.GetComponent<GuardBehaviour>().Shot();
+                    hitInfo.collider.GetComponent<AgentDeath>().Die();
             }
 
             else Debug.Log("I shot but didn't hit anything");

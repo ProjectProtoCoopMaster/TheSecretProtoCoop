@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Valve.VR;
@@ -19,16 +20,20 @@ namespace Gameplay.VR.Player
         private void Awake()
         {
             controllerPose = GetComponent<SteamVR_Behaviour_Pose>();
+            myJoint = GetComponent<FixedJoint>();
             handSource = controllerPose.inputSource;
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            grabAction.AddOnStateDownListener(GrabObject, handSource);
-            grabAction.AddOnStateUpListener(ReleaseObject, handSource);
+            if (grabAction.GetStateDown(handSource)) 
+                GrabObject();
+
+            if (grabAction.GetStateUp(handSource)) 
+                ReleaseObject();
         }
 
-        private void GrabObject(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        private void GrabObject()
         {
             interactableObject = GetNearestInteractable();
 
@@ -39,7 +44,7 @@ namespace Gameplay.VR.Player
             }
         }
 
-        private void ReleaseObject(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        private void ReleaseObject()
         {
             if (interactableObject != null)
             {
