@@ -18,7 +18,7 @@ namespace Gameplay.AI
 
         private bool resumeNext = false;
 
-        public bool isDead;
+        public bool isDead { get; set; }
 
         void Awake()
         {
