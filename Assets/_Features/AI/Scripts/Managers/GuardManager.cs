@@ -28,7 +28,7 @@ namespace Gameplay.AI
         {
             if (guardType == GuardType.Patrol)
             {
-                SwitchAgentState(StateType.Patrol, Usage.Start, false);
+                SwitchAgentState(Usage.Start, StateType.Patrol);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Gameplay.AI
         {
             distractionBehavior.SetDistraction(destination);
 
-            SwitchAgentState(StateType.Distraction, Usage.Start, true);
+            SwitchAgentState(Usage.Start, StateType.Distraction, true);
         }
     } 
 }

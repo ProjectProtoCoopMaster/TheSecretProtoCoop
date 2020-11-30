@@ -31,15 +31,15 @@ namespace Gameplay.AI
         {
             if (resumeNext)
             {
-                SwitchAgentState(saveState, Usage.Resume, false);
+                SwitchAgentState(Usage.Resume, saveState);
             }
             else
             {
-                SwitchAgentState(StateType.None, Usage.End, false); // Same as StopAgent();
+                SwitchAgentState(Usage.End); // Same as StopAgent();
             }
         }
 
-        protected void SwitchAgentState(StateType _state, Usage _usage, bool resumeAfterwards)
+        protected void SwitchAgentState(Usage _usage, StateType _state = StateType.None, bool resumeAfterwards = false)
         {
             if (isDead) return;
 
