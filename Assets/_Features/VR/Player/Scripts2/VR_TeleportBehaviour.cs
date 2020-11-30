@@ -18,20 +18,13 @@ namespace Gameplay.VR.Player
             handSource = controllerPose.inputSource;
         }
 
-        void OnEnable()
+        private void Update()
         {
-            teleportAction.AddOnStateDownListener(ShowPointer, handSource);
-            teleportAction.AddOnStateUpListener(TryTeleport, handSource);
-        }
+            if (teleportAction.GetStateDown(handSource)) 
+                teleportationManager.TallRayPointer(controllerPose);
 
-        private void ShowPointer(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
-        {
-            teleportationManager.TallRayPointer(controllerPose);
-        }
-
-        private void TryTeleport(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
-        {
-            teleportationManager.TryTeleporting();
+            if (teleportAction.GetStateUp(handSource)) 
+                teleportationManager.TryTeleporting();
         }
     }
 }
