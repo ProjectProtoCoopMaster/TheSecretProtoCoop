@@ -29,7 +29,7 @@ namespace Gameplay.VR
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<IKillable>() != null)
-                other.GetComponent<IKillable>().GE_Die();
+                other.GetComponent<IKillable>().Die();
         }
 
     }

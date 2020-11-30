@@ -13,6 +13,7 @@ namespace Networking
         [SerializeField] private Vector3Variable playerVRPosition;
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private GameEvent _onLose;
+        [SerializeField] private SymbolManager symbolManager;
 
         public void SendPlayerVRPosToOthers(Vector3Variable playerVRPosition)=> photonView.RPC("SendVector3", RpcTarget.Others, playerVRPosition.Value);
         [PunRPC]private void SendVector3(Vector3 position) => playerVRPosition.Value = position;
@@ -21,6 +22,10 @@ namespace Networking
         [PunRPC] public void SendSwitcherChange(float ID) => _switch.Raise(ID);
         public void SendLoseToOther() => photonView.RPC("SendLose", RpcTarget.Others);
         [PunRPC] public void SendLose() => _onLose.Raise();
+
+        public void SendIntToSymbolManagerToOther(int value) => photonView.RPC("SendIntToSymbolManager", RpcTarget.Others,value);
+        [PunRPC] public void SendIntToSymbolManager(int value) => symbolManager.indexes.Add(value);
+
 
     }
 }

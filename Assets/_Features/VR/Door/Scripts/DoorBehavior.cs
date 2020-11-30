@@ -6,13 +6,13 @@ namespace Gameplay.VR
 {
     public class DoorBehavior : MonoBehaviour, ISwitchable
     {
-        public enum LockState { Locked, Unlocked }
+        public enum LockState {Locked, Unlocked }
         public LockState lockState;
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
 
         [SerializeField] private Collider collider;
-        [SerializeField] private Material red, orange, blue;
+        [SerializeField] private Material red, green, blue;
         [SerializeField] private Renderer keyPassRenderer;
         [SerializeField] private Animator anim;
         public int State
@@ -43,38 +43,45 @@ namespace Gameplay.VR
 
         public void TurnOn()
         {
-            anim.ResetTrigger("Close");
-            anim.SetTrigger("Open");
-            //if (lockState == LockState.Locked) { keyPassRenderer.material = orange; collider.enabled = false; }
-            //else Unlock();
-            Unlock();
+            if (lockState == LockState.Locked) keyPassRenderer.material = red;
+            else keyPassRenderer.material = green;
+            anim.ResetTrigger("Open");
+            anim.SetTrigger("Close");
+
         }
 
         public void TurnOff()
         {
-            anim.ResetTrigger("Open");
-            anim.SetTrigger("Close");
-            //if (lockState == LockState.Locked) { keyPassRenderer.material = red; collider.enabled = false; }
-            Lock();
+            if (lockState == LockState.Unlocked )
+            {
+                anim.ResetTrigger("Close");
+                anim.SetTrigger("Open");
+                keyPassRenderer.material = blue;
+            }
+            else keyPassRenderer.material = red;
         }
 
         [Button("Unlock")]
         public void Unlock()
         {
-            anim.ResetTrigger("Close");
-            anim.SetTrigger("Open");
-            //collider.enabled = true;
-            //keyPassRenderer.material = blue;
+
             lockState = LockState.Unlocked;
+            if (Power == 0)
+            {
+                TurnOff(); 
+            }
+            else
+            {
+                keyPassRenderer.material = green;
+            }
         }
-        [Button("Lock")]
-        public void Lock()
+
+        // Only for Debug !!
+        [Button]
+        public void ChangePower()
         {
-            anim.ResetTrigger("Open");
-            anim.SetTrigger("Close");
-            //collider.enabled = true;
-            //keyPassRenderer.material = blue;
-            lockState = LockState.Locked;
+            if (Power == 1) Power = 0;
+            else Power = 1;
         }
 
     }
