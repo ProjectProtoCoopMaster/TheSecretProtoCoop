@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Gameplay;
 public class GameVerTest : MonoBehaviour
 {
     public Text gameOverText;
-
+    public CallableFunction sendGameOver;
+    private bool isDead;
     private void Start()
     {
         gameOverText.gameObject.SetActive(false);
@@ -15,8 +16,14 @@ public class GameVerTest : MonoBehaviour
 
     public void GE_GameOver()
     {
-        Debug.Log("Game Over");
-        ActivateUI();
+        if (!isDead)
+        {
+            Debug.Log("Game Over");
+            //sendGameOver.Raise();
+            isDead = true;
+        }
+
+        //ActivateUI();
     }
 
     private void ActivateUI()

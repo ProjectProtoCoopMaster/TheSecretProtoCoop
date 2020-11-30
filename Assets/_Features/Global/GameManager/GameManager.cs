@@ -43,7 +43,7 @@ namespace Gameplay
                 SceneManager.UnloadSceneAsync(1);
                 SceneManager.LoadScene(1, LoadSceneMode.Additive);
             }
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.5f);
             isGameOver = false;
             yield break;
         }
