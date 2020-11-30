@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    public  interface IKillable
+    public interface IKillable
     {
-        void GE_Die();
+        void Die();
         
     }
 }

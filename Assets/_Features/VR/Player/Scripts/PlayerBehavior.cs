@@ -11,7 +11,7 @@ namespace Gameplay.VR
         [SerializeField] private Vector3Variable _PlayerPosition;
         [SerializeField] private Camera pictureCamera;
         private bool isDead;
-        public void GE_Die()
+        public void Die()
         {
             if (!isDead)
             {

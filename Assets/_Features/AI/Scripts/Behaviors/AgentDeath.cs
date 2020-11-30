@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
-    public class AgentDeath : MonoBehaviour
+    public class AgentDeath : MonoBehaviour, IKillable
     {
         public UnityEvent deathEvent;
         public RagdollBehavior ragdollBehavior;

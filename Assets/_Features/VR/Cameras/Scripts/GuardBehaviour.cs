@@ -18,10 +18,10 @@ namespace Gameplay.VR
         public void Shot()
         {
             gameObject.name = "DEAD";
-            GE_Die();
+            Die();
         }
 
-        public void GE_Die()
+        public void Die()
         {
             Debug.Log("Ragdolling");
             ragdoll.ActivateRagdoll();

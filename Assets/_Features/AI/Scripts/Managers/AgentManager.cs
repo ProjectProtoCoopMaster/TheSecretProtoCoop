@@ -25,7 +25,7 @@ namespace Gameplay.AI
             previousState = currentState;
             currentState = newState;
 
-            foreach(AgentBehavior agentBehavior in agentBehaviors.Values)
+            foreach (AgentBehavior agentBehavior in agentBehaviors.Values)
             {
                 agentBehavior.Stop();
             }
@@ -36,7 +36,7 @@ namespace Gameplay.AI
 
         public void Stop()
         {
-            foreach(AgentBehavior agentBehavior in agentBehaviors.Values)
+            foreach (AgentBehavior agentBehavior in agentBehaviors.Values)
             {
                 agentBehavior.Stop();
             }
