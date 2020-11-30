@@ -137,6 +137,14 @@ namespace Gameplay.VR.Player
             }
         }
 
+        Vector3 playerFeetPosition
+        {
+            get
+            {
+                return Vector3.zero;
+            }
+        }
+
         #endregion
 
         // 1. fire a ray pointing in the direction of the controller

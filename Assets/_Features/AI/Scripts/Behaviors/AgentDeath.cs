@@ -12,10 +12,8 @@ namespace Gameplay.VR
 
         public void Die()
         {
-            gameObject.name = "DEAD";
-            ragdollBehavior.ActivateRagdoll();
-
             deathEvent.Invoke();
+            ragdollBehavior.ActivateRagdoll();
         }
     } 
 }

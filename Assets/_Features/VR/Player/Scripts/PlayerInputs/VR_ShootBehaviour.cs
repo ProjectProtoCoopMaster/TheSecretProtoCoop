@@ -41,7 +41,7 @@ namespace Gameplay.VR.Player
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
                 if (hitInfo.collider.CompareTag("Enemy"))
-                    hitInfo.collider.GetComponent<AgentDeath>().Die();
+                    hitInfo.collider.GetComponentInParent<AgentDeath>().Die();
             }
 
             else Debug.Log("I shot but didn't hit anything");

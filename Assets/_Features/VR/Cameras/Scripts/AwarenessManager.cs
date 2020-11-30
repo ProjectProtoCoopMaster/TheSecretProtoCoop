@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +15,35 @@ namespace Gameplay.VR
 
     public class AwarenessManager : MonoBehaviour
     {
+        [SerializeField] internal List<GameObject> deadGuards = new List<GameObject>();
+        [SerializeField] float alarmRaiseDuration;
+        [SerializeField] float time = 0f;
+        [SerializeField] bool raisingAlarm = false;
+        [SerializeField] CallableFunction gameOver;
+
+        // called by Detection Behaviour
+        internal void RaiseAlarm()
+        {
+            if (raisingAlarm != true)
+            {
+                Time.timeScale /= 2f;
+            }
+            else return;
+        }
+
+        private void Update()
+        {
+            if (raisingAlarm)
+                time += Time.unscaledDeltaTime;
+
+            if (raisingAlarm && time >= alarmRaiseDuration)
+            {
+                gameOver.Raise();
+                raisingAlarm = false;
+            }
+
+        }
+
         /*
         public List<OverwatchBehavior> overwatchBehaviors = new List<OverwatchBehavior>();
         public List<OverwatchEntityInfo> overwatchEntities = new List<OverwatchEntityInfo>();
@@ -72,61 +100,63 @@ namespace Gameplay.VR
             }
         }*/
 
-
-
-
         #region Shit
+        /*
+    float time;
+    bool killedAlarmRaiser;
+    public float timeToAlarm;
+    public CallableFunction sendGameOver;
+    private int frames;
 
-        float time;
-        bool killedAlarmRaiser;
-        public float timeToAlarm;
-        public CallableFunction sendGameOver;
-        private int frames;
+    public void GE_GuardRaisingAlarm()
+    {
+        // TODO : Implement a progressive spotting mechanic, based on distance
+        killedAlarmRaiser = false;
+        StartCoroutine(AlarmRaising());
+    }
 
-        public void GE_GuardRaisingAlarm()
+    // interrupt the alarm
+    public void GE_KillAlarmRaiser()
+    {
+        //killedAlarmRaiser = true;
+    }
+
+    // instant gameOver
+    public void GE_CameraRaisedAlarm()
+    {
+        // TODO : Implement a progressive spotting mechanic, based on distance
+        sendGameOver.Raise();
+    }
+
+    // countdown to raise the alarm, can be interrupted
+    private IEnumerator AlarmRaising()
+    {
+        time = 0f;
+        Debug.Log("Raising the Alarm !");
+
+        /*while (time < timeToAlarm)
         {
-            // TODO : Implement a progressive spotting mechanic, based on distance
-            killedAlarmRaiser = false;
-            StartCoroutine(AlarmRaising());
-        }
-
-        // interrupt the alarm
-        public void GE_KillAlarmRaiser()
-        {
-            //killedAlarmRaiser = true;
-        }
-
-        // instant gameOver
-        public void GE_CameraRaisedAlarm()
-        {
-            // TODO : Implement a progressive spotting mechanic, based on distance
-            sendGameOver.Raise();
-        }
-
-        // countdown to raise the alarm, can be interrupted
-        private IEnumerator AlarmRaising()
-        {
-            time = 0f;
-            Debug.Log("Raising the Alarm !");
-
-            /*while (time < timeToAlarm)
+            time += Time.deltaTime;
+            if (killedAlarmRaiser)
             {
-                time += Time.deltaTime;
-                if (killedAlarmRaiser)
-                {
-                    Debug.Log("Alarm was interrupted");
-                    break;
-                }
+                Debug.Log("Alarm was interrupted");
+                break;
+            }
 
-                // if enough time passes uninterrupted, the gameOver event is raised
-                if (time >= timeToAlarm) 
-
-                yield return null;
-            }*/
-            sendGameOver.Raise();
+            // if enough time passes uninterrupted, the gameOver event is raised
+            if (time >= timeToAlarm) 
 
             yield return null;
         }
+        sendGameOver.Raise();
+
+        yield return null;
+    }*/
         #endregion
+
+        public void GE_LoadNewLevel()
+        {
+            deadGuards = new List<GameObject>();
+        }
     }
 }

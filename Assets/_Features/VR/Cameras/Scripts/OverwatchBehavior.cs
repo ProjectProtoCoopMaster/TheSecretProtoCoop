@@ -1,103 +1,111 @@
-﻿using System.Collections;
-using UnityEngine;
-using System.Threading;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Gameplay.VR
 {
     public class OverwatchBehavior : EntityVisionDataInterface
     {
         public int frames;
-        public List<GameObject> visibleGuards = new List<GameObject>();
-        bool raisingAlarm;
+
+        [SerializeField] int pingFrequency;
 
         private void Awake()
         {
-            guards.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+            poweredOn = true;
+            /*
+             * 1. Best practices pour shaders sur mobile et sur VR
+             * 
+             * VR shaders -> hardware can change how shaders render (multi, single pass), forward, deffered rendering, etc...
+             * you can post-process everything at once, not camera by camera
+             * VFX -> animation culling, frustrum culling also work like this
+             * 
+             * See performance on URP 
+             * 
+             * Pick your hardware, pick your pipeline, and THEN start coding your shaders
+             * 
+             * OVERDRAW -> enemy of performance for VR and mobile
+             * 
+             * always work up from minimal specs
+             * 
+             * check shaders on right eye and left eye, off screen
+             * 
+             * watch out for off-screen post processing
+             * 
+             * start with shader graph -> preview node is important (haha)
+             * look at compiled version after 
+             * 
+             * Shader Graph has a "master shader" in which it "plugs in" sub-shaders
+             */
         }
 
-        private void Start()
+        // every couple of frames, ping for dead guards
+        private void Update()
         {
-            isActive = true;
-            PingForGuards();
+            if (poweredOn == true)
+            {
+                frames++;
+                if (frames % pingFrequency == 0)
+                {
+                    frames = 0;
+                    if (poweredOn) PingForDeadGuards();
+                }
+            }
+
+            else return;
         }
 
-        // called if
-        public void GE_Overwatching()
+        private void PingForDeadGuards()
         {
-            raisingAlarm = false;
-            PingForGuards();
+            myPos.x = transform.position.x;
+            myPos.y = transform.position.z;
+
+            for (int i = 0; i < awarenessManager.deadGuards.Count; i++)
+            {
+                targetPos.x = awarenessManager.deadGuards[i].transform.position.x;
+                targetPos.y = awarenessManager.deadGuards[i].transform.position.z;
+
+                myFinalPos.x = transform.position.x;
+                myFinalPos.y = awarenessManager.deadGuards[i].transform.position.y;
+                myFinalPos.z = transform.position.z;
+
+                sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
+
+                // if the target guard is within the vision range
+                if (sqrDistToTarget < rangeOfVision * rangeOfVision)
+                {
+                    // get the entity's direction relative to you...
+                    targetDir = awarenessManager.deadGuards[i].transform.position - myFinalPos;
+                    Debug.DrawLine(transform.forward, targetDir, Color.green);
+                    //...if the angle between the looking dir of the tneity and a dead guard is less than the cone of vision, then you can see him
+                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f)
+                    {
+                        Debug.Log(gameObject.name + " can see a dead friendly");
+                        awarenessManager.RaiseAlarm();
+                    }
+                }
+            }
         }
 
+        //called by Unity Event when the guard is killed
+        public void UE_GuardDied()
+        {
+            awarenessManager.deadGuards.Add(gameObject);
+            enabled = false;
+        }
+
+        #region Mobile Camera Power
         // for cameras
         // called from VR_CameraBehavior
         public void OverwatchOn()
         {
-            isActive = true;
-            PingForGuards();
+            poweredOn = true;
         }
 
         public void OverwatchOff()
         {
-            isActive = false;
-            StopAllCoroutines();
+            poweredOn = false;
         }
-
-        private void Update()
-        {
-            frames++;
-            if (frames % 2 == 0)
-            {
-                frames = 0;
-                PingForGuards();
-            }
-        }
-
-        void PingForGuards()
-        {
-            visibleGuards.Clear();
-            for (int i = 0; i < guards.Count; i++)
-            {
-                myPos.x = transform.position.x;
-                myPos.y = transform.position.z;
-
-                targetPos.x = guards[i].transform.position.x;
-                targetPos.y = guards[i].transform.position.z;
-
-                myFinalPos.x = transform.position.x;
-                myFinalPos.y = guards[i].transform.position.y;
-                myFinalPos.z = transform.position.z;
-
-                distToTarget = (targetPos - myPos).sqrMagnitude;
-
-                // if the target guard is within the vision range
-                if (distToTarget < rangeOfVision)
-                {
-                    // get the direction of the player's head...
-                    targetDir = guards[i].transform.position - myFinalPos;
-                    //...if the angle between the looking dir of the cam and the player is less than the cone of vision, then you are inside the cone of vision
-                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f) CheckGuardState(guards[i]);
-                }
-
-                else continue;
-            }
-        }
-
-        void CheckGuardState(GameObject guard)
-        {
-#if UNITY_EDITOR
-            if (!visibleGuards.Contains(guard)) visibleGuards.Add(guard);
-#endif
-
-            // if you see a dead guard
-            if (guard.name == "DEAD")
-            {
-                Debug.Log("I see a dead friendly !");
-                raisingAlarm = true;
-                raiseAlarm.Raise();
-            }
-        }
+        #endregion
     }
 }

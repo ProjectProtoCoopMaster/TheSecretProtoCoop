@@ -10,29 +10,36 @@ namespace Gameplay.VR
 
         private void Start()
         {
-            // have two seperate methods to 
-            isActive = true;
+            poweredOn = true;
             StartCoroutine(PlayerInRangeCheck());
         }
 
+        //called by Unity Event when the guard is killed
+        public void UE_GuardDied()
+        {
+            enabled = false;
+        }
+
+        #region Mobile Camera Power
         // called from VR_CameraBehavior
         public void DetectionOn()
         {
-            isActive = true;
+            poweredOn = true;
             StartCoroutine(PlayerInRangeCheck());
         }
         public void DetectionOff()
         {
-            isActive = false;
+            poweredOn = false;
             StopAllCoroutines();
-        }
+        } 
+        #endregion
 
         // check if the player is in range 
         IEnumerator PlayerInRangeCheck()
         {
             while (true)
             {
-                if (!isActive) break;
+                if (!poweredOn) break;
 
                 myPos.x = transform.position.x;
                 myPos.z = transform.position.z;
@@ -44,11 +51,11 @@ namespace Gameplay.VR
                 myFinalPos.y = playerHead.transform.position.y;
                 myFinalPos.z = transform.position.z;
 
-                distToTarget = (targetPos - myPos).sqrMagnitude;
+                sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
                 // Debug.DrawLine(transform.position, playerHead.position, Color.white);
 
                 // if the player is within the vision range
-                if (distToTarget < rangeOfVision * rangeOfVision)
+                if (sqrDistToTarget < rangeOfVision * rangeOfVision)
                 {
                     // get the direction of the player's head...
                    targetDir = playerHead.position - myFinalPos;
@@ -75,13 +82,12 @@ namespace Gameplay.VR
                 {
                     if (!isDetected)
                     {
-                        Debug.DrawLine(transform.position, playerHead.position, Color.green);
-                        Debug.Log(transform.name);
-                        raiseAlarm.Raise();
+                        Debug.Log(gameObject.name + " spotted the player");
+                        awarenessManager.RaiseAlarm();
                         isDetected = true;
                     }
-
                 }
+
                 else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
                 {
                     Debug.DrawLine(transform.position, playerHead.position, Color.red);

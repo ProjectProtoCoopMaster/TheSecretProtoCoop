@@ -20,14 +20,11 @@ namespace Gameplay.VR
         [SerializeField] protected GameEvent raiseAlarm;
         [SerializeField] [HideInInspector] protected Vector3 targetDir;
 
-        // overwatch variables (do not show in Scriptable)
-        protected float pingFrequency = 2f; // frequency at which you check up on nearby entities
-        protected List<GameObject> guards = new List<GameObject>(); // list of guards in the scene
-        protected List<Vector3> deadGuards = new List<Vector3>(); // list of guards in the scene
+        [SerializeField] protected AwarenessManager awarenessManager = null;
 
         protected Vector3 myPos, targetPos, myFinalPos;
-        protected float distToTarget;
-        protected bool isActive;
+        protected float sqrDistToTarget;
+        protected bool poweredOn;
 
         private void Awake()
         {
