@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Gameplay.VR
 {
@@ -20,12 +21,17 @@ namespace Gameplay.VR
 
         [SerializeField] internal List<GameObject> deadGuards = new List<GameObject>();
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
-        [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")][FoldoutGroup("Alarm Raising")] float reflexModeMultiplier;
         [SerializeField][FoldoutGroup("Debugging")] float timePassed = 0f;
+
+        [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")] [FoldoutGroup("Slow Motion")] float reflexModeMultiplier;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false;
         [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
 
+        private void Awake()
+        {
+
+        }
 
         // called by Detection Behaviour
         internal void RaiseAlarm(EntityVisionDataInterface alarmRaiser)
@@ -45,11 +51,13 @@ namespace Gameplay.VR
             if (raisingAlarm)
                 timePassed += Time.unscaledDeltaTime;
 
-            if (raisingAlarm && timePassed >= alarmRaiseDuration)
+            if (raisingAlarm && alarmRaisers.Count == 0 || timePassed >= alarmRaiseDuration)
             {
                 // if there are still entities raising the alarm, it's game over
                 if(alarmRaisers.Count > 0 ) gameOver.Raise();
-                else Time.timeScale *= reflexModeMultiplier;
+
+                // otherwise, set the world back in order
+                Time.timeScale *= reflexModeMultiplier;
                 raisingAlarm = false;
                 timePassed = 0f;
             }
