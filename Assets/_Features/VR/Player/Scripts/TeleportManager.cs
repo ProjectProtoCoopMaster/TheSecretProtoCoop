@@ -24,7 +24,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation")] float maxDistance = 10f;
         [SerializeField] [FoldoutGroup("Teleportation")] float castingHeight = 2f;
         [SerializeField] [FoldoutGroup("Teleportation")] float minControllerAngle = 30f, maxControllerAngle = 150f;
-        [SerializeField] [FoldoutGroup("Teleportation")] LayerMask layerMask;
+        [SerializeField] [FoldoutGroup("Teleportation")] LayerMask teleportationLayers;
         [SerializeField] [FoldoutGroup("Teleportation")] Gradient validTeleport;
         [SerializeField] [FoldoutGroup("Teleportation")] Gradient invalidTeleport;
         [SerializeField] [FoldoutGroup("Teleportation")] bool canTeleport;
@@ -175,7 +175,7 @@ namespace Gameplay.VR.Player
             tallRay.direction = (pointAlongRay - castingPosition).normalized;
 
             // if you hit something with the Tall Ray, define it as the endpoint
-            if (Physics.Raycast(tallRay, out hitTallInfo, 500, layerMask))
+            if (Physics.Raycast(tallRay, out hitTallInfo, 500, teleportationLayers))
             {
                 if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
                 {
@@ -189,7 +189,7 @@ namespace Gameplay.VR.Player
             }
 
             // otherwise, the endpoint must be on the horizontal axis
-            else if (Physics.Raycast(horizontalRay, out hitHorizontalInfo, 500, layerMask))
+            else if (Physics.Raycast(horizontalRay, out hitHorizontalInfo, 500, teleportationLayers))
             {
                 pointer.transform.position = hitHorizontalInfo.point;
             }

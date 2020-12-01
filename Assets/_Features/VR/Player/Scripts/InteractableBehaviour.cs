@@ -12,7 +12,6 @@ namespace Gameplay.VR
     {
         [SerializeField] LayerMask layerMask;
         RaycastHit[] hitInfo;
-        [SerializeField] float radius;
 
         [SerializeField] float maxRange;
         float noiseRange;
@@ -42,12 +41,7 @@ namespace Gameplay.VR
         private void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
-                ArmSound();
-        }
-
-        private void ArmSound()
-        {
-            canPlaySound = true;
+                canPlaySound = true;
         }
 
         private void MakeNoise(float collisionForce)
@@ -68,7 +62,7 @@ namespace Gameplay.VR
                     for (int j = 0; j < hitInfo.Length; j++)
                     {
                         // if the sound has to pass through a wall
-                        if (hitInfo[j].collider.CompareTag("Wall"))
+                        if (hitInfo[j].collider.CompareTag("Wall") || hitInfo[j].collider.CompareTag("Window"))
                         {
                             noiseRange *= .5F;
                             Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);

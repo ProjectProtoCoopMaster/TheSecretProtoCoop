@@ -227,11 +227,14 @@ MonoBehaviour:
   rangeOfVision: 90
   coneOfVision: 90
   playerHead: {fileID: 0}
-  layerMask:
+  detectionMask:
     serializedVersion: 2
-    m_Bits: 0
-  gameOver: {fileID: 0}
+    m_Bits: 1280
+  raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
+  awarenessManager: {fileID: 0}
+  pingFrequency: 3
+  frames: 3
 --- !u!114 &7403117790416530890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,12 +251,14 @@ MonoBehaviour:
   rangeOfVision: 90
   coneOfVision: 90
   playerHead: {fileID: 0}
-  layerMask:
+  detectionMask:
     serializedVersion: 2
-    m_Bits: 0
-  gameOver: {fileID: 0}
+    m_Bits: 3072
+  raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
-  visibleGuards: []
+  awarenessManager: {fileID: 0}
+  pingFrequency: 3
+  frames: 3
 --- !u!114 &5960268178023418780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,8 +275,11 @@ MonoBehaviour:
   rangeOfVision: 90
   coneOfVision: 90
   playerHead: {fileID: 0}
-  layerMask:
+  detectionMask:
     serializedVersion: 2
     m_Bits: 0
-  gameOver: {fileID: 0}
+  raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
+  awarenessManager: {fileID: 0}
+  pingFrequency: 3
+  frames: 3
