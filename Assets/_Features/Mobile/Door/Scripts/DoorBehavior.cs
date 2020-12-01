@@ -28,6 +28,7 @@ namespace Gameplay.Mobile
         private void OnEnable()
         {
             color = GetComponent<Image>().color;
+            
         }
         private void Start() => Power = power;
 
@@ -60,6 +61,9 @@ namespace Gameplay.Mobile
             }
         }
 
+
+        public void RaiseLoadSymbols(CallableFunction loadSymbols) { loadSymbols.Raise(); }
+
         // Only for Debug !!
         [Button]
         public void ChangePower()
@@ -67,6 +71,8 @@ namespace Gameplay.Mobile
             if (Power == 1) Power = 0;
             else Power = 1;
         }
+
+
     }
 }
 

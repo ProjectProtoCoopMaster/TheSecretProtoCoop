@@ -8,88 +8,151 @@ namespace Gameplay
 {
     public class SymbolManager : MonoBehaviour
     {
-        [SerializeField] private List<Sprite> iconsAsset;
-        [SerializeField] private List<Sprite> iconsAssetReminder;
-        [SerializeField] private Image[] iconsGame;
-        [SerializeField] private List<Sprite> iconsSelected;
+       
         [SerializeField] private Networking.TransmitterManager transmitterManager;
+        public BoolVariable isSymbolLoaded;
+        public List<Sprite> iconsAsset;
+        [ReadOnly]
+        public List<Sprite> iconsAssetReminder;
+        [ReadOnly]
+        public List<Sprite> iconsSelected;
+        [ReadOnly]
+        public List<Sprite> iconsStashed;
+        [SerializeField] private string[] codeNames;
+        [ReadOnly]
+        public string[] pickedNames;
+        [ReadOnly]
         public List<int> indexes;
-        
-        [Button]
-        public void ChargeSymbols()
+        public static SymbolManager instance;
+        public ISymbol symbol;
+        private void OnEnable()
         {
-            iconsSelected.Clear();
-            iconsAssetReminder.Clear();
-            indexes.Clear();
-            for (int i = 0; i < iconsGame.Length; i++)
+            instance = this;
+            
+        }
+        private void OnDisable()
+        {
+            isSymbolLoaded.Value = false;
+        }
+        public void LoadSymbols()
+        {
+            if (!isSymbolLoaded.Value)
             {
-                int random = Random.Range(0, iconsAsset.Count);
-                indexes.Add(random);
-                iconsGame[i].overrideSprite = iconsAsset[random];
-                iconsAssetReminder.Add(iconsAsset[random]);
-                iconsAsset.Remove(iconsAsset[random]);
-
-            }
-
-
-
-            for (int i = 0; i < 3; i++)
-            {
-                int randomSelected = Random.Range(0, iconsAssetReminder.Count);
-                if (iconsSelected.Count != 0)
+                Debug.Log("Hello");
+                iconsSelected.Clear();
+                iconsAssetReminder.Clear();
+                iconsStashed.Clear();
+                indexes.Clear();
+                for (int i = 0; i < iconsAsset.Count; i++)
                 {
-                    for (int j = 0; j < iconsSelected.Count; j++)
+                    iconsAssetReminder.Add(iconsAsset[i]);
+                }
+                for (int i = 0; i < 15; i++)
+                {
+                    int random = Random.Range(0, iconsAsset.Count);
+                    indexes.Add(random);
+
+                    iconsStashed.Add(iconsAsset[random]);
+                    iconsAsset.Remove(iconsAsset[random]);
+
+                }
+
+
+
+                for (int i = 0; i < 3; i++)
+                {
+                    int randomSelected = Random.Range(0, iconsStashed.Count);
+                    if (iconsSelected.Count != 0)
                     {
-                        if (iconsAssetReminder[randomSelected] == iconsSelected[j])
+                        for (int j = 0; j < iconsSelected.Count; j++)
                         {
-                            i--;
-                            break;
-                        }
-                        else
-                        {
-                            if (j == iconsSelected.Count - 1)
+                            if (iconsStashed[randomSelected] == iconsSelected[j])
                             {
-                                iconsSelected.Add(iconsAssetReminder[randomSelected]);
-                                indexes.Add(randomSelected);
+                                i--;
                                 break;
+                            }
+                            else
+                            {
+                                if (j == iconsSelected.Count - 1)
+                                {
+                                    iconsSelected.Add(iconsStashed[randomSelected]);
+                                    indexes.Add(randomSelected);
+
+                                    break;
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        iconsSelected.Add(iconsStashed[randomSelected]);
+                        indexes.Add(randomSelected);
+
+                    }
+
+
                 }
-                else
+                iconsAsset.Clear();
+                for (int i = 0; i < iconsAssetReminder.Count; i++)
                 {
-                    iconsSelected.Add(iconsAssetReminder[randomSelected]);
-                    indexes.Add(randomSelected);
+                    iconsAsset.Add(iconsAssetReminder[i]);
                 }
 
+                for (int i = 0; i < indexes.Count; i++)
+                {
+                    transmitterManager.SendSymbolIDToOther(indexes[i]);
+                }
+                PickCodeName();
+                SetSymbols();
 
-            }
-            for (int i = 0; i < iconsAssetReminder.Count; i++)
-            {
-                iconsAsset.Add(iconsAssetReminder[i]);
+                
+                transmitterManager.SendSetSymbolToOthers();
+
+                for (int i = 0; i < 3; i++)
+                {
+                    transmitterManager.SendIconsSelectedToOthers(i,iconsStashed.IndexOf(iconsSelected[i]));
+                }
+                
+                isSymbolLoaded.Value = true;
             }
 
-            for (int i = 0; i < indexes.Count; i++)
-            {
-                transmitterManager.SendIntToSymbolManagerToOther(indexes[i]);
-            }
 
         }
 
-        public void ChargeSymbols(List<int> IDs)
+        public void SetSymbols()
         {
-            iconsSelected.Clear();
-            for (int i = 0; i < iconsGame.Length; i++)
+            if (symbol != null) symbol.SetSymbols();
+        }
+
+
+        public void PickCodeName()
+        {
+            pickedNames = new string[3];
+            int random = Random.Range(0, codeNames.Length);
+            pickedNames[0] = codeNames[random];
+            
+            for (int i = 1; i < 3; i++)
             {
-                iconsGame[i].overrideSprite = iconsAsset[IDs[i]];
+                int randomSelected = Random.Range(0, codeNames.Length);
+                for (int j = 0; j < pickedNames.Length; j++)
+                {
+                    if (codeNames[randomSelected] == pickedNames[j])
+                    {
+                        i--;
+                        break;
+                    }
+                    else
+                    {
+                        pickedNames[i] = codeNames[randomSelected];
+                        break;
+                    }
+                }
+
+
             }
 
-            for (int i = 0; i < 3; i++)
-            {
-                iconsSelected.Add(iconsAssetReminder[IDs[i] + iconsGame.Length - 1]);
-            }
+            transmitterManager.SendCodeNameToOthers(pickedNames);
 
-            indexes.Clear();
         }
 
     }

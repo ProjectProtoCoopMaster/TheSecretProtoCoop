@@ -5,15 +5,24 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 namespace Gameplay.Mobile
 {
-    public class SymbolBehavior : MonoBehaviour
+    public class SymbolBehavior : MonoBehaviour, ISymbol
     {
-        [SerializeField] private List<Sprite> iconsSelected;
-        [SerializeField] private Image[] iconsAnswers;
+        [SerializeField] private CallableFunction _sendOnOpenDoor;
+        private SymbolManager symbolManager;
+        [SerializeField] public Image[] iconsAnswers;
         [SerializeField] private Image[] results;
+        [SerializeField] private Image[] iconsGame;
+        [SerializeField] Text codeNameText;
+
         private int missNumber;
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
 
+        private void OnEnable()
+        {
+            symbolManager = SymbolManager.instance;
+            symbolManager.symbol = this;
+        }
         public void ResetIcon(Image image)
         {
             image.overrideSprite = null;
@@ -35,17 +44,17 @@ namespace Gameplay.Mobile
 
         public void Unlock()
         {
-            for (int i = 0; i < iconsSelected.Count; i++)
+            for (int i = 0; i < symbolManager.iconsSelected.Count; i++)
             {
-                if(iconsSelected[i] != iconsAnswers[i].overrideSprite)
+                if(symbolManager.iconsSelected[i] != iconsAnswers[i].overrideSprite)
                 {
                     Miss();
-                    i = iconsSelected.Count;
+                    i = symbolManager.iconsSelected.Count;
                     break;
                 }
                 else
                 {
-                    if (i == iconsSelected.Count - 1)
+                    if (i == symbolManager.iconsSelected.Count - 1)
                     {
                         Succeed();
                         break;
@@ -59,7 +68,8 @@ namespace Gameplay.Mobile
 
             door.Unlock();
             results[missNumber].color = Color.green;
-            Destroy(gameObject);
+            _sendOnOpenDoor.Raise();
+            //Destroy(gameObject);
         }
 
         private void Miss()
@@ -69,6 +79,33 @@ namespace Gameplay.Mobile
         }
 
 
+        public void SetSymbols()
+        {
+            Debug.Log("Hello");
+            for (int i = 0; i < iconsGame.Length; i++)
+            {
+
+                iconsGame[i].overrideSprite = symbolManager.iconsAsset[symbolManager.indexes[i]];
+                symbolManager.iconsStashed.Add(symbolManager.iconsAsset[symbolManager.indexes[i]]);
+                symbolManager.iconsAsset.Remove(symbolManager.iconsAsset[symbolManager.indexes[i]]);
+            }
+            symbolManager.iconsSelected.Clear();
+
+            for (int i = 0; i < 3; i++)
+            {
+                symbolManager.iconsSelected.Add(symbolManager.iconsStashed[symbolManager.indexes[i + iconsGame.Length]]);
+
+            }
+
+            symbolManager.iconsAsset.Clear();
+            for (int i = 0; i < symbolManager.iconsAssetReminder.Count; i++)
+            {
+                symbolManager.iconsAsset.Add(symbolManager.iconsAssetReminder[i]);
+            }
+
+            codeNameText.text = symbolManager.pickedNames[0];
+
+        }
     }
 
 }
