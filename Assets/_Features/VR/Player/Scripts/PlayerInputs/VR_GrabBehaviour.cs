@@ -39,10 +39,7 @@ namespace Gameplay.VR.Player
             interactableObject = GetNearestInteractable();
 
             if (interactableObject != null)
-            {
-                //interactableObject.transform.position = transform.position;
                 myJoint.connectedBody = interactableObject.rigidBody;
-            }
         }
 
         private void ReleaseObject()
