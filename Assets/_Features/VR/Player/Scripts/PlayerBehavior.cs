@@ -26,7 +26,6 @@ namespace Gameplay.VR
             _PlayerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
             _SendPlayerPosition.Raise();
         }
-
     }
 }
 

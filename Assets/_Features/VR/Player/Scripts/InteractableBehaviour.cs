@@ -7,14 +7,13 @@ namespace Gameplay.VR
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(AudioSource))]
-
     public class InteractableBehaviour : MonoBehaviour
     {
-        [SerializeField] LayerMask layerMask;
+        [SerializeField] LayerMask guardHearingLayermask;
         RaycastHit[] hitInfo;
-        [SerializeField] float radius;
 
-        [SerializeField] float maxRange;
+        [SerializeField] float maxRange = 30f;
+        [SerializeField] float noiseDampenMultiplier = .5f;
         float noiseRange;
 
         // accessed by the Grab Behaviour
@@ -26,7 +25,6 @@ namespace Gameplay.VR
 
         private void Awake()
         {
-            if (gameObject.tag != "Interactable") gameObject.tag = "Interactable";
             rigidBody = GetComponent<Rigidbody>();
             audioSource = GetComponent<AudioSource>();
 
@@ -35,6 +33,7 @@ namespace Gameplay.VR
 
         private void OnCollisionEnter(Collision collision)
         {
+            Debug.Log("I HIT " + collision.gameObject.name);
             if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && canPlaySound)
                 MakeNoise(noiseRange = collision.relativeVelocity.magnitude);
         }
@@ -42,12 +41,7 @@ namespace Gameplay.VR
         private void OnCollisionExit(Collision collision)
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
-                ArmSound();
-        }
-
-        private void ArmSound()
-        {
-            canPlaySound = true;
+                canPlaySound = true;
         }
 
         private void MakeNoise(float collisionForce)
@@ -61,18 +55,18 @@ namespace Gameplay.VR
             // check to see if the sound has to pass through walls to reach each enemy in the scene
             for (int i = 0; i < agentsInScene.Count; i++)
             {
-                hitInfo = Physics.RaycastAll(transform.position, agentsInScene[i].transform.position, 500f, layerMask);
+                hitInfo = Physics.RaycastAll(transform.position, agentsInScene[i].transform.position, 500f, guardHearingLayermask);
 
                 if(hitInfo.Length > 0)
                 {
                     for (int j = 0; j < hitInfo.Length; j++)
                     {
                         // if the sound has to pass through a wall
-                        if (hitInfo[j].collider.CompareTag("Wall"))
+                        if (hitInfo[j].collider.CompareTag("Wall") || hitInfo[j].collider.CompareTag("Window"))
                         {
-                            noiseRange *= .5F;
-                            Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
-                            Debug.Log("noiseRange is now " + noiseRange);
+                            noiseRange *= noiseDampenMultiplier;
+                            /*Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
+                            Debug.Log("noiseRange is now " + noiseRange);*/
                         }
                     }
                 }
@@ -82,12 +76,9 @@ namespace Gameplay.VR
                 {
                     Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
 
-                    AgentManager agent = agentsInScene[i].GetComponent<AgentManager>();
+                    GuardManager guard = agentsInScene[i].GetComponent<GuardManager>();
 
-                    DistractionBehavior distractionBehavior = agent.agentBehaviors[StateType.Distraction] as DistractionBehavior;
-                    distractionBehavior.SetDistraction(transform.position);
-
-                    agent.SwitchState(StateType.Distraction);
+                    guard.DistractTo(transform.position);
                 }
             }
         }

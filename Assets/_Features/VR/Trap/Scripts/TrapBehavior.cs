@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
+    [RequireComponent(typeof(BoxCollider))]
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
         [Range(0, 1), SerializeField] private int state;
@@ -28,8 +29,10 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<IKillable>() != null)
-                other.GetComponent<IKillable>().Die();
+            if (other.transform.parent.tag == "Enemy")
+            {
+                other.transform.parent.GetComponent<IKillable>().Die();
+            }
         }
 
     }

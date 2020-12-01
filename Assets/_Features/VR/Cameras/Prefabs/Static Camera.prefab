@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 5594484670664326339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5594484669824261417}
   m_Father: {fileID: 0}
@@ -208,14 +208,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityVisionData: {fileID: 0}
-  rangeOfVision: 0
-  coneOfVision: 0
+  rangeOfVision: 5.99
+  coneOfVision: 66
   playerHead: {fileID: 0}
-  layerMask:
+  detectionMask:
     serializedVersion: 2
-    m_Bits: 0
-  gameOver: {fileID: 0}
+    m_Bits: 1280
+  raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
+  awarenessManager: {fileID: 0}
+  pingFrequency: 3
+  frames: 3
 --- !u!114 &7403117790416530890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,15 +232,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityVisionData: {fileID: 0}
-  rangeOfVision: 0
-  coneOfVision: 0
+  rangeOfVision: 5.99
+  coneOfVision: 66
   playerHead: {fileID: 0}
-  layerMask:
+  detectionMask:
     serializedVersion: 2
-    m_Bits: 0
-  gameOver: {fileID: 0}
+    m_Bits: 3072
+  raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
-  visibleGuards: []
+  awarenessManager: {fileID: 0}
+  pingFrequency: 3
+  frames: 3
 --- !u!114 &5960268178023418780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,11 +256,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityVisionData: {fileID: 0}
-  rangeOfVision: 0
-  coneOfVision: 0
+  rangeOfVision: 5.99
+  coneOfVision: 66
   playerHead: {fileID: 0}
-  layerMask:
+  detectionMask:
     serializedVersion: 2
     m_Bits: 0
-  gameOver: {fileID: 0}
+  raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
+  awarenessManager: {fileID: 0}
+  pingFrequency: 3
+  frames: 3
