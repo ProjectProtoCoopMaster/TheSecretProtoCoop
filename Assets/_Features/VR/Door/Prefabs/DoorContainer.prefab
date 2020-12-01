@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a77048a39ca19e4386e1c02c76d40a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockState: 1
+  lockState: 0
   state: 1
   power: 1
   collider: {fileID: 7307703324290391865}
@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 7307703324976488376}
   - component: {fileID: 7307703324976488377}
   - component: {fileID: 7307703324976488382}
+  - component: {fileID: 544148342}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -264,3 +265,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &544148342
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7307703324976488380}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

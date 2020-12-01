@@ -178,13 +178,11 @@ namespace Gameplay.VR.Player
             if (Physics.Raycast(tallRay, out hitTallInfo, 500, teleportationLayers))
             {
                 if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
-                {
                     canTeleport = true;
-                }
-                else
-                {
+
+                else 
                     canTeleport = false;
-                }
+
                 pointer.transform.position = hitTallInfo.point;
             }
 

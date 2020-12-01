@@ -7,13 +7,12 @@ namespace Gameplay.VR
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(AudioSource))]
-
     public class InteractableBehaviour : MonoBehaviour
     {
-        [SerializeField] LayerMask layerMask;
+        [SerializeField] LayerMask guardHearingLayermask;
         RaycastHit[] hitInfo;
 
-        [SerializeField] float maxRange;
+        [SerializeField] float maxRange = 30f;
         float noiseRange;
 
         // accessed by the Grab Behaviour
@@ -55,7 +54,7 @@ namespace Gameplay.VR
             // check to see if the sound has to pass through walls to reach each enemy in the scene
             for (int i = 0; i < agentsInScene.Count; i++)
             {
-                hitInfo = Physics.RaycastAll(transform.position, agentsInScene[i].transform.position, 500f, layerMask);
+                hitInfo = Physics.RaycastAll(transform.position, agentsInScene[i].transform.position, 500f, guardHearingLayermask);
 
                 if(hitInfo.Length > 0)
                 {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
+    [RequireComponent(typeof(BoxCollider))]
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
         [Range(0, 1), SerializeField] private int state;

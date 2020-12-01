@@ -13,6 +13,7 @@ namespace Gameplay.VR.Player
         SteamVR_Input_Sources handSource;
 
         [SerializeField] LayerMask pickupLayer;
+        [SerializeField] float pickupOffset = 0.2f;
         [SerializeField] InteractableBehaviour interactableObject = null;
 
         FixedJoint myJoint;
@@ -39,7 +40,7 @@ namespace Gameplay.VR.Player
 
             if (interactableObject != null)
             {
-                interactableObject.transform.position = transform.position;
+                //interactableObject.transform.position = transform.position;
                 myJoint.connectedBody = interactableObject.rigidBody;
             }
         }
@@ -57,7 +58,7 @@ namespace Gameplay.VR.Player
 
         private InteractableBehaviour GetNearestInteractable()
         {
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, 0.2f, pickupLayer);
+            Collider[] colliders = Physics.OverlapSphere(this.transform.position, pickupOffset, pickupLayer);
 
             if (colliders.Length > 0)
             {
