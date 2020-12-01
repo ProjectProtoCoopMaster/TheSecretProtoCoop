@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -91,7 +88,8 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            if (awarenessManager.alarmRaisers.Contains(this)) awarenessManager.alarmRaisers.Remove(this);
+            if (awarenessManager.alarmRaisers.Contains(this)) 
+                awarenessManager.alarmRaisers.Remove(this);
                enabled = false;
         }
 
