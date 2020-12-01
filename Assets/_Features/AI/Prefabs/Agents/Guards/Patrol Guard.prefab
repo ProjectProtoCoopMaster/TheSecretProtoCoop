@@ -2385,7 +2385,7 @@ GameObject:
   - component: {fileID: 5042022890298481365}
   m_Layer: 11
   m_Name: Body
-  m_TagString: Enemy
+  m_TagString: Enemy/Light Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3013,7 +3013,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8424401980289362233}
   - component: {fileID: 6669204620637733675}
-  - component: {fileID: 8424401980289362238}
   - component: {fileID: 8424401980289362236}
   - component: {fileID: 7862957208814157675}
   - component: {fileID: 5042022890283721781}
@@ -3022,7 +3021,7 @@ GameObject:
   - component: {fileID: 170555982519352291}
   m_Layer: 11
   m_Name: Patrol Guard
-  m_TagString: Enemy
+  m_TagString: Enemy/Light Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3056,27 +3055,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  guardType: 0
-  patrolBehavior: {fileID: 8424401980289362238}
+  guardType: 1
+  patrolBehavior: {fileID: 0}
   distractionBehavior: {fileID: 8424401980289362236}
---- !u!114 &8424401980289362238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424401980289362230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a0cae07758951469a76ade5a4a543e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateType: 0
-  loop: 1
-  path: {fileID: 0}
-  moveBehavior: {fileID: 2313500980275010188}
-  waitBehavior: {fileID: 1097267631011459549}
-  watchBehavior: {fileID: 5757402280843154334}
 --- !u!114 &8424401980289362236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3208,6 +3189,30 @@ MonoBehaviour:
       - m_Target: {fileID: 6669204620637733675}
         m_TargetAssemblyTypeName: Gameplay.AI.AgentManager, Assembly-CSharp
         m_MethodName: KillAgent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5042022890283721780}
+        m_TargetAssemblyTypeName: Gameplay.VR.OverwatchBehavior, Assembly-CSharp
+        m_MethodName: UE_GuardDied
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5042022890283721779}
+        m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
+        m_MethodName: UE_GuardDied
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

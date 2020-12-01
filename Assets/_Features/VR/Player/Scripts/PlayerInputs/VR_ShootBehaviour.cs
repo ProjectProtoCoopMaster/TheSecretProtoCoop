@@ -41,7 +41,7 @@ namespace Gameplay.VR.Player
             {
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
-                if (hitInfo.collider.CompareTag("Enemy"))
+                if (hitInfo.collider.CompareTag("Enemy/Light Guard"))
                     hitInfo.collider.GetComponentInParent<AgentDeath>().Die();
             }
 
