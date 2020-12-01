@@ -13,6 +13,7 @@ namespace Gameplay.VR.Player
         SteamVR_Input_Sources handSource;
 
         [SerializeField] [FoldoutGroup("Shooting")] LayerMask shootingLayer;
+        [SerializeField] [FoldoutGroup("Shooting")] float bulletRadius = 0.1f;
         [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
 
         RaycastHit hitInfo;
@@ -36,7 +37,7 @@ namespace Gameplay.VR.Player
 
             shotTrail.Play();
 
-            if (Physics.SphereCast(transform.position, 0.25f, transform.forward, out hitInfo, 100f, shootingLayer))
+            if (Physics.SphereCast(transform.position, bulletRadius, transform.forward, out hitInfo, 100f, shootingLayer))
             {
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
