@@ -31,19 +31,25 @@ namespace Gameplay.AI
         public void SetDistraction(Vector3 direction)
         {
             distractionPosition = direction;
-            returnPosition = transform.position;
-
-            returnRotation = transform.rotation.eulerAngles;
 
             actions = new List<_Action>
             {
                 new _Action { actionType = ActionType.Wait, timeToWait = awarenessTime },
                 new _Action { actionType = ActionType.Move, destination = distractionPosition, area = 0.8f },
 
-                new _Action { actionType = ActionType.Wait, timeToWait = searchTime },
-                new _Action { actionType = ActionType.Move, destination = returnPosition, area = 0.1f },
-                new _Action { actionType = ActionType.Search, watchRotation = returnRotation }
+                new _Action { actionType = ActionType.Wait, timeToWait = searchTime }
             };
+        }
+
+        public void SetDistractionWithReturn(Vector3 direction)
+        {
+            SetDistraction(direction);
+
+            returnPosition = transform.position;
+            returnRotation = transform.rotation.eulerAngles;
+
+            actions.Add(new _Action { actionType = ActionType.Move, destination = returnPosition, area = 0.1f });
+            actions.Add(new _Action { actionType = ActionType.Search, watchRotation = returnRotation });
         }
     }
 }

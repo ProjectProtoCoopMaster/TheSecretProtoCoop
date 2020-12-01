@@ -75,7 +75,7 @@ namespace Gameplay.AI
 
         protected List<_Action> actions = new List<_Action>();
 
-        protected _Action currentAction;
+        public _Action currentAction { get; private set; }
         public ActionType currentActionType { get; set; }
         public ActionType savedActionType { get; set; }
 

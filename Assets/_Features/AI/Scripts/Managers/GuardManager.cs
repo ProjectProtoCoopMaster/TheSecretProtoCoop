@@ -34,7 +34,14 @@ namespace Gameplay.AI
 
         public void DistractTo(Vector3 destination)
         {
-            distractionBehavior.SetDistraction(destination);
+            if (guardType == GuardType.Patrol && patrolBehavior.currentAction.actionType == ActionType.Move)
+            {
+                distractionBehavior.SetDistraction(destination);
+            }
+            else
+            {
+                distractionBehavior.SetDistractionWithReturn(destination);
+            }
 
             SwitchAgentState(Usage.Start, StateType.Distraction, true);
         }
