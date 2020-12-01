@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class ObjectMove : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] private float speed;
 
-    public Transform startPoint;
-    public Transform endPoint;
+    [SerializeField] private Transform startPoint;
+    [SerializeField] private Transform endPoint;
 
     private Vector3 currentDestination { get { if (onReturn) return startPoint.position; else return endPoint.position; } }
 
-    public bool onReturn { get; set; }
+    public bool onReturn { get; private set; }
 
     void Update()
     {
         MoveTo(currentDestination);
     }
 
-    void MoveTo(Vector3 destination)
+    private void MoveTo(Vector3 destination)
     {
         Vector3 localDestination = destination - transform.position;
         Vector3 direction = Vector3.ClampMagnitude(localDestination, 1f);

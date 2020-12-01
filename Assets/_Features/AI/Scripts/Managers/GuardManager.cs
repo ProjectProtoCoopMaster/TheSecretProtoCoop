@@ -9,12 +9,11 @@ namespace Gameplay.AI
 
     public class GuardManager : AgentManager
     {
-        public GuardType guardType;
+        [SerializeField] private GuardType guardType; public GuardType GuardType { get => guardType; }
 
-        [ShowIf("guardType", GuardType.Patrol)]
-        public PatrolBehavior patrolBehavior;
+        [ShowIf("guardType", GuardType.Patrol), SerializeField] private PatrolBehavior patrolBehavior;
 
-        public DistractionBehavior distractionBehavior;
+        [SerializeField] private DistractionBehavior distractionBehavior;
 
         protected override void InitializeAgent()
         {
@@ -34,7 +33,15 @@ namespace Gameplay.AI
 
         public void DistractTo(Vector3 destination)
         {
-            if (guardType == GuardType.Patrol && patrolBehavior.currentAction.actionType == ActionType.Move)
+            if (distractionBehavior.active == true)
+            {
+                if (Vector3.Distance(transform.position, destination) > Vector3.Distance(transform.position, distractionBehavior.distractionPosition))
+                {
+                    return;
+                }
+            }
+
+            if (guardType == GuardType.Patrol && patrolBehavior.active == true && patrolBehavior.currentAction.actionType == ActionType.Move)
             {
                 distractionBehavior.SetDistraction(destination);
             }

@@ -6,10 +6,10 @@ namespace Gameplay.AI
 {
     public class MoveAction : ActionBehavior
     {
-        public Transform target;
+        [SerializeField] protected Transform target;
 
-        public Vector3 destination { get; set; }
-        public float area { get; set; }
+        public Vector3 destination { get; protected set; }
+        public float area { get; protected set; }
 
         public override void StartActionBehavior(_Action action)
         {
@@ -34,12 +34,12 @@ namespace Gameplay.AI
             else return false;
         }
 
-        public virtual void SetMove(Vector3 direction, bool _move)
+        protected virtual void SetMove(Vector3 direction, bool _move)
         {
             destination = direction;
         }
 
-        public bool IsInArea(Vector3 objectPos, Vector3 destPos, float area)
+        protected bool IsInArea(Vector3 objectPos, Vector3 destPos, float area)
         {
             if (objectPos.x <= (destPos.x + area) && objectPos.x >= (destPos.x - area))
             {

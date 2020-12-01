@@ -5,18 +5,17 @@ namespace Gameplay.AI
 {
     public class DistractionBehavior : AgentBehavior
     {
-        public MoveAction moveBehavior;
-        public WaitAction waitBehavior;
+        [SerializeField] private MoveAction moveBehavior;
+        [SerializeField] private WaitAction waitBehavior;
+        [SerializeField] private WatchAction watchBehavior;
 
-        public WatchAction watchBehavior;
+        public Vector3 distractionPosition { get; private set; }
 
-        private Vector3 distractionPosition;
         private Vector3 returnPosition;
-
         private Vector3 returnRotation;
 
-        public float awarenessTime;
-        public float searchTime;
+        [SerializeField] private float awarenessTime;
+        [SerializeField] private float searchTime;
 
         protected override void InitializeBehavior()
         {

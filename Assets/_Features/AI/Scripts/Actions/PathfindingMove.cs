@@ -8,11 +8,11 @@ namespace Gameplay.AI
 {
     public class PathfindingMove : MoveAction
     {
-        public NavMeshAgent navMeshAgent;
+        [SerializeField] private NavMeshAgent navMeshAgent;
 
-        public bool move { get; set; }
+        public bool move { get; private set; }
 
-        public float angular;
+        [SerializeField] private float angular;
 
         #region Set
         void Start()
@@ -20,7 +20,7 @@ namespace Gameplay.AI
             destination = target.position;
         }
 
-        public override void SetMove(Vector3 direction, bool _move)
+        protected override void SetMove(Vector3 direction, bool _move)
         {
             base.SetMove(direction, _move);
 
@@ -30,7 +30,7 @@ namespace Gameplay.AI
             SetNavDestination(destination);
         }
 
-        public void SetNavAgent(bool locked)
+        private void SetNavAgent(bool locked)
         {
             if (locked) navMeshAgent.angularSpeed = 0.0f;
 

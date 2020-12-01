@@ -7,12 +7,14 @@ namespace Gameplay.VR
 {
     public class AgentDeath : MonoBehaviour, IKillable
     {
-        public UnityEvent deathEvent;
-        public RagdollBehavior ragdollBehavior;
+        [SerializeField] public UnityEvent deathEvent;
+
+        [SerializeField] private RagdollBehavior ragdollBehavior;
 
         public void Die()
         {
             ragdollBehavior.ActivateRagdoll();
+
             deathEvent.Invoke();
             
             enabled = false;

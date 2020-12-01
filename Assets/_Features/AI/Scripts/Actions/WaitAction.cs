@@ -31,7 +31,7 @@ namespace Gameplay.AI
             else return false;
         }
 
-        private void Update()
+        void Update()
         {
             if (wait)
             {

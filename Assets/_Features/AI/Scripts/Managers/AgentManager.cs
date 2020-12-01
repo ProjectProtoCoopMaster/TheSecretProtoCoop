@@ -10,15 +10,15 @@ namespace Gameplay.AI
 
     public abstract class AgentManager : MonoBehaviour
     {
-        public Dictionary<StateType, AgentBehavior> agentBehaviors = new Dictionary<StateType, AgentBehavior>();
+        protected Dictionary<StateType, AgentBehavior> agentBehaviors = new Dictionary<StateType, AgentBehavior>();
 
-        public StateType currentState { get; set; } = StateType.None;
+        public StateType currentState { get; protected set; } = StateType.None;
 
-        private StateType saveState = StateType.None;
+        protected StateType saveState = StateType.None;
 
-        private bool resumeNext = false;
+        protected bool resumeNext = false;
 
-        public bool isDead { get; set; }
+        public bool isDead { get; protected set; }
 
         void Awake()
         {

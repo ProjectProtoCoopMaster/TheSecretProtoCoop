@@ -6,6 +6,6 @@ namespace Gameplay.AI
 {
     public class AIManager : MonoBehaviour
     {
-        public List<AgentManager> agents;
+        public List<AgentManager> agents { get; protected set; }
     } 
 }
