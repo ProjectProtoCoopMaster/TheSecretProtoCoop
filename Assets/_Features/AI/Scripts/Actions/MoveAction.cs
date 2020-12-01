@@ -34,7 +34,7 @@ namespace Gameplay.AI
             else return false;
         }
 
-        public virtual void SetMove(Vector3 direction, bool move)
+        public virtual void SetMove(Vector3 direction, bool _move)
         {
             destination = direction;
         }
