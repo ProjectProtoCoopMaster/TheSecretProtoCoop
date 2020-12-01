@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gameplay.VR
 {
     public class TestThreadedOverwatchBehavior : EntityVisionDataInterface
-    {
+    {/*
         Thread childThread = null;
         EventWaitHandle childThreadWait = new EventWaitHandle(true, EventResetMode.ManualReset);
         EventWaitHandle mainThreadWait = new EventWaitHandle(true, EventResetMode.ManualReset);
@@ -104,6 +104,6 @@ namespace Gameplay.VR
         {
             Debug.DrawLine(this.transform.position, guard.transform.position, Color.red);
             if (guard.name == "DEAD") Debug.Log("Game over, bub");
-        }
+        }*/
     }
 }

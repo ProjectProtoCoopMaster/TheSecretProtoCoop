@@ -11,7 +11,7 @@ namespace Gameplay.VR
         [SerializeField] private Vector3Variable _PlayerPosition;
         [SerializeField] private Camera pictureCamera;
         private bool isDead;
-        public void GE_Die()
+        public void Die()
         {
             if (!isDead)
             {
@@ -26,7 +26,6 @@ namespace Gameplay.VR
             _PlayerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
             _SendPlayerPosition.Raise();
         }
-
     }
 }
 

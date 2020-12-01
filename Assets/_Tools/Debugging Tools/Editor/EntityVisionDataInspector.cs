@@ -91,10 +91,10 @@ namespace Tools.Debugging
 
         private void OnSceneGUI()
         {
-            Handles.color = Color.red;
-            foreach (GameObject guard in overwatchBehavior.visibleGuards)
+            /*Handles.color = Color.red;
+            foreach (GameObject guard in overwatchBehavior.awarenessManager.deadGuards)
                 Handles.DrawLine(overwatchBehavior.gameObject.transform.position, guard.transform.position);
-            Handles.color = Color.white;
+            Handles.color = Color.white;*/
         }
 
 
