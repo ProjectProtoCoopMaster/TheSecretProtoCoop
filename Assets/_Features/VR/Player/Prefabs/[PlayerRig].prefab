@@ -5150,7 +5150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 2483412a026d11b41a4f73b09e7cbc61, type: 2}
+  sharedProfile: {fileID: 0}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -5412,13 +5412,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6003109435717557739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dca07f246ad1f5468625434e94c69ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 9db9bbd1d47eea9439704f984d6d3258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAction:
-    actionPath: /actions/default/in/Teleport
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
-  teleportationManager: {fileID: 6003109435831060672}
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  pickupOffset: 0.2
+  interactableObject: {fileID: 0}
 --- !u!114 &6003109435717710658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5428,16 +5432,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6003109435717557739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4b340db30fed24483d037e278beb06, type: 3}
+  m_Script: {fileID: 11500000, guid: 19f839e06a64289429e563eb57972b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabAction:
-    actionPath: /actions/default/in/GrabGrip
+  shootAction:
+    actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
-  pickupLayer:
+  shootingLayer:
     serializedVersion: 2
-    m_Bits: 8192
-  interactableObject: {fileID: 0}
+    m_Bits: 19456
+  bulletRadius: 0.1
+  shotTrail: {fileID: 8700703703138933956}
 --- !u!114 &6003109435717710659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5447,16 +5452,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6003109435717557739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c54d242ac5f9da34595e71aed13eaf3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d6e3f33fa434b8468cf16e9ef682ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAction:
-    actionPath: /actions/default/in/GrabPinch
+  teleportAction:
+    actionPath: /actions/default/in/Teleport
     needsReinit: 0
-  shootingLayer:
-    serializedVersion: 2
-    m_Bits: 3072
-  shotTrail: {fileID: 8700703703138933956}
+  teleportationManager: {fileID: 6003109435831060672}
 --- !u!54 &6003109435717557737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5549,7 +5551,7 @@ GameObject:
   - component: {fileID: 6003109435714332089}
   - component: {fileID: 6003109435706227929}
   m_Layer: 0
-  m_Name: '[FullRig]'
+  m_Name: '[PlayerRig]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5728,13 +5730,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6003109435717588941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dca07f246ad1f5468625434e94c69ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 9db9bbd1d47eea9439704f984d6d3258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAction:
-    actionPath: /actions/default/in/Teleport
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
-  teleportationManager: {fileID: 6003109435831060672}
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  pickupOffset: 0.2
+  interactableObject: {fileID: 0}
 --- !u!114 &6003109435717710663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5744,16 +5750,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6003109435717588941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4b340db30fed24483d037e278beb06, type: 3}
+  m_Script: {fileID: 11500000, guid: 19f839e06a64289429e563eb57972b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabAction:
-    actionPath: /actions/default/in/GrabGrip
+  shootAction:
+    actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
-  pickupLayer:
+  shootingLayer:
     serializedVersion: 2
-    m_Bits: 8192
-  interactableObject: {fileID: 0}
+    m_Bits: 19456
+  bulletRadius: 0.1
+  shotTrail: {fileID: 8700703703138933956}
 --- !u!114 &6003109435717710656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5763,16 +5770,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6003109435717588941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c54d242ac5f9da34595e71aed13eaf3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d6e3f33fa434b8468cf16e9ef682ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAction:
-    actionPath: /actions/default/in/GrabPinch
+  teleportAction:
+    actionPath: /actions/default/in/Teleport
     needsReinit: 0
-  shootingLayer:
-    serializedVersion: 2
-    m_Bits: 3072
-  shotTrail: {fileID: 8700703703138933956}
+  teleportationManager: {fileID: 6003109435831060672}
 --- !u!54 &6003109435717588931
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5859,9 +5863,9 @@ MonoBehaviour:
   castingHeight: 2
   minControllerAngle: 30
   maxControllerAngle: 150
-  layerMask:
+  teleportationLayers:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 0
   validTeleport:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.58337283, a: 1}
