@@ -12,7 +12,7 @@ namespace Gameplay.VR
         [SerializeField] LayerMask guardHearingLayermask;
         RaycastHit[] hitInfo;
 
-        [SerializeField] float maxRange = 30f;
+        [SerializeField] float maxRange;
         [SerializeField] float noiseDampenMultiplier = .5f;
         float noiseRange;
 
@@ -51,13 +51,13 @@ namespace Gameplay.VR
             audioSource.Play();
 
             canPlaySound = false;
-            
+
             // check to see if the sound has to pass through walls to reach each enemy in the scene
             for (int i = 0; i < agentsInScene.Count; i++)
             {
                 hitInfo = Physics.RaycastAll(transform.position, agentsInScene[i].transform.position, 500f, guardHearingLayermask);
 
-                if(hitInfo.Length > 0)
+                if (hitInfo.Length > 0)
                 {
                     for (int j = 0; j < hitInfo.Length; j++)
                     {

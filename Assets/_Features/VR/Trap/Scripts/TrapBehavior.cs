@@ -29,12 +29,8 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.tag == "Enemy")
-            {
-                other.transform.parent.GetComponent<IKillable>().Die();
-            }
+            other.transform.parent.GetComponent<IKillable>();
         }
-
     }
 }
 

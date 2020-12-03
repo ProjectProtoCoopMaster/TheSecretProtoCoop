@@ -61,7 +61,6 @@ namespace Gameplay.VR
                 raisingAlarm = false;
                 timePassed = 0f;
             }
-
         }
 
         /*
