@@ -29,12 +29,11 @@ namespace Gameplay.VR
         // called by Detection Behaviour
         internal void RaiseAlarm(EntityVisionDataInterface alarmRaiser)
         {
-            if (alarmRaiser.)
-            {
-                gameOver.Raise();
-            }
+            // if the player was spotted by a camera, it's instant gameOver
+            if(alarmRaiser.gameObject.CompareTag("Guard")) gameOver.Raise();
 
-            else
+            // if the player was spotted by a guard, start the countdown
+            if (alarmRaiser.gameObject.CompareTag("Enemy"))
             {
                 alarmRaisers.Add(alarmRaiser);
 

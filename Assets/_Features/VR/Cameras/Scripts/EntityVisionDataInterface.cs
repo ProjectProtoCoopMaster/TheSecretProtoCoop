@@ -28,7 +28,7 @@ namespace Gameplay.VR
         [SerializeField] protected int pingFrequency;
         public int frames;
 
-        [SerializeField] EntityType entityType;
+        [SerializeField] internal EntityType entityType;
 
         private void Awake()
         {
