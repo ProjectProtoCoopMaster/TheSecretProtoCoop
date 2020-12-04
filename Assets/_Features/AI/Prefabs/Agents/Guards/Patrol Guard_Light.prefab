@@ -3013,6 +3013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8424401980289362233}
   - component: {fileID: 6669204620637733675}
+  - component: {fileID: -1345150251109997427}
   - component: {fileID: 8424401980289362236}
   - component: {fileID: 7862957208814157675}
   - component: {fileID: 5042022890283721781}
@@ -3020,7 +3021,7 @@ GameObject:
   - component: {fileID: 5042022890283721779}
   - component: {fileID: 170555982519352291}
   m_Layer: 11
-  m_Name: Patrol Guard
+  m_Name: Patrol Guard_Light
   m_TagString: Enemy/Light Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3055,9 +3056,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  guardType: 1
-  patrolBehavior: {fileID: 0}
+  guardType: 0
+  patrolBehavior: {fileID: -1345150251109997427}
   distractionBehavior: {fileID: 8424401980289362236}
+--- !u!114 &-1345150251109997427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424401980289362230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a0cae07758951469a76ade5a4a543e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateType: 0
+  loop: 1
+  path: {fileID: 0}
+  moveBehavior: {fileID: 3843661653558922179, guid: 353f3a4096229ae478d9ae5decc89489, type: 3}
+  waitBehavior: {fileID: 1906744556307357842, guid: 353f3a4096229ae478d9ae5decc89489, type: 3}
+  watchBehavior: {fileID: 6533104390550242001, guid: 353f3a4096229ae478d9ae5decc89489, type: 3}
 --- !u!114 &8424401980289362236
 MonoBehaviour:
   m_ObjectHideFlags: 0
