@@ -6,7 +6,7 @@ namespace Gameplay.AI
 {
     public class DodgeBehavior : AgentBehavior
     {
-        public MoveAction moveBehavior;
+        [SerializeField] private MoveAction moveBehavior;
 
         private Vector3 direction;
 
@@ -18,10 +18,9 @@ namespace Gameplay.AI
             };
         }
 
-        public void SetDodge()
+        private void SetDodge()
         {
             direction = transform.position + Vector3.forward;
-
 
             actions = new List<_Action>
             {
@@ -32,13 +31,11 @@ namespace Gameplay.AI
         public override void Update()
         {
             base.Update();
-
-
         }
 
         private void CheckForTargets()
         {
-
+            // Raycast
         }
     } 
 }

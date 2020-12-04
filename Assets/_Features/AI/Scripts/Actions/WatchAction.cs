@@ -7,9 +7,9 @@ namespace Gameplay.AI
 {
     public class WatchAction : ActionBehavior
     {
-        public float rotateSpeed;
+        [SerializeField] private float rotateSpeed;
 
-        public Transform target;
+        [SerializeField] private Transform target;
 
         private bool watch = false;
 
@@ -51,7 +51,7 @@ namespace Gameplay.AI
         }
 
         #region Set
-        public void SetWatch()
+        private void SetWatch()
         {
             Vector3 _position = target.position + direction;
             Vector3 position = _position - target.position;
@@ -66,7 +66,7 @@ namespace Gameplay.AI
             watch = true;
         }
 
-        public void SetWatch(Vector3 angleDirection)
+        private void SetWatch(Vector3 angleDirection)
         {
             currentRotation = Quaternion.Euler(angleDirection);
             angles[0] = currentRotation.eulerAngles.y - angleOffset;
@@ -87,7 +87,7 @@ namespace Gameplay.AI
             }
         }
 
-        public void WatchDirection()
+        private void WatchDirection()
         {
             time += (Time.deltaTime * rotateSpeed);
 
