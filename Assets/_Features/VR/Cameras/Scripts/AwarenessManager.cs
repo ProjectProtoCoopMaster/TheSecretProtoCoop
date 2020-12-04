@@ -1,9 +1,7 @@
 ﻿using Gameplay.VR.Player;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 namespace Gameplay.VR
 {
@@ -25,13 +23,16 @@ namespace Gameplay.VR
         void Awake()
         {
             player = FindObjectOfType<TeleportManager>();
+            Time.timeScale = 1f;
         }
 
         // called by Detection Behaviour
         internal void RaiseAlarm(EntityVisionDataInterface alarmRaiser)
         {
-            if (alarmRaiser.GetComponent<CameraBehavior>() != null)
+            if (alarmRaiser.)
+            {
                 gameOver.Raise();
+            }
 
             else
             {
@@ -51,7 +52,7 @@ namespace Gameplay.VR
             // wait for player to stop teleporting to activate slow motion mode
             if (changeTime && player.isTeleporting)
             {
-                //Time.timeScale /= reflexModeMultiplier;
+                Time.timeScale /= reflexModeMultiplier;
                 changeTime = false;
             }
 
@@ -64,7 +65,7 @@ namespace Gameplay.VR
                 if (alarmRaisers.Count > 0)
                 {
                     // otherwise, set the world back in order
-                    //Time.timeScale *= reflexModeMultiplier;
+                    Time.timeScale *= reflexModeMultiplier;
 
                     raisingAlarm = false;
                     timePassed = 0f;

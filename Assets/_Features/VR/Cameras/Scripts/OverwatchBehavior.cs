@@ -9,7 +9,6 @@ namespace Gameplay.VR
 
         private void Start()
         {
-            // poweredOn = true;
             /*
              * 1. Best practices pour shaders sur mobile et sur VR
              * 
@@ -77,24 +76,12 @@ namespace Gameplay.VR
                     //...if the angle between the looking dir of the tneity and a dead guard is less than the cone of vision, then you can see him
                     if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f && !detectedGuard)
                     {
-                        // if you hit something between the camera and the player's head position
-                        if (Physics.Linecast(transform.position, targetPos, out hitInfo, detectionMask))
-                        {
-                            if (hitInfo.collider.gameObject == awarenessManager.deadGuards[i].gameObject)
-                            {
-                                Debug.Log(gameObject.name + " can see a dead friendly");
-                                awarenessManager.RaiseAlarm(this);
-                                detectedGuard = true;
-                            }
-                        }
+                        Debug.Log(gameObject.name + " can see a dead friendly");
+                        awarenessManager.RaiseAlarm(this);
+                        detectedGuard = true;
                     }
                 }
             }
-        }
-
-        private void LineOfSightCheck()
-        {
-
         }
 
         //called by Unity Event when the guard is killed

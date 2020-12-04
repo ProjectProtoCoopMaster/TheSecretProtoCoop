@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    [RequireComponent(typeof(OverwatchBehavior))]
-    [RequireComponent(typeof(DetectionBehavior))]
     public class EntityVisionDataInterface : MonoBehaviour
     {
         [SerializeField] [HideInInspector] public EntityVisionScriptable entityVisionData;
@@ -24,19 +22,17 @@ namespace Gameplay.VR
 
         protected Vector3 myPos, targetPos, myFinalPos;
         protected float sqrDistToTarget;
+
         [SerializeField] protected bool poweredOn;
 
         [SerializeField] protected int pingFrequency;
         public int frames;
 
+        [SerializeField] EntityType entityType;
+
         private void Awake()
         {
-            if (playerHead == null)
-            {
-                Debug.Log("Set Player Reference");
-                playerHead = GameObject.Find("HeadCollider").transform;
-            }
-
+            playerHead = GameObject.Find("HeadCollider").transform;
             awarenessManager = FindObjectOfType<AwarenessManager>();
         }
     }

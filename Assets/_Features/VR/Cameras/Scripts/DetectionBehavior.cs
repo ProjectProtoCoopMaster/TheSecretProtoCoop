@@ -6,16 +6,10 @@ namespace Gameplay.VR
     {
         private bool detectedPlayer = false;
 
-        private void Start()
-        {
-            //poweredOn = true;
-        }
-
         private void Update()
         {
             if (poweredOn)
             {
-                Debug.Log("Looking");
                 frames++;
                 if (frames % pingFrequency == 0)
                 {
@@ -57,8 +51,6 @@ namespace Gameplay.VR
             // if the player is within the vision range
             if (sqrDistToTarget < rangeOfVision * rangeOfVision)
             {
-                Debug.Log("Withing Range");
-
                 // get the direction of the player's head...
                 targetDir = playerHead.position - myFinalPos;
 
