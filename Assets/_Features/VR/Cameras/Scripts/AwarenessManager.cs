@@ -10,7 +10,7 @@ namespace Gameplay.VR
     public class AwarenessManager : MonoBehaviour
     {
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityVisionDataInterface> alarmRaisers = new List<EntityVisionDataInterface>();
-
+        
         [SerializeField] internal List<GameObject> deadGuards = new List<GameObject>();
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;

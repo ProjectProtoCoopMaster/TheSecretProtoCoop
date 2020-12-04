@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8700703703138933956}
   - component: {fileID: 4817341798165711687}
   m_Layer: 0
-  m_Name: BulletTrail
+  m_Name: ShotTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5417,11 +5417,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabAction:
-    actionPath: 
+    actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
   pickupLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   pickupOffset: 0.2
   interactableObject: {fileID: 0}
 --- !u!114 &6003109435717710658
@@ -5437,13 +5437,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootAction:
-    actionPath: 
+    actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
   shootingLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 19456
   bulletRadius: 0.1
-  shotTrail: {fileID: 0}
+  shotTrail: {fileID: 8700703703138933956}
 --- !u!114 &6003109435717710659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5457,9 +5457,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportAction:
-    actionPath: 
+    actionPath: /actions/default/in/Teleport
     needsReinit: 0
-  teleportationManager: {fileID: 0}
+  teleportationManager: {fileID: 6003109435831060672}
 --- !u!54 &6003109435717557737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5735,11 +5735,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabAction:
-    actionPath: 
+    actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
   pickupLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   pickupOffset: 0.2
   interactableObject: {fileID: 0}
 --- !u!114 &6003109435717710663
@@ -5755,13 +5755,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootAction:
-    actionPath: 
+    actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
   shootingLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 19456
   bulletRadius: 0.1
-  shotTrail: {fileID: 0}
+  shotTrail: {fileID: 8700703703138933956}
 --- !u!114 &6003109435717710656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5775,9 +5775,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportAction:
-    actionPath: 
+    actionPath: /actions/default/in/Teleport
     needsReinit: 0
-  teleportationManager: {fileID: 0}
+  teleportationManager: {fileID: 6003109435831060672}
 --- !u!54 &6003109435717588931
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5858,10 +5858,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenDuration: 0.25
-  particleDash: {fileID: 0}
+  particleDash: {fileID: 7868168292743468123}
   tweenFunction: 0
-  playerHead: {fileID: 0}
-  cameraRig: {fileID: 0}
+  playerHead: {fileID: 5999183673499546489}
+  cameraRig: {fileID: 6003109435717295971}
   maxDistance: 10
   castingHeight: 2
   minControllerAngle: 30
@@ -5929,9 +5929,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   canTeleport: 0
   VRPlatform: 0
-  bezierVisualization: {fileID: 0}
-  lineWidth: 0
-  smoothness: 0
+  bezierVisualization: {fileID: 6003109434748244785}
+  lineWidth: 0.01
+  smoothness: 10
 --- !u!1 &6003109435924983498
 GameObject:
   m_ObjectHideFlags: 0
@@ -6126,7 +6126,7 @@ GameObject:
   - component: {fileID: 7868168292743468123}
   - component: {fileID: 7868168292743468122}
   m_Layer: 0
-  m_Name: TeleportEffect
+  m_Name: ParticleDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
