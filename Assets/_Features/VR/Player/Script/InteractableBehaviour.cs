@@ -65,8 +65,8 @@ namespace Gameplay.VR
                         if (hitInfo[j].collider.CompareTag("Wall") || hitInfo[j].collider.CompareTag("Window"))
                         {
                             noiseRange *= noiseDampenMultiplier;
-                            /*Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
-                            Debug.Log("noiseRange is now " + noiseRange);*/
+                            Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
+                            Debug.Log("noiseRange is now " + noiseRange);
                         }
                     }
                 }

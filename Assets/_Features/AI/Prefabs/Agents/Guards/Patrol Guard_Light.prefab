@@ -2339,7 +2339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be870d727c6db01488ea1cb8ca8ce22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionType: 0
   target: {fileID: 8424401980289362233}
   navMeshAgent: {fileID: 7862957208814157675}
   angular: 120
@@ -2355,7 +2354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d628e5332fc05264dbba648bb47df174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionType: 1
 --- !u!114 &5757402280843154334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2368,7 +2366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420fe84d8aef12b48b521bafb3ae9627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionType: 2
   rotateSpeed: 0.05
   target: {fileID: 8424401980289362233}
 --- !u!1 &7878566129749615744
@@ -2385,7 +2382,7 @@ GameObject:
   - component: {fileID: 5042022890298481365}
   m_Layer: 11
   m_Name: Body
-  m_TagString: Enemy/Light Guard
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3013,7 +3010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8424401980289362233}
   - component: {fileID: 6669204620637733675}
-  - component: {fileID: -1345150251109997427}
+  - component: {fileID: 8424401980289362238}
   - component: {fileID: 8424401980289362236}
   - component: {fileID: 7862957208814157675}
   - component: {fileID: 5042022890283721781}
@@ -3035,7 +3032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8424401980289362230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7878566129749326176}
@@ -3055,11 +3052,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3d3d7d5cf215a478e1ea6879049547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
   guardType: 0
-  patrolBehavior: {fileID: -1345150251109997427}
+  patrolBehavior: {fileID: 8424401980289362238}
   distractionBehavior: {fileID: 8424401980289362236}
---- !u!114 &-1345150251109997427
+--- !u!114 &8424401980289362238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3071,12 +3067,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a0cae07758951469a76ade5a4a543e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateType: 0
   loop: 1
   path: {fileID: 0}
-  moveBehavior: {fileID: 3843661653558922179, guid: 353f3a4096229ae478d9ae5decc89489, type: 3}
-  waitBehavior: {fileID: 1906744556307357842, guid: 353f3a4096229ae478d9ae5decc89489, type: 3}
-  watchBehavior: {fileID: 6533104390550242001, guid: 353f3a4096229ae478d9ae5decc89489, type: 3}
+  moveBehavior: {fileID: 2313500980275010188}
+  waitBehavior: {fileID: 1097267631011459549}
+  watchBehavior: {fileID: 5757402280843154334}
 --- !u!114 &8424401980289362236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3089,7 +3084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426e221a1ec3efa48a3c2e2f5ea11120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateType: 1
   loop: 0
   moveBehavior: {fileID: 2313500980275010188}
   waitBehavior: {fileID: 1097267631011459549}
@@ -3139,7 +3133,6 @@ MonoBehaviour:
     m_Bits: 1280
   raiseAlarm: {fileID: 11400000, guid: a4e593c46a2b7be44a74f90b35e2c128, type: 2}
   targetDir: {x: 0, y: 0, z: 0}
-  awarenessManager: {fileID: 0}
   pingFrequency: 0
   frames: 0
 --- !u!114 &5042022890283721780
@@ -3160,10 +3153,9 @@ MonoBehaviour:
   playerHead: {fileID: 0}
   detectionMask:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1280
   raiseAlarm: {fileID: 11400000, guid: a4e593c46a2b7be44a74f90b35e2c128, type: 2}
   targetDir: {x: 0, y: 0, z: 0}
-  awarenessManager: {fileID: 0}
   pingFrequency: 10
   frames: 0
 --- !u!114 &5042022890283721779
@@ -3187,7 +3179,6 @@ MonoBehaviour:
     m_Bits: 1280
   raiseAlarm: {fileID: 11400000, guid: a4e593c46a2b7be44a74f90b35e2c128, type: 2}
   targetDir: {x: 0, y: 0, z: 0}
-  awarenessManager: {fileID: 0}
   pingFrequency: 5
   frames: 0
 --- !u!114 &170555982519352291
