@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -26,7 +27,7 @@ namespace Gameplay.VR
             else return;
         }
 
-        #region Mobile Camera Power
+#region Mobile Camera Power
         // called from VR_CameraBehavior
         public void DetectionOn()
         {
@@ -36,7 +37,7 @@ namespace Gameplay.VR
         {
             poweredOn = false;
         } 
-        #endregion
+#endregion
 
         // check if the player is in range 
         void PingForPlayer()
@@ -95,3 +96,4 @@ namespace Gameplay.VR
 
     }
 }
+#endif

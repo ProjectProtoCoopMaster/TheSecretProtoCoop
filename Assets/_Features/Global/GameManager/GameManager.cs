@@ -14,7 +14,7 @@ namespace Gameplay
         void Start()
         {
             if(startGame)
-                SceneManager.LoadScene(3, LoadSceneMode.Additive);
+                SceneManager.LoadScene(6, LoadSceneMode.Additive);
         }
         public void RaiseOnLose()=> _onLose.Raise();
         [Button]

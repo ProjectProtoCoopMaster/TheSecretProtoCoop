@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -77,7 +78,7 @@ namespace Gameplay.VR
                     if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f && !detectedGuard)
                     {
                         Debug.Log(gameObject.name + " can see a dead friendly");
-                        awarenessManager.RaiseAlarm(this); 
+                        awarenessManager.RaiseAlarm(this);
                         detectedGuard = true;
                     }
                 }
@@ -92,7 +93,7 @@ namespace Gameplay.VR
             enabled = false;
         }
 
-        #region Mobile Camera Power
+#region Mobile Camera Power
         // for cameras
         // called from VR_CameraBehavior
         public void OverwatchOn()
@@ -104,6 +105,7 @@ namespace Gameplay.VR
         {
             poweredOn = false;
         }
-        #endregion
+#endregion
     }
-}
+} 
+#endif

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -46,7 +47,7 @@ namespace Gameplay.VR
             Debug.Log("Off");
             overwatchBehavior.OverwatchOff();
             detectionBehavior.DetectionOff();
-            if(rotationBehavior != null) rotationBehavior.RotationOff();
+            if (rotationBehavior != null) rotationBehavior.RotationOff();
         }
 
         public void TurnOn()
@@ -57,4 +58,5 @@ namespace Gameplay.VR
             if (rotationBehavior != null) rotationBehavior.RotationOn();
         }
     }
-}
+} 
+#endif
