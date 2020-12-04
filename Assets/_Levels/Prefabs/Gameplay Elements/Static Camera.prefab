@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 2243126664052907473}
   - component: {fileID: 7782004803534937576}
   - component: {fileID: 3764901063986171097}
-  - component: {fileID: 15082748463196815}
   - component: {fileID: 3876923638693574412}
   m_Layer: 0
   m_Name: Static Camera
@@ -218,9 +217,9 @@ MonoBehaviour:
   raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
   poweredOn: 0
-  isCamera: 0
   pingFrequency: 3
   frames: 0
+  entityType: 0
 --- !u!114 &3764901063986171097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,34 +242,9 @@ MonoBehaviour:
   raiseAlarm: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
   poweredOn: 0
-  isCamera: 0
   pingFrequency: 3
   frames: 3
---- !u!114 &15082748463196815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2243126664052907472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1a3f14c8c98a1c4bb7a6e62596c5536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityVisionData: {fileID: 0}
-  rangeOfVision: 5.99
-  coneOfVision: 66
-  playerHead: {fileID: 0}
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  raiseAlarm: {fileID: 0}
-  targetDir: {x: 0, y: 0, z: 0}
-  poweredOn: 0
-  isCamera: 1
-  pingFrequency: 3
-  frames: 0
+  entityType: 0
 --- !u!114 &3876923638693574412
 MonoBehaviour:
   m_ObjectHideFlags: 0

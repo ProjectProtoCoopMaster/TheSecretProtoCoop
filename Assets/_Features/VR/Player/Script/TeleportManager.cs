@@ -9,40 +9,45 @@ namespace Gameplay.VR.Player
     public class TeleportManager : MonoBehaviour
     {
         [SerializeField] [FoldoutGroup("Teleportation Transition")] float tweenDuration = .25f;
-        [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
+        ParticleSystem particleDash;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
 
-        [SerializeField] [FoldoutGroup("SteamVR Components")] internal Transform playerHead;
-        [SerializeField] [FoldoutGroup("SteamVR Components")] Transform cameraRig;
+        internal Transform playerHead;
+        Transform playerRig;
         SteamVR_Behaviour_Pose controllerPose;
         private bool showRayPointer = false;
 
-        // [SerializeField] [FoldoutGroup("Teleportation")] Transform startPoint, endPoint;
-        [SerializeField] [FoldoutGroup("Teleportation")] float maxDistance = 10f;
-        [SerializeField] [FoldoutGroup("Teleportation")] float castingHeight = 2f;
-        [SerializeField] [FoldoutGroup("Teleportation")] float minControllerAngle = 30f, maxControllerAngle = 150f;
-        [SerializeField] [FoldoutGroup("Teleportation")] LayerMask teleportationLayers;
-        [SerializeField] [FoldoutGroup("Teleportation")] Gradient validTeleport;
-        [SerializeField] [FoldoutGroup("Teleportation")] Gradient invalidTeleport;
-        [SerializeField] [FoldoutGroup("Teleportation")] bool canTeleport;
-        [SerializeField] [FoldoutGroup("Teleportation")] bool VRPlatform;
-
-        [SerializeField] [FoldoutGroup("Teleportation Pointer")] LineRenderer bezierVisualization;
+        [SerializeField] [FoldoutGroup("Teleportation Pointer")] LayerMask teleportationLayers;
+        [SerializeField] [FoldoutGroup("Teleportation Pointer")] Gradient validTeleport;
+        [SerializeField] [FoldoutGroup("Teleportation Pointer")] Gradient invalidTeleport;
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] float lineWidth;
-        [SerializeField] [FoldoutGroup("Teleportation Pointer")] int smoothness;
+        LineRenderer bezierVisualization;
+        internal Transform pointerOrigin;
+        GameObject pointer;
+        Ray horizontalRay, tallRay;
+        RaycastHit hitTallInfo, hitHorizontalInfo;
         Vector3 posContainer;
         Vector3 p0, p1, p2;
         float t;
 
-        Ray horizontalRay, tallRay;
-        RaycastHit hitTallInfo, hitHorizontalInfo;
-        GameObject pointer;
-        internal Transform pointerOrigin;
+        [SerializeField] [FoldoutGroup("Internal Values")] float maxDistance = 10f;
+        [SerializeField] [FoldoutGroup("Internal Values")] float castingHeight = 2f;
+        [SerializeField] [FoldoutGroup("Internal Values")] float minControllerAngle = 30f, maxControllerAngle = 150f;
+        [SerializeField] [FoldoutGroup("Internal Values")] bool canTeleport;
+        [SerializeField] [FoldoutGroup("Internal Values")] bool VRPlatform;
+        [SerializeField] [FoldoutGroup("Internal Values")] int bezierSmoothness;
+        internal bool isTeleporting; // for Awareness Manager time freeze feedback
 
-        internal bool isTeleporting;
+        private void Awake()
+        {
+            playerRig = this.transform.parent;
+            playerHead = this.transform.parent.GetComponentInChildren<SphereCollider>().transform.parent.transform;
+            bezierVisualization = GetComponentInChildren<LineRenderer>();
+            particleDash = GetComponentInChildren<ParticleSystem>();
+        }
 
         private void Start()
         {
@@ -53,7 +58,7 @@ namespace Gameplay.VR.Player
             bezierVisualization.startWidth = lineWidth;
             bezierVisualization.endWidth = lineWidth;
             bezierVisualization.useWorldSpace = true;
-            bezierVisualization.positionCount = smoothness;
+            bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
         }
@@ -100,7 +105,7 @@ namespace Gameplay.VR.Player
         {
             get
             {
-                return cameraRig.position - playerHead.position;
+                return playerRig.position - playerHead.position;
             }
         }
 
@@ -213,9 +218,9 @@ namespace Gameplay.VR.Player
                 p1.y = pointerOrigin.position.y;
             }
 
-            for (int i = 0; i < smoothness; i++)
+            for (int i = 0; i < bezierSmoothness; i++)
             {
-                t = i / (smoothness - 1.0f);
+                t = i / (bezierSmoothness - 1.0f);
                 posContainer = (1.0f - t) * (1.0f - t) * p0
                 + 2.0f * (1.0f - t) * t * p1 + t * t * p2;
                 bezierVisualization.SetPosition(i, posContainer);
@@ -235,9 +240,9 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
-            startPos = playerPosition; 
+            startPos = playerPosition;
             targetPos = teleportTarget;
-            
+
             showRayPointer = false;
             isTeleporting = true;
 
@@ -254,8 +259,8 @@ namespace Gameplay.VR.Player
                 time += Time.deltaTime;
                 movingPosition.x = delegateTween(time, startPos.x, change.x, tweenDuration);
                 movingPosition.z = delegateTween(time, startPos.z, change.z, tweenDuration);
-                movingPosition.y = cameraRig.position.y;
-                cameraRig.position = movingPosition;
+                movingPosition.y = playerRig.position.y;
+                playerRig.position = movingPosition;
                 this.transform.position = movingPosition;
                 yield return null;
             }
