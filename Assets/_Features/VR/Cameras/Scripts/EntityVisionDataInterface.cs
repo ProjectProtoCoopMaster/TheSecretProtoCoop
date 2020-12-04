@@ -20,7 +20,7 @@ namespace Gameplay.VR
         [SerializeField] protected GameEvent raiseAlarm;
         [SerializeField] [HideInInspector] protected Vector3 targetDir;
 
-        [SerializeField] protected AwarenessManager awarenessManager = null;
+        protected AwarenessManager awarenessManager = null;
 
         protected Vector3 myPos, targetPos, myFinalPos;
         protected float sqrDistToTarget;
@@ -36,6 +36,8 @@ namespace Gameplay.VR
                 Debug.Log("Set Player Reference");
                 playerHead = GameObject.Find("HeadCollider").transform;
             }
+
+            awarenessManager = FindObjectOfType<AwarenessManager>();
         }
     }
 }
