@@ -29,6 +29,14 @@ namespace Gameplay.VR
         {
             other.transform.parent.GetComponent<IKillable>().Die();
         }
+        private void OnTriggerStay(Collider other)
+        {
+            other.transform.parent.GetComponent<IKillable>().Die();
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            other.transform.parent.GetComponent<IKillable>().Die();
+        }
     }
 }
 

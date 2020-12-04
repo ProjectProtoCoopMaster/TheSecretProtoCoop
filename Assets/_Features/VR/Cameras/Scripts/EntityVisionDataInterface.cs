@@ -24,7 +24,7 @@ namespace Gameplay.VR
 
         protected Vector3 myPos, targetPos, myFinalPos;
         protected float sqrDistToTarget;
-        protected bool poweredOn;
+        [SerializeField] protected bool poweredOn;
 
         [SerializeField] protected int pingFrequency;
         public int frames;

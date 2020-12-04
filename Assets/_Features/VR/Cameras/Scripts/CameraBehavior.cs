@@ -39,6 +39,8 @@ namespace Gameplay.VR
                 rotationBehavior = GetComponent<RotationBehavior>();
             }
             finally { };
+
+            Power = power;
         }
 
         public void TurnOff()
