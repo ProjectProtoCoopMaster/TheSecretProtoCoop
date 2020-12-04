@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -18,7 +16,6 @@ namespace Gameplay.VR
                 _GameOver.Raise();
                 isDead = true;
             }
-
         }
 
         private void Update()

@@ -12,7 +12,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
         TweenManagerLibrary.TweenFunction delegateTween;
-        Vector3 movingPosition, change;
+        Vector3 startPos, targetPos, movingPosition, change;
         float time;
 
         [SerializeField] [FoldoutGroup("SteamVR Components")] internal Transform playerHead;
@@ -41,6 +41,8 @@ namespace Gameplay.VR.Player
         RaycastHit hitTallInfo, hitHorizontalInfo;
         GameObject pointer;
         internal Transform pointerOrigin;
+
+        internal bool isTeleporting = false;
 
         private void Start()
         {
@@ -235,14 +237,15 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
-            Debug.Log("Teleporting");
-            Vector3 startPos = playerPosition, targetPos = teleportTarget;
+            time = 0;
+            startPos = playerPosition;
+            targetPos = teleportTarget;
+            change = targetPos - startPos;
+
             showRayPointer = false;
+            isTeleporting = true;
 
             particleDash.Play();
-
-            time = 0;
-            change = targetPos - startPos;
 
             // don't change yPos
             movingPosition.y = startPos.y;
@@ -257,7 +260,10 @@ namespace Gameplay.VR.Player
                 this.transform.position = movingPosition;
                 yield return null;
             }
+
             particleDash.Stop();
+
+            isTeleporting = false;
         }
     }
 }

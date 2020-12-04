@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -29,7 +27,7 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            other.transform.parent.GetComponent<IKillable>();
+            other.transform.parent.GetComponent<IKillable>().Die();
         }
     }
 }
