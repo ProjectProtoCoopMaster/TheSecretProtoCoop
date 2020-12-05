@@ -8,7 +8,7 @@ namespace Tools.Debugging
 {
     [ExecuteAlways]
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(EntityVisionDataInterface))]
+    [CustomEditor(typeof(EntityVisionData))]
     public class EntityVisionDataInspector : Editor
     {
         static int playerMask = 0;
@@ -18,21 +18,18 @@ namespace Tools.Debugging
         bool existingData, localData;
         SerializedProperty entityVisionScriptableProp, rangeOfVisionProp, coneOfVisionProp, playerTransformProp, playerDetectionLayerProp;
 
-        EntityVisionDataInterface entityVisionDataInterface;
+        EntityVisionData entityVisionDataInterface;
         DetectionBehavior detectionBehavior;
         OverwatchBehavior overwatchBehavior;
 
         private void OnEnable()
         {
-            entityVisionDataInterface = target as EntityVisionDataInterface;
+            entityVisionDataInterface = target as EntityVisionData;
             detectionBehavior = entityVisionDataInterface.gameObject.GetComponent<DetectionBehavior>();
             overwatchBehavior = entityVisionDataInterface.gameObject.GetComponent<OverwatchBehavior>();
 
-            entityVisionScriptableProp = serializedObject.FindProperty(nameof(entityVisionDataInterface.entityVisionData));
             rangeOfVisionProp = serializedObject.FindProperty(nameof(entityVisionDataInterface.rangeOfVision));
             coneOfVisionProp = serializedObject.FindProperty(nameof(entityVisionDataInterface.coneOfVision));
-            playerTransformProp = serializedObject.FindProperty(nameof(entityVisionDataInterface.playerHead));
-            playerDetectionLayerProp = serializedObject.FindProperty(nameof(entityVisionDataInterface.detectionMask));
         }
 
 
@@ -42,14 +39,7 @@ namespace Tools.Debugging
 
             serializedObject.Update();
 
-            /*if (playerTransform.objectReferenceValue == null)
-                playerTransform.objectReferenceValue = GameObject.Find("Player");
-
-            if (playerTransform.objectReferenceValue != null)
-                detectionBehavior.playerHead = overwatchBehavior.playerHead = playerTransform.objectReferenceValue as Transform;*/
-
             EditorGUILayout.PropertyField(playerTransformProp);
-            DrawLayerMask();
 
             EditorGUILayout.Space();
 
@@ -60,35 +50,6 @@ namespace Tools.Debugging
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawLayerMask()
-        {/*
-            if (layers == null)
-            {
-                layers = new List<string>();
-                layerOptions = new string[4];
-            }
-            else layers.Clear();
-
-            for (int i = 0; i < 32; i++)
-            {
-                string layerName = LayerMask.LayerToName(i);
-                if (layerName != "")
-                {
-                    layers.Add(layerName);
-                }
-                else continue;
-            }
-
-            if (layerOptions.Length != layers.Count)
-            {
-                layerOptions = new string[layers.Count];
-            }
-            for (int i = 0; i < layerOptions.Length; i++) layerOptions[i] = layers[i];
-
-            playerMask = EditorGUILayout.MaskField("Player Flags", playerMask, layerOptions);
-            detectionBehavior.playerLayer = overwatchBehavior.playerLayer = playerMask;*/
-        }
-
         private void OnSceneGUI()
         {
             /*Handles.color = Color.red;
@@ -96,7 +57,6 @@ namespace Tools.Debugging
                 Handles.DrawLine(overwatchBehavior.gameObject.transform.position, guard.transform.position);
             Handles.color = Color.white;*/
         }
-
 
         #region User Input
         // ask the user if he's assigning or creating data

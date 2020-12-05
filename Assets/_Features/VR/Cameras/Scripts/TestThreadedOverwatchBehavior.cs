@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    public class TestThreadedOverwatchBehavior : EntityVisionDataInterface
+    public class TestThreadedOverwatchBehavior : EntityVisionData
     {/*
         Thread childThread = null;
         EventWaitHandle childThreadWait = new EventWaitHandle(true, EventResetMode.ManualReset);

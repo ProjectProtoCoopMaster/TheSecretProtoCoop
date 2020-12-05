@@ -7,7 +7,7 @@ namespace Gameplay.VR
 {
     public class AwarenessManager : MonoBehaviour
     {
-        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityVisionDataInterface> alarmRaisers = new List<EntityVisionDataInterface>();
+        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityVisionData> alarmRaisers = new List<EntityVisionData>();
         
         [SerializeField] internal List<GameObject> deadGuards = new List<GameObject>();
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
@@ -27,13 +27,13 @@ namespace Gameplay.VR
         }
 
         // called by Detection Behaviour
-        internal void RaiseAlarm(EntityVisionDataInterface alarmRaiser)
+        internal void RaiseAlarm(EntityVisionData alarmRaiser)
         {
             // if the player was spotted by a camera, it's instant gameOver
-            if(alarmRaiser.gameObject.CompareTag("Guard")) gameOver.Raise();
+            if(alarmRaiser.entityType == EntityType.Camera) gameOver.Raise();
 
             // if the player was spotted by a guard, start the countdown
-            if (alarmRaiser.gameObject.CompareTag("Enemy"))
+            if (alarmRaiser.entityType == EntityType.Guard)
             {
                 alarmRaisers.Add(alarmRaiser);
 

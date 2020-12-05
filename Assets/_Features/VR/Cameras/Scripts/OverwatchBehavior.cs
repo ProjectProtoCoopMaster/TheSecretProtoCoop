@@ -1,11 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.VR
 {
-    public class OverwatchBehavior : EntityVisionDataInterface
+    public class OverwatchBehavior : EntityVisionData
     {
+        [SerializeField] public LayerMask overwatchMask;
         bool detectedGuard = false;
+
+        new void Awake()
+        {
+            base.Awake();
+            pingFrequency = 20;
+        }
 
         private void Start()
         {
@@ -40,11 +46,11 @@ namespace Gameplay.VR
         {
             if (poweredOn)
             {
-                frames++;
-                if (frames % pingFrequency == 0)
+                framesPassed++;
+                if (framesPassed % pingFrequency == 0)
                 {
                     PingForDeadGuards();
-                    frames = 0;
+                    framesPassed = 0;
                 }
             }
 
@@ -93,14 +99,13 @@ namespace Gameplay.VR
         }
 
         #region Mobile Camera Power
-        // for cameras
         // called from VR_CameraBehavior
-        public void OverwatchOn()
+        public void UE_OverwatchOn()
         {
             poweredOn = true;
         }
 
-        public void OverwatchOff()
+        public void UE_OverwatchOff()
         {
             poweredOn = false;
         }

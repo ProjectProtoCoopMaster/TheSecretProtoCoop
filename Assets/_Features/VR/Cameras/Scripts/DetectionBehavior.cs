@@ -2,36 +2,34 @@
 
 namespace Gameplay.VR
 {
-    public class DetectionBehavior : EntityVisionDataInterface
+    public class DetectionBehavior : EntityVisionData
     {
-        private bool detectedPlayer = false;
+        [SerializeField] public LayerMask detectionMask;
+        [HideInInspector] public Transform playerHead;
+        private bool detectedPlayer = false; 
+        private RaycastHit hitInfo;
+
+        new void Awake()
+        {
+            base.Awake();
+            playerHead = GameObject.Find("HeadCollider").transform;
+            pingFrequency = 10;
+        }
 
         private void Update()
         {
             if (poweredOn)
             {
-                frames++;
-                if (frames % pingFrequency == 0)
+                framesPassed++;
+                if (framesPassed % pingFrequency == 0)
                 {
                     PingForPlayer();
-                    frames = 0;
+                    framesPassed = 0;
                 }
             }
 
             else return;
         }
-
-        #region Mobile Camera Power
-        // called from VR_CameraBehavior
-        public void DetectionOn()
-        {
-            poweredOn = true;
-        }
-        public void DetectionOff()
-        {
-            poweredOn = false;
-        } 
-        #endregion
 
         // check if the player is in range 
         void PingForPlayer()
@@ -88,5 +86,16 @@ namespace Gameplay.VR
                enabled = false;
         }
 
+        #region Mobile Camera Power
+        // called from VR_CameraBehavior
+        public void UE_DetectionOn()
+        {
+            poweredOn = true;
+        }
+        public void UE_DetectionOff()
+        {
+            poweredOn = false;
+        }
+        #endregion
     }
 }
