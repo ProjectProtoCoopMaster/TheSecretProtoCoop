@@ -14,7 +14,7 @@ namespace Gameplay.VR.Player
 
         [SerializeField] LayerMask pickupLayer;
         [SerializeField] float pickupOffset = 0.2f;
-        [SerializeField] NoiseMakerBehaviour interactableObject = null;
+        [SerializeField] InteractableBehaviour interactableObject = null;
 
         FixedJoint myJoint;
 
@@ -53,7 +53,7 @@ namespace Gameplay.VR.Player
             }
         }
 
-        private NoiseMakerBehaviour GetNearestInteractable()
+        private InteractableBehaviour GetNearestInteractable()
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, pickupOffset, pickupLayer);
 
@@ -62,7 +62,7 @@ namespace Gameplay.VR.Player
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     if (colliders[i].CompareTag("Interactable"))
-                        return colliders[i].transform.GetComponent<NoiseMakerBehaviour>();
+                        return colliders[i].transform.GetComponent<InteractableBehaviour>();
                     else continue;
                 }
                 return null;

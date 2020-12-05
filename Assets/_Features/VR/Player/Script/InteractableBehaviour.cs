@@ -6,10 +6,9 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(AudioSource))]
-    public class NoiseMakerBehaviour : MonoBehaviour
+    public class InteractableBehaviour : MonoBehaviour
     {
         [Tooltip("Define which layers the sound will affect")] [SerializeField] LayerMask guardHearingLayermask;
         RaycastHit hitInfo;
@@ -24,7 +23,6 @@ namespace Gameplay.VR
         internal Rigidbody rigidBody;
         AudioSource audioSource;
         bool canPlaySound;
-
 
         private void Awake()
         {
