@@ -1,16 +1,15 @@
-﻿#if UNITY_STANDALONE
-using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+using UnityEngine.InputSystem;
 
 namespace Gameplay.VR.Player
 {
-    public class VR_ShootBehaviour : MonoBehaviour
+    public class PC_ShootBehaviour : MonoBehaviour
     {
-        [SerializeField] SteamVR_Action_Boolean shootAction = null;
-        SteamVR_Behaviour_Pose controllerPose = null;
-        SteamVR_Input_Sources handSource;
+        [SerializeField] InputAction shootAction = null;
+        [SerializeField] Transform controllerPose = null;
 
         [SerializeField] [FoldoutGroup("Shooting")] LayerMask shootingLayer;
         [SerializeField] [FoldoutGroup("Shooting")] float bulletRadius = 0.1f;
@@ -18,15 +17,9 @@ namespace Gameplay.VR.Player
 
         RaycastHit hitInfo;
 
-        private void Awake()
-        {
-            controllerPose = GetComponent<SteamVR_Behaviour_Pose>();
-            handSource = controllerPose.inputSource;
-        }
-
         private void Update()
         {
-            if (shootAction.GetStateDown(handSource)) 
+            if (Input.GetKeyDown(KeyCode.E))
                 Shooting();
         }
 
@@ -37,7 +30,7 @@ namespace Gameplay.VR.Player
 
             shotTrail.Play();
 
-            if (Physics.SphereCast(transform.position, bulletRadius, transform.forward, out hitInfo, 100f, shootingLayer))
+            if (Physics.SphereCast(controllerPose.position, bulletRadius, transform.forward, out hitInfo, 100f, shootingLayer))
             {
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
@@ -49,4 +42,3 @@ namespace Gameplay.VR.Player
         }
     }
 }
-#endif

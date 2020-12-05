@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
     [RequireComponent(typeof(EntityDataInterface))]
     public class EntityVisionData : MonoBehaviour
     {
+        [SerializeField] protected UnityEvent raiseAlarm;
+
         // need to be identical across both Detection and Overwatch
         [HideInInspector] public float rangeOfVision;
         [HideInInspector] public float coneOfVision;
@@ -44,11 +47,6 @@ namespace Gameplay.VR
             else entityType = EntityType.Camera;
 
             awarenessManager = FindObjectOfType<AwarenessManager>();
-        }
-
-        protected void RaiseAlarm()
-        {
-
         }
     }
 }

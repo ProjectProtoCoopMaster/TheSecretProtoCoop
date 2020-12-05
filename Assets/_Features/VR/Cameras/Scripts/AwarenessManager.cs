@@ -51,7 +51,7 @@ namespace Gameplay.VR
             // wait for player to stop teleporting to activate slow motion mode
             if (changeTime && player.isTeleporting)
             {
-                Time.timeScale /= reflexModeMultiplier;
+                //Time.timeScale /= reflexModeMultiplier;
                 changeTime = false;
             }
 
@@ -64,7 +64,7 @@ namespace Gameplay.VR
                 if (alarmRaisers.Count > 0)
                 {
                     // otherwise, set the world back in order
-                    Time.timeScale *= reflexModeMultiplier;
+                    //Time.timeScale *= reflexModeMultiplier;
 
                     raisingAlarm = false;
                     timePassed = 0f;

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &142167616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142167617}
+  m_Layer: 0
+  m_Name: KeyboardControllerOrigin2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &142167617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142167616}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6003109435831060673}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4882315487823582137
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +60,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6003109435831060673}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &8700703703138933956
 ParticleSystem:
@@ -5015,7 +5045,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6003109435831060673}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &6003109434471915034
 Camera:
@@ -5253,7 +5283,6 @@ GameObject:
   - component: {fileID: 6003109435717710659}
   - component: {fileID: 6003109435717557737}
   - component: {fileID: 6003109435717557738}
-  - component: {fileID: 81888824}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -5395,21 +5424,6 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &81888824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6003109435717557739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f7cb947e4eb72d43a8c538b2b2e425c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseOrigin: {fileID: 6003109436100188527}
-  teleportationManager: {fileID: 6003109435831060672}
-  mouseSensitivity: 200
 --- !u!1 &6003109435717569959
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,7 +5601,6 @@ GameObject:
   - component: {fileID: 6003109435717710656}
   - component: {fileID: 6003109435717588931}
   - component: {fileID: 6003109435717588940}
-  - component: {fileID: 324530314}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -5729,21 +5742,6 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &324530314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6003109435717588941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f7cb947e4eb72d43a8c538b2b2e425c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseOrigin: {fileID: 6003109436100188527}
-  teleportationManager: {fileID: 6003109435831060672}
-  mouseSensitivity: 200
 --- !u!1 &6003109435831060674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5754,6 +5752,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6003109435831060673}
   - component: {fileID: 6003109435831060672}
+  - component: {fileID: 498836825}
+  - component: {fileID: 498836826}
   m_Layer: 0
   m_Name: Player Components
   m_TagString: Untagged
@@ -5774,6 +5774,7 @@ Transform:
   m_Children:
   - {fileID: 6003109434748244786}
   - {fileID: 6003109436100188527}
+  - {fileID: 142167617}
   - {fileID: 6003109434471915035}
   - {fileID: 319244581793752966}
   - {fileID: 7868168292743468120}
@@ -5863,6 +5864,69 @@ MonoBehaviour:
   canTeleport: 0
   VRPlatform: 0
   bezierSmoothness: 10
+--- !u!114 &498836825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435831060674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7cb947e4eb72d43a8c538b2b2e425c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportAction:
+    m_Name: Teleport
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c57cd323-5e36-4e12-9050-87259beea149
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 0d439504-d643-476d-8ea7-11a8f14e29c8
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Teleport
+      m_Flags: 0
+  mouseOrigin: {fileID: 6003109436100188527}
+--- !u!114 &498836826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435831060674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c6ca82f6e46a34983c6831f852359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootAction:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9a4bd338-d329-491f-ac14-fe8ec7059e93
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 71f019a7-0617-4c33-b243-d91852287038
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
+  controllerPose: {fileID: 142167617}
+  shootingLayer:
+    serializedVersion: 2
+    m_Bits: 19456
+  bulletRadius: 0.1
+  shotTrail: {fileID: 8700703703138933956}
 --- !u!1 &6003109435924983498
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,7 +6011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6003109436100188527}
   m_Layer: 0
-  m_Name: KeyboardControllerOrigin
+  m_Name: KeyboardControllerOrigin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6058,7 +6122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6003109435831060673}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7868168292743468123
 ParticleSystem:

@@ -88,22 +88,11 @@ namespace Gameplay.VR
                         {
                             if (hitInfo.collider.gameObject.CompareTag("Dead"))
                             {
-                                Debug.Log(gameObject.name + " can see a dead friendly " + hitInfo.collider.gameObject.transform.parent.parent.parent.name);
                                 awarenessManager.RaiseAlarm(this);
                                 detectedGuard = true;
                             }
-
-                            else
-                            {
-                                Debug.DrawLine(this.transform.position, awarenessManager.deadGuards[i].position, Color.magenta);
-                                Debug.Log("I hit " + hitInfo.collider.gameObject.name);
-                            }
                         }
-
-                        else Debug.DrawLine(this.transform.position, awarenessManager.deadGuards[i].position, Color.green);
                     }
-
-                    else Debug.DrawLine(this.transform.position, awarenessManager.deadGuards[i].position);
                 }
             }
         }
