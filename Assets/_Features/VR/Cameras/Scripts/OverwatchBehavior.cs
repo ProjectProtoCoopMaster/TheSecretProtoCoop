@@ -12,7 +12,7 @@ namespace Gameplay.VR
         new void Awake()
         {
             base.Awake();
-            pingFrequency = 20;
+            pingFrequency = 1;
         }
 
         private void Start()
@@ -82,23 +82,28 @@ namespace Gameplay.VR
                     targetDir = awarenessManager.deadGuards[i].position - myFinalPos;
 
                     //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
-                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f && !detectedGuard)
+                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && !detectedGuard)
                     {
-                        if (Physics.Linecast(transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
+                        if (Physics.Linecast(this.transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
                         {
-                            if(hitInfo.collider.gameObject.CompareTag("Dead"))
+                            if (hitInfo.collider.gameObject.CompareTag("Dead"))
                             {
-                                Debug.Log(gameObject.name + " can see a deader friendly");
+                                Debug.Log(gameObject.name + " can see a dead friendly " + hitInfo.collider.gameObject.transform.parent.parent.parent.name);
                                 awarenessManager.RaiseAlarm(this);
                                 detectedGuard = true;
                             }
 
                             else
                             {
+                                Debug.DrawLine(this.transform.position, awarenessManager.deadGuards[i].position, Color.magenta);
                                 Debug.Log("I hit " + hitInfo.collider.gameObject.name);
                             }
                         }
+
+                        else Debug.DrawLine(this.transform.position, awarenessManager.deadGuards[i].position, Color.green);
                     }
+
+                    else Debug.DrawLine(this.transform.position, awarenessManager.deadGuards[i].position);
                 }
             }
         }
@@ -109,6 +114,11 @@ namespace Gameplay.VR
             if (awarenessManager.alarmRaisers.Contains(this)) awarenessManager.alarmRaisers.Remove(this);
             awarenessManager.deadGuards.Add(myDetectableBody);
             myDetectableBody.gameObject.tag = "Dead";
+
+            for (int i = 0; i < myDetectableBody.childCount; i++)
+            {
+                myDetectableBody.GetChild(i).tag = "Dead";
+            }
             enabled = false;
         }
 

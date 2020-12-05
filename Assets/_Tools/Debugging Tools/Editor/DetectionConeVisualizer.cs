@@ -5,15 +5,17 @@ using Gameplay.VR;
 namespace Tools.Debugging
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(DetectionBehavior))]
+    [CustomEditor(typeof(EntityDataInterface))]
     public class DetectionConeVisualizer : Editor
     {
-        DetectionBehavior detectionBehavior;
+        //DetectionBehavior detectionBehavior;
+        EntityDataInterface detectionBehavior;
         Vector3 leftPoint, rightPoint;
 
         private void OnEnable()
         {
-            detectionBehavior = target as DetectionBehavior;
+            detectionBehavior = target as EntityDataInterface;
+            //visionInterface = target as 
         }
 
         public void OnSceneGUI()
@@ -29,7 +31,7 @@ namespace Tools.Debugging
             Handles.DrawLine(localTransform.position, leftPoint);
             Handles.DrawLine(localTransform.position, rightPoint);
 
-            if (detectionBehavior.playerHead != null)
+            /*if (detectionBehavior.playerHead != null)
             {
                 // floor the values to get the "shadow" image but locked at 0y
                 Vector3 flooredPosition = new Vector3(localTransform.position.x, detectionBehavior.playerHead.position.y, localTransform.position.z);
@@ -41,7 +43,7 @@ namespace Tools.Debugging
 
                 Handles.DrawLine(flooredPosition, flooredleftPoint);
                 Handles.DrawLine(flooredPosition, flooredrightPoint);
-            }
+            }*/
         }
     }
 }
