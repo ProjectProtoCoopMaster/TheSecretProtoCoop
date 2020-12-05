@@ -7,19 +7,13 @@ namespace Gameplay.VR.Player
     {
         Transform playerHead;
         public Transform mouseOrigin;
-        TeleportManager manager;
+        [SerializeField] TeleportManager teleportationManager;
         [SerializeField] float mouseSensitivity;
         float xRotation = 0f;
 
-        private void Awake()
+        private void Start()
         {
-            manager = GetComponent<TeleportManager>();
-            playerHead = manager.playerHead;
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
+            playerHead = teleportationManager.playerHead;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -28,13 +22,13 @@ namespace Gameplay.VR.Player
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                manager.pointerOrigin = mouseOrigin;
-                manager.TallRayPointer(null);
+                teleportationManager.pointerOrigin = mouseOrigin;
+                teleportationManager.TallRayPointer(null);
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                manager.TryTeleporting();
+                teleportationManager.TryTeleporting();
             }
 
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
