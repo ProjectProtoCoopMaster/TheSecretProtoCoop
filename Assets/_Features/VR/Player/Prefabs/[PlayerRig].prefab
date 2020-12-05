@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 142167617}
   m_Layer: 0
-  m_Name: KeyboardControllerOrigin2
+  m_Name: ShootOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,6 +29,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6003109435831060673}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &364947576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 364947577}
+  m_Layer: 0
+  m_Name: GrabOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &364947577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364947576}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6003109436356268098}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4882315487823582137
 GameObject:
@@ -5754,6 +5784,7 @@ GameObject:
   - component: {fileID: 6003109435831060672}
   - component: {fileID: 498836825}
   - component: {fileID: 498836826}
+  - component: {fileID: 2526640716234072363}
   m_Layer: 0
   m_Name: Player Components
   m_TagString: Untagged
@@ -5876,23 +5907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7cb947e4eb72d43a8c538b2b2e425c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAction:
-    m_Name: Teleport
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c57cd323-5e36-4e12-9050-87259beea149
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 0d439504-d643-476d-8ea7-11a8f14e29c8
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Teleport
-      m_Flags: 0
-  mouseOrigin: {fileID: 6003109436100188527}
+  teleportOrigin: {fileID: 0}
 --- !u!114 &498836826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5905,28 +5920,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c6ca82f6e46a34983c6831f852359a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAction:
-    m_Name: Shoot
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 9a4bd338-d329-491f-ac14-fe8ec7059e93
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 71f019a7-0617-4c33-b243-d91852287038
-      m_Path: <Keyboard>/e
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Shoot
-      m_Flags: 0
-  controllerPose: {fileID: 142167617}
+  shootOrigin: {fileID: 0}
   shootingLayer:
     serializedVersion: 2
     m_Bits: 19456
   bulletRadius: 0.1
   shotTrail: {fileID: 8700703703138933956}
+--- !u!114 &2526640716234072363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435831060674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176462bd42c73104ea7bf9f08082bae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabOrigin: {fileID: 0}
+  playerHead: {fileID: 0}
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  interactableObject: {fileID: 0}
 --- !u!1 &6003109435924983498
 GameObject:
   m_ObjectHideFlags: 0
@@ -6011,7 +6028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6003109436100188527}
   m_Layer: 0
-  m_Name: KeyboardControllerOrigin1
+  m_Name: TeleportOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6059,7 +6076,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 364947577}
   m_Father: {fileID: 5999183673499546489}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

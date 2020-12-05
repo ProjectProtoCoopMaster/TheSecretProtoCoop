@@ -6,7 +6,7 @@ using Valve.VR;
 
 namespace Gameplay.VR.Player
 {
-    public class VR_GrabObjectsBehaviour : MonoBehaviour
+    public class VR_GrabObjectBehaviour : MonoBehaviour
     {
         [SerializeField] SteamVR_Action_Boolean grabAction = null;
         SteamVR_Behaviour_Pose controllerPose = null;

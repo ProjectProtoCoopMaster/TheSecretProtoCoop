@@ -1,16 +1,15 @@
 ﻿#if UNITY_STANDALONE
+using Gameplay.VR.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Gameplay.VR.Player
+namespace Gameplay.PC.Player
 {
     public class PC_TeleportBehaviour : MonoBehaviour
     {
-        [SerializeField] InputAction teleportAction = null;
-        [SerializeField] InputActionAsset mmep = null;
-        Transform playerHead = null;
-        public Transform mouseOrigin = null;
+        [SerializeField] Transform teleportOrigin = null;
         TeleportManager teleportationManager = null;
+        Transform playerHead = null;
         float mouseSensitivity = 200f;
         float xRotation = 0f;
 
@@ -41,7 +40,7 @@ namespace Gameplay.VR.Player
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                teleportationManager.pointerOrigin = mouseOrigin;
+                teleportationManager.pointerOrigin = teleportOrigin;
                 teleportationManager.TallRayPointer(null);
             }
 

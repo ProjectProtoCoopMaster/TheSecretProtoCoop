@@ -1,15 +1,13 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Gameplay.VR;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Gameplay.VR.Player
+namespace Gameplay.PC.Player
 {
     public class PC_ShootBehaviour : MonoBehaviour
     {
-        [SerializeField] InputAction shootAction = null;
-        [SerializeField] Transform controllerPose = null;
+        [SerializeField] Transform shootOrigin = null;
 
         [SerializeField] [FoldoutGroup("Shooting")] LayerMask shootingLayer;
         [SerializeField] [FoldoutGroup("Shooting")] float bulletRadius = 0.1f;
@@ -30,7 +28,7 @@ namespace Gameplay.VR.Player
 
             shotTrail.Play();
 
-            if (Physics.SphereCast(controllerPose.position, bulletRadius, transform.forward, out hitInfo, 100f, shootingLayer))
+            if (Physics.SphereCast(shootOrigin.position, bulletRadius, transform.forward, out hitInfo, 100f, shootingLayer))
             {
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
