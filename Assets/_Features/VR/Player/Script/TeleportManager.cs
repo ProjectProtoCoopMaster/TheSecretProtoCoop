@@ -10,7 +10,8 @@ namespace Gameplay.VR.Player
     {
         [SerializeField] [FoldoutGroup("Teleportation Transition")] float tweenDuration = .25f;
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
-        ParticleSystem particleDash;
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleporting;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -46,7 +47,6 @@ namespace Gameplay.VR.Player
             playerRig = this.transform.parent;
             playerHead = this.transform.parent.GetComponentInChildren<SphereCollider>().transform.parent.transform;
             bezierVisualization = GetComponentInChildren<LineRenderer>();
-            particleDash = GetComponentInChildren<ParticleSystem>();
         }
 
         private void Start()
@@ -248,7 +248,9 @@ namespace Gameplay.VR.Player
 
             particleDash.Play();
 
-            time = 0;
+            teleporting.Raise();
+
+             time = 0;
             change = targetPos - startPos;
 
             // don't change yPos

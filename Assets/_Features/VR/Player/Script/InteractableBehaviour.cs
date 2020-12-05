@@ -26,6 +26,8 @@ namespace Gameplay.VR
 
         private void Awake()
         {
+            canPlaySound = false;
+            
             rigidBody = GetComponent<Rigidbody>();
             audioSource = GetComponent<AudioSource>();
             agentsInScene.AddRange(FindObjectsOfType<DistractionBehavior>());
@@ -36,7 +38,7 @@ namespace Gameplay.VR
             if (collision.relativeVelocity.magnitude > maxVelocityLimit) noiseRange = maxRange;
             else noiseRange = (float)CustomScaler.Scalef(collision.relativeVelocity.magnitude, 0, maxVelocityLimit, 0, maxRange);
             
-            MakeNoise(noiseRange);
+            if(canPlaySound) MakeNoise(noiseRange);
         }
 
         private void OnCollisionExit(Collision collision)

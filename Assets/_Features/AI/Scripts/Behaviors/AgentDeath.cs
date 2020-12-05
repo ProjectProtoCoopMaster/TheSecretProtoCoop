@@ -12,10 +12,13 @@ namespace Gameplay.VR
 
         [SerializeField] private RagdollBehavior ragdollBehavior;
 
+        public float thrust = 1.0f;
+
         [Button]
-        public void Die()
+        public void Die(Vector3 force = default)
         {
-            ragdollBehavior.ActivateRagdoll();
+            //ragdollBehavior.ActivateRagdoll();
+            ragdollBehavior.ActivateRagdollWithForce(force, ForceMode.Impulse);            
 
             deathEvent.Invoke();
             
