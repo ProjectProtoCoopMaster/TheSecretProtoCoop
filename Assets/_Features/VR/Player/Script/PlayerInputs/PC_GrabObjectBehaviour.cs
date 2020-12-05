@@ -11,7 +11,7 @@ namespace Gameplay.PC.Player
         RaycastHit hitInfo;
 
         [SerializeField] LayerMask pickupLayer;
-        [SerializeField] InteractableBehaviour interactableObject = null;
+        [SerializeField] NoiseMakerBehaviour interactableObject = null;
 
         private void Update()
         {
@@ -48,14 +48,14 @@ namespace Gameplay.PC.Player
             }
         }
 
-        private InteractableBehaviour GetNearestInteractable()
+        private NoiseMakerBehaviour GetNearestInteractable()
         {
             Debug.DrawRay(playerHead.position, playerHead.forward, Color.green);
             if(Physics.Raycast(playerHead.position, playerHead.forward, out hitInfo, 500f, pickupLayer))
             {
                 Debug.Log(hitInfo.collider.gameObject.name);
                 if (hitInfo.collider.CompareTag("Interactable"))
-                    return hitInfo.collider.GetComponent<InteractableBehaviour>();
+                    return hitInfo.collider.GetComponent<NoiseMakerBehaviour>();
 
                 else return null;
             }
