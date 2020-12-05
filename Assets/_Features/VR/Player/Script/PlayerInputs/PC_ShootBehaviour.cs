@@ -14,6 +14,8 @@ namespace Gameplay.PC.Player
         [SerializeField] [FoldoutGroup("Shooting")] float bulletForce = 5f;
         [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting;
+        [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet;
+        //[SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting;
 
         RaycastHit hitInfo;
 
@@ -40,6 +42,16 @@ namespace Gameplay.PC.Player
                 if (hitInfo.collider.CompareTag("Enemy/Light Guard"))
                 {
                     hitInfo.collider.GetComponentInParent<AgentDeath>().Die((transform.forward) * bulletForce);
+                }
+
+                else if(hitInfo.collider.CompareTag("Enemy/Heavy Guard"))
+                {
+                    ricochet.Raise();
+                }
+
+                else if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
+                {
+
                 }
             }
 

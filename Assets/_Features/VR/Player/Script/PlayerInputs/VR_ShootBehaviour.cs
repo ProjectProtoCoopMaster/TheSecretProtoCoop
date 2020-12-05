@@ -17,6 +17,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Shooting")] float bulletForce = 5f;
         [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting;
+        [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet;
 
         RaycastHit hitInfo;
 
@@ -46,7 +47,19 @@ namespace Gameplay.VR.Player
                 Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
                 if (hitInfo.collider.CompareTag("Enemy/Light Guard"))
+                {
                     hitInfo.collider.GetComponentInParent<AgentDeath>().Die((transform.forward) * bulletForce);
+                }
+
+                else if (hitInfo.collider.CompareTag("Enemy/Heavy Guard"))
+                {
+                    ricochet.Raise();
+                }
+
+                else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
+                {
+
+                }
             }
 
             else Debug.Log("I shot but didn't hit anything");

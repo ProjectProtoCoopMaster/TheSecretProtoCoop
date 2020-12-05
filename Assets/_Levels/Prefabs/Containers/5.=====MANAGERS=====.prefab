@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1974829948514142821}
   - component: {fileID: 7831653972509766363}
   - component: {fileID: 453704551}
+  - component: {fileID: 7746237536713962799}
   - component: {fileID: 453704555}
   - component: {fileID: 453704554}
   - component: {fileID: 453704553}
@@ -83,7 +84,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAudioSource: {fileID: 0}
-  gunshotClip: {fileID: 0}
+  volume: 0.5
+  gunshotClip: {fileID: 8300000, guid: ac161ceed4dcf2d48afcb3e5cd018c48, type: 3}
+  ricochetClips:
+  - {fileID: 8300000, guid: 5ac3bd9286454b647b2394ab4b12cb07, type: 3}
+  - {fileID: 8300000, guid: 5afbd5b9b119ba447acf81df0fc88e3d, type: 3}
+  - {fileID: 8300000, guid: f65e4da10e269dc4aa9b753c28c4eaaa, type: 3}
+  - {fileID: 8300000, guid: 8746f1bab3124ea49bfb77543041b60a, type: 3}
+  - {fileID: 8300000, guid: 8f33492f263e76240a7b6ac1f4e1b29a, type: 3}
+  - {fileID: 8300000, guid: 516187b76f6a9824da96903794a120aa, type: 3}
+  - {fileID: 8300000, guid: c2247912792e15842b5b64f5c3af99cd, type: 3}
+  - {fileID: 8300000, guid: 340af1279a82ab344bb52ed93397c60e, type: 3}
+  - {fileID: 8300000, guid: b19de55f73363f5499168dfc5d2e3df5, type: 3}
 --- !u!114 &453704551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +114,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7831653972509766363}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
-        m_MethodName: GE_GunShotSFX
+        m_MethodName: GE_GunshotSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7746237536713962799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829948514142820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5c12e046bb55cb7449db58b95f5a303a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7831653972509766363}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
+        m_MethodName: GE_GunshotRicochetSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
