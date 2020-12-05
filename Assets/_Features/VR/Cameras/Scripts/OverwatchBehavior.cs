@@ -4,6 +4,7 @@ namespace Gameplay.VR
 {
     public class OverwatchBehavior : EntityVisionData
     {
+        [SerializeField] Transform myDetectableBody;
         [SerializeField] public LayerMask overwatchMask;
         private RaycastHit hitInfo;
         bool detectedGuard = false;
@@ -65,11 +66,11 @@ namespace Gameplay.VR
 
             for (int i = 0; i < awarenessManager.deadGuards.Count; i++)
             {
-                targetPos.x = awarenessManager.deadGuards[i].transform.position.x;
-                targetPos.y = awarenessManager.deadGuards[i].transform.position.z;
+                targetPos.x = awarenessManager.deadGuards[i].position.x;
+                targetPos.y = awarenessManager.deadGuards[i].position.z;
 
                 myFinalPos.x = transform.position.x;
-                myFinalPos.y = awarenessManager.deadGuards[i].transform.position.y;
+                myFinalPos.y = awarenessManager.deadGuards[i].position.y;
                 myFinalPos.z = transform.position.z;
 
                 sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
@@ -78,30 +79,25 @@ namespace Gameplay.VR
                 if (sqrDistToTarget < rangeOfVision * rangeOfVision)
                 {
                     // get the entity's direction relative to you...
-                    targetDir = awarenessManager.deadGuards[i].transform.position - myFinalPos;
+                    targetDir = awarenessManager.deadGuards[i].position - myFinalPos;
 
-                    Debug.DrawLine(transform.position, awarenessManager.deadGuards[i].transform.position, Color.green);
                     //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
                     if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f && !detectedGuard)
                     {
-                        if (Physics.SphereCast(transform.position, 1f, awarenessManager.deadGuards[i].transform.position, out hitInfo, overwatchMask))
+                        if (Physics.Linecast(transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
                         {
-                            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Dead"))
+                            if(hitInfo.collider.gameObject.CompareTag("Dead"))
                             {
-                                Debug.Log(gameObject.name + " can see a dead friendly");
+                                Debug.Log(gameObject.name + " can see a deader friendly");
                                 awarenessManager.RaiseAlarm(this);
                                 detectedGuard = true;
                             }
 
                             else
                             {
-                                Debug.DrawLine(transform.position, awarenessManager.deadGuards[i].transform.position, Color.red);
                                 Debug.Log("I hit " + hitInfo.collider.gameObject.name);
                             }
                         }
-
-
-
                     }
                 }
             }
@@ -111,7 +107,8 @@ namespace Gameplay.VR
         public void UE_GuardDied()
         {
             if (awarenessManager.alarmRaisers.Contains(this)) awarenessManager.alarmRaisers.Remove(this);
-            awarenessManager.deadGuards.Add(gameObject);
+            awarenessManager.deadGuards.Add(myDetectableBody);
+            myDetectableBody.gameObject.tag = "Dead";
             enabled = false;
         }
 

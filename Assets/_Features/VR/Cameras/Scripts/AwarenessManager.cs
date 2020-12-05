@@ -9,7 +9,7 @@ namespace Gameplay.VR
     {
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityVisionData> alarmRaisers = new List<EntityVisionData>();
         
-        [SerializeField] internal List<GameObject> deadGuards = new List<GameObject>();
+        [SerializeField] internal List<Transform> deadGuards = new List<Transform>();
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
 
@@ -73,11 +73,6 @@ namespace Gameplay.VR
                 }
 
             }
-        }
-
-        public void GE_LoadNewLevel()
-        {
-            deadGuards = new List<GameObject>();
         }
     }
 }
