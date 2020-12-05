@@ -2380,6 +2380,7 @@ GameObject:
   - component: {fileID: 5202017752194612483}
   - component: {fileID: 6941732742617552660}
   - component: {fileID: 8764660432937058627}
+  - component: {fileID: 6981803773881930411}
   - component: {fileID: 5855907443207019036}
   - component: {fileID: 5855907443207019035}
   - component: {fileID: 1648719965424338379}
@@ -2461,6 +2462,20 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6981803773881930411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941732742617552670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb643dfac8653eb429c41fe28c2cfe8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeOfVision: 0
+  coneOfVision: 0
 --- !u!114 &5855907443207019036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,18 +2488,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53529aae8a8e8e444ab5f37ddbd4fc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityVisionData: {fileID: 0}
   rangeOfVision: 5
   coneOfVision: 45
-  playerHead: {fileID: 0}
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 19456
-  raiseAlarm: {fileID: 11400000, guid: a4e593c46a2b7be44a74f90b35e2c128, type: 2}
-  targetDir: {x: 0, y: 0, z: 0}
-  poweredOn: 1
   pingFrequency: 10
-  frames: 0
+  framesPassed: 0
+  poweredOn: 1
+  overwatchMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &5855907443207019035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2497,18 +2508,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f26db10a9f33444b97710c03677104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityVisionData: {fileID: 0}
   rangeOfVision: 5
   coneOfVision: 45
-  playerHead: {fileID: 0}
+  pingFrequency: 5
+  framesPassed: 0
+  poweredOn: 1
   detectionMask:
     serializedVersion: 2
     m_Bits: 17664
-  raiseAlarm: {fileID: 11400000, guid: a4e593c46a2b7be44a74f90b35e2c128, type: 2}
-  targetDir: {x: 0, y: 0, z: 0}
-  poweredOn: 1
-  pingFrequency: 5
-  frames: 0
+  playerHead: {fileID: 0}
 --- !u!114 &1648719965424338379
 MonoBehaviour:
   m_ObjectHideFlags: 0

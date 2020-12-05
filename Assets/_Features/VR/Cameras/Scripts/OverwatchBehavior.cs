@@ -5,6 +5,7 @@ namespace Gameplay.VR
     public class OverwatchBehavior : EntityVisionData
     {
         [SerializeField] public LayerMask overwatchMask;
+        private RaycastHit hitInfo;
         bool detectedGuard = false;
 
         new void Awake()
@@ -78,13 +79,29 @@ namespace Gameplay.VR
                 {
                     // get the entity's direction relative to you...
                     targetDir = awarenessManager.deadGuards[i].transform.position - myFinalPos;
-                    Debug.DrawLine(transform.forward, targetDir, Color.green);
-                    //...if the angle between the looking dir of the tneity and a dead guard is less than the cone of vision, then you can see him
+
+                    Debug.DrawLine(transform.position, awarenessManager.deadGuards[i].transform.position, Color.green);
+                    //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
                     if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * .5f && !detectedGuard)
                     {
-                        Debug.Log(gameObject.name + " can see a dead friendly");
-                        awarenessManager.RaiseAlarm(this);
-                        detectedGuard = true;
+                        if (Physics.SphereCast(transform.position, 1f, awarenessManager.deadGuards[i].transform.position, out hitInfo, overwatchMask))
+                        {
+                            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Dead"))
+                            {
+                                Debug.Log(gameObject.name + " can see a dead friendly");
+                                awarenessManager.RaiseAlarm(this);
+                                detectedGuard = true;
+                            }
+
+                            else
+                            {
+                                Debug.DrawLine(transform.position, awarenessManager.deadGuards[i].transform.position, Color.red);
+                                Debug.Log("I hit " + hitInfo.collider.gameObject.name);
+                            }
+                        }
+
+
+
                     }
                 }
             }
