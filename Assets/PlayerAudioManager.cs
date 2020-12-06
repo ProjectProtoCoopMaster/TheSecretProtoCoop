@@ -1,7 +1,5 @@
 ﻿using Gameplay.VR.Player;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.VR.Feedbacks
@@ -12,8 +10,10 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("Player")] float volume = 0.5f;
         [SerializeField] [FoldoutGroup("Player Gun")] AudioClip gunshotClip;
         [SerializeField] [FoldoutGroup("Player Gun")] AudioClip[] ricochetClips;
-        AudioClip ricochetClip, lastRicochetClip; // to avoid repeating the sound
+        AudioClip lastRicochetClip; // to avoid repeating the sound
         int attempts = 3; // 1-out-of-3 chance to replay the same sound 
+        [SerializeField] [FoldoutGroup("Player Gun")] AudioClip[] hitEnvironmentClips;
+        AudioClip lastEnvironmentClip;
 
         private void Awake()
         {
@@ -27,22 +27,24 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_GunshotRicochetSFX()
         {
-            int index = Random.Range(0, ricochetClips.Length);
-            lastRicochetClip = ricochetClips[index];
-            playerAudioSource.PlayOneShot(RandomRicochet(), volume);
+            playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
         }
 
-        AudioClip RandomRicochet()
+        public void GE_HitEnvironementSFX()
         {
-            ricochetClip = ricochetClips[Random.Range(0, ricochetClips.Length)];
+            playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
+            playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
+        }
 
-            while (ricochetClip == lastRicochetClip && attempts > 0)
+        AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)
+        {
+            AudioClip ricochetClip = clipArray[Random.Range(0, clipArray.Length)];
+
+            while (ricochetClip == previousClip && attempts > 0)
             {
-                ricochetClip = ricochetClips[Random.Range(0, ricochetClips.Length)];
+                ricochetClip = clipArray[Random.Range(0, clipArray.Length)];
                 attempts--;
             }
-
-            lastRicochetClip = ricochetClip;
             return ricochetClip;
         }
     }

@@ -18,6 +18,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet;
+        [SerializeField] [FoldoutGroup("Shooting")] GameEvent shotEnvironment;
 
         RaycastHit hitInfo;
 
@@ -58,7 +59,8 @@ namespace Gameplay.VR.Player
 
                 else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
                 {
-
+                    ricochet.Raise();
+                    shotEnvironment.Raise();
                 }
             }
 
