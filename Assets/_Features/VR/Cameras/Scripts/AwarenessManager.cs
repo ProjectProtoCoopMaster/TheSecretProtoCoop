@@ -17,7 +17,9 @@ namespace Gameplay.VR
         bool changeTime = false;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
-        [SerializeField] [FoldoutGroup("Alarm Raising")] UnityEvent gameOverFeedback;
+        [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
+
+        bool gameIsOver;
 
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
 
@@ -79,9 +81,12 @@ namespace Gameplay.VR
         }
         private void GameOver()
         {
-            gameOverFeedback.Invoke();
-            gameOver.Raise();
+            if(!gameIsOver)
+            {
+                gameIsOver = true;
+                gameOver.Raise();
+                gameOverAlarm.Raise();
+            }
         }
-
     }
 }

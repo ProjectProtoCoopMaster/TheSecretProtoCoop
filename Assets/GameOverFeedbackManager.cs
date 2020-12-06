@@ -8,12 +8,12 @@ namespace Gameplay.VR
 
         private void Awake()
         {
-            redAlarmLight.enabled = false;
+            redAlarmLight.gameObject.SetActive(false);
         }
 
         public void GE_TurnOnAlarmLights()
         {
-            redAlarmLight.enabled = true;
+            redAlarmLight.gameObject.SetActive(true);
         }
     } 
 }

@@ -17,6 +17,10 @@ namespace Gameplay.VR.Feedbacks
         AudioClip lastEnvironmentClip;
 
         [SerializeField] [FoldoutGroup("Teleportation")] AudioClip teleportationSFX;
+        [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationWooshSFX;
+         AudioClip lastWooshSFX;
+
+        [SerializeField] [FoldoutGroup("GameOver")] AudioClip gameOverAlarm;
 
         private void Awake()
         {
@@ -42,6 +46,12 @@ namespace Gameplay.VR.Feedbacks
         public void GE_TeleportationSFX()
         {
             playerAudioSource.PlayOneShot(teleportationSFX);
+            playerAudioSource.PlayOneShot(lastWooshSFX = RandomRicochet(teleportationWooshSFX, lastWooshSFX), volume);
+        }
+
+        public void GE_GameOverAlarmSFX()
+        {
+            playerAudioSource.PlayOneShot(gameOverAlarm);            
         }
 
         AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)

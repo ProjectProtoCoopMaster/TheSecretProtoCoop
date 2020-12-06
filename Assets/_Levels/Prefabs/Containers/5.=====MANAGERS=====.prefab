@@ -43,13 +43,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1974829948514142821}
   - component: {fileID: 7831653972509766363}
+  - component: {fileID: 2978738355510773617}
   - component: {fileID: 453704551}
   - component: {fileID: 7746237536713962799}
   - component: {fileID: 453704555}
+  - component: {fileID: 1057292591}
   - component: {fileID: 453704554}
   - component: {fileID: 453704553}
   - component: {fileID: 453704552}
-  - component: {fileID: 2978738355510773617}
+  - component: {fileID: 1057292582}
   m_Layer: 0
   m_Name: VRAudioManager
   m_TagString: Untagged
@@ -96,6 +98,42 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c2247912792e15842b5b64f5c3af99cd, type: 3}
   - {fileID: 8300000, guid: 340af1279a82ab344bb52ed93397c60e, type: 3}
   - {fileID: 8300000, guid: b19de55f73363f5499168dfc5d2e3df5, type: 3}
+  hitEnvironmentClips: []
+  teleportationSFX: {fileID: 8300000, guid: 81342a278015a3143adb58b9c4293625, type: 3}
+  teleportationWooshSFX:
+  - {fileID: 8300000, guid: 3496719da28320b4a9c489788c954c3f, type: 3}
+  - {fileID: 8300000, guid: ed35bc532b7d625459559edb66141c9b, type: 3}
+  gameOverAlarm: {fileID: 0}
+--- !u!114 &2978738355510773617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829948514142820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7831653972509766363}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
+        m_MethodName: GE_GameOverAlarmSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: 
+  component: {fileID: 0}
 --- !u!114 &453704551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +205,47 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: 46fbd5a8138bdb4469d687dc256ffec6, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7831653972509766363}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
+        m_MethodName: GE_TeleportationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1057292591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829948514142820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 50db5394dd658cd49910330550ec678e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7831653972509766363}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
+        m_MethodName: GE_HitEnvironementSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &453704554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +294,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2978738355510773617
+--- !u!114 &1057292582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,15 +303,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1974829948514142820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  Event: {fileID: 0}
   Response:
     m_PersistentCalls:
       m_Calls: []
-  methodName: 
-  component: {fileID: 0}
 --- !u!1 &1974829949914884779
 GameObject:
   m_ObjectHideFlags: 0
