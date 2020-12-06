@@ -1,4 +1,5 @@
-﻿using Photon.Pun.Demo.Cockpit;
+﻿#if UNITY_STANDALONE
+using Photon.Pun.Demo.Cockpit;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    public class TestThreadedOverwatchBehavior : EntityVisionDataInterface
+    public class TestThreadedOverwatchBehavior : EntityVisionData
     {/*
         Thread childThread = null;
         EventWaitHandle childThreadWait = new EventWaitHandle(true, EventResetMode.ManualReset);
@@ -106,4 +107,5 @@ namespace Gameplay.VR
             if (guard.name == "DEAD") Debug.Log("Game over, bub");
         }*/
     }
-}
+} 
+#endif

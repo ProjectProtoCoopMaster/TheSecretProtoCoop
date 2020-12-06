@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 using UnityEditor;
 using Gameplay.VR;
 
@@ -44,4 +45,5 @@ namespace Tools.Debugging
             }
         }
     }
-}
+} 
+#endif

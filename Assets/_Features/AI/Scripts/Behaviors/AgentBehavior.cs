@@ -53,7 +53,7 @@ namespace Gameplay.AI
 
     public abstract class ActionBehavior : MonoBehaviour
     {
-        public ActionType actionType;
+        public ActionType actionType { get; protected set; } // Not used
 
         public abstract void StartActionBehavior(_Action action);
         public virtual void ResumeActionBehavior(_Action action) { StartActionBehavior(action); }
@@ -65,23 +65,23 @@ namespace Gameplay.AI
 
     public abstract class AgentBehavior : MonoBehaviour
     {
-        public StateType stateType;
+        public StateType stateType { get; protected set; } // Not used
 
-        public bool loop;
+        [SerializeField] public bool loop;
 
-        private bool active;
+        public bool active { get; private set; }
 
         protected Dictionary<ActionType, ActionBehavior> actionBehaviors = new Dictionary<ActionType, ActionBehavior>();
 
-        protected List<_Action> actions = new List<_Action>();
+        public List<_Action> actions { get; protected set; } = new List<_Action>();
 
-        protected _Action currentAction;
-        public ActionType currentActionType { get; set; }
-        public ActionType savedActionType { get; set; }
+        public _Action currentAction { get; protected set; }
+        public ActionType currentActionType { get; protected set; }
+        public ActionType savedActionType { get; protected set; }
 
         protected int actionIndex;
 
-        internal AgentManager agent;
+        public AgentManager agent { get; internal set; }
 
         #region Get
         void Awake()

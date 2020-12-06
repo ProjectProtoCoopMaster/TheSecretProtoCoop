@@ -6,11 +6,11 @@ namespace Gameplay.AI
 {
     public class PatrolBehavior : AgentBehavior
     {
-        public PatrolPath path;
+        [SerializeField] private PatrolPath path;
 
-        public MoveAction moveBehavior;
-        public WaitAction waitBehavior;
-        public WatchAction watchBehavior;
+        [SerializeField] private MoveAction moveBehavior;
+        [SerializeField] private WaitAction waitBehavior;
+        [SerializeField] private WatchAction watchBehavior;
 
         protected override void InitializeBehavior()
         {
@@ -28,7 +28,7 @@ namespace Gameplay.AI
             }
         }
 
-        public List<_Action> ConvertPath(PatrolPath _path)
+        private List<_Action> ConvertPath(PatrolPath _path)
         {
             List<_Action> list = new List<_Action>();
 

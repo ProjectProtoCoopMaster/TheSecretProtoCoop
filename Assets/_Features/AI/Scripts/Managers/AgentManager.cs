@@ -10,15 +10,15 @@ namespace Gameplay.AI
 
     public abstract class AgentManager : MonoBehaviour
     {
-        public Dictionary<StateType, AgentBehavior> agentBehaviors = new Dictionary<StateType, AgentBehavior>();
+        protected Dictionary<StateType, AgentBehavior> agentBehaviors = new Dictionary<StateType, AgentBehavior>();
 
-        public StateType currentState { get; set; } = StateType.None;
+        public StateType currentState { get; protected set; } = StateType.None;
 
-        private StateType saveState = StateType.None;
+        protected StateType saveState = StateType.None;
 
-        private bool resumeNext = false;
+        protected bool resumeNext = false;
 
-        public bool isDead;
+        public bool isDead { get; protected set; }
 
         void Awake()
         {
@@ -31,15 +31,15 @@ namespace Gameplay.AI
         {
             if (resumeNext)
             {
-                SwitchAgentState(saveState, Usage.Resume, false);
+                SwitchAgentState(Usage.Resume, saveState);
             }
             else
             {
-                SwitchAgentState(StateType.None, Usage.End, false); // Same as StopAgent();
+                SwitchAgentState(Usage.End); // Same as StopAgent();
             }
         }
 
-        protected void SwitchAgentState(StateType _state, Usage _usage, bool resumeAfterwards)
+        protected void SwitchAgentState(Usage _usage, StateType _state = StateType.None, bool resumeAfterwards = false)
         {
             if (isDead) return;
 

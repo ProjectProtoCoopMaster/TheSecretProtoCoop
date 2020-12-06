@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
     public class CameraBehavior : MonoBehaviour, ISwitchable
     {
-        OverwatchBehavior overwatchBehavior;
-        DetectionBehavior detectionBehavior;
-        RotationBehavior rotationBehavior;
+        public UnityEvent camerasOff, camerasOn;
 
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
@@ -32,29 +31,18 @@ namespace Gameplay.VR
 
         private void Awake()
         {
-            overwatchBehavior = GetComponent<OverwatchBehavior>();
-            detectionBehavior = GetComponent<DetectionBehavior>();
-            try
-            {
-                rotationBehavior = GetComponent<RotationBehavior>();
-            }
-            finally { };
+            Power = power;
         }
 
         public void TurnOff()
         {
-            Debug.Log("Off");
-            overwatchBehavior.OverwatchOff();
-            detectionBehavior.DetectionOff();
-            if(rotationBehavior != null) rotationBehavior.RotationOff();
+            camerasOff.Invoke();
         }
 
         public void TurnOn()
         {
-            Debug.Log("On");
-            overwatchBehavior.OverwatchOn();
-            detectionBehavior.DetectionOn();
-            if (rotationBehavior != null) rotationBehavior.RotationOn();
+            camerasOn.Invoke();
         }
     }
-}
+} 
+#endif

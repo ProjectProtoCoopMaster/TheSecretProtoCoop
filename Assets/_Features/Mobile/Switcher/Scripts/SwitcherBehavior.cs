@@ -64,9 +64,13 @@ namespace Gameplay
 
         private void Start() 
         {
-            if (switchTimer == SwitchTimer.Fixed) { timerDisplayer.transform.parent.gameObject.SetActive(true); ResetTimer(); }
-            else timerDisplayer.transform.parent.gameObject.SetActive(false);
-            
+            if (timerDisplayer != null)
+            {
+                if (switchTimer == SwitchTimer.Fixed) { timerDisplayer.transform.parent.gameObject.SetActive(true); ResetTimer(); }
+                else timerDisplayer.transform.parent.gameObject.SetActive(false);
+
+
+            }
 
             Power = power;
         }

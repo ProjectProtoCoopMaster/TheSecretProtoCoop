@@ -5,20 +5,20 @@ using Gameplay.AI;
 
 public class SoundObject : MonoBehaviour
 {
-    public LayerMask layerMask;
-    public float radius;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private float radius; public float Radius { get => radius; }
 
     private bool active = true;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Floor" && active)
         {
-            _Distraction();
+            Distraction();
         }
     }
 
-    public void _Distraction()
+    private void Distraction()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerMask);
 
@@ -36,14 +36,14 @@ public class SoundObject : MonoBehaviour
         //active = false;
     }
 
-    public void Grab()
+    public void WaitForGrab()
     {
         Wait();
 
         active = true;
     }
 
-    IEnumerator Wait()
+    private IEnumerator Wait()
     {
         yield return new WaitForSeconds(1f);
     }
