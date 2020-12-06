@@ -66,7 +66,7 @@ namespace Gameplay.VR
                 if (hitInfo.collider.gameObject.name == playerHead.name)
                 {
                     Debug.Log(gameObject.name + " spotted the player");
-                    awarenessManager.RaiseAlarm(this);
+                    awarenessManager.RaiseAlarm(entityType, EntityType.Player);
                     detectedPlayer = true;
                 }
 
@@ -81,8 +81,8 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            if (awarenessManager.alarmRaisers.Contains(this)) 
-                awarenessManager.alarmRaisers.Remove(this);
+            if (awarenessManager.alarmRaisers.Contains(entityType)) 
+                awarenessManager.alarmRaisers.Remove(entityType);
                enabled = false;
         }
 

@@ -103,7 +103,7 @@ MonoBehaviour:
   teleportationWooshSFX:
   - {fileID: 8300000, guid: 3496719da28320b4a9c489788c954c3f, type: 3}
   - {fileID: 8300000, guid: ed35bc532b7d625459559edb66141c9b, type: 3}
-  gameOverAlarm: {fileID: 0}
+  gameOverAlarm: {fileID: 8300000, guid: 87f065f94592ece4ebb0806d80ee4ed2, type: 3}
 --- !u!114 &2978738355510773617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,10 +306,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: 74bbccdcda182824997cba25f2478557, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7831653972509766363}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
+        m_MethodName: GE_GameOverAlarmSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1974829949914884779
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +337,7 @@ GameObject:
   - component: {fileID: 1200446381}
   - component: {fileID: 1200446380}
   - component: {fileID: 1200446379}
-  - component: {fileID: 3087696460554669009}
+  - component: {fileID: 171248697309145549}
   m_Layer: 0
   m_Name: VRFeedbackManager
   m_TagString: Untagged
@@ -360,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redAlarmLight: {fileID: 0}
+  gameOverText: {fileID: 0}
 --- !u!114 &1200446378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +453,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3087696460554669009
+--- !u!114 &171248697309145549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -449,10 +462,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1974829949914884779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  Event: {fileID: 11400000, guid: 74bbccdcda182824997cba25f2478557, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -468,8 +481,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
 --- !u!1 &3611946231853382549
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,10 +527,8 @@ MonoBehaviour:
   reflexModeMultiplier: 5
   raisingAlarm: 0
   alarmRaiseDuration: 0
-  alarmRaisers: []
+  alarmRaisers: 
   deadGuards: []
   gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
-  gameOverFeedback:
-    m_PersistentCalls:
-      m_Calls: []
+  gameOverAlarm: {fileID: 11400000, guid: 74bbccdcda182824997cba25f2478557, type: 2}
   timePassed: 0

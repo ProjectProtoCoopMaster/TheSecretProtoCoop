@@ -105,10 +105,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2243126664052907476}
-  - component: {fileID: 3354379565190297599}
   - component: {fileID: 2243126664052907475}
   - component: {fileID: 2243126664052907474}
   - component: {fileID: 2243126664052907473}
+  - component: {fileID: 3354379565190297599}
   - component: {fileID: 7782004803534937576}
   - component: {fileID: 3764901063986171097}
   - component: {fileID: 3876923638693574412}
@@ -134,20 +134,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3354379565190297599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2243126664052907472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb643dfac8653eb429c41fe28c2cfe8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangeOfVision: 0
-  coneOfVision: 0
 --- !u!33 &2243126664052907475
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -210,6 +196,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3354379565190297599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243126664052907472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb643dfac8653eb429c41fe28c2cfe8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeOfVision: 9
+  coneOfVision: 90
 --- !u!114 &7782004803534937576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,9 +248,10 @@ MonoBehaviour:
   pingFrequency: 3
   framesPassed: 0
   poweredOn: 0
+  myDetectableBody: {fileID: 0}
   overwatchMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 17664
 --- !u!114 &3876923638693574412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,4 +319,4 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   state: 1
-  power: 0
+  power: 1

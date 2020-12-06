@@ -9,8 +9,6 @@ namespace Gameplay.VR
     [RequireComponent(typeof(EntityDataInterface))]
     public class EntityVisionData : MonoBehaviour
     {
-        [SerializeField] protected UnityEvent raiseAlarm;
-
         // need to be identical across both Detection and Overwatch
         [HideInInspector] public float rangeOfVision;
         [HideInInspector] public float coneOfVision;
