@@ -1,4 +1,5 @@
 ﻿using Gameplay.AI;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,33 +10,35 @@ namespace Gameplay.VR
     [RequireComponent(typeof(AudioSource))]
     public class InteractableBehaviour : MonoBehaviour
     {
-        [SerializeField] LayerMask guardHearingLayermask;
-        RaycastHit[] hitInfo;
+        [Tooltip("Define which layers the sound will affect")] [SerializeField] LayerMask guardHearingLayermask;
+        RaycastHit hitInfo;
 
-        [SerializeField] float maxRange;
-        [SerializeField] float noiseDampenMultiplier = .5f;
-        float noiseRange;
+        List<DistractionBehavior> agentsInScene = new List<DistractionBehavior>();
+        [Tooltip("This value dictates by how much sound will be reduced when passing through a wall")] [SerializeField] [FoldoutGroup("Noise Values")] float noiseDampenMultiplier = .5f;
+        [Tooltip("This is the max range that sound should travel in an open room")] [SerializeField] [FoldoutGroup("Noise Values")] float maxRange;
+        [Tooltip("This debug value defines how hard the object has to be thrown to produce maximum volume")] [SerializeField] [FoldoutGroup("Debugging")] float maxVelocityLimit;
+        [Tooltip("This debug value returns the object's last range travelled (can appear reduced if it had to travel through walls)")] [SerializeField] [FoldoutGroup("Debugging")] float noiseRange;
 
         // accessed by the Grab Behaviour
         internal Rigidbody rigidBody;
         AudioSource audioSource;
         bool canPlaySound;
 
-        [SerializeField] List<DistractionBehavior> agentsInScene = new List<DistractionBehavior>();
-
         private void Awake()
         {
+            canPlaySound = false;
+            
             rigidBody = GetComponent<Rigidbody>();
             audioSource = GetComponent<AudioSource>();
-
             agentsInScene.AddRange(FindObjectsOfType<DistractionBehavior>());
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("I HIT " + collision.gameObject.name);
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && canPlaySound)
-                MakeNoise(noiseRange = collision.relativeVelocity.magnitude);
+            if (collision.relativeVelocity.magnitude > maxVelocityLimit) noiseRange = maxRange;
+            else noiseRange = (float)CustomScaler.Scalef(collision.relativeVelocity.magnitude, 0, maxVelocityLimit, 0, maxRange);
+            
+            if(canPlaySound) MakeNoise(noiseRange);
         }
 
         private void OnCollisionExit(Collision collision)
@@ -46,8 +49,7 @@ namespace Gameplay.VR
 
         private void MakeNoise(float collisionForce)
         {
-            Debug.Log("I hit the target at a force of " + collisionForce);
-            audioSource.volume = collisionForce / maxRange;
+            //audioSource.volume = collisionForce / maxRange;
             audioSource.Play();
 
             canPlaySound = false;
@@ -55,24 +57,17 @@ namespace Gameplay.VR
             // check to see if the sound has to pass through walls to reach each enemy in the scene
             for (int i = 0; i < agentsInScene.Count; i++)
             {
-                hitInfo = Physics.RaycastAll(transform.position, agentsInScene[i].transform.position, 500f, guardHearingLayermask);
-
-                if (hitInfo.Length > 0)
+                if (Physics.Linecast(transform.position, agentsInScene[i].transform.position, out hitInfo, guardHearingLayermask))
                 {
-                    for (int j = 0; j < hitInfo.Length; j++)
+                    if (hitInfo.collider.gameObject.layer != LayerMask.NameToLayer("Entity"))
                     {
-                        // if the sound has to pass through a wall
-                        if (hitInfo[j].collider.CompareTag("Wall") || hitInfo[j].collider.CompareTag("Window"))
-                        {
-                            noiseRange *= noiseDampenMultiplier;
-                            Debug.Log("I had to hit " + hitInfo[j].collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
-                            Debug.Log("noiseRange is now " + noiseRange);
-                        }
+                        collisionForce *= noiseDampenMultiplier;
+                        Debug.Log("I had to hit " + hitInfo.collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
                     }
                 }
 
                 // if the agent is within range of the sound
-                if ((agentsInScene[i].transform.position - transform.position).sqrMagnitude < noiseRange * noiseRange)
+                if ((agentsInScene[i].transform.position - transform.position).sqrMagnitude < collisionForce * collisionForce)
                 {
                     Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
 

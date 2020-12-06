@@ -6,5 +6,6 @@ public enum EntityType
 {
     Camera,
     Guard,
+    Player,
     Count
 }
