@@ -6,14 +6,17 @@ namespace Gameplay.VR.Feedbacks
 {
     public class PlayerAudioManager : MonoBehaviour
     {
-        [SerializeField] [FoldoutGroup("Player")] AudioSource playerAudioSource;
-        [SerializeField] [FoldoutGroup("Player")] float volume = 0.5f;
-        [SerializeField] [FoldoutGroup("Player Gun")] AudioClip gunshotClip;
-        [SerializeField] [FoldoutGroup("Player Gun")] AudioClip[] ricochetClips;
+        [SerializeField] [FoldoutGroup("General")] AudioSource playerAudioSource;
+        [SerializeField] [FoldoutGroup("General")] float volume = 0.5f;
+
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip gunshotClip;
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] ricochetClips;
         AudioClip lastRicochetClip; // to avoid repeating the sound
         int attempts = 3; // 1-out-of-3 chance to replay the same sound 
-        [SerializeField] [FoldoutGroup("Player Gun")] AudioClip[] hitEnvironmentClips;
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] hitEnvironmentClips;
         AudioClip lastEnvironmentClip;
+
+        [SerializeField] [FoldoutGroup("Teleportation")] AudioClip teleportationSFX;
 
         private void Awake()
         {
@@ -34,6 +37,11 @@ namespace Gameplay.VR.Feedbacks
         {
             playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
             playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
+        }
+
+        public void GE_TeleportationSFX()
+        {
+            playerAudioSource.PlayOneShot(teleportationSFX);
         }
 
         AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)
