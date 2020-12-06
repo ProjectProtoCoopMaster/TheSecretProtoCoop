@@ -51,7 +51,7 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_GameOverAlarmSFX()
         {
-            playerAudioSource.PlayOneShot(gameOverAlarm);            
+            playerAudioSource.PlayOneShot(gameOverAlarm, volume);            
         }
 
         AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)
