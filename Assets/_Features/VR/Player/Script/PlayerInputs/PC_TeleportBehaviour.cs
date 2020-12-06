@@ -1,26 +1,18 @@
 ﻿#if UNITY_STANDALONE
+using Gameplay.VR.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-namespace Gameplay.VR.Player
+namespace Gameplay.PC.Player
 {
     public class PC_TeleportBehaviour : MonoBehaviour
     {
-        Transform playerHead;
-        public Transform mouseOrigin;
-        TeleportManager manager;
-        [SerializeField] float mouseSensitivity;
-        float xRotation = 0f;
+        [SerializeField] Transform teleportOrigin = null;
+        TeleportManager teleportationManager = null;
 
         private void Awake()
         {
-            manager = GetComponent<TeleportManager>();
-            playerHead = manager.playerHead;
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            Cursor.lockState = CursorLockMode.Locked;
+            teleportationManager = GetComponent<TeleportManager>();
         }
 
         // Update is called once per frame
@@ -28,24 +20,15 @@ namespace Gameplay.VR.Player
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                manager.pointerOrigin = mouseOrigin;
-                manager.TallRayPointer(null);
+                teleportationManager.pointerOrigin = teleportOrigin;
+                teleportationManager.TallRayPointer(null);
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                manager.TryTeleporting();
+                teleportationManager.TryTeleporting();
             }
-
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-            playerHead.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-            playerHead.transform.parent.Rotate(Vector3.up, mouseX);
         }
     }
-} 
+}
 #endif

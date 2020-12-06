@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Valve.VR;
 
@@ -10,7 +11,7 @@ namespace Gameplay.VR.Player
         SteamVR_Behaviour_Pose controllerPose = null;
         SteamVR_Input_Sources handSource;
 
-        [SerializeField] TeleportManager teleportationManager = null;
+        [SerializeField] [FoldoutGroup("Shooting")] TeleportManager teleportationManager = null;
 
         private void Awake()
         {
@@ -23,7 +24,7 @@ namespace Gameplay.VR.Player
             if (teleportAction.GetStateDown(handSource)) 
                 teleportationManager.TallRayPointer(controllerPose);
 
-            if (teleportAction.GetStateUp(handSource)) 
+            if (teleportAction.GetStateUp(handSource))
                 teleportationManager.TryTeleporting();
         }
     }

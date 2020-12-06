@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Valve.VR;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 namespace Gameplay.VR.Player
 {
@@ -10,7 +11,8 @@ namespace Gameplay.VR.Player
     {
         [SerializeField] [FoldoutGroup("Teleportation Transition")] float tweenDuration = .25f;
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
-        ParticleSystem particleDash;
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleporting;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -41,12 +43,13 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Internal Values")] int bezierSmoothness;
         internal bool isTeleporting; // for Awareness Manager time freeze feedback
 
+        internal bool isGameOver;
+        
         private void Awake()
         {
             playerRig = this.transform.parent;
             playerHead = this.transform.parent.GetComponentInChildren<SphereCollider>().transform.parent.transform;
             bezierVisualization = GetComponentInChildren<LineRenderer>();
-            particleDash = GetComponentInChildren<ParticleSystem>();
         }
 
         private void Start()
@@ -65,7 +68,7 @@ namespace Gameplay.VR.Player
 
         private void FixedUpdate()
         {
-            if (showRayPointer)
+            if (showRayPointer == true && isGameOver == false)
                 ShowRayPointer();
         }
 
@@ -153,6 +156,11 @@ namespace Gameplay.VR.Player
         }
 
         #endregion
+
+        public void GE_OnGameOver()
+        {
+            isGameOver = true;
+        }
 
         // 1. fire a ray pointing in the direction of the controller
         // 2. find a point on the horizontalRay based on the normalized pitch (defined in a range, eg. 60° to 120°) of the controller * maxDistance
@@ -248,7 +256,9 @@ namespace Gameplay.VR.Player
 
             particleDash.Play();
 
-            time = 0;
+            teleporting.Raise();
+
+             time = 0;
             change = targetPos - startPos;
 
             // don't change yPos

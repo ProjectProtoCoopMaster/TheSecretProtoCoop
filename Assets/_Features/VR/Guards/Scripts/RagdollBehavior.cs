@@ -33,14 +33,14 @@ namespace Gameplay.VR
                 allRB[i].isKinematic = false;
             }
         }
-        public void ActivateRagdollWithForce( Vector3 force, ForceMode forceMode)
+
+        public void ActivateRagdollWithForce(Vector3 force, ForceMode forceMode)
         {
             for (int i = 0; i < allRB.Length; i++)
             {
                 allRB[i].isKinematic = false;
+                allRB[i].AddForce(force, ForceMode.Impulse);
             }
-
-            rb.AddForce(force, forceMode);
         }
     }
 }

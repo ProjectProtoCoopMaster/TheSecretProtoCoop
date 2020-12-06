@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
@@ -44,11 +45,6 @@ namespace Gameplay.VR
             else entityType = EntityType.Camera;
 
             awarenessManager = FindObjectOfType<AwarenessManager>();
-        }
-
-        protected void RaiseAlarm()
-        {
-
         }
     }
 }
