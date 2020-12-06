@@ -1,4 +1,5 @@
-﻿using Photon.Pun.Demo.Cockpit;
+﻿#if UNITY_STANDALONE
+using Photon.Pun.Demo.Cockpit;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -106,4 +107,5 @@ namespace Gameplay.VR
             if (guard.name == "DEAD") Debug.Log("Game over, bub");
         }*/
     }
-}
+} 
+#endif

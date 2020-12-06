@@ -1,4 +1,5 @@
-﻿using Gameplay.VR;
+﻿#if UNITY_STANDALONE
+using Gameplay.VR;
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
@@ -80,9 +81,9 @@ namespace Tools.Debugging
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }
-        #endregion
+#endregion
 
-        #region Draw Fields
+#region Draw Fields
         // display a single property field for assigning exsiting scriptableObject data
         private void DrawScriptableObjProperty()
         {
@@ -129,6 +130,7 @@ namespace Tools.Debugging
             }
             EditorGUILayout.EndVertical();
         }
-        #endregion
-   }
-}
+#endregion
+    }
+} 
+#endif

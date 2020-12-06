@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -99,3 +100,4 @@ namespace Gameplay.VR
         #endregion
     }
 }
+#endif

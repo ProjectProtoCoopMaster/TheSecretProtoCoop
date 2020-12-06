@@ -44,4 +44,5 @@ namespace Gameplay.VR
             camerasOn.Invoke();
         }
     }
-}
+} 
+#endif

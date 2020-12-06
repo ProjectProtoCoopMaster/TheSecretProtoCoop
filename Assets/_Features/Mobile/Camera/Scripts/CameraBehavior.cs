@@ -8,6 +8,7 @@ namespace Gameplay.Mobile
 {
     public class CameraBehavior : MonoBehaviour, ISwitchable
     {
+        [SerializeField] private LineRenderer visionLine;
         private Color color;
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
@@ -29,8 +30,8 @@ namespace Gameplay.Mobile
         }
         private void Start() => Power = power;
 
-        public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); }
-        public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); }
+        public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); visionLine.SetColors(Color.black, Color.black); }
+        public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); visionLine.SetColors(Color.red, Color.red); }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gameplay.VR.Player;
+﻿#if UNITY_STANDALONE
+using Gameplay.VR.Player;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,3 +82,4 @@ namespace Gameplay.VR
         }
     }
 }
+#endif

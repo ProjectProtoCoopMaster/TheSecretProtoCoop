@@ -16,10 +16,10 @@ namespace Gameplay
         public VisualTreeAsset visualTree;
         public VisualElement rootElement;
         private Button join;
-
+        private int index = 1;
         private void OnEnable()
         {
-
+            index = 1;
             rootElement = visualTree.CloneTree();
 
             join = rootElement.Q<Button>("JoinButton");
@@ -32,7 +32,7 @@ namespace Gameplay
         }
 
         private void Test(ChangeEvent<Button> value) => Debug.Log("Helo");
-        public void JoinRoom() => _JoinRoom.Raise();
+        public void JoinRoom(int ID) { _JoinRoom.Raise(); index = ID; }
 
         [Button]
         public void CreateRoom() => _CreateRoom.Raise();
@@ -41,13 +41,13 @@ namespace Gameplay
         {
             if (Application.platform == RuntimePlatform.WindowsEditor)
             {
-                SceneManager.LoadScene(1, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(3);
+                SceneManager.LoadScene(index, LoadSceneMode.Additive);
+                SceneManager.UnloadScene(6);
             }
             else
             {
-                SceneManager.LoadScene(2, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(3);
+                SceneManager.LoadScene(index, LoadSceneMode.Additive);
+                SceneManager.UnloadScene(6);
             }
         }
 

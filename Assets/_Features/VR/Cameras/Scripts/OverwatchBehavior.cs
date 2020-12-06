@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -126,6 +127,7 @@ namespace Gameplay.VR
         {
             poweredOn = false;
         }
-        #endregion
+#endregion
     }
-}
+} 
+#endif
