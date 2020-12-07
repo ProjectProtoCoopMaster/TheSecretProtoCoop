@@ -14,7 +14,7 @@ namespace Gameplay.VR
         {
             base.Awake();
             playerHead = GameObject.Find("HeadCollider").transform;
-            pingFrequency = 10;
+            //pingFrequency = 10;
         }
 
         private void Update()

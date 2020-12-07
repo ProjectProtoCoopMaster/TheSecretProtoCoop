@@ -13,7 +13,7 @@ namespace Gameplay.VR
         new void Awake()
         {
             base.Awake();
-            pingFrequency = 1;
+            //pingFrequency = 1;
         }
 
         private void Start()

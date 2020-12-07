@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
     [RequireComponent(typeof(BoxCollider))]
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
+        UnityEvent hitTrap = new UnityEvent();
+        GameOverFeedbackManager gameOverFeedback = null;
+
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
@@ -20,21 +24,29 @@ namespace Gameplay.VR
             }
         }
 
-        private void Start() => Power = power;
+        private void Start()
+        {
+            gameOverFeedback = FindObjectOfType<GameOverFeedbackManager>();
+            hitTrap.AddListener(() => gameOverFeedback.UE_GameOverExplanation(EntityType.Trap, EntityType.Trap));
+            Power = power;
+        }
 
         public void TurnOff() { GetComponent<BoxCollider>().enabled = false; }
         public void TurnOn() { GetComponent<BoxCollider>().enabled = true; }
 
         private void OnTriggerEnter(Collider other)
         {
+            hitTrap.Invoke();
             other.transform.parent.GetComponent<IKillable>().Die();
         }
         private void OnTriggerStay(Collider other)
         {
+            hitTrap.Invoke();
             other.transform.parent.GetComponent<IKillable>().Die();
         }
         private void OnTriggerExit(Collider other)
         {
+            hitTrap.Invoke();
             other.transform.parent.GetComponent<IKillable>().Die();
         }
     }
