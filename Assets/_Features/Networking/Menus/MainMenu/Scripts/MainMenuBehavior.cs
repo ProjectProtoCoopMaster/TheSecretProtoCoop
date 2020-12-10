@@ -22,7 +22,7 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            index = 1;
+            index = 2;
             rootElement = visualTree.CloneTree();
 
             join = rootElement.Q<Button>("JoinButton");
