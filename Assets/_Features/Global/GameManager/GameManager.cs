@@ -11,10 +11,13 @@ namespace Gameplay
         [SerializeField] private GameEvent _onLose;
         private GameObject loseCanvas;
         private bool isGameOver = false;
+
+        public int mainMenuIndex = 6;
+
         void Start()
         {
             if(startGame)
-                SceneManager.LoadScene(6, LoadSceneMode.Additive);
+                SceneManager.LoadScene(mainMenuIndex, LoadSceneMode.Additive);
         }
         public void RaiseOnLose()=> _onLose.Raise();
         [Button]

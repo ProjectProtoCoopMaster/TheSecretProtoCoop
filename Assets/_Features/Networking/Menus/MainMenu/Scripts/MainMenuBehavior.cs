@@ -17,6 +17,9 @@ namespace Gameplay
         public VisualElement rootElement;
         private Button join;
         private int index = 1;
+
+        public int mainMenuIndex = 6;
+
         private void OnEnable()
         {
             index = 1;
@@ -42,12 +45,12 @@ namespace Gameplay
             if (Application.platform == RuntimePlatform.WindowsEditor)
             {
                 SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(6);
+                SceneManager.UnloadScene(mainMenuIndex);
             }
             else
             {
                 SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(6);
+                SceneManager.UnloadScene(mainMenuIndex);
             }
         }
 
