@@ -1,4 +1,6 @@
-﻿using Gameplay.VR.Player;
+﻿#if UNITY_STANDALONE
+
+using Gameplay.VR.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -18,7 +20,7 @@ namespace Gameplay.VR.Feedbacks
 
         [SerializeField] [FoldoutGroup("Teleportation")] AudioClip teleportationSFX;
         [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationWooshSFX;
-         AudioClip lastWooshSFX;
+        AudioClip lastWooshSFX;
 
         [SerializeField] [FoldoutGroup("GameOver")] AudioClip gameOverAlarm;
 
@@ -51,7 +53,7 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_GameOverAlarmSFX()
         {
-            playerAudioSource.PlayOneShot(gameOverAlarm, volume);            
+            playerAudioSource.PlayOneShot(gameOverAlarm, volume);
         }
 
         AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)
@@ -66,4 +68,5 @@ namespace Gameplay.VR.Feedbacks
             return ricochetClip;
         }
     }
-}
+} 
+#endif

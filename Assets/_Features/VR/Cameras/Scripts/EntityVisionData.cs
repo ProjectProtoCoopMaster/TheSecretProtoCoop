@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace Gameplay.VR
         {
             entityDataInterface = GetComponent<EntityDataInterface>();
 
-            rangeOfVision = entityDataInterface.rangeOfVision; 
+            rangeOfVision = entityDataInterface.rangeOfVision;
             coneOfVision = entityDataInterface.coneOfVision;
 
             if (GetComponent<AgentDeath>() != null) entityType = EntityType.Guard;
@@ -47,4 +48,5 @@ namespace Gameplay.VR
             awarenessManager = FindObjectOfType<AwarenessManager>();
         }
     }
-}
+} 
+#endif

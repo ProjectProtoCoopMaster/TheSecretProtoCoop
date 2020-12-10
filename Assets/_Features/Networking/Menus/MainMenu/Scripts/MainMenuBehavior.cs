@@ -13,6 +13,7 @@ namespace Gameplay
         public Vector3Variable playerVRPos;
         [SerializeField] CallableFunction _JoinRoom;
         [SerializeField] CallableFunction _CreateRoom;
+        [SerializeField] IntVariable _sceneID;
         public VisualTreeAsset visualTree;
         public VisualElement rootElement;
         private Button join;
@@ -27,7 +28,6 @@ namespace Gameplay
             //join.clickable.clicked += () => Debug.Log("Clicked");
 
             rootElement.Add(join);
-
 
         }
 
@@ -49,6 +49,8 @@ namespace Gameplay
                 SceneManager.LoadScene(index, LoadSceneMode.Additive);
                 SceneManager.UnloadScene(6);
             }
+
+            _sceneID.Value = index;
         }
 
         

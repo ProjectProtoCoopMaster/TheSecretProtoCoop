@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Gameplay
 {
@@ -9,6 +10,7 @@ namespace Gameplay
     public class CallableFunction : ScriptableObject
     {
         [SerializeField] private CallableFunctionListener listener = new CallableFunctionListener();
+        [Button]
         public void Raise()
         {
             listener.OnEventRaised();
