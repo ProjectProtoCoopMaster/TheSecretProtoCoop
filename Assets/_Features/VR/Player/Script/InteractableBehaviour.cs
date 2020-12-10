@@ -43,7 +43,7 @@ namespace Gameplay.VR
 
         private void OnCollisionExit(Collision collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") || collision.gameObject.layer == LayerMask.NameToLayer("Window"))
                 canPlaySound = true;
         }
 

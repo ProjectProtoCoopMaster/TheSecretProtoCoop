@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay.VR
@@ -9,11 +10,13 @@ namespace Gameplay.VR
         [HideInInspector] public Transform playerHead;
         private bool detectedPlayer = false; 
         private RaycastHit hitInfo;
+        public Light powerLight;
 
         new void Awake()
         {
             base.Awake();
             playerHead = GameObject.Find("HeadCollider").transform;
+            powerLight = transform.parent.GetComponentInChildren<Light>();
             //pingFrequency = 10;
         }
 
@@ -88,14 +91,18 @@ namespace Gameplay.VR
         }
 
         #region Mobile Camera Power
+        [Button]
         // called from VR_CameraBehavior
         public void UE_DetectionOn()
         {
             poweredOn = true;
+            powerLight.enabled = true;
         }
+        [Button]
         public void UE_DetectionOff()
         {
             poweredOn = false;
+            powerLight.enabled = false;
         }
         #endregion
     }

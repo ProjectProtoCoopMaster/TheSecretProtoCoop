@@ -146,7 +146,7 @@ MonoBehaviour:
   myDetectableBody: {fileID: 1677564832351905859}
   overwatchMask:
     serializedVersion: 2
-    m_Bits: 19456
+    m_Bits: 3072
 --- !u!114 &4605352206057338154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,8 +166,9 @@ MonoBehaviour:
   poweredOn: 1
   detectionMask:
     serializedVersion: 2
-    m_Bits: 17664
+    m_Bits: 1280
   playerHead: {fileID: 0}
+  powerLight: {fileID: 0}
 --- !u!114 &8668388833559456506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   ragdollBehavior: {fileID: 4605352206039059404}
+  thrust: 1
 --- !u!1 &1677564832351679523
 GameObject:
   m_ObjectHideFlags: 0
