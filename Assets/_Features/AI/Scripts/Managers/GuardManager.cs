@@ -52,5 +52,5 @@ namespace Gameplay.AI
 
             SwitchAgentState(Usage.Start, StateType.Distraction, true);
         }
-    } 
+    }
 }

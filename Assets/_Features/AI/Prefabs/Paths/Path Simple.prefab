@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 247aab258dd18cd48a06e35ad2e6e77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePathColor: 1
   path: {fileID: 6299419827058009376}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  otherRadius: 0
+  script: {fileID: 0}
   radius: 1
 --- !u!114 &4342643272137094006
 MonoBehaviour:
@@ -61,10 +65,7 @@ MonoBehaviour:
   actions:
   - type: 1
     timeToWait: 0
-    watchDirections:
-    - {x: -1, y: 0, z: 0}
-    - {x: 0, y: 0, z: 1}
-    - {x: 1, y: 0, z: 0}
+    orientations: []
 --- !u!1001 &7026001336247813476
 PrefabInstance:
   m_ObjectHideFlags: 0
