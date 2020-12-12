@@ -10,20 +10,83 @@ namespace Gameplay.VR
         private SymbolManager sm;
         [SerializeField] private CallableFunction _loadSymbols;
         public CodeLine[] codeLines;
+        [SerializeField] private List<string> codes;
+        [SerializeField] private List<Sprite> icons;
+        [SerializeField] private List<int> randoms;
+        private int random;
 
-        private void OnEnable()
+        private void Start()
         {
             sm = SymbolManager.instance;
             sm.symbol = this;
             _loadSymbols.Raise();
+            Debug.Log("Load");
         }
+
         public void SetSymbols()
         {
-            int random = Random.Range(0, 3);
+            codes.Clear();
+            icons.Clear();
+            randoms.Clear();
+
+            for (int i = 0; i < sm.iconsAsset.Count; i++)
+            {
+                icons.Add(sm.iconsAsset[i]);
+            }
+
+            for (int i = 0; i < sm.codeNames.Length; i++)
+            {
+                codes.Add(sm.codeNames[i]);
+            }
+
+
+            random = Random.Range(0, 3);
+            randoms.Add(random);
             codeLines[random].codeText.text = sm.pickedNames[0];
+            codes.Remove(sm.pickedNames[0]);
+
             for (int i = 0; i < codeLines[random].symbols.Length; i++)
             {
                 codeLines[random].symbols[i].overrideSprite = sm.iconsSelected[i];
+                icons.Remove(sm.iconsSelected[i]);
+            }
+
+
+
+            for (int i = 0; i < 2; i++)
+            {
+
+                random = Random.Range(0, 3);
+
+                for (int j = 0; j < randoms.Count; j++)
+                {
+                    if(random == randoms[j])
+                    {
+                        j = randoms.Count;
+                        i--;
+                        break;
+                    }
+
+                    else
+                    {
+                        if (j == randoms.Count-1)
+                        {
+                            int newRand = Random.Range(0, codes.Count);
+                            codeLines[random].codeText.text = codes[newRand];
+                            codes.Remove(codes[newRand]);
+                            randoms.Add(random);
+                            for (int k = 0; k < codeLines[random].symbols.Length; k++)
+                            {
+                                int newRand2 = Random.Range(0, icons.Count);
+                                codeLines[random].symbols[k].overrideSprite = icons[newRand2];
+                                icons.Remove(icons[newRand2]);
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                
             }
 
         }

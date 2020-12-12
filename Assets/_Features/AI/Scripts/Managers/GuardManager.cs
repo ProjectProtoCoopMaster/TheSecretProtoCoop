@@ -50,7 +50,7 @@ namespace Gameplay.AI
                 distractionBehavior.SetDistractionWithReturn(destination);
             }
 
-            SwitchAgentState(Usage.Start, StateType.Distraction, true);
+            SwitchAgentState(Usage.Start, StateType.Distraction, !distractionBehavior.active);
         }
-    } 
+    }
 }

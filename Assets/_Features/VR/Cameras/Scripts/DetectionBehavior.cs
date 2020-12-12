@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay.VR
@@ -14,7 +15,6 @@ namespace Gameplay.VR
         {
             base.Awake();
             playerHead = GameObject.Find("HeadCollider").transform;
-            pingFrequency = 10;
         }
 
         private void Update()
@@ -93,6 +93,7 @@ namespace Gameplay.VR
         {
             poweredOn = true;
         }
+
         public void UE_DetectionOff()
         {
             poweredOn = false;

@@ -10,6 +10,14 @@ namespace Gameplay.AI
 
         private Vector3 direction;
 
+        public float distance;
+        public float lateralRange;
+
+        public float reactionTime;
+        private float currentTime;
+
+        private bool hitAlready;
+
         protected override void InitializeBehavior()
         {
             actionBehaviors = new Dictionary<ActionType, ActionBehavior>
@@ -35,7 +43,40 @@ namespace Gameplay.AI
 
         private void CheckForTargets()
         {
-            // Raycast
+            RaycastHit hit;
+
+            Vector3 leftDir = transform.TransformDirection(new Vector3(-lateralRange, 0, 1));
+            Vector3 rightDir = transform.TransformDirection(new Vector3(lateralRange, 0, 1));
+
+            Debug.DrawRay(transform.position, leftDir * distance, Color.yellow);
+            Debug.DrawRay(transform.position, rightDir * distance, Color.yellow);
+
+            int hits = 0;
+            hits = Physics.Raycast(transform.position, leftDir, out hit, distance) ? hits++ : Physics.Raycast(transform.position, rightDir, out hit, distance) ? hits++ : hits ;
+
+            bool singleHit = (Physics.Raycast(transform.position, leftDir, out hit, distance) || Physics.Raycast(transform.position, rightDir, out hit, distance)) && !hitAlready;
+            bool twoHits = Physics.Raycast(transform.position, leftDir, out hit, distance) && Physics.Raycast(transform.position, rightDir, out hit, distance);
+
+            if (singleHit && !hitAlready)
+            {
+                currentTime = reactionTime;
+                hitAlready = true;
+            }
+            else if (hitAlready)
+            {
+                if (currentTime <= 0.0f)
+                {
+                    hitAlready = false;
+                    SetDodge();
+                }
+            }
+            if (twoHits)
+            {
+                hitAlready = false;
+                return;
+            }
+
+            currentTime -= Time.deltaTime;
         }
     } 
 }

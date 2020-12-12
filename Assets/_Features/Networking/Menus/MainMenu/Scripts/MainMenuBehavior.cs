@@ -13,13 +13,17 @@ namespace Gameplay
         public Vector3Variable playerVRPos;
         [SerializeField] CallableFunction _JoinRoom;
         [SerializeField] CallableFunction _CreateRoom;
+        [SerializeField] IntVariable _sceneID;
         public VisualTreeAsset visualTree;
         public VisualElement rootElement;
         private Button join;
         private int index = 1;
+
+        public int mainMenuIndex = 6;
+
         private void OnEnable()
         {
-            index = 1;
+            index = 2;
             rootElement = visualTree.CloneTree();
 
             join = rootElement.Q<Button>("JoinButton");
@@ -27,7 +31,6 @@ namespace Gameplay
             //join.clickable.clicked += () => Debug.Log("Clicked");
 
             rootElement.Add(join);
-
 
         }
 
@@ -42,13 +45,15 @@ namespace Gameplay
             if (Application.platform == RuntimePlatform.WindowsEditor)
             {
                 SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(6);
+                SceneManager.UnloadScene(mainMenuIndex);
             }
             else
             {
                 SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(6);
+                SceneManager.UnloadScene(mainMenuIndex);
             }
+
+            _sceneID.Value = index;
         }
 
         

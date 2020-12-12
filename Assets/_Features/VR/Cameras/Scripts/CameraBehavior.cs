@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Gameplay.VR
@@ -34,11 +35,13 @@ namespace Gameplay.VR
             Power = power;
         }
 
+        [Button]
         public void TurnOff()
         {
             camerasOff.Invoke();
         }
 
+        [Button]
         public void TurnOn()
         {
             camerasOn.Invoke();

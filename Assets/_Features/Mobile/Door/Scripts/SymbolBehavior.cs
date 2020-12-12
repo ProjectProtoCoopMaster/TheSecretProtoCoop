@@ -8,6 +8,7 @@ namespace Gameplay.Mobile
     public class SymbolBehavior : MonoBehaviour, ISymbol
     {
         [SerializeField] private CallableFunction _sendOnOpenDoor;
+        [SerializeField] private CallableFunction _sendGameOver;
         private SymbolManager symbolManager;
         [SerializeField] public Image[] iconsAnswers;
         [SerializeField] private Image[] results;
@@ -18,10 +19,16 @@ namespace Gameplay.Mobile
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
 
-        private void OnEnable()
+        private IEnumerator Start()
         {
+            yield return new WaitForEndOfFrame();
             symbolManager = SymbolManager.instance;
             symbolManager.symbol = this;
+        }
+
+        private void OnDisable()
+        {
+            symbolManager.indexes.Clear();
         }
         public void ResetIcon(Image image)
         {
@@ -69,19 +76,28 @@ namespace Gameplay.Mobile
             door.Unlock();
             results[missNumber].color = Color.green;
             _sendOnOpenDoor.Raise();
-            //Destroy(gameObject);
         }
 
         private void Miss()
         {
             missNumber++;
             results[missNumber - 1].color = Color.red;
+            if (missNumber == 2)
+            {
+                _sendGameOver.Raise();
+            }
         }
 
 
         public void SetSymbols()
         {
-            Debug.Log("Hello");
+            symbolManager.iconsAssetReminder.Clear();
+            symbolManager.iconsStashed.Clear();
+            
+            for (int i = 0; i < symbolManager.iconsAsset.Count; i++)
+            {
+                symbolManager.iconsAssetReminder.Add(symbolManager.iconsAsset[i]);
+            }
             for (int i = 0; i < iconsGame.Length; i++)
             {
 
@@ -104,6 +120,7 @@ namespace Gameplay.Mobile
             }
 
             codeNameText.text = symbolManager.pickedNames[0];
+
 
         }
     }

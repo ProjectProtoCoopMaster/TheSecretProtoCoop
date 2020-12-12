@@ -7,5 +7,6 @@ public enum EntityType
     Camera,
     Guard,
     Player,
+    Trap,
     Count
 }

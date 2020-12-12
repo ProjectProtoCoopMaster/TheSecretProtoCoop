@@ -5,6 +5,7 @@ namespace Gameplay.VR
 {
     public class GameOverFeedbackManager : MonoBehaviour
     {
+
         [SerializeField] internal Light redAlarmLight;
         [SerializeField] Canvas gameOverCanvas;
         Text gameOverText;
@@ -18,9 +19,11 @@ namespace Gameplay.VR
         }
 
         internal void UE_GameOverExplanation(EntityType alarmRaiser, EntityType alarmReason)
-        {           
-            if (alarmReason == EntityType.Player) gameOverText.text = "Alarm was raised because a " + alarmRaiser.ToString() + " saw the player";
-            else gameOverText.text = "Alarm was raised because a " + alarmRaiser.ToString() + " saw a dead guard";
+        {
+            gameOverText.enabled = true;
+            if (alarmReason == EntityType.Player) gameOverText.text = "GAME OVER. A " + alarmRaiser.ToString() + " spotted You";
+            else if (alarmReason == EntityType.Trap) gameOverText.text = "GAME OVER. You walked into a hidden Trap";
+            else gameOverText.text = "GAME OVER. A " + alarmRaiser.ToString() + " spotted a dead body";
         }
 
         public void GE_TurnOnAlarmLights()

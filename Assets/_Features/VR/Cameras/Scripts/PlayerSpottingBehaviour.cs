@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -13,7 +14,9 @@ namespace Gameplay.VR
 
         private void Update()
         {
-          //  detectionBehavior.sqrDistToTarget;
+            //  detectionBehavior.sqrDistToTarget;
         }
-    } 
+    }
 }
+
+#endif

@@ -18,14 +18,14 @@ namespace Gameplay
         public List<Sprite> iconsSelected;
         [ReadOnly]
         public List<Sprite> iconsStashed;
-        [SerializeField] private string[] codeNames;
+        [SerializeField] public string[] codeNames;
         [ReadOnly]
         public string[] pickedNames;
         [ReadOnly]
         public List<int> indexes;
         public static SymbolManager instance;
         public ISymbol symbol;
-        private void OnEnable()
+        private void Awake()
         {
             instance = this;
             
@@ -34,11 +34,15 @@ namespace Gameplay
         {
             isSymbolLoaded.Value = false;
         }
+        private void Update()
+        {
+            Debug.Log("Symbol");
+        }
         public void LoadSymbols()
         {
             if (!isSymbolLoaded.Value)
             {
-                Debug.Log("Hello");
+                Debug.Log("Load Symbols");
                 iconsSelected.Clear();
                 iconsAssetReminder.Clear();
                 iconsStashed.Clear();
@@ -121,7 +125,13 @@ namespace Gameplay
 
         public void SetSymbols()
         {
-            if (symbol != null) symbol.SetSymbols();
+            Debug.Log("symbol nuuuuuul");
+            if (symbol != null)
+            {
+                Debug.Log("Going To Set Symbol");
+                symbol.SetSymbols();
+                    
+            }
         }
 
 
