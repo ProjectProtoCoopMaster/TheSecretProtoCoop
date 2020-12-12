@@ -98,6 +98,7 @@ namespace Gameplay.AI
             string msg = "There are no actions registered for " + this + ", likely, the behavior did not initialize correctly";
             if (Utility.SafeCheck(actions, msg))
             {
+                Debug.Log("Beginning behavior :" + this + " for " + gameObject.name);
                 active = true;
                 actionIndex = 0;
                 SetAction(actionIndex);

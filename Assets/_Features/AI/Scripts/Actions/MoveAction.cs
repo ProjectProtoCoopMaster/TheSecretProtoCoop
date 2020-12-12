@@ -19,7 +19,6 @@ namespace Gameplay.AI
 
         public override void StopActionBehavior()
         {
-            Debug.Log(this);
             SetMove(target.position, false);
         }
 
