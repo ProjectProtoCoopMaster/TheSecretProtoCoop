@@ -1,7 +1,5 @@
-﻿#if UNITY_STANDALONE
-using Gameplay.VR.Player;
+﻿
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +8,7 @@ namespace Gameplay.VR
 {
     public class AwarenessManager : MonoBehaviour
     {
+        #if UNITY_STANDALONE
         [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")] [FoldoutGroup("Slow Motion")] float reflexModeMultiplier;
         [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false;
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
@@ -24,8 +23,6 @@ namespace Gameplay.VR
 
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
 
-        TeleportManager player;
-
         GameOverFeedbackManager gameOverFeedbackManager;
         EntityType alarmRaisingEntity;
         EntityType alarmReasonEntity;
@@ -33,14 +30,15 @@ namespace Gameplay.VR
 
         void Awake()
         {
-            player = FindObjectOfType<TeleportManager>();
             Time.timeScale = 1f;
 
             gameOverFeedbackManager = transform.parent.GetComponentInChildren<GameOverFeedbackManager>();
+
+            //  this unity event is what sends the information to the UI
             raiseTheAlarm.AddListener(() => gameOverFeedbackManager.UE_GameOverExplanation(alarmRaisingEntity, alarmReasonEntity));
         }
 
-        // called by Detection and Detection Behaviour
+        // called by Detection and Overwatch Behaviours
         internal void RaiseAlarm(EntityType alarmRaiser, EntityType alarmReason)
         {
             alarmRaisingEntity = alarmRaiser;
@@ -66,11 +64,11 @@ namespace Gameplay.VR
         private void Update()
         {
             // wait for player to stop teleporting to activate slow motion mode
-            if (changeTime && player.isTeleporting)
+            /*if (changeTime && player.isTeleporting)
             {
                 //Time.timeScale /= reflexModeMultiplier;
                 changeTime = false;
-            }
+            }*/
 
             if (raisingAlarm)
                 timePassed += Time.unscaledDeltaTime;
@@ -88,9 +86,9 @@ namespace Gameplay.VR
 
                     GameOver();
                 }
-
             }
         }
+
         private void GameOver()
         {
             if (!gameIsOver)
@@ -101,6 +99,6 @@ namespace Gameplay.VR
                 gameOverAlarm.Raise();
             }
         }
+        #endif
     }
 }
-#endif
