@@ -6,9 +6,11 @@ namespace Gameplay.VR
 {
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
-        [SerializeField] private CallableFunction _GameOver;
-        [SerializeField] private CallableFunction _SendPlayerPosition;
-        [SerializeField] private Vector3Variable _PlayerPosition;
+        [SerializeField] private CallableFunction _gameOver;
+        [SerializeField] private CallableFunction _sendPlayerPosition;
+        [SerializeField] private CallableFunction _sendPlayerRotation;
+        [SerializeField] private Vector3Variable _playerPosition;
+        [SerializeField] private QuaternionVariable _playerRotation;
         [SerializeField] private Camera pictureCamera;
         private bool isDead;
 
@@ -16,15 +18,17 @@ namespace Gameplay.VR
         {
             if (!isDead)
             {
-                _GameOver.Raise();
+                _gameOver.Raise();
                 isDead = true;
             }
         }
 
         private void Update()
         {
-            _PlayerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
-            _SendPlayerPosition.Raise();
+            _playerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
+            _playerRotation.Value = transform.localRotation;
+            _sendPlayerPosition.Raise();
+            _sendPlayerRotation.Raise();
         }
     }
 }

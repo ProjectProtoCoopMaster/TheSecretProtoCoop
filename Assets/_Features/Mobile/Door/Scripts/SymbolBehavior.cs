@@ -19,9 +19,9 @@ namespace Gameplay.Mobile
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
 
-        private void OnEnable()
+        private IEnumerator Start()
         {
-
+            yield return new WaitForEndOfFrame();
             symbolManager = SymbolManager.instance;
             symbolManager.symbol = this;
         }

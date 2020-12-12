@@ -10,14 +10,21 @@ namespace Networking
     public class TransmitterManager : MonoBehaviour
     {
         [SerializeField] private PhotonView photonView;
-        [SerializeField] private Vector3Variable playerVRPosition;
+        [SerializeField] private Vector3Variable _playerVRPosition;
+        [SerializeField] private QuaternionVariable _playerVRPRotation;
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private GameEvent _onOpenDoor;
         public SymbolManager symbolManager;
 
-        public void SendPlayerVRPosToOthers(Vector3Variable playerVRPosition) => photonView.RPC("SendVector3", RpcTarget.Others, playerVRPosition.Value);
-        [PunRPC] private void SendVector3(Vector3 position) => playerVRPosition.Value = position;
+        public void SendPlayerVRPosToOthers(Vector3Variable playerVRPosition) => photonView.RPC("SendPosition", RpcTarget.Others, playerVRPosition.Value);
+
+       
+        [PunRPC] private void SendPosition(Vector3 position) => _playerVRPosition.Value = position;
+
+        public void SendPlayerVRRotToOthers(QuaternionVariable playerVRRotation) => photonView.RPC("SendRotation", RpcTarget.Others, playerVRRotation.Value);
+        [PunRPC] private void SendRotation(Quaternion rotation) => _playerVRPRotation.Value = rotation;
+
 
         public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
         [PunRPC] public void SendSwitcherChange(float ID) => _switch.Raise(ID);

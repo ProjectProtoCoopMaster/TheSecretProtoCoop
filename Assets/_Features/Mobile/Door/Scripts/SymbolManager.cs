@@ -25,7 +25,7 @@ namespace Gameplay
         public List<int> indexes;
         public static SymbolManager instance;
         public ISymbol symbol;
-        private void OnEnable()
+        private void Awake()
         {
             instance = this;
             
