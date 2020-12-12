@@ -9,6 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private bool startGame;
         [SerializeField] private GameEvent _onLose;
+        [SerializeField] private IntVariable _sceneID;
         private GameObject loseCanvas;
         private bool isGameOver = false;
 
@@ -37,19 +38,17 @@ namespace Gameplay
         {
             yield return new WaitForSeconds(3);
             Destroy(loseCanvas);
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                SceneManager.UnloadSceneAsync(2);
-                SceneManager.LoadScene(2,LoadSceneMode.Additive);
-            }
-            else
-            {
-                SceneManager.UnloadSceneAsync(1);
-                SceneManager.LoadScene(1, LoadSceneMode.Additive);
-            }
+            StartCoroutine(WaitSceneDestruction()); ;
             yield return new WaitForSeconds(.5f);
             isGameOver = false;
             yield break;
+        }
+
+        IEnumerator WaitSceneDestruction()
+        {
+            yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
+            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+
         }
     }
 }
