@@ -17,7 +17,6 @@ namespace Gameplay.VR
         [Button]
         public void Die(Vector3 force = default)
         {
-            //ragdollBehavior.ActivateRagdoll();
             ragdollBehavior.ActivateRagdollWithForce(force, ForceMode.Impulse);            
 
             deathEvent.Invoke();

@@ -16,7 +16,8 @@ namespace Gameplay
 
     public class LevelManager : SerializedMonoBehaviour
     {
-        public Dictionary<Modifiers, float> modifierSettings = new Dictionary<Modifiers, float>();
+        private List<Modifiers> modifiers = new List<Modifiers>();
+        public int modifierAmount;
 
         public Pool easyPool, mediumPool, hardPool;
 
@@ -31,6 +32,8 @@ namespace Gameplay
 
         public void GenerateLevel()
         {
+            modifiers = new List<Modifiers> { Modifiers.DarkZone, Modifiers.Thermic, Modifiers.Oxygen };
+
             List<Pool> pools = new List<Pool> { easyPool, mediumPool, hardPool };
 
             foreach (Pool pool in pools)
@@ -43,7 +46,9 @@ namespace Gameplay
 
         private void PickRoom(List<RoomManager> rooms, int occurences)
         {
-            List<RoomManager> roomPool = rooms;
+            List<RoomManager> roomPool = new List<RoomManager>();
+            foreach (RoomManager room in rooms) roomPool.Add(room);
+
             int pick;
 
             for (int i = 0; i < occurences; i++)
@@ -58,6 +63,24 @@ namespace Gameplay
 
         private void MakeLevel()
         {
+            int randomModifierAmount = Random.Range(0, modifierAmount) + 1;
+            int[] randomRooms = new int[randomModifierAmount];
+
+            List<RoomManager> availableRooms = new List<RoomManager>();
+            foreach (RoomManager room in levelRooms) availableRooms.Add(room);
+
+            for (int u = 0; u < randomRooms.Length; u++)
+            {
+                randomRooms[u] = Random.Range(0, availableRooms.Count);
+
+                SetRoomModifier(availableRooms[randomRooms[u]]);
+
+                availableRooms.RemoveAt(randomRooms[u]);
+            }
+            availableRooms.Clear();
+
+            ///
+
             Transform currentAnchor = levelEntranceAnchor;
 
             for (int i = 0; i < levelRooms.Count; i++)
@@ -71,14 +94,17 @@ namespace Gameplay
                 levelRooms[i].gameObject.transform.parent = this.transform;
 
                 currentAnchor = levelRooms[i].exitAnchor;
-
-
             }
         }
-
+        
         private void SetRoomModifier(RoomManager room)
         {
+            int m = Random.Range(0, modifiers.Count);
+            Modifiers modifier = modifiers[m];
 
+            room.roomModifier = modifier;
+
+            modifiers.RemoveAt(m);
         }
     } 
 }

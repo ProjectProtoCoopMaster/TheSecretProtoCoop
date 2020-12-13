@@ -676,7 +676,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.46786693, y: 0.000000029685907, z: -0.0000000018626454}
+  m_ConnectedAnchor: {x: -0.467867, y: 0.000000026193447, z: -0.0000000037252907}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2031,7 +2031,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.3985576, y: -0.16481082, z: -0.0750345}
+  m_ConnectedAnchor: {x: -0.39855748, y: -0.16481082, z: -0.075034484}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -2140,7 +2140,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.3985576, y: 0.16481088, z: -0.0750345}
+  m_ConnectedAnchor: {x: -0.39855748, y: 0.16481088, z: -0.075034484}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2515,13 +2515,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7878566129749615748}
-  m_LocalRotation: {x: 0.70710695, y: 0, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: -0, y: 0, z: -1.4901147e-10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7878566129749326176}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!137 &7878566129763280952
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -3018,7 +3018,7 @@ GameObject:
   - component: {fileID: 5042022890283721779}
   - component: {fileID: 170555982519352291}
   m_Layer: 11
-  m_Name: Patrol Guard_Light
+  m_Name: Patrol Guard Light
   m_TagString: Enemy/Light Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3143,6 +3143,7 @@ MonoBehaviour:
   pingFrequency: 10
   framesPassed: 0
   poweredOn: 1
+  myDetectableBody: {fileID: 0}
   overwatchMask:
     serializedVersion: 2
     m_Bits: 0
@@ -3219,3 +3220,4 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   ragdollBehavior: {fileID: 5042022890298481365}
+  thrust: 1
