@@ -22,6 +22,11 @@ namespace Gameplay.VR
             }
         }
 
+        public void Die()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void Update()
         {
             _playerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));

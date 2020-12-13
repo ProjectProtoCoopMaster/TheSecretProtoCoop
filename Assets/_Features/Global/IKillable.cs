@@ -1,11 +1,13 @@
 ﻿
 using UnityEngine;
 
-namespace Gameplay.VR
+namespace Gameplay
 {
     public interface IKillable
     {
         void Die(Vector3 force = default);
+
+        void Die();
         
     }
 }

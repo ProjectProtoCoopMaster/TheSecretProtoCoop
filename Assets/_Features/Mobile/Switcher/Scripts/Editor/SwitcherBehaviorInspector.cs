@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+using Gameplay.Mobile;
 namespace Gameplay
 {
     [CustomEditor(typeof(SwitcherBehavior))]
@@ -26,10 +26,10 @@ namespace Gameplay
                 switcher.timer = EditorGUILayout.FloatField("Timer",switcher.timer);
             }
 
-            //if (GUILayout.Button("Search Nodes References"))
-            //{
-            //    switcher.SearchReferences();
-            //}
+            if (switcher.hasJammer)
+            {
+                switcher.jammer = EditorGUILayout.ObjectField("Jammer",switcher.jammer,typeof(JammerBehavior)) as JammerBehavior;
+            }
 
             switcher.SearchReferences();
 

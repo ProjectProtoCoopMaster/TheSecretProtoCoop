@@ -13,6 +13,7 @@ namespace Networking
         [SerializeField] private Vector3Variable _playerVRPosition;
         [SerializeField] private QuaternionVariable _playerVRRotation;
         [SerializeField] private CallableFunction _switch;
+        [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private GameEvent _onOpenDoor;
         [SerializeField] private GameManager gameManager;
@@ -27,6 +28,9 @@ namespace Networking
 
         public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
         [PunRPC] public void SendSwitcherChange(float ID) => _switch.Raise(ID);
+
+        public void SendDestroyJammerToOthers(int ID) => photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID);
+        [PunRPC] public void SendDestroyJammer(int ID) => _destroyJammer.Raise(ID);
         public void SendLoseToOther(int loseType) => photonView.RPC("SendLose", RpcTarget.Others,loseType);
         [PunRPC] public void SendLose(int loseType) { gameManager.loseType = (GameManager.LoseType)loseType; _onLose.Raise();  }
 
