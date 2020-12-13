@@ -63,6 +63,7 @@ namespace Gameplay.VR
                     {
                         if (LineOfSightCheck(playerHandLeft.Value) && LineOfSightCheck(playerHandRight.Value))
                         {
+                            Suspicious();
                             raiseAlarm.Raise();
                             detectedPlayer = true; // stop the detection from looping
                         }

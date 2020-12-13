@@ -8,9 +8,10 @@ namespace Gameplay.VR
 {
     public class AwarenessManager : MonoBehaviour
     {
-        #if UNITY_STANDALONE
-        [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")] [FoldoutGroup("Slow Motion")] float reflexModeMultiplier;
-        [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")] [FoldoutGroup("Slow Motion")] GameEvent reflexMode;
+#if UNITY_STANDALONE
+        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOn;
+        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOff;
+
         [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false;
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityType> alarmRaisers = new List<EntityType>();
@@ -55,7 +56,7 @@ namespace Gameplay.VR
 
                 if (raisingAlarm != true)
                 {
-                    reflexMode.Raise();
+                    reflexModeOn.Raise();
                     raisingAlarm = true; // prevent the event from being raised more than once
                     changeTime = true;
                 }
@@ -65,23 +66,17 @@ namespace Gameplay.VR
 
         private void Update()
         {
-            // wait for player to stop teleporting to activate slow motion mode
-            /*if (changeTime && player.isTeleporting)
-            {
-                //Time.timeScale /= reflexModeMultiplier;
-                changeTime = false;
-            }*/
+            if (raisingAlarm) timePassed += Time.unscaledDeltaTime;
 
-            if (raisingAlarm)
-                timePassed += Time.unscaledDeltaTime;
+            if (raisingAlarm && alarmRaisers.Count == 0) 
+                reflexModeOff.Raise();
 
-            if (raisingAlarm && alarmRaisers.Count == 0 || timePassed >= alarmRaiseDuration)
+            if (timePassed >= alarmRaiseDuration)
             {
                 // if there are still entities raising the alarm, it's game over
                 if (alarmRaisers.Count > 0)
                 {
-                    // otherwise, set the world back in order
-                    //Time.timeScale *= reflexModeMultiplier;
+                    reflexModeOff.Raise();
 
                     raisingAlarm = false;
                     timePassed = 0f;
@@ -101,6 +96,6 @@ namespace Gameplay.VR
                 gameOverAlarm.Raise();
             }
         }
-        #endif
+#endif
     }
 }

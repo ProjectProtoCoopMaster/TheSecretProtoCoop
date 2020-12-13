@@ -36,6 +36,8 @@ namespace Gameplay.VR
         // a reference to the interface
         EntityDataInterface entityDataInterface = null;
 
+        SpriteRenderer exclamationMark;
+
         protected void Awake()
         {
             entityDataInterface = GetComponent<EntityDataInterface>();
@@ -49,6 +51,14 @@ namespace Gameplay.VR
 
             if (GetComponent<AgentDeath>() != null) entityType = EntityType.Guard;
             else entityType = EntityType.Camera;
+
+            exclamationMark = GetComponentInChildren<SpriteRenderer>();
+            exclamationMark.enabled = false;
+        }
+
+        protected void Suspicious()
+        {
+            exclamationMark.enabled = true;
         }
     }
 } 
