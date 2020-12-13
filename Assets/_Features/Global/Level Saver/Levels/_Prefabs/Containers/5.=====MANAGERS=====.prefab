@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 74bbccdcda182824997cba25f2478557, type: 2}
+  Event: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -332,12 +332,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1974829949914884776}
   - component: {fileID: 8158769506171656232}
+  - component: {fileID: 7954192480871375622}
   - component: {fileID: 1200446378}
   - component: {fileID: 1200446382}
   - component: {fileID: 1200446381}
   - component: {fileID: 1200446380}
   - component: {fileID: 1200446379}
   - component: {fileID: 171248697309145549}
+  - component: {fileID: 8792408301243350314}
+  - component: {fileID: 1152197733083808084}
   m_Layer: 0
   m_Name: VRFeedbackManager
   m_TagString: Untagged
@@ -372,7 +375,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redAlarmLight: {fileID: 0}
-  gameOverText: {fileID: 0}
+  gameOverCanvas: {fileID: 0}
+--- !u!114 &7954192480871375622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829949914884779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a11d6ae532be0488b158dbc906b80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peakingCanvas: {fileID: 0}
 --- !u!114 &1200446378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,13 +481,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 74bbccdcda182824997cba25f2478557, type: 2}
+  Event: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8158769506171656232}
         m_TargetAssemblyTypeName: Gameplay.VR.GameOverFeedbackManager, Assembly-CSharp
         m_MethodName: GE_TurnOnAlarmLights
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8792408301243350314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829949914884779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7954192480871375622}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.DetectionFeedbackManager,
+          Assembly-CSharp
+        m_MethodName: GE_PlayerPeeking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1152197733083808084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829949914884779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: dcb3e72fe0dbd414aaca4edb5f702b0a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7954192480871375622}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.DetectionFeedbackManager,
+          Assembly-CSharp
+        m_MethodName: GE_PlayerReflexMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -530,5 +604,5 @@ MonoBehaviour:
   alarmRaisers: 
   deadGuards: []
   gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
-  gameOverAlarm: {fileID: 11400000, guid: 74bbccdcda182824997cba25f2478557, type: 2}
+  gameOverAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   timePassed: 0

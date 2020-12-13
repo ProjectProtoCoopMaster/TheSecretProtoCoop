@@ -159,7 +159,7 @@ namespace Gameplay.VR.Player
 
         public void GE_OnGameOver()
         {
-            isGameOver = true;
+            isGameOver = true; // go to teleportation jail
         }
 
         // 1. fire a ray pointing in the direction of the controller

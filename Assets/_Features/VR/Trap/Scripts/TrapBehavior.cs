@@ -37,17 +37,22 @@ namespace Gameplay.VR
         private void OnTriggerEnter(Collider other)
         {
             hitTrap.Invoke();
-            other.transform.parent.GetComponent<IKillable>().Die();
+            if(other.transform.parent.GetComponent<IKillable>() != null)
+                other.transform.parent.GetComponent<IKillable>().Die();
         }
+
         private void OnTriggerStay(Collider other)
         {
             hitTrap.Invoke();
-            other.transform.parent.GetComponent<IKillable>().Die();
+            if (other.transform.parent.GetComponent<IKillable>() != null) 
+                other.transform.parent.GetComponent<IKillable>().Die();
         }
+
         private void OnTriggerExit(Collider other)
         {
             hitTrap.Invoke();
-            other.transform.parent.GetComponent<IKillable>().Die();
+            if (other.transform.parent.GetComponent<IKillable>() != null) 
+                other.transform.parent.GetComponent<IKillable>().Die();
         }
     }
 }
