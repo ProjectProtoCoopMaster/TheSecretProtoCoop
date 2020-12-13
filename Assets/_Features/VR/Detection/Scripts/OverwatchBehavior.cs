@@ -13,55 +13,9 @@ namespace Gameplay.VR
         new void Awake()
         {
             base.Awake();
-
-            //pingFrequency = 1;
         }
 
-        private void Start()
-        {
-            /*
-             * 1. Best practices pour shaders sur mobile et sur VR
-             * 
-             * VR shaders -> hardware can change how shaders render (multi, single pass), forward, deffered rendering, etc...
-             * you can post-process everything at once, not camera by camera
-             * VFX -> animation culling, frustrum culling also work like this
-             * 
-             * See performance on URP 
-             * 
-             * Pick your hardware, pick your pipeline, and THEN start coding your shaders
-             * 
-             * OVERDRAW -> enemy of performance for VR and mobile
-             * 
-             * always work up from minimal specs
-             * 
-             * check shaders on right eye and left eye, off screen
-             * 
-             * watch out for off-screen post processing
-             * 
-             * start with shader graph -> preview node is important (haha)
-             * look at compiled version after 
-             * 
-             * Shader Graph has a "master shader" in which it "plugs in" sub-shaders
-             */
-        }
-
-        // every couple of frames, ping for dead guards
-        private void Update()
-        {
-            if (poweredOn)
-            {
-                framesPassed++;
-                if (framesPassed % pingFrequency == 0)
-                {
-                    PingForDeadGuards();
-                    framesPassed = 0;
-                }
-            }
-
-            else return;
-        }
-
-        private void PingForDeadGuards()
+        public override void Ping()
         {
             myPos.x = transform.position.x;
             myPos.y = transform.position.z;
@@ -98,19 +52,23 @@ namespace Gameplay.VR
                     }
                 }
             }
+
+            Debug.LogWarning(gameObject.name + " is checking for dead friendlies");
         }
 
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            if (awarenessManager.alarmRaisers.Contains(entityType)) awarenessManager.alarmRaisers.Remove(entityType);
+            if (awarenessManager.alarmRaisers.Contains(entityType)) 
+                awarenessManager.alarmRaisers.Remove(entityType);
+            
             awarenessManager.deadGuards.Add(myDetectableBody);
+
             myDetectableBody.gameObject.tag = "Dead";
 
-            for (int i = 0; i < myDetectableBody.childCount; i++)
-            {
+            for (int i = 0; i < myDetectableBody.childCount; i++) 
                 myDetectableBody.GetChild(i).tag = "Dead";
-            }
+
             enabled = false;
         }
 

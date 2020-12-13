@@ -19,23 +19,8 @@ namespace Gameplay.VR
             base.Awake();
         }
 
-        private void Update()
-        {
-            if (poweredOn && !detectedPlayer)
-            {
-                framesPassed++;
-                if (framesPassed % pingFrequency == 0)
-                {
-                    PingForPlayer();
-                    framesPassed = 0;
-                }
-            }
-
-            else return;
-        }
-
         // check if the player is in range 
-        void PingForPlayer()
+        public override void Ping()
         {
             myPos.x = transform.position.x;
             myPos.z = transform.position.z;
@@ -58,16 +43,19 @@ namespace Gameplay.VR
                 //...if the angle between the looking dir of the cam and the player is less than the cone of vision, then you are inside the cone of vision
                 if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f)
                 {
-                    // check to see if you can see head and both hands
+                    // check to see if you can see head
                     if (LineOfSightCheck(playerHead.Value))
                     {
+                        // if you can see both hands, then the player has been spotted
                         if (LineOfSightCheck(playerHandLeft.Value) && LineOfSightCheck(playerHandRight.Value))
                         {
-                            Suspicious();
                             raiseAlarm.Raise();
+                            //awarenessManager.RaiseAlarm(entityType, EntityType.Player);
+
                             detectedPlayer = true; // stop the detection from looping
                         }
 
+                        //...otherwise, it means that the player is "peeking"
                         else
                         {
                             playerPeaking.Raise();
@@ -76,6 +64,8 @@ namespace Gameplay.VR
                     }
                 }
             }
+
+            Debug.LogWarning(gameObject.name + " is searching for the Player");
         }
 
         private bool LineOfSightCheck(Vector3 checkPosition)

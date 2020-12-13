@@ -10,12 +10,21 @@ namespace Gameplay
     {
         [SerializeField] private CallableFunctionListener listener = new CallableFunctionListener();
 
+
         [Button]
         public void Raise()
         {
             listener.OnEventRaised();
         }
-        public void Raise<T>(T parameter) => listener.component.SendMessage(listener.methodName, parameter);
+        
+        public void Raise<T>(T parameter)
+        {
+            for (int i = 0; i < listener.ID; i++)
+            {
+                listener.component[i].SendMessage(listener.methodName[i], parameter);
+            }
+
+        }
 
         public void RegisterListener(CallableFunctionListener otherListener)
         {

@@ -8,8 +8,11 @@ using UnityEngine.Events;
 namespace Gameplay.VR
 {
     [RequireComponent(typeof(EntityDataInterface))]
-    public class EntityVisionData : MonoBehaviour
+    public abstract class EntityVisionData : MonoBehaviour
     {
+        // a reference to the interface
+        EntityDataInterface entityDataInterface = null;
+
         // need to be identical across both Detection and Overwatch
         [HideInInspector] public float rangeOfVision;
         [HideInInspector] public float coneOfVision;
@@ -23,6 +26,7 @@ namespace Gameplay.VR
         internal EntityType entityType;
 
         protected GameEvent raiseAlarm;
+        protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
         protected AwarenessManager awarenessManager = null;
 
@@ -33,10 +37,6 @@ namespace Gameplay.VR
         // used to know if the entity of type Camera is active
         [SerializeField] [FoldoutGroup("Debugging")] protected bool poweredOn;
 
-        // a reference to the interface
-        EntityDataInterface entityDataInterface = null;
-
-        SpriteRenderer exclamationMark;
 
         protected void Awake()
         {
@@ -49,20 +49,24 @@ namespace Gameplay.VR
 
             awarenessManager = entityDataInterface.awarenessManagerObj.Value.GetComponent<AwarenessManager>();
 
-            if (GetComponent<AgentDeath>() != null)
-            {
-                entityType = EntityType.Guard;
-                exclamationMark = transform.GetChild(2).GetComponent<SpriteRenderer>();
-                exclamationMark.enabled = false;
-            }
+            if (GetComponent<AgentDeath>() != null) entityType = EntityType.Guard;
             else entityType = EntityType.Camera;
-
         }
 
-        protected void Suspicious()
+        private void Update()
         {
-            exclamationMark.enabled = true;
+            if (poweredOn)
+            {
+                framesPassed++;
+                if (framesPassed % pingFrequency == 0)
+                {
+                    Ping();
+                    framesPassed = 0;
+                }
+            }
         }
+
+       public abstract void Ping();
     }
 } 
 #endif
