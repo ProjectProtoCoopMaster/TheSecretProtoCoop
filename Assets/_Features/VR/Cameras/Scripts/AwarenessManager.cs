@@ -1,4 +1,5 @@
-﻿
+﻿#if UNITY_STANDALONE
+
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Gameplay.VR
 {
     public class AwarenessManager : MonoBehaviour
     {
-        #if UNITY_STANDALONE
+
         [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")] [FoldoutGroup("Slow Motion")] float reflexModeMultiplier;
         [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false;
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
@@ -95,10 +96,11 @@ namespace Gameplay.VR
             {
                 raiseTheAlarm.Invoke();
                 gameIsOver = true;
-                gameOver.Raise();
+                gameOver.Raise((int)GameManager.LoseType.SpottedByCam);
                 gameOverAlarm.Raise();
             }
         }
-        #endif
+
     }
-}
+} 
+#endif

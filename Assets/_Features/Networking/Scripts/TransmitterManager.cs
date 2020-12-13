@@ -11,25 +11,24 @@ namespace Networking
     {
         [SerializeField] private PhotonView photonView;
         [SerializeField] private Vector3Variable _playerVRPosition;
-        [SerializeField] private QuaternionVariable _playerVRPRotation;
+        [SerializeField] private QuaternionVariable _playerVRRotation;
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private GameEvent _onOpenDoor;
+        [SerializeField] private GameManager gameManager;
         public SymbolManager symbolManager;
 
-        public void SendPlayerVRPosToOthers(Vector3Variable playerVRPosition) => photonView.RPC("SendPosition", RpcTarget.Others, playerVRPosition.Value);
+        public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
 
-       
-        [PunRPC] private void SendPosition(Vector3 position) => _playerVRPosition.Value = position;
 
-        public void SendPlayerVRRotToOthers(QuaternionVariable playerVRRotation) => photonView.RPC("SendRotation", RpcTarget.Others, playerVRRotation.Value);
-        [PunRPC] private void SendRotation(Quaternion rotation) => _playerVRPRotation.Value = rotation;
+        [PunRPC] private void SendPosAndRot(Vector3 position, Quaternion rotation) { _playerVRPosition.Value = position; _playerVRRotation.Value = rotation; }
+
 
 
         public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
         [PunRPC] public void SendSwitcherChange(float ID) => _switch.Raise(ID);
-        public void SendLoseToOther() => photonView.RPC("SendLose", RpcTarget.Others);
-        [PunRPC] public void SendLose() => _onLose.Raise();
+        public void SendLoseToOther(int loseType) => photonView.RPC("SendLose", RpcTarget.Others,loseType);
+        [PunRPC] public void SendLose(int loseType) { gameManager.loseType = (GameManager.LoseType)loseType; _onLose.Raise();  }
 
         public void SendSymbolIDToOther(int value) => photonView.RPC("SendSymbolID", RpcTarget.Others, value);
 
