@@ -90,7 +90,8 @@ namespace Gameplay.VR
                         {
                             if (hitInfo.collider.gameObject.CompareTag("Dead"))
                             {
-                                awarenessManager.RaiseAlarm(entityType, EntityType.Guard);
+                                raiseAlarm.Raise();
+                                //awarenessManager.RaiseAlarm(entityType, EntityType.Guard);
                                 detectedGuard = true;
                             }
                         }

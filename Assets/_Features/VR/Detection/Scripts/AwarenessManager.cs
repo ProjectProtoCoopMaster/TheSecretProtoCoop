@@ -41,7 +41,7 @@ namespace Gameplay.VR
         }
 
         // called by Detection and Overwatch Behaviours
-        internal void RaiseAlarm(EntityType alarmRaiser, EntityType alarmReason)
+        public void RaiseAlarm(EntityType alarmRaiser, EntityType alarmReason)
         {
             alarmRaisingEntity = alarmRaiser;
             alarmReasonEntity = alarmReason;

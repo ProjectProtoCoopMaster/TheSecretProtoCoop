@@ -49,11 +49,14 @@ namespace Gameplay.VR
 
             awarenessManager = entityDataInterface.awarenessManagerObj.Value.GetComponent<AwarenessManager>();
 
-            if (GetComponent<AgentDeath>() != null) entityType = EntityType.Guard;
+            if (GetComponent<AgentDeath>() != null)
+            {
+                entityType = EntityType.Guard;
+                exclamationMark = transform.GetChild(2).GetComponent<SpriteRenderer>();
+                exclamationMark.enabled = false;
+            }
             else entityType = EntityType.Camera;
 
-            exclamationMark = GetComponentInChildren<SpriteRenderer>();
-            exclamationMark.enabled = false;
         }
 
         protected void Suspicious()
