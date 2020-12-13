@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2243126664052907476}
+  - component: {fileID: 5671818033234735358}
   m_Layer: 0
   m_Name: Static Camera
   m_TagString: Camera/Static Camera
@@ -33,6 +34,98 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5671818033234735358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243126664052907472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac8bc820e2db9e4eac80b531be20a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camerasOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1426856480474875317}
+        m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
+        m_MethodName: UE_DetectionOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6734529643668475166}
+        m_TargetAssemblyTypeName: Gameplay.VR.OverwatchBehavior, Assembly-CSharp
+        m_MethodName: UE_OverwatchOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5151282222398012667}
+        m_TargetAssemblyTypeName: Gameplay.VR.CameraFeedbackBehaviour, Assembly-CSharp
+        m_MethodName: GE_DisabledLightFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  camerasOn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1426856480474875317}
+        m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
+        m_MethodName: UE_DetectionOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6734529643668475166}
+        m_TargetAssemblyTypeName: Gameplay.VR.OverwatchBehavior, Assembly-CSharp
+        m_MethodName: UE_OverwatchOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5151282222398012667}
+        m_TargetAssemblyTypeName: Gameplay.VR.CameraFeedbackBehaviour, Assembly-CSharp
+        m_MethodName: GE_ActiveLightFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  state: 1
+  power: 1
 --- !u!1 &4859161265381388714
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,7 +139,6 @@ GameObject:
   - component: {fileID: 1426856480474875317}
   - component: {fileID: 6734529643668475166}
   - component: {fileID: 5151282222398012667}
-  - component: {fileID: 6788773494171263256}
   m_Layer: 0
   m_Name: Camera Functions
   m_TagString: Camera/Static Camera
@@ -139,98 +231,6 @@ MonoBehaviour:
   lightMesh: {fileID: 5736856155733467423}
   activeMat: {fileID: 2100000, guid: 6f7b34ce739692e43bd9309d0ae38186, type: 2}
   disabledMat: {fileID: 2100000, guid: 6ed1464c0db56be4b9fb7ea381543d2d, type: 2}
---- !u!114 &6788773494171263256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4859161265381388714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac8bc820e2db9e4eac80b531be20a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camerasOff:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1426856480474875317}
-        m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
-        m_MethodName: UE_DetectionOff
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6734529643668475166}
-        m_TargetAssemblyTypeName: Gameplay.VR.OverwatchBehavior, Assembly-CSharp
-        m_MethodName: UE_OverwatchOff
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5151282222398012667}
-        m_TargetAssemblyTypeName: Gameplay.VR.CameraFeedbackBehaviour, Assembly-CSharp
-        m_MethodName: GE_DisabledLightFeedback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  camerasOn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1426856480474875317}
-        m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
-        m_MethodName: UE_DetectionOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6734529643668475166}
-        m_TargetAssemblyTypeName: Gameplay.VR.OverwatchBehavior, Assembly-CSharp
-        m_MethodName: UE_OverwatchOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5151282222398012667}
-        m_TargetAssemblyTypeName: Gameplay.VR.CameraFeedbackBehaviour, Assembly-CSharp
-        m_MethodName: GE_ActiveLightFeedback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  state: 1
-  power: 1
 --- !u!1 &9170820746961671367
 GameObject:
   m_ObjectHideFlags: 0
