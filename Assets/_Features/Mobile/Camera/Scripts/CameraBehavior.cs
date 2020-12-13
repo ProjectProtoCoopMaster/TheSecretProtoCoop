@@ -10,8 +10,9 @@ namespace Gameplay.Mobile
     {
         [SerializeField] private LineRenderer visionLine;
         private Color color;
-        [Range(0, 1), SerializeField] private int state;
-        [Range(0, 1), SerializeField] private int power;
+
+        [Range(0, 1), SerializeField] private int state = 1;
+        [Range(0, 1), SerializeField] private int power = 1;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
         public int Power

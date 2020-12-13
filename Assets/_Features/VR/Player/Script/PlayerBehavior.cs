@@ -7,8 +7,7 @@ namespace Gameplay.VR
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
         [SerializeField] private CallableFunction _gameOver;
-        [SerializeField] private CallableFunction _sendPlayerPosition;
-        [SerializeField] private CallableFunction _sendPlayerRotation;
+        [SerializeField] private CallableFunction _sendPlayerPosAndRot;
         [SerializeField] private Vector3Variable _playerPosition;
         [SerializeField] private QuaternionVariable _playerRotation;
         [SerializeField] private Camera pictureCamera;
@@ -23,12 +22,16 @@ namespace Gameplay.VR
             }
         }
 
+        public void Die()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void Update()
         {
             _playerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
             _playerRotation.Value = transform.localRotation;
-            _sendPlayerPosition.Raise();
-            _sendPlayerRotation.Raise();
+            _sendPlayerPosAndRot.Raise();
         }
     }
 }
