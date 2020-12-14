@@ -20,13 +20,19 @@ namespace Gameplay.VR
             if (!isDead)
             {
                 _gameOver.Raise();
+                playerHitTrap.Raise();
                 isDead = true;
             }
         }
 
         public void Die()
         {
-            playerHitTrap.Raise();
+            if (!isDead)
+            {
+                _gameOver.Raise();
+                playerHitTrap.Raise();
+                isDead = true;
+            }
         }
 
         private void Update()
