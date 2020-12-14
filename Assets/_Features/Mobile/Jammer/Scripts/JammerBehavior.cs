@@ -58,7 +58,6 @@ namespace Gameplay
         {
             _destroyJammer.Raise(ID);
             _sendOnJammerDestroyedToOthers.Raise(ID);
-
         }
 
         public void Die(Vector3 force = default)
