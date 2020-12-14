@@ -49,12 +49,13 @@ namespace Gameplay.VR
                         {
                             detectedPlayer = true; // stop the detection from looping
 
+                            detectionFeedback.PlayDetectionFeedback();
+
                             Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
                             if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
                                 awarenessManager.alarmRaisers.Add(this.gameObject);
 
                             spottedPlayer.Raise();
-
                         }
 
                         //...otherwise, it means that the player is "peeking"

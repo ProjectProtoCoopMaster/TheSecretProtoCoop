@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6925077236650935204}
   - component: {fileID: 4605352206057338154}
   - component: {fileID: 4605352206057338157}
+  - component: {fileID: 1379281556072007816}
   - component: {fileID: 8668388833559456506}
   m_Layer: 11
   m_Name: Patrol Guard_Light
@@ -128,11 +129,9 @@ MonoBehaviour:
   rangeOfVision: 6
   coneOfVision: 70
   awarenessManagerObj: {fileID: 11400000, guid: b6ec201e2731c1e419f7e2dcac4b975c, type: 2}
-  baseState: {fileID: 11400000, guid: f2e74b04ee7cc7f41a1eb5b075814114, type: 2}
   spottedPlayer: {fileID: 11400000, guid: 28b6efa130a282f45a8091442f80bc2d, type: 2}
   spottedDeadBody: {fileID: 11400000, guid: b464f744a71cc8046bcf074053dc1765, type: 2}
   playerPeeking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
-  alarmRaiserKilled: {fileID: 11400000, guid: 0ca7106f083346543aa6cf1902702d6a, type: 2}
 --- !u!114 &4605352206057338154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +176,19 @@ MonoBehaviour:
   overwatchMask:
     serializedVersion: 2
     m_Bits: 3072
+--- !u!114 &1379281556072007816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078856768317732911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d500547d57b0114ab857b93b58381a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exclamationMark: {fileID: 3968929243909163910}
 --- !u!114 &8668388833559456506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +231,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4605352206057338154}
         m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
         m_MethodName: UE_GuardDied
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1379281556072007816}
+        m_TargetAssemblyTypeName: DetectionFeedback, Assembly-CSharp
+        m_MethodName: StopDetectionFeedback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

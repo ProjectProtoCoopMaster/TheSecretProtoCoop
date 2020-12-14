@@ -45,6 +45,9 @@ namespace Gameplay.VR
                             if (hitInfo.collider.gameObject.CompareTag("Dead"))
                             {
                                 detectedBody = true; // stop overwatch from looping
+
+                                detectionFeedback.PlayDetectionFeedback();
+
                                 Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
 
                                 if (!awarenessManager.alarmRaisers.Contains(this.gameObject))

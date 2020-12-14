@@ -3098,6 +3098,7 @@ GameObject:
   - component: {fileID: 2385545449039188824}
   - component: {fileID: 5042022890283721779}
   - component: {fileID: 5042022890283721780}
+  - component: {fileID: 9184886540900451251}
   - component: {fileID: 170555982519352291}
   m_Layer: 11
   m_Name: Patrol Guard_Light
@@ -3212,8 +3213,7 @@ MonoBehaviour:
   awarenessManagerObj: {fileID: 0}
   spottedPlayer: {fileID: 0}
   spottedDeadBody: {fileID: 0}
-  playerPeaking: {fileID: 0}
-  alarmRaiserKilled: {fileID: 0}
+  playerPeeking: {fileID: 0}
 --- !u!114 &5042022890283721779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3258,6 +3258,18 @@ MonoBehaviour:
   overwatchMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &9184886540900451251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424401980289362230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d500547d57b0114ab857b93b58381a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &170555982519352291
 MonoBehaviour:
   m_ObjectHideFlags: 0

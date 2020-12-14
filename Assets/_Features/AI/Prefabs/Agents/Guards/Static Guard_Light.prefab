@@ -2465,6 +2465,7 @@ GameObject:
   - component: {fileID: 6981803773881930411}
   - component: {fileID: 5855907443207019035}
   - component: {fileID: 5855907443207019036}
+  - component: {fileID: 1526180925615306051}
   - component: {fileID: 1648719965424338379}
   m_Layer: 11
   m_Name: Static Guard_Light
@@ -2562,8 +2563,7 @@ MonoBehaviour:
   awarenessManagerObj: {fileID: 0}
   spottedPlayer: {fileID: 0}
   spottedDeadBody: {fileID: 0}
-  playerPeaking: {fileID: 0}
-  alarmRaiserKilled: {fileID: 0}
+  playerPeeking: {fileID: 0}
 --- !u!114 &5855907443207019035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,6 +2608,18 @@ MonoBehaviour:
   overwatchMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1526180925615306051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941732742617552670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d500547d57b0114ab857b93b58381a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1648719965424338379
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,9 +37,12 @@ namespace Gameplay.VR
         // used to know if the entity of type Camera is active
         [SerializeField] [FoldoutGroup("Debugging")] protected bool poweredOn;
 
+        protected DetectionFeedback detectionFeedback;
+
         protected void Awake()
         {
             entityDataInterface = GetComponent<EntityDataInterface>();
+            detectionFeedback = GetComponent<DetectionFeedback>();
 
             rangeOfVision = entityDataInterface.rangeOfVision;
             coneOfVision = entityDataInterface.coneOfVision;
