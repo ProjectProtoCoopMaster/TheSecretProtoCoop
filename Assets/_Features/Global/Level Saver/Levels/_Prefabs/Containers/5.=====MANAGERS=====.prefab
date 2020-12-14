@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 171248697309145549}
   - component: {fileID: 8792408301243350314}
   - component: {fileID: 1152197733083808084}
+  - component: {fileID: 506088471}
   m_Layer: 0
   m_Name: VRFeedbackManager
   m_TagString: Untagged
@@ -547,7 +548,36 @@ MonoBehaviour:
       - m_Target: {fileID: 7954192480871375622}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.DetectionFeedbackManager,
           Assembly-CSharp
-        m_MethodName: GE_PlayerReflexMode
+        m_MethodName: GE_EngageReflexMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &506088471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974829949914884779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c0553922c99bc4d469bad0605b6d5eb2, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7954192480871375622}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.DetectionFeedbackManager,
+          Assembly-CSharp
+        m_MethodName: GE_DisenageReflexMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -570,6 +600,9 @@ GameObject:
   - component: {fileID: 6042655841084324972}
   - component: {fileID: 1691701308}
   - component: {fileID: 1691701305}
+  - component: {fileID: 1691701306}
+  - component: {fileID: 7663523883360198828}
+  - component: {fileID: 1691701309}
   m_Layer: 0
   m_Name: AwarenessManager
   m_TagString: Untagged
@@ -603,15 +636,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3915db054a9b4ca4d9f7b828737d01e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflexModeOn: {fileID: 0}
-  reflexModeOff: {fileID: 0}
-  raisingAlarm: 0
+  reflexModeOn: {fileID: 11400000, guid: dcb3e72fe0dbd414aaca4edb5f702b0a, type: 2}
+  reflexModeOff: {fileID: 11400000, guid: c0553922c99bc4d469bad0605b6d5eb2, type: 2}
   alarmRaiseDuration: 0
-  alarmRaisers: 
   deadGuards: []
   gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
   gameOverAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   timePassed: 0
+  alarmRaisers: 0
 --- !u!114 &6042655841084324972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a9050ae7b09fa458fb958c7e105222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflexModeMultiplier: 0
+  reflexModeMultiplier: 2
 --- !u!114 &1691701308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +704,90 @@ MonoBehaviour:
       - m_Target: {fileID: 9210542409267680569}
         m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
         m_MethodName: GE_PlayerDetectedByGuard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1691701306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611946231853382549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 81bbe490a04b9a944925c942160d4c70, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9210542409267680569}
+        m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
+        m_MethodName: GE_BodyDetectedByCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7663523883360198828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611946231853382549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0ca7106f083346543aa6cf1902702d6a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9210542409267680569}
+        m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
+        m_MethodName: GE_AlarmRaiserKilled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1691701309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611946231853382549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b464f744a71cc8046bcf074053dc1765, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9210542409267680569}
+        m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
+        m_MethodName: GE_BodyDetectedByGuard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

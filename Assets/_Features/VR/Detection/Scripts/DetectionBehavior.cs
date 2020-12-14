@@ -46,7 +46,7 @@ namespace Gameplay.VR
                     if (LineOfSightCheck(playerHead.Value))
                     {
                         // if you can see both hands, then the player has been spotted
-                        if (LineOfSightCheck(playerHandLeft.Value) && LineOfSightCheck(playerHandRight.Value))
+                        if (LineOfSightCheck(playerHandLeft.Value) == true && LineOfSightCheck(playerHandRight.Value) == true)
                         {
                             spottedPlayer.Raise();
                             //awarenessManager.RaiseAlarm(entityType, EntityType.Player);
@@ -61,6 +61,8 @@ namespace Gameplay.VR
                             Debug.Log("You're peeking !");
                         }
                     }
+
+                    else baseState.Raise();
                 }
             }
 

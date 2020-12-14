@@ -1,10 +1,8 @@
-﻿
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static Gameplay.GameManager;
 
 namespace Gameplay.VR
 {
@@ -14,17 +12,15 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOn;
         [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOff;
 
-        [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false;
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
-        [SerializeField] [FoldoutGroup("Alarm Raising")] internal int alarmRaisers;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
 
-        bool gameIsOver;
-
+        bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameIsOver = false;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
+        [SerializeField] [FoldoutGroup("Debugging")] internal int alarmRaisers;
 
         private void Awake()
         {
@@ -36,7 +32,7 @@ namespace Gameplay.VR
         // called every time a guard is killed
         public void GE_AlarmRaiserKilled()
         {
-            if(alarmRaisers > 0) alarmRaisers--;
+            if (alarmRaisers > 0) alarmRaisers--;
         }
 
         // called when the player is detected by a guard
@@ -54,7 +50,7 @@ namespace Gameplay.VR
 
         public void GE_PlayerDetectedByCamera()
         {
-            GameOver(LoseType.PlayerSpottedByCam);
+            GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByCam);
         }
 
         public void GE_BodyDetectedByGuard()
@@ -71,7 +67,7 @@ namespace Gameplay.VR
 
         public void GE_BodyDetectedByCamera()
         {
-            GameOver(LoseType.BodySpottedByCam);
+            GameOver(Gameplay.GameManager.LoseType.BodySpottedByCam);
         }
         #endregion
 
@@ -96,8 +92,8 @@ namespace Gameplay.VR
                         raisingAlarm = false;
                         timePassed = 0f;
 
-                        if (spottedDeadBody) GameOver(LoseType.BodySpottedByGuard);
-                        if (spottedPlayer) GameOver(LoseType.PlayerSpottedByGuard);
+                        if (spottedDeadBody) GameOver(Gameplay.GameManager.LoseType.BodySpottedByGuard);
+                        if (spottedPlayer) GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByGuard);
                     }
                 }
             }
@@ -112,7 +108,7 @@ namespace Gameplay.VR
             spottedPlayer = false;
         }
 
-        private void GameOver(LoseType loseReason)
+        private void GameOver(Gameplay.GameManager.LoseType loseReason)
         {
             if (!gameIsOver)
             {

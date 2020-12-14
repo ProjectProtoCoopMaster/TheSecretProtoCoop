@@ -49,6 +49,8 @@ namespace Gameplay.VR
                                 detectedGuard = true;
                             }
                         }
+
+                        else baseState.Raise();
                     }
                 }
             }

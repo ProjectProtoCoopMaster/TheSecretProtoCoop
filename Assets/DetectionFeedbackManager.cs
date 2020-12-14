@@ -18,7 +18,12 @@ namespace Gameplay.VR.Feedbacks
             peakingCanvas.enabled = true;
         }
 
-        public void GE_PlayerReflexMode()
+        public void GE_EngageReflexMode()
+        {
+
+        }
+
+        public void GE_DisenageReflexMode()
         {
 
         }
