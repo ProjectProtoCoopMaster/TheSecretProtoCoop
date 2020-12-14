@@ -9,7 +9,7 @@ namespace Gameplay.VR
         [SerializeField] Canvas gameOverCanvas;
         Text gameOverText;
 
-        CallableFunction gameOver;
+        [SerializeField] CallableFunction gameOver;
 
         private void Awake()
         {
@@ -27,7 +27,8 @@ namespace Gameplay.VR
 
         public void GE_PlayerHitTrap()
         {
-            gameOver.Raise(Gameplay.GameManager.LoseType.PlayerHitTrap);
+            Debug.Log((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
+            gameOver.Raise((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
         }
     } 
 }
