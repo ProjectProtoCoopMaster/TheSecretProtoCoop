@@ -31,8 +31,9 @@ namespace Networking
 
         public void SendDestroyJammerToOthers(int ID) => photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID);
         [PunRPC] public void SendDestroyJammer(int ID) => _destroyJammer.Raise(ID);
-        public void SendLoseToOther(int loseType) => photonView.RPC("SendLose", RpcTarget.Others,loseType);
-        [PunRPC] public void SendLose(int loseType) { gameManager.loseType = (GameManager.LoseType)loseType; _onLose.Raise();  }
+        public void SendLoseToOther(int loseType) { gameManager.RaiseOnLose(loseType); photonView.RPC("SendLose", RpcTarget.Others, loseType); }
+
+        [PunRPC] public void SendLose(int loseType) { gameManager.RaiseOnLose(loseType);  }
 
         public void SendSymbolIDToOther(int value) => photonView.RPC("SendSymbolID", RpcTarget.Others, value);
 

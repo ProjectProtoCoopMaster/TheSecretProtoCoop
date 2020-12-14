@@ -21,7 +21,9 @@ namespace Gameplay
         {
             for (int i = 0; i < listener.ID; i++)
             {
+                
                 listener.component[i].SendMessage(listener.methodName[i], parameter);
+                Debug.Log(listener.component[i]);
             }
 
         }

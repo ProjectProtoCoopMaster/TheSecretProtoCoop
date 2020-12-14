@@ -13,7 +13,8 @@ namespace Tools
         public static void BuildAndroid()
         {
             BoolVariable isMobile = Resources.Load("isMobile") as BoolVariable;
-            isMobile.SwitchValue();
+            isMobile.Value = true;
+            isMobile.SetDirty();
             Debug.Log(isMobile.Value);
             BuildPlayerOptions buildPlayerOptions = BuildPlayerWindow.DefaultBuildMethods.GetBuildPlayerOptions(new BuildPlayerOptions());
             BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
@@ -21,17 +22,26 @@ namespace Tools
             BuildSummary summary = report.summary;
             if (summary.result == BuildResult.Succeeded)
             {
-                isMobile.SwitchValue();
+                isMobile.Value = false;
+                isMobile.SetDirty();
                 Debug.Log(isMobile.Value);
                 Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
             }
 
             if (summary.result == BuildResult.Failed)
             {
-                isMobile.SwitchValue();
+                isMobile.Value = false;
+                isMobile.SetDirty();
                 Debug.Log(isMobile.Value);
                 Debug.Log("Build failed");
             }
+        }
+
+        [MenuItem("Build/Build Test")]
+        public static void BuildTest()
+        {
+            BoolVariable isMobile = Resources.Load("isMobile") as BoolVariable;
+            EditorGUIUtility.PingObject(isMobile);
         }
 
     }

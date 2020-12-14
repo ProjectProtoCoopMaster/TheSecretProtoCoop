@@ -8,6 +8,7 @@ namespace Gameplay
 {
     public class GameManager : MonoBehaviour
     {
+        public CallableFunction sendGameOver;
         [System.Serializable]
         public enum LoseType
         {
@@ -31,11 +32,12 @@ namespace Gameplay
 
         void Start()
         {
+            
 
             if (startGame)
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
-        public void RaiseOnLose(int ID) { loseType = (LoseType)ID; _onLose.Raise(); }
+        public void RaiseOnLose(int ID) { Debug.Log((LoseType)ID);loseType =  (LoseType)ID ; _onLose.Raise(); }
         [Button]
         public void GameOver()
         {

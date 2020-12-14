@@ -30,6 +30,7 @@ namespace Gameplay
 
         private void OnEnable()
         {
+            
             Function.RegisterListener(this);
             type = new Type[ID];
             methodName = new string[ID];
@@ -39,6 +40,7 @@ namespace Gameplay
             {
                 type[i] = Response.GetPersistentTarget(i).GetType();
                 methodName[i] = Response.GetPersistentMethodName(i);
+                Debug.Log(component[i] + Function.name);
                 component[i] = GetComponent(type[i]);
             }
 
