@@ -9,7 +9,7 @@ namespace Gameplay.VR
         [SerializeField] public float coneOfVision;
 
         [SerializeField] public GameObjectVariable awarenessManagerObj = null;
-        [SerializeField] public GameEvent baseState = null, spottedPlayer = null, spottedDeadBody = null, playerPeeking = null, alarmRaiserKilled = null;
+        [SerializeField] public GameEvent baseState = null, spottedPlayer = null, spottedDeadBody = null, playerPeeking = null;
 
     }
 }

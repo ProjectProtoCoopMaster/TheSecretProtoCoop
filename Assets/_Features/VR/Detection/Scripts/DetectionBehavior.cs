@@ -7,9 +7,8 @@ namespace Gameplay.VR
     public class DetectionBehavior : EntityVisionData
     {
         [SerializeField] public LayerMask detectionMask;
-        // [HideInInspector] public Transform playerHead;
-        private bool detectedPlayer = false;
         private RaycastHit hitInfo;
+        private bool detectedPlayer = false;
 
         public Vector3Variable playerHead, playerHandLeft, playerHandRight;
 
@@ -40,7 +39,7 @@ namespace Gameplay.VR
                 targetDir = playerHead.Value - myFinalPos;
 
                 //...if the angle between the looking dir of the cam and the player is less than the cone of vision, then you are inside the cone of vision
-                if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f)
+                if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedPlayer == false)
                 {
                     // check to see if you can see head
                     if (LineOfSightCheck(playerHead.Value))
@@ -48,10 +47,14 @@ namespace Gameplay.VR
                         // if you can see both hands, then the player has been spotted
                         if (LineOfSightCheck(playerHandLeft.Value) == true && LineOfSightCheck(playerHandRight.Value) == true)
                         {
-                            spottedPlayer.Raise();
-                            //awarenessManager.RaiseAlarm(entityType, EntityType.Player);
-
                             detectedPlayer = true; // stop the detection from looping
+                            
+                            Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
+                            if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
+                                awarenessManager.alarmRaisers.Add(this.gameObject);
+
+                            spottedPlayer.Raise();
+
                         }
 
                         //...otherwise, it means that the player is "peeking"
@@ -83,8 +86,10 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            // if you were detecting the player, then decrease the amount of alarm raisers
-            if(detectedPlayer) alarmRaiserKilled.Raise();
+            // if you were detecting the player, remove this object from the list of alarm raisers
+            if (awarenessManager.alarmRaisers.Contains(this.gameObject))
+                awarenessManager.alarmRaisers.Remove(this.gameObject);
+
             enabled = false;
         }
 

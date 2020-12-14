@@ -8,7 +8,7 @@ namespace Gameplay.VR
         [SerializeField] Transform myDetectableBody;
         [SerializeField] public LayerMask overwatchMask;
         private RaycastHit hitInfo;
-        bool detectedGuard = false;
+        private bool detectedBody = false;
 
         new void Awake()
         {
@@ -38,15 +38,19 @@ namespace Gameplay.VR
                     targetDir = awarenessManager.deadGuards[i].position - myFinalPos;
 
                     //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
-                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && !detectedGuard)
+                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedBody == false)
                     {
                         if (Physics.Linecast(this.transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
                         {
                             if (hitInfo.collider.gameObject.CompareTag("Dead"))
                             {
+                                detectedBody = true; // stop overwatch from looping
+                                Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
+
+                                if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
+                                    awarenessManager.alarmRaisers.Add(this.gameObject);
+
                                 spottedDeadBody.Raise();
-                                //awarenessManager.RaiseAlarm(entityType, EntityType.Guard);
-                                detectedGuard = true;
                             }
                         }
 
@@ -61,11 +65,18 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            awarenessManager.deadGuards.Add(myDetectableBody);
+            // if you were detecting the player, remove this object from the list of alarm raisers
+            if (awarenessManager.alarmRaisers.Contains(this.gameObject))
+                awarenessManager.alarmRaisers.Remove(this.gameObject);
 
+            // add this entity to the list of dead guards
+            if (!awarenessManager.deadGuards.Contains(myDetectableBody))
+                awarenessManager.deadGuards.Add(myDetectableBody);
+
+            // change the object's tags to "Dead"
             myDetectableBody.gameObject.tag = "Dead";
 
-            for (int i = 0; i < myDetectableBody.childCount; i++) 
+            for (int i = 0; i < myDetectableBody.childCount; i++)
                 myDetectableBody.GetChild(i).tag = "Dead";
 
             enabled = false;
@@ -82,7 +93,7 @@ namespace Gameplay.VR
         {
             poweredOn = false;
         }
-#endregion
+        #endregion
     }
-} 
+}
 #endif

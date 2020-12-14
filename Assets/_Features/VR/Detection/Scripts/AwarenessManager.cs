@@ -14,31 +14,24 @@ namespace Gameplay.VR
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
+        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<GameObject> alarmRaisers = new List<GameObject>();
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
 
         bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameIsOver = false;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
-        [SerializeField] [FoldoutGroup("Debugging")] internal int alarmRaisers;
+        //[SerializeField] [FoldoutGroup("Debugging")] internal int alarmRaisers;
 
         private void Awake()
         {
             Time.timeScale = 1f;
-            alarmRaisers = 0;
         }
 
         #region Game Events
-        // called every time a guard is killed
-        public void GE_AlarmRaiserKilled()
-        {
-            if (alarmRaisers > 0) alarmRaisers--;
-        }
-
         // called when the player is detected by a guard
         public void GE_PlayerDetectedByGuard()
         {
-            alarmRaisers++;
             spottedPlayer = true;
 
             if (raisingAlarm != true)
@@ -55,7 +48,6 @@ namespace Gameplay.VR
 
         public void GE_BodyDetectedByGuard()
         {
-            alarmRaisers++;
             spottedDeadBody = true;
 
             if (raisingAlarm != true)
@@ -79,13 +71,13 @@ namespace Gameplay.VR
                 timePassed += Time.unscaledDeltaTime;
 
                 // if you kill all the alarm raising entities
-                if (alarmRaisers == 0) KillAlarm();
+                if (alarmRaisers.Count == 0) KillAlarm();
 
                 // if the alarm has passed its limit
                 if (timePassed >= alarmRaiseDuration)
                 {
                     // if there are still entities raising the alarm, it's game over
-                    if (alarmRaisers > 0)
+                    if (alarmRaisers.Count > 0)
                     {
                         reflexModeOff.Raise();
 
@@ -106,6 +98,8 @@ namespace Gameplay.VR
 
             spottedDeadBody = false;
             spottedPlayer = false;
+
+            timePassed = 0f;
         }
 
         private void GameOver(Gameplay.GameManager.LoseType loseReason)

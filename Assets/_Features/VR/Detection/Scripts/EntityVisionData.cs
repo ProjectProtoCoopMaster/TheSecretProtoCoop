@@ -25,7 +25,7 @@ namespace Gameplay.VR
         // usued for the Awareness Manager to determine who detected
         internal EntityType entityType;
 
-        protected GameEvent baseState, spottedPlayer, spottedDeadBody, playerPeaking, alarmRaiserKilled;
+        protected GameEvent baseState, spottedPlayer, spottedDeadBody, playerPeaking;
         protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
         protected AwarenessManager awarenessManager = null;
@@ -37,7 +37,6 @@ namespace Gameplay.VR
         // used to know if the entity of type Camera is active
         [SerializeField] [FoldoutGroup("Debugging")] protected bool poweredOn;
 
-
         protected void Awake()
         {
             entityDataInterface = GetComponent<EntityDataInterface>();
@@ -48,7 +47,6 @@ namespace Gameplay.VR
             spottedPlayer = entityDataInterface.spottedPlayer;
             spottedDeadBody = entityDataInterface.spottedDeadBody;
             playerPeaking = entityDataInterface.spottedPlayer;
-            alarmRaiserKilled = entityDataInterface.spottedDeadBody;
             baseState = entityDataInterface.baseState;
 
             awarenessManager = entityDataInterface.awarenessManagerObj.Value.GetComponent<AwarenessManager>();
