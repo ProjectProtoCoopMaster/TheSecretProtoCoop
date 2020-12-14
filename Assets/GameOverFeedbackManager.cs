@@ -5,18 +5,19 @@ namespace Gameplay.VR
 {
     public class GameOverFeedbackManager : MonoBehaviour
     {
-        [SerializeField] internal Light redAlarmLight;
-        [SerializeField] Canvas gameOverCanvas;
+        [SerializeField] GameObjectVariable playerHead;
+        [SerializeField] GameObjectVariable gameOverTextObj;
+        [SerializeField] CallableFunction gameOver;
+
         Text gameOverText;
-
-        CallableFunction gameOver;
-
+        Light redAlarmLight;
+        
         private void Awake()
         {
-            gameOverCanvas = GameObject.Find("Game Over Info Canvas").GetComponent<Canvas>();
+            redAlarmLight = playerHead.Value.GetComponent<Light>();
             redAlarmLight.gameObject.SetActive(false);
 
-            gameOverText = gameOverCanvas.GetComponentInChildren<Text>();
+            gameOverText = gameOverTextObj.Value.GetComponent<Text>();
             gameOverText.enabled = false;
         }
 
@@ -27,7 +28,8 @@ namespace Gameplay.VR
 
         public void GE_PlayerHitTrap()
         {
-            gameOver.Raise(Gameplay.GameManager.LoseType.PlayerHitTrap);
+            Debug.Log((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
+            gameOver.Raise((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
         }
     } 
 }

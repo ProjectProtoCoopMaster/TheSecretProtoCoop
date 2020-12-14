@@ -31,6 +31,7 @@ Transform:
   - {fileID: 2818681102088160480}
   - {fileID: 8822995864073479240}
   - {fileID: 3401674643308202482}
+  - {fileID: 585238935296170007}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -138,6 +139,7 @@ GameObject:
   - component: {fileID: 8893718603193664340}
   - component: {fileID: 1426856480474875317}
   - component: {fileID: 6734529643668475166}
+  - component: {fileID: 3340561288250468278}
   - component: {fileID: 5151282222398012667}
   m_Layer: 0
   m_Name: Camera Functions
@@ -175,11 +177,9 @@ MonoBehaviour:
   rangeOfVision: 9
   coneOfVision: 90
   awarenessManagerObj: {fileID: 11400000, guid: b6ec201e2731c1e419f7e2dcac4b975c, type: 2}
-  baseState: {fileID: 11400000, guid: f2e74b04ee7cc7f41a1eb5b075814114, type: 2}
   spottedPlayer: {fileID: 11400000, guid: 58caf91a32ef0e841acd8638273e62e6, type: 2}
   spottedDeadBody: {fileID: 11400000, guid: 81bbe490a04b9a944925c942160d4c70, type: 2}
   playerPeeking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
-  alarmRaiserKilled: {fileID: 0}
 --- !u!114 &1426856480474875317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +224,19 @@ MonoBehaviour:
   overwatchMask:
     serializedVersion: 2
     m_Bits: 3072
+--- !u!114 &3340561288250468278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4859161265381388714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d500547d57b0114ab857b93b58381a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exclamationMark: {fileID: 7507984338933606281}
 --- !u!114 &5151282222398012667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +252,88 @@ MonoBehaviour:
   lightMesh: {fileID: 5736856155733467423}
   activeMat: {fileID: 2100000, guid: 6f7b34ce739692e43bd9309d0ae38186, type: 2}
   disabledMat: {fileID: 2100000, guid: 6ed1464c0db56be4b9fb7ea381543d2d, type: 2}
+--- !u!1 &7272883303542268953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585238935296170007}
+  - component: {fileID: 7507984338933606281}
+  m_Layer: 11
+  m_Name: Detection Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &585238935296170007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7272883303542268953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.363, z: 0.117}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2243126664052907476}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7507984338933606281
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7272883303542268953}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: de608b2553db1fc4499bc2ce956e1390, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.6, y: 1.6}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &9170820746961671367
 GameObject:
   m_ObjectHideFlags: 0
