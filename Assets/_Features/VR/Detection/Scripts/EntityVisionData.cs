@@ -28,7 +28,7 @@ namespace Gameplay.VR
         protected GameEvent spottedPlayer, spottedDeadBody, playerPeeking;
         protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
-        [SerializeField] protected AwarenessManager awarenessManager = null;
+        protected AwarenessManager awarenessManager = null;
 
         // used to update the entity's update every X frames
         [SerializeField] [FoldoutGroup("Debugging")] protected int pingFrequency;
@@ -38,6 +38,7 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Debugging")] protected bool poweredOn;
 
         protected DetectionFeedback detectionFeedback;
+
 
         protected void Awake()
         {

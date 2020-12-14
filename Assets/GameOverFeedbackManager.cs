@@ -15,6 +15,7 @@ namespace Gameplay.VR
 
         public void GE_TurnOnAlarmLights()
         {
+            redAlarmLight.transform.position = GameObject.Find("[PlayerRig]").transform.position;
             redAlarmLight.gameObject.SetActive(true);
         }
 
