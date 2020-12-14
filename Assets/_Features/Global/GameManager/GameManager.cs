@@ -28,17 +28,18 @@ namespace Gameplay
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private IntVariable _sceneID;
         private GameObject loseCanvas;
-        private Text loseText;
+        [SerializeField] GameObjectVariable loseTextVRObj;
+        private Text loseText, loseTextVR;
         private bool isGameOver = false;
 
         void Start()
         {
-            
-
             if (startGame)
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
+
         public void RaiseOnLose(int ID) { Debug.Log((LoseType)ID);loseType =  (LoseType)ID ; _onLose.Raise(); }
+        
         [Button]
         public void GameOver()
         {
@@ -70,6 +71,10 @@ namespace Gameplay
                         loseText.text = "You ran into a Hidden Trap !";
                         break;
                 }
+
+                loseTextVR = loseTextVRObj.Value.GetComponent<Text>();
+                loseTextVR.enabled = true;
+                loseTextVR.text = loseText.text;
 
                 StartCoroutine(WaitGameOver());
 
