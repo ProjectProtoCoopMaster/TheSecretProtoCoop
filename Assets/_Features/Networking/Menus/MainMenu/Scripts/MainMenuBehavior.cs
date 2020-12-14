@@ -11,27 +11,20 @@ namespace Gameplay
     {
         public Transform playerVR;
         public Vector3Variable playerVRPos;
-        [SerializeField] CallableFunction _JoinRoom;
-        [SerializeField] CallableFunction _CreateRoom;
-        [SerializeField] IntVariable _sceneID;
-        [SerializeField] BoolVariable _isMobile;
-        public VisualTreeAsset visualTree;
-        public VisualElement rootElement;
-        private Button join;
+        [SerializeField] private CallableFunction _JoinRoom;
+        [SerializeField] private CallableFunction _CreateRoom;
+        [SerializeField] private IntVariable _sceneID;
+        [SerializeField] private BoolVariable _isMobile;
+        [SerializeField] private Canvas mobileCanvas;
+        [SerializeField] private Canvas vrCanvas;
         private int index = -1;
-
+        
 
         private void OnEnable()
         {
+            vrCanvas.enabled = false;
+            mobileCanvas.enabled = false;
             index = 2;
-            rootElement = visualTree.CloneTree();
-
-            join = rootElement.Q<Button>("JoinButton");
-
-            //join.clickable.clicked += () => Debug.Log("Clicked");
-
-            rootElement.Add(join);
-
         }
 
         public void SetIndex(int ID) => index = ID;
@@ -42,7 +35,6 @@ namespace Gameplay
 
         public void OpenScene()
         {
-
             if(_isMobile.Value)
             {
                 SceneManager.LoadScene(index + 1, LoadSceneMode.Additive);
@@ -58,8 +50,19 @@ namespace Gameplay
 
             }
 
+        }
 
-            
+        public void OpenCanvas()
+        {
+            if (_isMobile.Value)
+            {
+                mobileCanvas.enabled = true;
+            }
+            else
+            {
+                vrCanvas.enabled = true;
+
+            }
         }
 
         
