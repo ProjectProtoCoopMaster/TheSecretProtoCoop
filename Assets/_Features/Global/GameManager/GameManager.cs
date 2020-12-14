@@ -55,11 +55,11 @@ namespace Gameplay
                 {
                     case LoseType.PlayerSpottedByGuard:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You were spotted By a Guard";
+                        loseText.text = loseTextVR.Value = "You were spotted by a Guard";
                         break;
                     case LoseType.PlayerSpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You were spotted By a Camera";
+                        loseText.text = loseTextVR.Value = "You were spotted by a Camera";
                         break;
                     case LoseType.BodySpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
