@@ -13,13 +13,10 @@ namespace Gameplay.VR
         [SerializeField] private Vector3Variable _playerPosition;
         [SerializeField] private QuaternionVariable _playerRotation;
         [SerializeField] private GameObjectVariable pictureCameraObj;
-        private Camera pictureCamera;
+        [SerializeField] private Camera pictureCamera;
         private bool isDead;
         
-        private void Awake()
-        {
-            pictureCamera = pictureCameraObj.Value.GetComponent<Camera>();
-        }
+     
 
         public void Die(Vector3 direction = default)
         {

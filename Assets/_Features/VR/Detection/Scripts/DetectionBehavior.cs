@@ -51,24 +51,22 @@ namespace Gameplay.VR
 
                             detectionFeedback.PlayDetectionFeedback();
 
-                            Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
                             if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
                                 awarenessManager.alarmRaisers.Add(this.gameObject);
 
                             spottedPlayer.Raise();
+                            Debug.Log("I spotted the player !");
                         }
 
                         //...otherwise, it means that the player is "peeking"
                         else
                         {
                             playerPeeking.Raise();
-                            Debug.Log("You're peeking !");
+                            Debug.Log("The player is peeking !");
                         }
                     }
                 }
             }
-
-            Debug.LogWarning(gameObject.name + " is searching for the Player");
         }
 
         private bool LineOfSightCheck(Vector3 checkPosition)

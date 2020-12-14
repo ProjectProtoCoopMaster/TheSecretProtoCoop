@@ -29,25 +29,11 @@ namespace Gameplay.VR
         public void TurnOff() { GetComponent<BoxCollider>().enabled = false; }
         public void TurnOn() { GetComponent<BoxCollider>().enabled = true; }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            if(other.transform.parent.GetComponent<IKillable>() != null)
-                other.transform.parent.GetComponent<IKillable>().Die();
-        }
-
-        /*private void OnTriggerStay(Collider other)
-        {
-            playerHitTrap.Raise();
             if (other.transform.parent.GetComponent<IKillable>() != null) 
                 other.transform.parent.GetComponent<IKillable>().Die();
         }
-
-        private void OnTriggerExit(Collider other)
-        {
-            playerHitTrap.Raise();
-            if (other.transform.parent.GetComponent<IKillable>() != null) 
-                other.transform.parent.GetComponent<IKillable>().Die();
-        }*/
     }
 }
 

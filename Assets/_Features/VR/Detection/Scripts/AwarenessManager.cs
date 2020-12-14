@@ -43,6 +43,7 @@ namespace Gameplay.VR
 
         public void GE_PlayerDetectedByCamera()
         {
+            Debug.Log("Restarting the game, a camera saw me");
             GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByCam);
         }
 
@@ -59,6 +60,7 @@ namespace Gameplay.VR
 
         public void GE_BodyDetectedByCamera()
         {
+            Debug.Log("Restarting the game, a camera saw a body");
             GameOver(Gameplay.GameManager.LoseType.BodySpottedByCam);
         }
         #endregion
@@ -84,8 +86,16 @@ namespace Gameplay.VR
                         raisingAlarm = false;
                         timePassed = 0f;
 
-                        if (spottedDeadBody) GameOver(Gameplay.GameManager.LoseType.BodySpottedByGuard);
-                        if (spottedPlayer) GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByGuard);
+                        if (spottedDeadBody)
+                        {
+                            Debug.Log("Restarting the game, a guard saw a body");
+                            GameOver(Gameplay.GameManager.LoseType.BodySpottedByGuard);
+                        }
+                        if (spottedPlayer)
+                        {
+                            Debug.Log("Restarting the game, a guard saw me");
+                            GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByGuard);
+                        }
                     }
                 }
             }
