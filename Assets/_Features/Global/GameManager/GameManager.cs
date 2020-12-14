@@ -9,12 +9,13 @@ namespace Gameplay
     public class GameManager : MonoBehaviour
     {
         [System.Serializable]
-        public enum LoseType 
-        { 
+        public enum LoseType
+        {
             PlayerSpottedByGuard = 0,
             PlayerSpottedByCam = 1,
             BodySpottedByCam = 2,
-            BodySpottedByGuard = 3
+            BodySpottedByGuard = 3,
+            PlayerHitTrap = 4
         };
         [HideInInspector]
         public LoseType loseType;
@@ -31,7 +32,7 @@ namespace Gameplay
         void Start()
         {
 
-            if(startGame)
+            if (startGame)
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
         public void RaiseOnLose(int ID) { loseType = (LoseType)ID; _onLose.Raise(); }
@@ -42,7 +43,6 @@ namespace Gameplay
             {
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
-                
 
                 switch (loseType)
                 {
@@ -61,6 +61,10 @@ namespace Gameplay
                     case LoseType.BodySpottedByGuard:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
                         loseText.text = "A dead body was spotted by a Guard";
+                        break;
+                    case LoseType.PlayerHitTrap:
+                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
+                        loseText.text = "You ran into a Hidden Trap !";
                         break;
                 }
 

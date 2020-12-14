@@ -25,7 +25,7 @@ namespace Gameplay.VR
         // usued for the Awareness Manager to determine who detected
         internal EntityType entityType;
 
-        protected GameEvent baseState, spottedPlayer, spottedDeadBody, playerPeaking;
+        protected GameEvent spottedPlayer, spottedDeadBody, playerPeeking;
         protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
         protected AwarenessManager awarenessManager = null;
@@ -46,8 +46,7 @@ namespace Gameplay.VR
 
             spottedPlayer = entityDataInterface.spottedPlayer;
             spottedDeadBody = entityDataInterface.spottedDeadBody;
-            playerPeaking = entityDataInterface.spottedPlayer;
-            baseState = entityDataInterface.baseState;
+            playerPeeking = entityDataInterface.playerPeeking;
 
             awarenessManager = entityDataInterface.awarenessManagerObj.Value.GetComponent<AwarenessManager>();
 

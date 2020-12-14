@@ -53,8 +53,6 @@ namespace Gameplay.VR
                                 spottedDeadBody.Raise();
                             }
                         }
-
-                        else baseState.Raise();
                     }
                 }
             }

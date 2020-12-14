@@ -48,7 +48,7 @@ namespace Gameplay.VR
                         if (LineOfSightCheck(playerHandLeft.Value) == true && LineOfSightCheck(playerHandRight.Value) == true)
                         {
                             detectedPlayer = true; // stop the detection from looping
-                            
+
                             Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
                             if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
                                 awarenessManager.alarmRaisers.Add(this.gameObject);
@@ -60,12 +60,10 @@ namespace Gameplay.VR
                         //...otherwise, it means that the player is "peeking"
                         else
                         {
-                            playerPeaking.Raise();
+                            playerPeeking.Raise();
                             Debug.Log("You're peeking !");
                         }
                     }
-
-                    else baseState.Raise();
                 }
             }
 
