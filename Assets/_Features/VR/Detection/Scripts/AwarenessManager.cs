@@ -123,6 +123,8 @@ namespace Gameplay.VR
 
         public void GE_RefreshScene()
         {
+            deadGuards.Clear();
+            alarmRaisers.Clear();
             raisingAlarm = false;
             timePassed = 0f;
             Time.timeScale = 1f;

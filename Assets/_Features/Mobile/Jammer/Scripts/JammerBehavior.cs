@@ -58,6 +58,8 @@ namespace Gameplay
         {
             _destroyJammer.Raise(ID);
             _sendOnJammerDestroyedToOthers.Raise(ID);
+
+            GetComponent<MeshRenderer>().enabled = false;
         }
 
         public void Die(Vector3 force = default)
