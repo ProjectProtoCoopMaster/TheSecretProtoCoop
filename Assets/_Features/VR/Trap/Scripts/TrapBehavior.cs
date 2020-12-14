@@ -6,9 +6,6 @@ namespace Gameplay.VR
     [RequireComponent(typeof(BoxCollider))]
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
-        UnityEvent hitTrap = new UnityEvent();
-        GameOverFeedbackManager gameOverFeedback = null;
-
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
@@ -26,8 +23,6 @@ namespace Gameplay.VR
 
         private void Start()
         {
-            gameOverFeedback = FindObjectOfType<GameOverFeedbackManager>();
-            hitTrap.AddListener(() => gameOverFeedback.UE_GameOverExplanation(EntityType.Trap, EntityType.Trap));
             Power = power;
         }
 
@@ -36,19 +31,23 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            hitTrap.Invoke();
-            other.transform.parent.GetComponent<IKillable>().Die();
+            if(other.transform.parent.GetComponent<IKillable>() != null)
+                other.transform.parent.GetComponent<IKillable>().Die();
         }
-        private void OnTriggerStay(Collider other)
+
+        /*private void OnTriggerStay(Collider other)
         {
-            hitTrap.Invoke();
-            other.transform.parent.GetComponent<IKillable>().Die();
+            playerHitTrap.Raise();
+            if (other.transform.parent.GetComponent<IKillable>() != null) 
+                other.transform.parent.GetComponent<IKillable>().Die();
         }
+
         private void OnTriggerExit(Collider other)
         {
-            hitTrap.Invoke();
-            other.transform.parent.GetComponent<IKillable>().Die();
-        }
+            playerHitTrap.Raise();
+            if (other.transform.parent.GetComponent<IKillable>() != null) 
+                other.transform.parent.GetComponent<IKillable>().Die();
+        }*/
     }
 }
 
