@@ -55,7 +55,7 @@ namespace Gameplay.VR
                                 awarenessManager.alarmRaisers.Add(this.gameObject);
 
                             spottedPlayer.Raise();
-                            Debug.Log("I spotted the player !");
+                            Debug.Log(gameObject.name + " spotted the player !");
                         }
 
                         //...otherwise, it means that the player is "peeking"

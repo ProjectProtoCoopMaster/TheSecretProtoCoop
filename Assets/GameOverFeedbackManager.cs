@@ -5,13 +5,13 @@ namespace Gameplay.VR
 {
     public class GameOverFeedbackManager : MonoBehaviour
     {
-        [SerializeField] GameObjectVariable playerHead;
-        [SerializeField] GameObjectVariable gameOverTextObj;
+        /*[SerializeField] GameObjectVariable playerHead;
+        [SerializeField] GameObjectVariable gameOverTextObj;*/
         [SerializeField] CallableFunction gameOver;
 
-        Text gameOverText;
-        Light redAlarmLight;
-        
+        [SerializeField] Text gameOverText;
+        [SerializeField] Light redAlarmLight;
+
         private void Awake()
         {
             GE_RefreshScene();
@@ -35,11 +35,8 @@ namespace Gameplay.VR
 
         public void GE_RefreshScene()
         {
-            redAlarmLight = playerHead.Value.GetComponent<Light>();
             redAlarmLight.gameObject.SetActive(false);
-
-            gameOverText = gameOverTextObj.Value.GetComponent<Text>();
             gameOverText.enabled = false;
         }
-    } 
+    }
 }

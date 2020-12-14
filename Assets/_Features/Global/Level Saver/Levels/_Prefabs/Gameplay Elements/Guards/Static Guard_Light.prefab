@@ -110,7 +110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeOfVision: 6
   coneOfVision: 70
-  awarenessManagerObj: {fileID: 11400000, guid: b6ec201e2731c1e419f7e2dcac4b975c, type: 2}
   spottedPlayer: {fileID: 11400000, guid: 28b6efa130a282f45a8091442f80bc2d, type: 2}
   spottedDeadBody: {fileID: 11400000, guid: b464f744a71cc8046bcf074053dc1765, type: 2}
   playerPeeking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
@@ -128,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeOfVision: 8
   coneOfVision: 45
+  awarenessManager: {fileID: 0}
   pingFrequency: 5
   framesPassed: 0
   poweredOn: 1
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeOfVision: 6
   coneOfVision: 45
+  awarenessManager: {fileID: 0}
   pingFrequency: 10
   framesPassed: 0
   poweredOn: 1
@@ -975,6 +976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8257542931106048310}
   - component: {fileID: 4073010310318997594}
+  - component: {fileID: 2193040176230741980}
   m_Layer: 11
   m_Name: Detection Sprite
   m_TagString: Untagged
@@ -1047,6 +1049,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2193040176230741980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424637464478035194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4591a43efb79d614c9208ad706db23d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7951315781764849408
 GameObject:
   m_ObjectHideFlags: 0

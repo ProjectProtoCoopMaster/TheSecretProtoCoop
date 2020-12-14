@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2651522416651946663}
   - component: {fileID: 2651522416651946656}
   m_Layer: 0
-  m_Name: AwarenessManager
+  m_Name: VRAwarenessManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,11 +50,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reflexModeOn: {fileID: 11400000, guid: dcb3e72fe0dbd414aaca4edb5f702b0a, type: 2}
   reflexModeOff: {fileID: 11400000, guid: c0553922c99bc4d469bad0605b6d5eb2, type: 2}
-  alarmRaiseDuration: 1000000
+  alarmRaiseDuration: 2
   deadGuards: []
   alarmRaisers: []
   gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
   gameOverAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
+  raisingAlarm: 0
+  spottedPlayer: 0
+  spottedDeadBody: 0
+  gameIsOver: 0
   timePassed: 0
 --- !u!114 &2651522416651946660
 MonoBehaviour:

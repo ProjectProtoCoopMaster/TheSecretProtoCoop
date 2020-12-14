@@ -28,8 +28,9 @@ namespace Gameplay
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private IntVariable _sceneID;
         private GameObject loseCanvas;
-        [SerializeField] GameObjectVariable loseTextVRObj;
-        private Text loseText, loseTextVR;
+        // [SerializeField] GameObjectVariable loseTextVRObj;
+        private Text loseText;
+        [SerializeField] Text loseTextVR;
         private bool isGameOver = false;
 
         [SerializeField] private GameEvent onRefreshScene;
@@ -49,7 +50,7 @@ namespace Gameplay
             {
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
-                loseTextVR = loseTextVRObj.Value.GetComponent<Text>();
+                //loseTextVR = loseTextVRObj.Value.GetComponent<Text>();
 
                 switch (loseType)
                 {

@@ -38,7 +38,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2055030888561677631}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,9 +55,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795f2d98a97a5574587f99811f8b55fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHead: {fileID: 11400000, guid: 05b3f17b5e876954191e49105a946abf, type: 2}
-  gameOverTextObj: {fileID: 11400000, guid: a28ef5a2dc814eb408ba7b344575230e, type: 2}
   gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  gameOverText: {fileID: 0}
+  redAlarmLight: {fileID: 2055030888561677630}
 --- !u!114 &3521382425665192195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a11d6ae532be0488b158dbc906b80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatusText: {fileID: 11400000, guid: 116d636fa4eb72246a0e2369bdb7bff0, type: 2}
+  peakingText: {fileID: 0}
 --- !u!114 &3521382425665192192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,3 +294,74 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1001 &3521382425298171362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3521382425665192201}
+    m_Modifications:
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659550, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_Name
+      value: Red Alarm Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196035231666659550, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+--- !u!4 &2055030888561677631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3196035231666659549, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+  m_PrefabInstance: {fileID: 3521382425298171362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &2055030888561677630 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 3196035231666659548, guid: 5aad3b19998e7d4438bac35dc6d8f082, type: 3}
+  m_PrefabInstance: {fileID: 3521382425298171362}
+  m_PrefabAsset: {fileID: 0}

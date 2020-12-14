@@ -16,6 +16,7 @@ namespace Gameplay.PC.Player
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shotEnvironment;
+        [SerializeField] [FoldoutGroup("Shooting")] Transform crossHair;
 
         RaycastHit hitInfo;
 
@@ -28,13 +29,13 @@ namespace Gameplay.PC.Player
         void Shooting()
         {
             shotTrail.transform.position = shootOrigin.position;
-            shotTrail.transform.rotation = shootOrigin.rotation;
+            shotTrail.transform.LookAt(crossHair.position);
 
             shotTrail.Play();
 
             shooting.Raise();
 
-            if (Physics.SphereCast(shootOrigin.position, bulletRadius, transform.forward, out hitInfo, 100f, shootingLayer))
+            if (Physics.SphereCast(shootOrigin.position, bulletRadius, (crossHair.position - shootOrigin.position).normalized, out hitInfo, 100f, shootingLayer))
             {
                 if (hitInfo.collider.CompareTag("Enemy/Light Guard")) hitInfo.collider.GetComponentInParent<AgentDeath>().Die((transform.forward) * bulletForce);
 
@@ -44,6 +45,11 @@ namespace Gameplay.PC.Player
                 {
                     ricochet.Raise();
                     shotEnvironment.Raise();
+                }
+
+                else if (hitInfo.collider.gameObject.tag == "Jammer")
+                {
+                    hitInfo.collider.GetComponent<IKillable>().Die();
                 }
             }
         }

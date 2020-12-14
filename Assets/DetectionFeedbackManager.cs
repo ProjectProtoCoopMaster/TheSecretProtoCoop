@@ -7,8 +7,7 @@ namespace Gameplay.VR.Feedbacks
 {
     public class DetectionFeedbackManager : MonoBehaviour
     {
-        [SerializeField] GameObjectVariable playerStatusText;
-        Text peakingText;
+        [SerializeField] Text peakingText;
         private bool temp_refresh;
         int framesPassed = 0;
         int framesToWait = 20;
@@ -58,7 +57,6 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_RefreshScene()
         {
-            peakingText = playerStatusText.Value.GetComponent<Text>();
             peakingText.enabled = false;
         }
     }

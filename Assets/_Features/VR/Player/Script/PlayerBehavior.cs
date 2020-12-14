@@ -12,7 +12,7 @@ namespace Gameplay.VR
         [SerializeField] private CallableFunction _sendPlayerPosAndRot;
         [SerializeField] private Vector3Variable _playerPosition;
         [SerializeField] private QuaternionVariable _playerRotation;
-        [SerializeField] private GameObjectVariable pictureCameraObj;
+        //[SerializeField] private GameObjectVariable pictureCameraObj;
         [SerializeField] private Camera pictureCamera;
         private bool isDead;
      
