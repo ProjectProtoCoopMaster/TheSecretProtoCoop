@@ -50,7 +50,6 @@ namespace Gameplay
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
                 loseTextVR = loseTextVRObj.Value.GetComponent<Text>();
-                loseTextVR.enabled = true;
 
                 switch (loseType)
                 {

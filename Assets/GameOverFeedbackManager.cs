@@ -28,6 +28,11 @@ namespace Gameplay.VR
             gameOver.Raise((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
         }
 
+        public void GE_GameOver()
+        {
+            gameOverText.enabled = true;
+        }
+
         public void GE_RefreshScene()
         {
             redAlarmLight = playerHead.Value.GetComponent<Light>();
