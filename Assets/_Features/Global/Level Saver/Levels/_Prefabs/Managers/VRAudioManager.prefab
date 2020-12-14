@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8205924854273922697}
   - component: {fileID: 443274189433892407}
-  - component: {fileID: 4890863621619047325}
   - component: {fileID: 7676750935698974603}
   - component: {fileID: 74702684239112643}
   - component: {fileID: 7676750935698974599}
@@ -71,38 +70,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3496719da28320b4a9c489788c954c3f, type: 3}
   - {fileID: 8300000, guid: ed35bc532b7d625459559edb66141c9b, type: 3}
   gameOverAlarm: {fileID: 8300000, guid: 87f065f94592ece4ebb0806d80ee4ed2, type: 3}
---- !u!114 &4890863621619047325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8205924854273922696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
-  ID: 0
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 443274189433892407}
-        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
-        m_MethodName: GE_GameOverAlarmSFX
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  methodName: []
-  component:
-  - {fileID: 0}
 --- !u!114 &7676750935698974603
 MonoBehaviour:
   m_ObjectHideFlags: 0

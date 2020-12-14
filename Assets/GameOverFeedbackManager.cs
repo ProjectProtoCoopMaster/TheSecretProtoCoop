@@ -5,18 +5,19 @@ namespace Gameplay.VR
 {
     public class GameOverFeedbackManager : MonoBehaviour
     {
-        [SerializeField] internal Light redAlarmLight;
-        [SerializeField] Canvas gameOverCanvas;
-        Text gameOverText;
-
+        [SerializeField] GameObjectVariable playerHead;
+        [SerializeField] GameObjectVariable gameOverTextObj;
         [SerializeField] CallableFunction gameOver;
 
+        Text gameOverText;
+        Light redAlarmLight;
+        
         private void Awake()
         {
-            gameOverCanvas = GameObject.Find("Game Over Info Canvas").GetComponent<Canvas>();
+            redAlarmLight = playerHead.Value.GetComponent<Light>();
             redAlarmLight.gameObject.SetActive(false);
 
-            gameOverText = gameOverCanvas.GetComponentInChildren<Text>();
+            gameOverText = gameOverTextObj.Value.GetComponent<Text>();
             gameOverText.enabled = false;
         }
 
