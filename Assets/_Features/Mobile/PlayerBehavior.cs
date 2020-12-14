@@ -16,7 +16,7 @@ namespace Gameplay.Mobile
         private void Update()
         {
             player.rectTransform.anchoredPosition = _playerPosition.Value;
-            player.rectTransform.eulerAngles = new Vector3(0,0,-_playerRotation.Value.eulerAngles.y);
+            player.rectTransform.eulerAngles = new Vector3(0,0,-_playerRotation.Value.eulerAngles.y +90);
 
         }
     }
