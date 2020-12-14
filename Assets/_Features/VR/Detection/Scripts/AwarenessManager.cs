@@ -19,7 +19,7 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
 
-        bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameIsOver = false;
+        [SerializeField] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameIsOver = false;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
         //[SerializeField] [FoldoutGroup("Debugging")] internal int alarmRaisers;
 
@@ -83,9 +83,6 @@ namespace Gameplay.VR
                     {
                         reflexModeOff.Raise();
 
-                        raisingAlarm = false;
-                        timePassed = 0f;
-
                         if (spottedDeadBody)
                         {
                             Debug.Log("Restarting the game, a guard saw a body");
@@ -96,6 +93,10 @@ namespace Gameplay.VR
                             Debug.Log("Restarting the game, a guard saw me");
                             GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByGuard);
                         }
+
+                        raisingAlarm = false;
+                        timePassed = 0f;
+                        Time.timeScale = 1f;
                     }
                 }
             }
@@ -117,9 +118,9 @@ namespace Gameplay.VR
             if (!gameIsOver)
             {
                 gameIsOver = true;
-                gameOver.Raise((int)loseReason);
-                gameOverAlarm.Raise();
             }
+            gameOver.Raise((int)loseReason);
+            gameOverAlarm.Raise();
         }
 #endif
     }
