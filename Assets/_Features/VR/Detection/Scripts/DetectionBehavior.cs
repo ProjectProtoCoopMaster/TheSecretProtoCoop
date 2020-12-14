@@ -11,7 +11,6 @@ namespace Gameplay.VR
         private bool detectedPlayer = false;
         private RaycastHit hitInfo;
 
-        public GameEvent playerPeaking;
         public Vector3Variable playerHead, playerHandLeft, playerHandRight;
 
         new void Awake()
@@ -49,7 +48,7 @@ namespace Gameplay.VR
                         // if you can see both hands, then the player has been spotted
                         if (LineOfSightCheck(playerHandLeft.Value) && LineOfSightCheck(playerHandRight.Value))
                         {
-                            raiseAlarm.Raise();
+                            spottedPlayer.Raise();
                             //awarenessManager.RaiseAlarm(entityType, EntityType.Player);
 
                             detectedPlayer = true; // stop the detection from looping
@@ -82,8 +81,8 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            if (awarenessManager.alarmRaisers.Contains(entityType))
-                awarenessManager.alarmRaisers.Remove(entityType);
+            // if you were detecting the player, then decrease the amount of alarm raisers
+            if(detectedPlayer) alarmRaiserKilled.Raise();
             enabled = false;
         }
 

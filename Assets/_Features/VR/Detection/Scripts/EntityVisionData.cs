@@ -25,7 +25,7 @@ namespace Gameplay.VR
         // usued for the Awareness Manager to determine who detected
         internal EntityType entityType;
 
-        protected GameEvent raiseAlarm;
+        protected GameEvent spottedPlayer, spottedDeadBody, playerPeaking, alarmRaiserKilled;
         protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
         protected AwarenessManager awarenessManager = null;
@@ -45,7 +45,10 @@ namespace Gameplay.VR
             rangeOfVision = entityDataInterface.rangeOfVision;
             coneOfVision = entityDataInterface.coneOfVision;
 
-            raiseAlarm = entityDataInterface.raiseAlarm;
+            spottedPlayer = entityDataInterface.spottedPlayer;
+            spottedDeadBody = entityDataInterface.spottedDeadBody;
+            playerPeaking = entityDataInterface.spottedPlayer;
+            alarmRaiserKilled = entityDataInterface.spottedDeadBody;
 
             awarenessManager = entityDataInterface.awarenessManagerObj.Value.GetComponent<AwarenessManager>();
 
@@ -66,7 +69,7 @@ namespace Gameplay.VR
             }
         }
 
-       public abstract void Ping();
+        public abstract void Ping();
     }
-} 
+}
 #endif

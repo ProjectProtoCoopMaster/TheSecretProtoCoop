@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
-    public class AwarenessManager : MonoBehaviour
+    public class AwarenessManager2 : MonoBehaviour
     {
 
         [SerializeField] [Tooltip("Time will slow down by x amount when the player is detected.")] [FoldoutGroup("Slow Motion")] float reflexModeMultiplier;
@@ -96,7 +96,7 @@ namespace Gameplay.VR
             {
                 raiseTheAlarm.Invoke();
                 gameIsOver = true;
-                gameOver.Raise((int)GameManager.LoseType.SpottedByCam);
+                gameOver.Raise((int)GameManager.LoseType.PlayerSpottedByCam);
                 gameOverAlarm.Raise();
             }
         }

@@ -83,7 +83,10 @@ MonoBehaviour:
   rangeOfVision: 9
   coneOfVision: 90
   awarenessManagerObj: {fileID: 11400000, guid: b6ec201e2731c1e419f7e2dcac4b975c, type: 2}
-  raiseAlarm: {fileID: 11400000, guid: 28b6efa130a282f45a8091442f80bc2d, type: 2}
+  spottedPlayer: {fileID: 11400000, guid: 58caf91a32ef0e841acd8638273e62e6, type: 2}
+  spottedDeadBody: {fileID: 11400000, guid: 81bbe490a04b9a944925c942160d4c70, type: 2}
+  playerPeeking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
+  alarmRaiserKilled: {fileID: 0}
 --- !u!114 &1426856480474875317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +107,6 @@ MonoBehaviour:
   detectionMask:
     serializedVersion: 2
     m_Bits: 1280
-  playerPeaking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
   playerHead: {fileID: 11400000, guid: fc4086dc6f8485446aebb626600542d9, type: 2}
   playerHandLeft: {fileID: 11400000, guid: 081fa034172a0d94db98e5f22efde086, type: 2}
   playerHandRight: {fileID: 11400000, guid: 12a2b33e6cec1f64c9bbb1ff8748576f, type: 2}

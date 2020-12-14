@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  ID: 0
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -132,8 +133,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
+  methodName: []
+  component:
+  - {fileID: 0}
 --- !u!114 &453704551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +568,8 @@ GameObject:
   - component: {fileID: 8540674844573722731}
   - component: {fileID: 9210542409267680569}
   - component: {fileID: 6042655841084324972}
+  - component: {fileID: 1691701308}
+  - component: {fileID: 1691701305}
   m_Layer: 0
   m_Name: AwarenessManager
   m_TagString: Untagged
@@ -599,8 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3915db054a9b4ca4d9f7b828737d01e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflexModeMultiplier: 5
-  reflexMode: {fileID: 11400000, guid: dcb3e72fe0dbd414aaca4edb5f702b0a, type: 2}
+  reflexModeOn: {fileID: 0}
+  reflexModeOff: {fileID: 0}
   raisingAlarm: 0
   alarmRaiseDuration: 0
   alarmRaisers: 
@@ -620,3 +624,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a9050ae7b09fa458fb958c7e105222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reflexModeMultiplier: 0
+--- !u!114 &1691701308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611946231853382549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 58caf91a32ef0e841acd8638273e62e6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9210542409267680569}
+        m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
+        m_MethodName: GE_PlayerDetectedByCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1691701305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611946231853382549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 28b6efa130a282f45a8091442f80bc2d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9210542409267680569}
+        m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
+        m_MethodName: GE_PlayerDetectedByGuard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

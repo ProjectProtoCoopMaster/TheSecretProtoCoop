@@ -1,8 +1,10 @@
 ﻿
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Gameplay.GameManager;
 
 namespace Gameplay.VR
 {
@@ -12,11 +14,10 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOn;
         [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOff;
 
-        [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false;
+        [SerializeField] [FoldoutGroup("Alarm Raising")] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false;
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
-        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<EntityType> alarmRaisers = new List<EntityType>();
+        [SerializeField] [FoldoutGroup("Alarm Raising")] internal int alarmRaisers;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
-        bool changeTime = false;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
@@ -25,74 +26,98 @@ namespace Gameplay.VR
 
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
 
-        GameOverFeedbackManager gameOverFeedbackManager;
-        EntityType alarmRaisingEntity;
-        EntityType alarmReasonEntity;
-        UnityEvent raiseTheAlarm = new UnityEvent();
-
-        void Awake()
+        private void Awake()
         {
             Time.timeScale = 1f;
-
-            gameOverFeedbackManager = transform.parent.GetComponentInChildren<GameOverFeedbackManager>();
-
-            //  this unity event is what sends the information to the UI
-            raiseTheAlarm.AddListener(() => gameOverFeedbackManager.UE_GameOverExplanation(alarmRaisingEntity, alarmReasonEntity));
+            alarmRaisers = 0;
         }
 
-        // called by Detection and Overwatch Behaviours
-        public void RaiseAlarm(EntityType alarmRaiser, EntityType alarmReason)
+        #region Game Events
+        // called every time a guard is killed
+        public void GE_AlarmRaiserKilled()
         {
-            alarmRaisingEntity = alarmRaiser;
-            alarmReasonEntity = alarmReason;
+            if(alarmRaisers > 0) alarmRaisers--;
+        }
 
-            // if the player was spotted by a camera, it's instant gameOver
-            if (alarmRaiser == EntityType.Camera) GameOver();
+        // called when the player is detected by a guard
+        public void GE_PlayerDetectedByGuard()
+        {
+            alarmRaisers++;
+            spottedPlayer = true;
 
-            // if the player was spotted by a guard, start the countdown
-            if (alarmRaiser == EntityType.Guard)
+            if (raisingAlarm != true)
             {
-                alarmRaisers.Add(alarmRaiser);
-
-                if (raisingAlarm != true)
-                {
-                    reflexModeOn.Raise();
-                    raisingAlarm = true; // prevent the event from being raised more than once
-                    changeTime = true;
-                }
-                else return;
+                raisingAlarm = true; // prevent the event from being raised more than once
+                reflexModeOn.Raise();
             }
         }
+
+        public void GE_PlayerDetectedByCamera()
+        {
+            GameOver(LoseType.PlayerSpottedByCam);
+        }
+
+        public void GE_BodyDetectedByGuard()
+        {
+            alarmRaisers++;
+            spottedDeadBody = true;
+
+            if (raisingAlarm != true)
+            {
+                raisingAlarm = true; // prevent the event from being raised more than once
+                reflexModeOn.Raise();
+            }
+        }
+
+        public void GE_BodyDetectedByCamera()
+        {
+            GameOver(LoseType.BodySpottedByCam);
+        }
+        #endregion
 
         private void Update()
         {
-            if (raisingAlarm) timePassed += Time.unscaledDeltaTime;
-
-            if (raisingAlarm && alarmRaisers.Count == 0) 
-                reflexModeOff.Raise();
-
-            if (timePassed >= alarmRaiseDuration)
+            if (raisingAlarm)
             {
-                // if there are still entities raising the alarm, it's game over
-                if (alarmRaisers.Count > 0)
+                // increase the time that is currently passing
+                timePassed += Time.unscaledDeltaTime;
+
+                // if you kill all the alarm raising entities
+                if (alarmRaisers == 0) KillAlarm();
+
+                // if the alarm has passed its limit
+                if (timePassed >= alarmRaiseDuration)
                 {
-                    reflexModeOff.Raise();
+                    // if there are still entities raising the alarm, it's game over
+                    if (alarmRaisers > 0)
+                    {
+                        reflexModeOff.Raise();
 
-                    raisingAlarm = false;
-                    timePassed = 0f;
+                        raisingAlarm = false;
+                        timePassed = 0f;
 
-                    GameOver();
+                        if (spottedDeadBody) GameOver(LoseType.BodySpottedByGuard);
+                        if (spottedPlayer) GameOver(LoseType.PlayerSpottedByGuard);
+                    }
                 }
             }
         }
 
-        private void GameOver()
+        private void KillAlarm()
+        {
+            raisingAlarm = false;
+            reflexModeOff.Raise();
+
+            spottedDeadBody = false;
+            spottedPlayer = false;
+        }
+
+        private void GameOver(LoseType loseReason)
         {
             if (!gameIsOver)
             {
-                raiseTheAlarm.Invoke();
                 gameIsOver = true;
-                gameOver.Raise();
+                gameOver.Raise((int)loseReason);
                 gameOverAlarm.Raise();
             }
         }

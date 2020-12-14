@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 785165413479417946}
   - component: {fileID: 1374405838736023053}
   - component: {fileID: -2781964938941927497}
-  - component: {fileID: 4320313397978350930}
   - component: {fileID: 4320313397978350933}
+  - component: {fileID: 4320313397978350930}
   - component: {fileID: 8958192908289284741}
   m_Layer: 11
   m_Name: Static Guard_Light
@@ -110,7 +110,33 @@ MonoBehaviour:
   rangeOfVision: 6
   coneOfVision: 70
   awarenessManagerObj: {fileID: 11400000, guid: b6ec201e2731c1e419f7e2dcac4b975c, type: 2}
-  raiseAlarm: {fileID: 11400000, guid: 28b6efa130a282f45a8091442f80bc2d, type: 2}
+  spottedPlayer: {fileID: 11400000, guid: 28b6efa130a282f45a8091442f80bc2d, type: 2}
+  spottedDeadBody: {fileID: 11400000, guid: b464f744a71cc8046bcf074053dc1765, type: 2}
+  playerPeeking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
+  alarmRaiserKilled: {fileID: 11400000, guid: 0ca7106f083346543aa6cf1902702d6a, type: 2}
+--- !u!114 &4320313397978350933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785165413479417936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f26db10a9f33444b97710c03677104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeOfVision: 5
+  coneOfVision: 45
+  pingFrequency: 5
+  framesPassed: 0
+  poweredOn: 1
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 1280
+  playerHead: {fileID: 11400000, guid: fc4086dc6f8485446aebb626600542d9, type: 2}
+  playerHandLeft: {fileID: 11400000, guid: 081fa034172a0d94db98e5f22efde086, type: 2}
+  playerHandRight: {fileID: 11400000, guid: 12a2b33e6cec1f64c9bbb1ff8748576f, type: 2}
 --- !u!114 &4320313397978350930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,30 +158,6 @@ MonoBehaviour:
   overwatchMask:
     serializedVersion: 2
     m_Bits: 3072
---- !u!114 &4320313397978350933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785165413479417936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3f26db10a9f33444b97710c03677104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangeOfVision: 5
-  coneOfVision: 45
-  pingFrequency: 5
-  framesPassed: 0
-  poweredOn: 1
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 1280
-  playerPeaking: {fileID: 11400000, guid: 653420ddf1146294f9612e7b026f0513, type: 2}
-  playerHead: {fileID: 11400000, guid: fc4086dc6f8485446aebb626600542d9, type: 2}
-  playerHandLeft: {fileID: 11400000, guid: 081fa034172a0d94db98e5f22efde086, type: 2}
-  playerHandRight: {fileID: 11400000, guid: 12a2b33e6cec1f64c9bbb1ff8748576f, type: 2}
 --- !u!114 &8958192908289284741
 MonoBehaviour:
   m_ObjectHideFlags: 0

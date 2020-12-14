@@ -11,9 +11,10 @@ namespace Gameplay
         [System.Serializable]
         public enum LoseType 
         { 
-            SpottedByGuard = 0,
-            SpottedByCam = 1,
-            BodySpotted = 2
+            PlayerSpottedByGuard = 0,
+            PlayerSpottedByCam = 1,
+            BodySpottedByCam = 2,
+            BodySpottedByGuard = 3
         };
         [HideInInspector]
         public LoseType loseType;
@@ -45,21 +46,23 @@ namespace Gameplay
 
                 switch (loseType)
                 {
-                    case LoseType.SpottedByGuard:
+                    case LoseType.PlayerSpottedByGuard:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = "Spotted By A Guard";
+                        loseText.text = "You were spotted By a Guard";
                         break;
-                    case LoseType.SpottedByCam:
+                    case LoseType.PlayerSpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = "Spotted By A Camera";
+                        loseText.text = "You were spotted By a Camera";
                         break;
-                    case LoseType.BodySpotted:
+                    case LoseType.BodySpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = "Body Spotted";
+                        loseText.text = "A dead body was spotted by a Camera";
                         break;
-
+                    case LoseType.BodySpottedByGuard:
+                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
+                        loseText.text = "A dead body was spotted by a Guard";
+                        break;
                 }
-
 
                 StartCoroutine(WaitGameOver());
 
