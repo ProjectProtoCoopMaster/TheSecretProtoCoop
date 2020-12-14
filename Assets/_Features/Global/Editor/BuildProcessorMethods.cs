@@ -16,7 +16,7 @@ namespace Tools
             if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
             {
                 BoolVariable isMobile = Resources.Load("isMobile") as BoolVariable;
-                isMobile.Value = true;
+                //isMobile.Value = true;
                 Debug.Log("Start Building");
             }
 
@@ -26,7 +26,7 @@ namespace Tools
             if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
             {
                 BoolVariable isMobile = Resources.Load("isMobile") as BoolVariable;
-                isMobile.Value = false;
+                //isMobile.Value = false;
                 Debug.Log("End Building");
             }
 
