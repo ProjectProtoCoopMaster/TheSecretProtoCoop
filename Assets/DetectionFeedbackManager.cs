@@ -15,8 +15,7 @@ namespace Gameplay.VR.Feedbacks
 
         private void Awake()
         {
-            peakingText = playerStatusText.Value.GetComponent<Text>();
-            peakingText.enabled = false;
+            GE_RefreshScene();
         }
 
         public void GE_PlayerPeeking()
@@ -55,6 +54,12 @@ namespace Gameplay.VR.Feedbacks
                 if (framesPassed % framesToWait == 0)
                     peakingText.enabled = false;
             }
+        }
+
+        public void GE_RefreshScene()
+        {
+            peakingText = playerStatusText.Value.GetComponent<Text>();
+            peakingText.enabled = false;
         }
     }
 }

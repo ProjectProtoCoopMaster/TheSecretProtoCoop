@@ -25,7 +25,7 @@ namespace Gameplay.VR
 
         private void Awake()
         {
-            Time.timeScale = 1f;
+            GE_RefreshScene();
         }
 
         #region Game Events
@@ -94,9 +94,7 @@ namespace Gameplay.VR
                             GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByGuard);
                         }
 
-                        raisingAlarm = false;
-                        timePassed = 0f;
-                        Time.timeScale = 1f;
+                        GE_RefreshScene();
                     }
                 }
             }
@@ -121,6 +119,13 @@ namespace Gameplay.VR
             }
             gameOver.Raise((int)loseReason);
             gameOverAlarm.Raise();
+        }
+
+        public void GE_RefreshScene()
+        {
+            raisingAlarm = false;
+            timePassed = 0f;
+            Time.timeScale = 1f;
         }
 #endif
     }

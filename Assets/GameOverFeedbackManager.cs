@@ -14,11 +14,7 @@ namespace Gameplay.VR
         
         private void Awake()
         {
-            redAlarmLight = playerHead.Value.GetComponent<Light>();
-            redAlarmLight.gameObject.SetActive(false);
-
-            gameOverText = gameOverTextObj.Value.GetComponent<Text>();
-            gameOverText.enabled = false;
+            GE_RefreshScene();
         }
 
         public void GE_TurnOnAlarmLights()
@@ -30,6 +26,20 @@ namespace Gameplay.VR
         {
             Debug.Log((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
             gameOver.Raise((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
+        }
+
+        public void GE_GameOver()
+        {
+            gameOverText.enabled = true;
+        }
+
+        public void GE_RefreshScene()
+        {
+            redAlarmLight = playerHead.Value.GetComponent<Light>();
+            redAlarmLight.gameObject.SetActive(false);
+
+            gameOverText = gameOverTextObj.Value.GetComponent<Text>();
+            gameOverText.enabled = false;
         }
     } 
 }
