@@ -32,7 +32,7 @@ namespace Gameplay
         private Text loseText, loseTextVR;
         private bool isGameOver = false;
 
-        [SerializeField] private GameEvent refreshScene;
+        [SerializeField] private GameEvent onRefreshScene;
 
         void Start()
         {
@@ -96,7 +96,7 @@ namespace Gameplay
         {
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
-
+            onRefreshScene.Raise();
         }
     }
 }
