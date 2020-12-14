@@ -39,21 +39,30 @@ namespace Gameplay.VR.Player
             interactableObject = GetNearestInteractable();
 
             if (interactableObject != null)
+            {
+                interactableObject.rigidBody.useGravity = false;
+                interactableObject.rigidBody.isKinematic = true;
                 myJoint.connectedBody = interactableObject.rigidBody;
+            }
         }
 
         private void ReleaseObject()
         {
             if (interactableObject != null)
             {
+                interactableObject.rigidBody.isKinematic = false;
+                interactableObject.rigidBody.useGravity = true;
+                interactableObject.transform.parent = null;
+
                 interactableObject.rigidBody.velocity = controllerPose.GetVelocity();
                 interactableObject.rigidBody.angularVelocity = controllerPose.GetAngularVelocity();
+
                 myJoint.connectedBody = null;
                 interactableObject = null;
             }
         }
 
-        private InteractableBehaviour GetNearestInteractable()
+        InteractableBehaviour GetNearestInteractable()
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, pickupOffset, pickupLayer);
 
@@ -62,7 +71,10 @@ namespace Gameplay.VR.Player
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     if (colliders[i].CompareTag("Interactable"))
+                    {
+                        Debug.Log("I'm picking up " + colliders[i].gameObject.name);
                         return colliders[i].transform.GetComponent<InteractableBehaviour>();
+                    }
                     else continue;
                 }
                 return null;
