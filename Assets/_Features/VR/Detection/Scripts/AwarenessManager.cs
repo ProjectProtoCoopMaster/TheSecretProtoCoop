@@ -9,8 +9,7 @@ namespace Gameplay.VR
     public class AwarenessManager : MonoBehaviour
     {
 #if UNITY_STANDALONE
-        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOn;
-        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOff;
+        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOn, reflexModeOff;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
@@ -81,8 +80,6 @@ namespace Gameplay.VR
                     // if there are still entities raising the alarm, it's game over
                     if (alarmRaisers.Count > 0)
                     {
-                        reflexModeOff.Raise();
-
                         if (spottedDeadBody)
                         {
                             Debug.Log("Restarting the game, a guard saw a body");

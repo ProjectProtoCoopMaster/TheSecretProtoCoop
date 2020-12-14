@@ -30,7 +30,7 @@ namespace Gameplay
         private GameObject loseCanvas;
         // [SerializeField] GameObjectVariable loseTextVRObj;
         private Text loseText;
-        [SerializeField] Text loseTextVR;
+        [SerializeField] StringVariable loseTextVR;
         private bool isGameOver = false;
 
         [SerializeField] private GameEvent onRefreshScene;
@@ -50,29 +50,28 @@ namespace Gameplay
             {
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
-                //loseTextVR = loseTextVRObj.Value.GetComponent<Text>();
 
                 switch (loseType)
                 {
                     case LoseType.PlayerSpottedByGuard:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.text = "You were spotted By a Guard";
+                        loseText.text = loseTextVR.Value = "You were spotted By a Guard";
                         break;
                     case LoseType.PlayerSpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.text = "You were spotted By a Camera";
+                        loseText.text = loseTextVR.Value = "You were spotted By a Camera";
                         break;
                     case LoseType.BodySpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.text = "A dead body was spotted by a Camera";
+                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Camera";
                         break;
                     case LoseType.BodySpottedByGuard:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.text = "A dead body was spotted by a Guard";
+                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Guard";
                         break;
                     case LoseType.PlayerHitTrap:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.text = "You ran into a Hidden Trap !";
+                        loseText.text = loseTextVR.Value = "You ran into a Hidden Trap !";
                         break;
                 }
 
@@ -85,7 +84,6 @@ namespace Gameplay
         {
             yield return new WaitForSeconds(3);
             Destroy(loseCanvas);
-            loseTextVR.enabled = false;
             StartCoroutine(WaitSceneDestruction()); ;
             yield return new WaitForSeconds(.5f);
             isGameOver = false;
