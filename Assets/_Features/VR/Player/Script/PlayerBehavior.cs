@@ -27,12 +27,7 @@ namespace Gameplay.VR
 
         public void Die()
         {
-            if (!isDead)
-            {
-                _gameOver.Raise();
-                playerHitTrap.Raise();
-                isDead = true;
-            }
+            playerHitTrap.Raise();
         }
 
         private void Update()
