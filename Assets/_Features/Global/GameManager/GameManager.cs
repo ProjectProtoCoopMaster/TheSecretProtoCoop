@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+
 namespace Gameplay
 {
     public class GameManager : MonoBehaviour
     {
+        public CallableFunction sendGameOver;
         [System.Serializable]
-        public enum LoseType 
-        { 
-            SpottedByGuard = 0,
-            SpottedByCam = 1,
-            BodySpotted = 2
+        public enum LoseType
+        {
+            PlayerSpottedByGuard = 0,
+            PlayerSpottedByCam = 1,
+            BodySpottedByCam = 2,
+            BodySpottedByGuard = 3,
+            PlayerHitTrap = 4
         };
         [HideInInspector]
         public LoseType loseType;
@@ -24,16 +28,21 @@ namespace Gameplay
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private IntVariable _sceneID;
         private GameObject loseCanvas;
+        // [SerializeField] GameObjectVariable loseTextVRObj;
         private Text loseText;
+        [SerializeField] StringVariable loseTextVR;
         private bool isGameOver = false;
+
+        [SerializeField] private GameEvent onRefreshScene;
 
         void Start()
         {
-
-            if(startGame)
+            if (startGame)
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
-        public void RaiseOnLose(int ID) { loseType = (LoseType)ID; _onLose.Raise(); }
+
+        public void RaiseOnLose(int ID) { Debug.Log((LoseType)ID); loseType = (LoseType)ID; _onLose.Raise(); }
+
         [Button]
         public void GameOver()
         {
@@ -41,30 +50,33 @@ namespace Gameplay
             {
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
-                
 
                 switch (loseType)
                 {
-                    case LoseType.SpottedByGuard:
+                    case LoseType.PlayerSpottedByGuard:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = "Spotted By A Guard";
+                        loseText.text = loseTextVR.Value = "You were spotted by a Guard";
                         break;
-                    case LoseType.SpottedByCam:
+                    case LoseType.PlayerSpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = "Spotted By A Camera";
+                        loseText.text = loseTextVR.Value = "You were spotted by a Camera";
                         break;
-                    case LoseType.BodySpotted:
+                    case LoseType.BodySpottedByCam:
                         loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = "Body Spotted";
+                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Camera";
                         break;
-
+                    case LoseType.BodySpottedByGuard:
+                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
+                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Guard";
+                        break;
+                    case LoseType.PlayerHitTrap:
+                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
+                        loseText.text = loseTextVR.Value = "You ran into a Hidden Trap !";
+                        break;
                 }
 
-
                 StartCoroutine(WaitGameOver());
-
             }
-
         }
 
 
@@ -82,7 +94,7 @@ namespace Gameplay
         {
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
-
+            onRefreshScene.Raise();
         }
     }
 }

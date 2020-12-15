@@ -130,10 +130,11 @@ MonoBehaviour:
   guardHearingLayermask:
     serializedVersion: 2
     m_Bits: 19456
-  noiseDampenMultiplier: 0.5
-  maxRange: 10
-  maxVelocityLimit: 18
-  noiseRange: 0
+  wallDampenMultiplier: 0.5
+  windowDampenMultiplier: 0.75
+  noiseRange: 7
+  minimumVelocity: 7
+  currNoiseRange: 0
 --- !u!82 &674570230588241313
 AudioSource:
   m_ObjectHideFlags: 0

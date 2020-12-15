@@ -26,6 +26,5 @@ public class PC_PlayerLookBehaviour : MonoBehaviour
 
         playerHead.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerHead.transform.parent.Rotate(Vector3.up, mouseX);
-
     }
 }

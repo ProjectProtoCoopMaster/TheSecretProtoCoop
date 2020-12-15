@@ -62,6 +62,11 @@ namespace Gameplay.VR.Player
                     ricochet.Raise();
                     shotEnvironment.Raise();
                 }
+
+                else if (hitInfo.collider.gameObject.tag == "Jammer")
+                {
+                    hitInfo.collider.GetComponent<IKillable>().Die();
+                }                    
             }
 
             else Debug.Log("I shot but didn't hit anything");
