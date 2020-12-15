@@ -14,7 +14,8 @@ namespace Gameplay.VR.UI
 
         private void Awake()
         {
-            GE_RefreshScene();
+            //GE_RefreshScene();
+            GE_DisenageReflexMode();
         }
 
         public void GE_PlayerPeeking()
