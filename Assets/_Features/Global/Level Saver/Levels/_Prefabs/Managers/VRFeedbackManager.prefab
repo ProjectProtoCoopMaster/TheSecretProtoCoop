@@ -41,7 +41,7 @@ Camera:
   m_GameObject: {fileID: 1462246904}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -60,7 +60,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 100
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -612,21 +612,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3521382425665192194}
-        m_TargetAssemblyTypeName: Gameplay.VR.GameOverFeedbackManager, Assembly-CSharp
-        m_MethodName: GE_TurnOnAlarmLights
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7857188697147195295}
-        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
-        m_MethodName: GE_GameOverAlarmSFX
+      - m_Target: {fileID: 1678453366}
+        m_TargetAssemblyTypeName: Gameplay.VR.UI.UI_GameOverBehaviour, Assembly-CSharp
+        m_MethodName: GE_GameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -648,9 +636,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1678453366}
-        m_TargetAssemblyTypeName: Gameplay.VR.UI.UI_GameOverBehaviour, Assembly-CSharp
-        m_MethodName: GE_GameOver
+      - m_Target: {fileID: 3521382425665192194}
+        m_TargetAssemblyTypeName: Gameplay.VR.GameOverFeedbackManager, Assembly-CSharp
+        m_MethodName: GE_TurnOnAlarmLights
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7857188697147195295}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
+        m_MethodName: GE_GameOverAlarmSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
