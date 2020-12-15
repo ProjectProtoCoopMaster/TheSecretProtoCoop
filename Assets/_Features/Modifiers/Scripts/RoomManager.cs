@@ -11,9 +11,7 @@ namespace Gameplay
 
         public abstract void Init();
 
-        public abstract void Activate();
-
-        public abstract void Deactivate();
+        public abstract void End();
     }
 
     public class RoomManager : MonoBehaviour
@@ -27,19 +25,17 @@ namespace Gameplay
 
         void Start()
         {
-            StartRoom();
+            OnEnterRoom();
         }
 
-        public void StartRoom()
+        public void OnEnterRoom()
         {
             modifier.Init();
-
-            modifier.Activate();
         }
 
         public void OnExitRoom()
         {
-            modifier.Deactivate();
+            modifier.End();
         }
     } 
 }

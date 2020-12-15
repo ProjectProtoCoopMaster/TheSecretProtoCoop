@@ -10,7 +10,7 @@ namespace Gameplay
 
         public void SetLights(bool enable)
         {
-            foreach (Light light in lights) light.enabled = enable;
+            foreach (Light light in lights) light.gameObject.SetActive(enable);
         }
     } 
 }
