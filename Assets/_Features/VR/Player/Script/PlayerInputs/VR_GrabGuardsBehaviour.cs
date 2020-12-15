@@ -1,12 +1,11 @@
-﻿#if UNITY_STANDALONE
-using System;
-using Sirenix.OdinInspector;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
 namespace Gameplay.VR.Player
 {
-    public class VR_GrabObjectBehaviour : MonoBehaviour
+    public class VR_GrabGuardsBehaviour : MonoBehaviour
     {
         [SerializeField] SteamVR_Action_Boolean grabAction = null;
         SteamVR_Behaviour_Pose controllerPose = null;
@@ -14,7 +13,7 @@ namespace Gameplay.VR.Player
 
         [SerializeField] LayerMask pickupLayer;
         [SerializeField] float pickupOffset = 0.2f;
-        [SerializeField] InteractableBehaviour interactableObject = null;
+        [SerializeField] Rigidbody deadGuard = null;
 
         FixedJoint myJoint;
 
@@ -27,36 +26,36 @@ namespace Gameplay.VR.Player
 
         private void Update()
         {
-            if (grabAction.GetStateDown(handSource)) 
-                GrabObject();
+            if (grabAction.GetStateDown(handSource))
+                GrabGuard();
 
-            if (grabAction.GetStateUp(handSource)) 
-                ReleaseObject();
+            if (grabAction.GetStateUp(handSource))
+                ReleaseGuard();
         }
 
-        private void GrabObject()
+        private void GrabGuard()
         {
-            interactableObject = GetNearestInteractable();
+            deadGuard = GetNearestDeadGuard();
 
-            if (interactableObject != null)
+            if (deadGuard != null)
             {
-                myJoint.connectedBody = interactableObject.rigidBody;
+                myJoint.connectedBody = deadGuard;
             }
         }
 
-        private void ReleaseObject()
+        private void ReleaseGuard()
         {
-            if (interactableObject != null)
+            if (deadGuard != null)
             {
-                interactableObject.rigidBody.velocity = controllerPose.GetVelocity();
-                interactableObject.rigidBody.angularVelocity = controllerPose.GetAngularVelocity();
+                deadGuard.velocity = controllerPose.GetVelocity();
+                deadGuard.angularVelocity = controllerPose.GetAngularVelocity();
 
                 myJoint.connectedBody = null;
-                interactableObject = null;
+                deadGuard = null;
             }
         }
 
-        InteractableBehaviour GetNearestInteractable()
+        private Rigidbody GetNearestDeadGuard()
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, pickupOffset, pickupLayer);
 
@@ -64,19 +63,17 @@ namespace Gameplay.VR.Player
             {
                 for (int i = 0; i < colliders.Length; i++)
                 {
-                    if (colliders[i].CompareTag("Interactable"))
+                    if (colliders[i].CompareTag("Dead"))
                     {
                         Debug.Log("I'm picking up " + colliders[i].gameObject.name);
-                        return colliders[i].transform.GetComponent<InteractableBehaviour>();
+                        return colliders[i].transform.GetComponent<Rigidbody>();
                     }
                     else continue;
                 }
                 return null;
             }
-
             else return null;
         }
     }
-}
 
-#endif
+}
