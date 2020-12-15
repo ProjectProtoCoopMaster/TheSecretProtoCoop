@@ -95,6 +95,9 @@ namespace Gameplay
         {
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
             SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+
+            yield return new WaitForSeconds(2f);
+
             onRefreshScene.Raise();
         }
 

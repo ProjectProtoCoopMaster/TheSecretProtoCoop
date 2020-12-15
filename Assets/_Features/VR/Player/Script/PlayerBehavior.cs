@@ -6,7 +6,7 @@ namespace Gameplay.VR
 {
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
-        [SerializeField] private GameEvent playerHitTrap;
+        [SerializeField] private GameEvent playerHitTrap, raiseAlarm;
 
         [SerializeField] private CallableFunction _gameOver;
         [SerializeField] private CallableFunction _sendPlayerPosAndRot;
@@ -21,6 +21,7 @@ namespace Gameplay.VR
         {
             if (!isDead)
             {
+                raiseAlarm.Raise();
                 _gameOver.Raise();
                 playerHitTrap.Raise();
                 isDead = true;
@@ -29,6 +30,7 @@ namespace Gameplay.VR
 
         public void Die()
         {
+            raiseAlarm.Raise();
             playerHitTrap.Raise();
         }
 
