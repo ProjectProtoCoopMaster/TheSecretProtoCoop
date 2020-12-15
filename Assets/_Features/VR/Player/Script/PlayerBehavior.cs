@@ -15,6 +15,7 @@ namespace Gameplay.VR
         //[SerializeField] private GameObjectVariable pictureCameraObj;
         [SerializeField] private Camera pictureCamera;
         private bool isDead;
+        public float debugRot;
      
         public void Die(Vector3 direction = default)
         {
@@ -35,6 +36,7 @@ namespace Gameplay.VR
         {
             _playerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
             _playerRotation.Value = transform.localRotation;
+            _playerRotation.Value.eulerAngles = new Vector3(_playerRotation.Value.eulerAngles.x, _playerRotation.Value.eulerAngles.y+ debugRot, _playerRotation.Value.eulerAngles.z);
             _sendPlayerPosAndRot.Raise();
         }
     }

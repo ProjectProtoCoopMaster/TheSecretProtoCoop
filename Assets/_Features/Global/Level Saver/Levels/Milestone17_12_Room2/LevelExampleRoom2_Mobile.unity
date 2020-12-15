@@ -688,6 +688,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1734483585}
     m_Modifications:
+    - target: {fileID: 713062126, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1478452703}
     - target: {fileID: 8098218842331729493, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
       propertyPath: m_Name
       value: Jammer
@@ -735,18 +739,6 @@ PrefabInstance:
     - target: {fileID: 8098218842331729495, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098218842331729495, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1919.2382
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098218842331729495, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1915.248
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098218842331729495, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2399.048
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcc098d57aa590e439b5a565ba665ea8, type: 3}
@@ -1257,6 +1249,8 @@ GameObject:
   - component: {fileID: 1478452702}
   - component: {fileID: 1478452701}
   - component: {fileID: 1478452700}
+  - component: {fileID: 1478452704}
+  - component: {fileID: 1478452703}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1329,6 +1323,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478452703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478452699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ed554b23b541d4ea9201bf78a3e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 0a3c04d411f83614ab285ced492c8fcb, type: 3}
+  VHSClip: {fileID: 32900000, guid: 52d63a2eb55128c498456280a99c2990, type: 3}
+--- !u!328 &1478452704
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478452699}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 52d63a2eb55128c498456280a99c2990, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 1478452701}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: _MainTex
+  m_RenderMode: 4
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &1534378035
 PrefabInstance:
   m_ObjectHideFlags: 0
