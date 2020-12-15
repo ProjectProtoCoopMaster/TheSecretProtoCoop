@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Networking;
+using Photon.Pun;
 
 namespace Gameplay
 {
@@ -15,8 +17,6 @@ namespace Gameplay
         public virtual void End() => active = false;
     }
 
-    public enum ModifierTarget { VR, Mobile, VR_Mobile }
-
     public class RoomManager : MonoBehaviour
     {
         public bool useLevelGeneration;
@@ -24,14 +24,9 @@ namespace Gameplay
         [ShowIf("useLevelGeneration")] public Transform entranceAnchor;
         [ShowIf("useLevelGeneration")] public Transform exitAnchor;
 
+        public ModifiersManager modifiersManager;
+
         public ModifierType roomModifier = ModifierType.None;
-
-        public ModifierTarget modifierTarget;
-
-        [HideIf("modifierTarget", ModifierTarget.Mobile)]
-        public Modifier VRModifier;
-        [HideIf("modifierTarget", ModifierTarget.VR)]
-        public GameEvent initMobileModifier;
 
         void Start()
         {
@@ -40,20 +35,10 @@ namespace Gameplay
 
         public void OnEnterRoom()
         {
-            if (modifierTarget == ModifierTarget.VR) InitVRModifier();
-
-            else if (modifierTarget == ModifierTarget.Mobile) InitMobileModifier();
-
-            else
+            if (roomModifier != ModifierType.None)
             {
-                InitVRModifier();
-                
-                InitMobileModifier();
+                modifiersManager.Send("Init", RpcTarget.All, roomModifier);
             }
         }
-
-        private void InitVRModifier() => VRModifier.Init();
-
-        private void InitMobileModifier() => initMobileModifier.Raise();
     } 
 }

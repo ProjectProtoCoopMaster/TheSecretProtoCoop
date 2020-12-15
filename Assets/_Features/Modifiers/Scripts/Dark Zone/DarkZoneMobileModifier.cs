@@ -6,11 +6,10 @@ namespace Gameplay.Mobile
 {
     public class DarkZoneMobileModifier : Modifier
     {
-        public BoolVariable mobileCheck;
-        public CallableFunction sendMobileCheck;
+        public BoolVariable shake;
+        public CallableFunction shakeResult;
 
         public ShakeDetection shakeDetection;
-        private bool shakeDetected;
 
         void Update()
         {
@@ -18,23 +17,25 @@ namespace Gameplay.Mobile
             {
                 if (check)
                 {
-                    MobileCheck(out mobileCheck.Value);
+                    MobileCheck(out shake.Value);
 
-                    sendMobileCheck.Raise();
+                    shakeResult.Raise();
                 }
             }
         }
 
         private void MobileCheck(out bool complete)
         {
+            bool shakeDetected;
+
             shakeDetection.DetectShake(out shakeDetected);
 
             complete = shakeDetected;
         }
 
-        public void RestartDetection()
+        public void StartShakeCheck()
         {
-            shakeDetection.Restart();
+            shakeDetection.StartShake();
         }
     }
 }

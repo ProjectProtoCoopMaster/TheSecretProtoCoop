@@ -6,6 +6,8 @@ namespace Gameplay
 {
     public class LightManager : MonoBehaviour
     {
+        public Color baseLightColor;
+
         public List<Light> lights;
 
         public void SetLights(bool enable)

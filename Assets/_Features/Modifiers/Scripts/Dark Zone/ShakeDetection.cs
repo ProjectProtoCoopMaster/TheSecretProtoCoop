@@ -35,11 +35,11 @@ public class ShakeDetection : MonoBehaviour
 
         if (currentTime >= timeThreshold)
         {
-            Restart();
+            StartShake();
         }
     }
 
-    public void Restart()
+    public void StartShake()
     {
         currentTime = 0.0f;
         currentAmount = 0;

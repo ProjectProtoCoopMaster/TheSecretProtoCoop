@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &216035856832860937
+--- !u!1 &1945316181738423922
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,63 +8,63 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5025227620011305608}
-  - component: {fileID: 6129269782710857282}
-  - component: {fileID: 4745324511757968824}
-  - component: {fileID: 712942561}
-  - component: {fileID: 2906806235926443018}
-  - component: {fileID: 3590990093792533102}
-  - component: {fileID: 1736184303}
-  - component: {fileID: 1095356123277400961}
-  - component: {fileID: 2906806235926443016}
+  - component: {fileID: 6754718089244508147}
+  - component: {fileID: 5552709442649701177}
+  - component: {fileID: 6474595395251613891}
+  - component: {fileID: 1729564453842531994}
+  - component: {fileID: 3483439117283008881}
+  - component: {fileID: 3014429616189263637}
+  - component: {fileID: 1729564454966756500}
+  - component: {fileID: 1671918627196767994}
+  - component: {fileID: 1661216796681196950}
+  - component: {fileID: 3420841883687820681}
   m_Layer: 0
-  m_Name: TransmitterManager
+  m_Name: Transmission Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5025227620011305608
+--- !u!4 &6754718089244508147
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 289, y: 162.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6129269782710857282
+--- !u!114 &5552709442649701177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a86d09b348497bf43b7f418bee32d6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 712942561}
+  photonView: {fileID: 1729564453842531994}
   _playerVRPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerVRPRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   _switch: {fileID: 11400000, guid: 6af23fddf1af7204bbbae8981a6051ca, type: 2}
   _onLose: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
   _onOpenDoor: {fileID: 11400000, guid: d6032a02634764a4cae45e41c7a40a1d, type: 2}
   symbolManager: {fileID: 0}
-  darkZoneMobileCheck: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}
---- !u!114 &4745324511757968824
+--- !u!114 &6474595395251613891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 896f32a55ec431f4698eefa3b38a5595, type: 3}
@@ -144,14 +144,16 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  photonView: {fileID: 712942561}
---- !u!114 &712942561
+  photonView: {fileID: 1729564453842531994}
+  shakeStart: {fileID: 11400000, guid: 90ee37ac8c9aa9b42ac3b32cdcf5374f, type: 2}
+  shake: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}
+--- !u!114 &1729564453842531994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
@@ -168,13 +170,13 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2906806235926443018
+--- !u!114 &3483439117283008881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
@@ -184,7 +186,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6129269782710857282}
+      - m_Target: {fileID: 5552709442649701177}
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendPlayerVRRotToOthers
         m_Mode: 2
@@ -198,13 +200,13 @@ MonoBehaviour:
         m_CallState: 2
   methodName: 
   component: {fileID: 0}
---- !u!114 &3590990093792533102
+--- !u!114 &3014429616189263637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
@@ -214,7 +216,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6129269782710857282}
+      - m_Target: {fileID: 5552709442649701177}
         m_TargetAssemblyTypeName: Gameplay.Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendSwicherChangeToOthers
         m_Mode: 3
@@ -228,13 +230,13 @@ MonoBehaviour:
         m_CallState: 2
   methodName: 
   component: {fileID: 0}
---- !u!114 &1736184303
+--- !u!114 &1729564454966756500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
@@ -244,7 +246,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6129269782710857282}
+      - m_Target: {fileID: 5552709442649701177}
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendOnOpenDoorToOther
         m_Mode: 1
@@ -270,13 +272,13 @@ MonoBehaviour:
         m_CallState: 2
   methodName: 
   component: {fileID: 0}
---- !u!114 &1095356123277400961
+--- !u!114 &1671918627196767994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
@@ -286,13 +288,13 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6129269782710857282}
+      - m_Target: {fileID: 5552709442649701177}
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendPlayerVRRotToOthers
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7d7c1315e7539f64e9dc39d6d66c2cbb, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Gameplay.Vector3Variable, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Gameplay.QuaternionVariable, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -300,13 +302,41 @@ MonoBehaviour:
         m_CallState: 2
   methodName: 
   component: {fileID: 0}
---- !u!114 &2906806235926443016
+--- !u!114 &1661216796681196950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216035856832860937}
+  m_GameObject: {fileID: 1945316181738423922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 85901817e2b34ab4c8625f80c610501a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6474595395251613891}
+        m_TargetAssemblyTypeName: Networking.ModifiersManager, Assembly-CSharp
+        m_MethodName: SendShakeStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3420841883687820681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
@@ -316,9 +346,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6129269782710857282}
-        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
-        m_MethodName: SendDarkZoneMobileCheckToVR
+      - m_Target: {fileID: 6474595395251613891}
+        m_TargetAssemblyTypeName: Networking.ModifiersManager, Assembly-CSharp
+        m_MethodName: SendShakeResult
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}

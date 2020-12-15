@@ -6,8 +6,8 @@ namespace Gameplay.VR
 {
     public class DarkZoneVRModifier : Modifier
     {
-        public GameEvent startShakeMobile;
-        public BoolVariable shakeCheck;
+        public BoolVariable shake;
+        public GameEvent shakeStart;
 
         public LightManager lightManager;
 
@@ -16,12 +16,12 @@ namespace Gameplay.VR
         public Transform playerHead, playerHandController;
         public float distance;
 
-        private bool completed;
-
         public float maxTimeUntilDark, minTimeUntilDark;
 
         private float timeUntilDark;
         private float currentTime;
+
+        private bool completed;
 
         public override void Init()
         {
@@ -40,7 +40,7 @@ namespace Gameplay.VR
             check = true;
             playerNightVisionLight.gameObject.SetActive(false);
 
-            startShakeMobile.Raise();
+            shakeStart.Raise();
         }
 
         public void VisionOn()
@@ -72,7 +72,7 @@ namespace Gameplay.VR
 
         private void Check()
         {
-            completed = VRCheck() && shakeCheck.Value;
+            completed = VRCheck() && shake.Value;
 
             if (completed)
             {

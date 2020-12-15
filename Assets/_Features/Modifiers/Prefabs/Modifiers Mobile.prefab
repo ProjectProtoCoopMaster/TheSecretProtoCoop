@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4379140988541723559}
   - component: {fileID: 4379140988541723553}
   - component: {fileID: 4379140988541723552}
-  - component: {fileID: 4379140988541723557}
   - component: {fileID: 4379140988541723558}
+  - component: {fileID: 4379140988541723557}
   m_Layer: 0
   m_Name: Dark Zone
   m_TagString: Untagged
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4d00b414dad0241a63c64cddfc17de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobileCheck: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}
-  sendMobileCheck: {fileID: 11400000, guid: 5537004c1643f0741b51c23eaf3b0618, type: 2}
+  shake: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}
+  shakeResult: {fileID: 11400000, guid: 5537004c1643f0741b51c23eaf3b0618, type: 2}
   shakeDetection: {fileID: 4379140988541723557}
 --- !u!114 &4379140988541723552
 MonoBehaviour:
@@ -77,22 +77,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4379140988541723557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4379140988541723554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c468337583a52b4eb67327a579f2b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeThreshold: 2
-  shakeThreshold: 3.6
-  shakeRate: 10
-  shakeAmount: 3
 --- !u!114 &4379140988541723558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +95,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4379140988541723553}
         m_TargetAssemblyTypeName: Gameplay.Mobile.DarkZoneMobileModifier, Assembly-CSharp
-        m_MethodName: RestartDetection
+        m_MethodName: StartShakeCheck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -121,6 +105,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4379140988541723557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379140988541723554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c468337583a52b4eb67327a579f2b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeThreshold: 2
+  shakeThreshold: 3.6
+  shakeRate: 10
+  shakeAmount: 3
 --- !u!1 &4379140989809892329
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4379140989809892328}
+  - component: {fileID: 5752513842307773188}
   - component: {fileID: 4379140989809892335}
   m_Layer: 0
   m_Name: Oxygen
@@ -152,6 +153,18 @@ Transform:
   m_Father: {fileID: 4379140990376738662}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5752513842307773188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379140989809892329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8a6488590de474b9b52f6c1958be7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4379140989809892335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +180,19 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: 42fb79797c95dac409c944199787f997, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5752513842307773188}
+        m_TargetAssemblyTypeName: Gameplay.Modifier, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4379140989963773054
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4379140990376738662}
   m_Layer: 0
-  m_Name: Modifiers
+  m_Name: Modifiers Mobile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
