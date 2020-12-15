@@ -17,6 +17,8 @@ namespace Networking
         [SerializeField] private GameEvent _onOpenDoor;
         public SymbolManager symbolManager;
 
+        [SerializeField] private BoolVariable darkZoneMobileCheck;
+
         public void SendPlayerVRPosToOthers(Vector3Variable playerVRPosition) => photonView.RPC("SendPosition", RpcTarget.Others, playerVRPosition.Value);
 
        
@@ -58,6 +60,12 @@ namespace Networking
         public void SendOnOpenDoorToOther() => photonView.RPC("SendOnOpenDoor", RpcTarget.Others);
         [PunRPC]
         public void SendOnOpenDoor() => _onOpenDoor.Raise();
+
+        /// Modifiers
+
+        public void SendDarkZoneMobileCheckToVR(BoolVariable check) => photonView.RPC("SendMobileCheck", RpcTarget.Others, check.Value);
+        [PunRPC]
+        public void SendMobileCheck(bool complete) => darkZoneMobileCheck.Value = complete;
     }
 }
 

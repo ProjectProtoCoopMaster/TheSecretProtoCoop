@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Mobile
 {
     public class ThermicModifier : Modifier
     {
-        public bool showPlayer { get; set; }
-        public BoolVariable ShowPlayer;
+        public bool showPlayer { get; set; } = true;
 
         public override void Init()
         {
-            active = true;
             showPlayer = false;
+            base.Init();
         }
 
         public override void End()
         {
-            active = true;
-            showPlayer = false;
+            showPlayer = true;
+            base.End();
         }
     } 
 }

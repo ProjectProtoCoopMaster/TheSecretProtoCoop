@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Gameplay
 {
@@ -9,19 +10,28 @@ namespace Gameplay
         public bool active { get; set; }
         public bool check { get; protected set; }
 
-        public abstract void Init();
+        public virtual void Init() => active = true;
 
-        public abstract void End();
+        public virtual void End() => active = false;
     }
+
+    public enum ModifierTarget { VR, Mobile, VR_Mobile }
 
     public class RoomManager : MonoBehaviour
     {
-        public Transform entranceAnchor;
-        public Transform exitAnchor;
+        public bool useLevelGeneration;
+
+        [ShowIf("useLevelGeneration")] public Transform entranceAnchor;
+        [ShowIf("useLevelGeneration")] public Transform exitAnchor;
 
         public ModifierType roomModifier = ModifierType.None;
 
-        public Modifier modifier;
+        public ModifierTarget modifierTarget;
+
+        [HideIf("modifierTarget", ModifierTarget.Mobile)]
+        public Modifier VRModifier;
+        [HideIf("modifierTarget", ModifierTarget.VR)]
+        public GameEvent initMobileModifier;
 
         void Start()
         {
@@ -30,12 +40,20 @@ namespace Gameplay
 
         public void OnEnterRoom()
         {
-            modifier.Init();
+            if (modifierTarget == ModifierTarget.VR) InitVRModifier();
+
+            else if (modifierTarget == ModifierTarget.Mobile) InitMobileModifier();
+
+            else
+            {
+                InitVRModifier();
+                
+                InitMobileModifier();
+            }
         }
 
-        public void OnExitRoom()
-        {
-            modifier.End();
-        }
+        private void InitVRModifier() => VRModifier.Init();
+
+        private void InitMobileModifier() => initMobileModifier.Raise();
     } 
 }

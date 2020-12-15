@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.VR
 {
-    public class DarkZoneModifier : Modifier
+    public class DarkZoneVRModifier : Modifier
     {
+        public GameEvent startShakeMobile;
+        public BoolVariable shakeCheck;
+
         public LightManager lightManager;
 
         public Light playerNightVisionLight;
 
         public Transform playerHead, playerHandController;
         public float distance;
-
-        public ShakeDetection shakeDetection;
-        private bool shakeDetected;
 
         private bool completed;
 
@@ -25,13 +25,14 @@ namespace Gameplay
 
         public override void Init()
         {
-            active = true;
             lightManager.SetLights(false);
 
             timeUntilDark = Random.Range(minTimeUntilDark, maxTimeUntilDark);
             currentTime = timeUntilDark;
 
             VisionOn();
+
+            base.Init();
         }
 
         public void VisionOff()
@@ -39,7 +40,7 @@ namespace Gameplay
             check = true;
             playerNightVisionLight.gameObject.SetActive(false);
 
-            shakeDetection.Restart();
+            startShakeMobile.Raise();
         }
 
         public void VisionOn()
@@ -50,26 +51,28 @@ namespace Gameplay
 
         public override void End()
         {
-            active = false;
             lightManager.SetLights(true);
 
             VisionOff();
+
+            base.End();
         }
 
         void Update()
         {
-            if (currentTime <= 0.0f) VisionOff();
+            if (active)
+            {
+                if (currentTime <= 0.0f) VisionOff();
 
-            currentTime -= Time.deltaTime;
+                currentTime -= Time.deltaTime;
 
-            if (check) Check();
+                if (check) Check();
+            }
         }
 
         private void Check()
         {
-            MobileCheck(out completed);
-
-            VRCheck(out completed);
+            completed = VRCheck() && shakeCheck.Value;
 
             if (completed)
             {
@@ -80,16 +83,9 @@ namespace Gameplay
             }
         }
 
-        private void MobileCheck(out bool complete)
+        private bool VRCheck()
         {
-            shakeDetection.DetectShake(out shakeDetected);
-
-            complete = shakeDetected;
+            return Vector3.Magnitude(playerHead.position - playerHandController.position) <= distance;
         }
-
-        private void VRCheck(out bool complete)
-        {
-            complete = Vector3.Magnitude(playerHead.position - playerHandController.position) <= distance;
-        }
-    } 
+    }
 }
