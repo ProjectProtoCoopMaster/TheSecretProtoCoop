@@ -457,7 +457,7 @@ MeshCollider:
   m_GameObject: {fileID: 1393905652}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -5844,6 +5844,7 @@ GameObject:
   - component: {fileID: 6003109435717557738}
   - component: {fileID: 334913096}
   - component: {fileID: 7409026258412376009}
+  - component: {fileID: 816853760}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -6100,6 +6101,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boneToTrack: {fileID: 11400000, guid: 12a2b33e6cec1f64c9bbb1ff8748576f, type: 2}
+--- !u!114 &816853760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435717557739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64919d8695680444ab5276d61e565d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
+    needsReinit: 0
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  pickupOffset: 0.2
+  deadGuard: {fileID: 0}
 --- !u!1 &6003109435717569959
 GameObject:
   m_ObjectHideFlags: 0
@@ -6279,6 +6300,7 @@ GameObject:
   - component: {fileID: 6003109435717588940}
   - component: {fileID: 497112874}
   - component: {fileID: 7409026258412376010}
+  - component: {fileID: 8359000}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -6535,6 +6557,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boneToTrack: {fileID: 11400000, guid: 081fa034172a0d94db98e5f22efde086, type: 2}
+--- !u!114 &8359000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435717588941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64919d8695680444ab5276d61e565d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
+    needsReinit: 0
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  pickupOffset: 0.2
+  deadGuard: {fileID: 0}
 --- !u!1 &6003109435831060674
 GameObject:
   m_ObjectHideFlags: 0
@@ -11777,7 +11819,7 @@ MeshCollider:
   m_GameObject: {fileID: 8576958022644232225}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30

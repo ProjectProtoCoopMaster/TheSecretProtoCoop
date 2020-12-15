@@ -35,6 +35,7 @@ namespace Gameplay
 
         [SerializeField] private GameEvent onRefreshScene;
 
+
         void Start()
         {
             if (startGame)
@@ -93,7 +94,7 @@ namespace Gameplay
         IEnumerator WaitSceneDestruction()
         {
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
-            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
             onRefreshScene.Raise();
         }
     }
