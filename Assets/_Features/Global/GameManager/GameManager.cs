@@ -42,7 +42,7 @@ namespace Gameplay
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
 
-        public void RaiseOnLose(int ID) { Debug.Log((LoseType)ID); loseType = (LoseType)ID; _onLose.Raise(); }
+        public void RaiseOnLose(int ID) {  loseType = (LoseType)ID; _onLose.Raise(); }
 
         [Button]
         public void GameOver()
@@ -97,6 +97,22 @@ namespace Gameplay
             SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
             onRefreshScene.Raise();
         }
+
+        IEnumerator WaitLoadNextScene()
+        {
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            yield return new WaitForEndOfFrame();
+            _sceneID.Value += 2;
+            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            onRefreshScene.Raise();
+        }
+
+        public void LoadNextScene()
+        {
+            StartCoroutine(WaitLoadNextScene());
+
+        }
+
     }
 }
 

@@ -11,10 +11,11 @@ namespace Networking
     {
         [SerializeField] private PhotonView photonView;
         [SerializeField] private Vector3Variable _playerVRPosition;
+        [SerializeField] private IntVariable _sceneID;
         [SerializeField] private QuaternionVariable _playerVRRotation;
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private CallableFunction _destroyJammer;
-        [SerializeField] private GameEvent _onLose;
+        [SerializeField] private CallableFunction _loadNextLevel;
         [SerializeField] private GameEvent _onOpenDoor;
         [SerializeField] private GameManager gameManager;
         public SymbolManager symbolManager;
@@ -29,7 +30,7 @@ namespace Networking
         public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
         [PunRPC] public void SendSwitcherChange(float ID) => _switch.Raise(ID);
 
-        public void SendDestroyJammerToOthers(int ID) => photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID);
+        public void SendDestroyJammerToOthers(int ID) { Debug.Log("Jammer"); photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID); }
         [PunRPC] public void SendDestroyJammer(int ID) => _destroyJammer.Raise(ID);
         public void SendLoseToOther(int loseType) { gameManager.RaiseOnLose(loseType); photonView.RPC("SendLose", RpcTarget.Others, loseType); }
 
@@ -62,6 +63,10 @@ namespace Networking
         public void SendOnOpenDoorToOther() => photonView.RPC("SendOnOpenDoor", RpcTarget.Others);
         [PunRPC]
         public void SendOnOpenDoor() => _onOpenDoor.Raise();
+
+        public void SendLoadNextSceneToOthers() => photonView.RPC("SendLoadNextScene", RpcTarget.Others);
+        [PunRPC]
+        public void SendLoadNextScene() => gameManager.LoadNextScene();
     }
 }
 

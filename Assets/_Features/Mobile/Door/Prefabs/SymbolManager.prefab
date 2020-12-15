@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3938265781617762620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3938265781617762609}
+  - component: {fileID: 3938265781617762622}
+  - component: {fileID: 3938265781617762623}
+  - component: {fileID: 3938265781617762608}
+  m_Layer: 0
+  m_Name: SymbolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3938265781617762609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3938265781617762622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848b223035fbc4b458724a723f52c94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transmitterManager: {fileID: 0}
+  isSymbolLoaded: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
+  iconsAsset:
+  - {fileID: 21300000, guid: 8dfb7eb4494cbe14eabf0fda5056d27d, type: 3}
+  - {fileID: 21300000, guid: 06140cc248b05d2488fbb6493ce5fd11, type: 3}
+  - {fileID: 21300000, guid: b077818db7df77e4db729d473295e99e, type: 3}
+  - {fileID: 21300000, guid: 37616095ebf53744c950962f33663458, type: 3}
+  - {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
+  - {fileID: 21300000, guid: 72786b43084161c4c81e83eef0990e1a, type: 3}
+  - {fileID: 21300000, guid: 6858813d0f1f28b4cafee677b3e2e49b, type: 3}
+  - {fileID: 21300000, guid: 8f66c60fb167a0f4299a9865ef4badc9, type: 3}
+  - {fileID: 21300000, guid: 24726326f0d24dc41875ec34f94e95b2, type: 3}
+  - {fileID: 21300000, guid: 162c961f79f03a7419bae8455ff18508, type: 3}
+  - {fileID: 21300000, guid: 8f4ea53398839234fb3e3aceb76b36a5, type: 3}
+  - {fileID: 21300000, guid: f7aaa971d41e8a447afd2674b898bd5e, type: 3}
+  - {fileID: 21300000, guid: 8708d80070522a043a1ab6a2b2775382, type: 3}
+  - {fileID: 21300000, guid: 1959adfdc5c338840858eec9307f0184, type: 3}
+  - {fileID: 21300000, guid: 45cfe68fb47a8514f96477d0fb432286, type: 3}
+  - {fileID: 21300000, guid: a28960bf12ee0ef439f0a3de86162ef9, type: 3}
+  - {fileID: 21300000, guid: 1853af91c4d184747801f42772136f14, type: 3}
+  iconsAssetReminder: []
+  iconsSelected:
+  - {fileID: 21300000, guid: 37616095ebf53744c950962f33663458, type: 3}
+  - {fileID: 21300000, guid: 72786b43084161c4c81e83eef0990e1a, type: 3}
+  - {fileID: 21300000, guid: 1959adfdc5c338840858eec9307f0184, type: 3}
+  iconsStashed: []
+  codeNames:
+  - Scholar
+  - Grob
+  - French
+  - Resign
+  - Stalemate
+  - Checkmate
+  - Flag
+  - Capablanca
+  - Bishop
+  - Ruy Lopez
+  - Fischer
+  - Protocole
+  - Chess
+  - Checkmate
+  - Gambit
+  - Candidat
+  - MVL
+  - Philidor
+  - Beth
+  - Roque
+  pickedNames:
+  - Checkmate
+  - Fischer
+  - French
+  indexes: 
+--- !u!114 &3938265781617762623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 04584ff1801e07948a000d37c9cd0632, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3938265781617762622}
+        m_TargetAssemblyTypeName: Gameplay.SymbolManager, Assembly-CSharp
+        m_MethodName: LoadSymbols
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &3938265781617762608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
+        m_TargetAssemblyTypeName: Gameplay.BoolVariable, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

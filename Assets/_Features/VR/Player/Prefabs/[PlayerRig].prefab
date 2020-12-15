@@ -40,7 +40,6 @@ GameObject:
   m_Component:
   - component: {fileID: 183108308}
   - component: {fileID: 183108310}
-  - component: {fileID: 183108309}
   - component: {fileID: 183108311}
   - component: {fileID: 183108312}
   m_Layer: 15
@@ -107,14 +106,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &183108309
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183108307}
-  m_Enabled: 1
 --- !u!65 &183108311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5631,11 +5622,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHitTrap: {fileID: 11400000, guid: 86d8d57eee7c00d41a8fe79b76cc7756, type: 2}
+  raiseAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   _gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
   _sendPlayerPosAndRot: {fileID: 11400000, guid: 3ef10703e4ae96a4b850ab5dab24df72, type: 2}
   _playerPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   pictureCamera: {fileID: 0}
+  debugRot: 90
 --- !u!114 &7409026258412376008
 MonoBehaviour:
   m_ObjectHideFlags: 0
