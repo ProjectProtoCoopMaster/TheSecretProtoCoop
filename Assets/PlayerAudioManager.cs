@@ -1,5 +1,4 @@
 ﻿#if UNITY_STANDALONE
-using Gameplay.VR.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
