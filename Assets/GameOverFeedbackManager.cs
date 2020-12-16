@@ -5,30 +5,29 @@ namespace Gameplay.VR
 {
     public class GameOverFeedbackManager : MonoBehaviour
     {
-
-        [SerializeField] internal Light redAlarmLight;
-        [SerializeField] Canvas gameOverCanvas;
-        Text gameOverText;
+        [SerializeField] CallableFunction gameOver;
+        [SerializeField] Light redAlarmLight;
 
         private void Awake()
         {
-            redAlarmLight.gameObject.SetActive(false);
-
-            gameOverText = gameOverCanvas.GetComponentInChildren<Text>();
-            gameOverText.enabled = false;
-        }
-
-        internal void UE_GameOverExplanation(EntityType alarmRaiser, EntityType alarmReason)
-        {
-            gameOverText.enabled = true;
-            if (alarmReason == EntityType.Player) gameOverText.text = "GAME OVER. A " + alarmRaiser.ToString() + " spotted You";
-            else if (alarmReason == EntityType.Trap) gameOverText.text = "GAME OVER. You walked into a hidden Trap";
-            else gameOverText.text = "GAME OVER. A " + alarmRaiser.ToString() + " spotted a dead body";
+            GE_RefreshScene();
         }
 
         public void GE_TurnOnAlarmLights()
         {
+            redAlarmLight.transform.position = GameObject.Find("[PlayerRig]").transform.position;
             redAlarmLight.gameObject.SetActive(true);
         }
-    } 
+
+        public void GE_PlayerHitTrap()
+        {
+            Debug.Log((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
+            gameOver.Raise((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
+        }
+
+        public void GE_RefreshScene()
+        {
+            redAlarmLight.gameObject.SetActive(false);
+        }
+    }
 }

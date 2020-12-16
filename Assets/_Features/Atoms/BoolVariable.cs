@@ -13,5 +13,13 @@ namespace Gameplay
         {
             return Value;
         }
+
+        public void SwitchValue()
+        {
+            if (Value) Value = false;
+            else Value = true;
+
+            SetDirty();
+        }
     }
 }

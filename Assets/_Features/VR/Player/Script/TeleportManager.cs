@@ -17,8 +17,7 @@ namespace Gameplay.VR.Player
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
 
-        internal Transform playerHead;
-        Transform playerRig;
+        [SerializeField] Transform playerRig, playerHead;
         SteamVR_Behaviour_Pose controllerPose;
         private bool showRayPointer = false;
 
@@ -47,8 +46,6 @@ namespace Gameplay.VR.Player
         
         private void Awake()
         {
-            playerRig = this.transform.parent;
-            playerHead = this.transform.parent.GetComponentInChildren<SphereCollider>().transform.parent.transform;
             bezierVisualization = GetComponentInChildren<LineRenderer>();
         }
 
@@ -159,7 +156,7 @@ namespace Gameplay.VR.Player
 
         public void GE_OnGameOver()
         {
-            isGameOver = true;
+            isGameOver = true; // go to teleportation jail
         }
 
         // 1. fire a ray pointing in the direction of the controller

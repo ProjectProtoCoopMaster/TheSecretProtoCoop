@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525769403144350534}
   - component: {fileID: 1525769403144350535}
-  - component: {fileID: 1645317099}
+  - component: {fileID: 1645317102}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,9 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f5f78e3a374fb4ab97bd2ec7c69c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sendGameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  loseType: 1
   startGame: 0
-  _OnLose: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
---- !u!114 &1645317099
+  _onLose: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
+  _sceneID: {fileID: 11400000, guid: 402a6ff0bf327fe4f859ff3b404f799e, type: 2}
+  loseTextVR: {fileID: 11400000, guid: 1bf64f71af61ee044a86b0aaacee7d96, type: 2}
+  onRefreshScene: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
+--- !u!114 &1645317102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,10 +60,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1525769403144350532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
+  Event: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -74,10 +79,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
-        m_MethodName: SendLoseToOther
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
+        m_TargetAssemblyTypeName: Gameplay.BoolVariable, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -86,5 +91,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}

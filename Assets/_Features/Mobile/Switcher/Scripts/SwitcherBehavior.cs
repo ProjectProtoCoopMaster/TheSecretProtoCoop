@@ -20,16 +20,33 @@ namespace Gameplay
         [Range(0, 1), SerializeField] private int power;
         [Range(0, 10)]
         public float ID = default;
+
         public enum SwitchTimer { None, Fixed}
 
         public SwitchTimer switchTimer = default;
         [HideInInspector]
         public float timer = 0;
+        public bool hasJammer = false;
+        [HideInInspector]
+        public JammerBehavior jammer;
         private float currentTimer = 0;
         public int State 
         { 
             get { return state; } 
-            set { state = value; }
+            set 
+            {
+                state = value;
+
+                if(state == 0)
+                {
+                    TurnOff();
+                }
+                else
+                {
+                    if (Power == 0) TurnOff();
+                    else TurnOn();
+                }
+            }
         
         }
 
@@ -71,6 +88,8 @@ namespace Gameplay
 
 
             }
+
+            if (hasJammer) jammer.AddSwitcher(this);
 
             Power = power;
         }
@@ -189,6 +208,20 @@ namespace Gameplay
             
             currentTimer = 0;
             timerDisplayer.text = timer.ToString() + "s";
+
+        }
+
+        public void ShowLines(bool value)
+        {
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                if(nodes[i].GetType() == typeof(Gameplay.Mobile.ElectricalLineBehavior))
+                {
+                    Gameplay.Mobile.ElectricalLineBehavior node = nodes[i] as Gameplay.Mobile.ElectricalLineBehavior;
+                    node.gameObject.GetComponent<LineRenderer>().enabled = value;
+                }
+
+            }
 
         }
     }

@@ -38,11 +38,12 @@ namespace Tools.LevelDesign
 
         public void CreateSwitcher()
         {
-            GameObject newSwitcher =  Instantiate(switcher,canvas.transform);
+#if Unity_Editor
+            GameObject newSwitcher = PrefabUtility.InstantiatePrefab(switcher,canvas.transform) as GameObject;
 
-            #if Unity_Editor
+
             Selection.activeGameObject = newSwitcher;
-            #endif
+#endif
 
             isDrawingLine = true;
 
@@ -54,13 +55,16 @@ namespace Tools.LevelDesign
         {
             for (int i = 0; i < startPoint.Count; i++)
             {
-                GameObject newLine = Instantiate(line);
+#if Unity_Editor
+                GameObject newLine = PrefabUtility.InstantiatePrefab(line) as GameObject;
+
 
                 newLine.GetComponent<ElectricalLinePlacement>().Initialize(firstSelectedGO, secondSelectedGO);
                 newLine.GetComponent<LineRenderer>().SetPosition(0, startPoint[i]);
                 newLine.GetComponent<LineRenderer>().SetPosition(1, startTangent[i]);
                 newLine.GetComponent<LineRenderer>().SetPosition(2, endTangent[i]);
                 newLine.GetComponent<LineRenderer>().SetPosition(3, endPoint[i]);
+#endif
             }
             ClearLineLists();
             firstSelectedGO = null;

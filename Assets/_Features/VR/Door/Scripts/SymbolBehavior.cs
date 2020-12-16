@@ -15,8 +15,9 @@ namespace Gameplay.VR
         [SerializeField] private List<int> randoms;
         private int random;
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitForSeconds(2);
             sm = SymbolManager.instance;
             sm.symbol = this;
             _loadSymbols.Raise();

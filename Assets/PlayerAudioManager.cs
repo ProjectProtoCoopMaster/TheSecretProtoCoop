@@ -21,11 +21,12 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationWooshSFX;
         AudioClip lastWooshSFX;
 
+        [SerializeField] [FoldoutGroup("GameOver")] AudioClip metalGearSolidDetection;
         [SerializeField] [FoldoutGroup("GameOver")] AudioClip gameOverAlarm;
 
         private void Awake()
         {
-            playerAudioSource = FindObjectOfType<VR_TeleportBehaviour>().gameObject.GetComponent<AudioSource>();
+            GE_RefreshScene();
         }
 
         public void GE_GunshotSFX()
@@ -50,6 +51,11 @@ namespace Gameplay.VR.Feedbacks
             playerAudioSource.PlayOneShot(lastWooshSFX = RandomRicochet(teleportationWooshSFX, lastWooshSFX), volume);
         }
 
+        public void GE_DetectionSFX()
+        {
+            playerAudioSource.PlayOneShot(metalGearSolidDetection, volume);
+        }
+
         public void GE_GameOverAlarmSFX()
         {
             playerAudioSource.PlayOneShot(gameOverAlarm, volume);
@@ -65,6 +71,11 @@ namespace Gameplay.VR.Feedbacks
                 attempts--;
             }
             return ricochetClip;
+        }
+
+        public void GE_RefreshScene()
+        {
+            playerAudioSource = GameObject.Find("[PlayerRig]").GetComponentInChildren<AudioSource>();
         }
     }
 } 

@@ -11,49 +11,58 @@ namespace Gameplay
     {
         public Transform playerVR;
         public Vector3Variable playerVRPos;
-        [SerializeField] CallableFunction _JoinRoom;
-        [SerializeField] CallableFunction _CreateRoom;
-        [SerializeField] IntVariable _sceneID;
-        public VisualTreeAsset visualTree;
-        public VisualElement rootElement;
-        private Button join;
-        private int index = 1;
-
-        public int mainMenuIndex = 6;
+        [SerializeField] private CallableFunction _JoinRoom;
+        [SerializeField] private CallableFunction _CreateRoom;
+        [SerializeField] private IntVariable _sceneID;
+        [SerializeField] private BoolVariable _isMobile;
+        [SerializeField] private Canvas mobileCanvas;
+        [SerializeField] private Canvas vrCanvas;
+        private int index = -1;
+        
 
         private void OnEnable()
         {
+            vrCanvas.enabled = false;
+            mobileCanvas.enabled = false;
             index = 2;
-            rootElement = visualTree.CloneTree();
-
-            join = rootElement.Q<Button>("JoinButton");
-
-            //join.clickable.clicked += () => Debug.Log("Clicked");
-
-            rootElement.Add(join);
-
         }
 
-        private void Test(ChangeEvent<Button> value) => Debug.Log("Helo");
-        public void JoinRoom(int ID) { _JoinRoom.Raise(); index = ID; }
+        public void SetIndex(int ID) => index = ID;
+        public void JoinRoom() { _JoinRoom.Raise(); }
 
         [Button]
         public void CreateRoom() => _CreateRoom.Raise();
 
         public void OpenScene()
         {
-            if (Application.platform == RuntimePlatform.WindowsEditor)
+            if(_isMobile.Value)
             {
-                SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(mainMenuIndex);
+                SceneManager.LoadScene(index + 1, LoadSceneMode.Additive);
+                SceneManager.UnloadScene("MainMenu");
+                _sceneID.Value = index + 1;
             }
             else
             {
+
                 SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene(mainMenuIndex);
+                SceneManager.UnloadScene("MainMenu");
+                _sceneID.Value = index;
+
             }
 
-            _sceneID.Value = index;
+        }
+
+        public void OpenCanvas()
+        {
+            if (_isMobile.Value)
+            {
+                mobileCanvas.enabled = true;
+            }
+            else
+            {
+                vrCanvas.enabled = true;
+
+            }
         }
 
         

@@ -7,7 +7,6 @@ namespace Gameplay.PC.Player
     {
         [SerializeField] Transform grabOrigin = null;
         [SerializeField] Transform playerHead = null;
-        SpringJoint springJoint;
         RaycastHit hitInfo;
 
         [SerializeField] LayerMask pickupLayer;

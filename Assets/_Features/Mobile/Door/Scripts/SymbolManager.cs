@@ -104,6 +104,7 @@ namespace Gameplay
 
                 for (int i = 0; i < indexes.Count; i++)
                 {
+                    Debug.Log("ID");
                     transmitterManager.SendSymbolIDToOther(indexes[i]);
                 }
                 PickCodeName();
