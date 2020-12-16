@@ -82,6 +82,7 @@ namespace Gameplay.Mobile
             {
                 padLock.overrideSprite = padLock_close;
                 padLock.DOColor(color_close, .5f);
+                
                 GetComponent<Button>().enabled = true;
                 anim.enabled = true;
                 doorOutline.enabled = true;
@@ -96,6 +97,7 @@ namespace Gameplay.Mobile
         {
             padLock.overrideSprite = padLock_open;
             padLock.DOColor(color_open, .5f);
+            door.DOColor(color_open, .5f);
             GetComponent<Button>().enabled = false;
             anim.enabled = false;
             doorOutline.enabled = false;

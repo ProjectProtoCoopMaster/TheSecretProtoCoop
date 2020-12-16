@@ -17,6 +17,7 @@ namespace Networking
         [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private CallableFunction _loadNextLevel;
         [SerializeField] private GameEvent _onOpenDoor;
+        [SerializeField] private GameEvent _onVictory;
         [SerializeField] private GameManager gameManager;
         public SymbolManager symbolManager;
 
@@ -35,6 +36,10 @@ namespace Networking
         public void SendLoseToOther(int loseType) { gameManager.RaiseOnLose(loseType); photonView.RPC("SendLose", RpcTarget.Others, loseType); }
 
         [PunRPC] public void SendLose(int loseType) { gameManager.RaiseOnLose(loseType);  }
+
+        public void SendOnVictoryToOthers() { photonView.RPC("SendOnVictory", RpcTarget.Others); }
+
+        [PunRPC] public void SendOnVictory() { _onVictory.Raise(); }
 
         public void SendSymbolIDToOther(int value) => photonView.RPC("SendSymbolID", RpcTarget.Others, value);
 
@@ -67,6 +72,12 @@ namespace Networking
         public void SendLoadNextSceneToOthers() => photonView.RPC("SendLoadNextScene", RpcTarget.Others);
         [PunRPC]
         public void SendLoadNextScene() => gameManager.LoadNextScene();
+
+        public void SendLoadSameSceneToOthers() {  photonView.RPC("SendLoadSameScene", RpcTarget.Others); }
+        [PunRPC]
+        public void SendLoadSameScene() { gameManager.LoadSameScene(); Debug.Log("LoadSameScene"); }
+
+       
     }
 }
 

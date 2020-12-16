@@ -58,7 +58,10 @@ namespace Networking
             _OnConnectedToServer.Raise();
         }
 
-        
+        public void ResetPhotonTimeScale()
+        {
+            
+        }
 
         
     }

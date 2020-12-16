@@ -18,6 +18,7 @@ namespace Gameplay.Mobile
         private int missNumber;
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
+        [SerializeField] private Text symbolAreaCodeName;
 
         private IEnumerator Start()
         {
@@ -64,20 +65,30 @@ namespace Gameplay.Mobile
                     if (i == symbolManager.iconsSelected.Count - 1)
                     {
                         Succeed();
+
                         break;
                     }
                 }
             }
         }
 
+        [Button]
         private void Succeed()
         {
 
             door.Unlock();
             results[missNumber].color = Color.green;
             _sendOnOpenDoor.Raise();
+            StartCoroutine(WaitCloseSymbolCanvas());
         }
 
+        IEnumerator WaitCloseSymbolCanvas()
+        {
+            yield return new WaitForSeconds(1.5f);
+            gameObject.SetActive(false);
+            yield break;
+        }
+        [Button]
         private void Miss()
         {
             missNumber++;
@@ -120,7 +131,7 @@ namespace Gameplay.Mobile
             }
 
             codeNameText.text = symbolManager.pickedNames[0];
-
+            symbolAreaCodeName.text = symbolManager.pickedNames[0];
 
         }
     }
