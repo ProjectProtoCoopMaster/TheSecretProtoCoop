@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_STANDALONE
 using Valve.VR;
 
 namespace Gameplay.VR.Player
@@ -77,3 +78,4 @@ namespace Gameplay.VR.Player
     }
 
 }
+#endif

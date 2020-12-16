@@ -31,10 +31,13 @@ namespace Gameplay.Mobile
             shakeDetection.DetectShake(out shakeDetected);
 
             complete = shakeDetected;
+
+            if (shakeDetected) check = false;
         }
 
         public void StartShakeCheck()
         {
+            check = true;
             shakeDetection.StartShake();
         }
     }

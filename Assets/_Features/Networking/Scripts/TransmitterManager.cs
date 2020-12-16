@@ -11,12 +11,16 @@ namespace Networking
         [SerializeField] private PhotonView photonView;
 
         [SerializeField] private Vector3Variable _playerVRPosition;
+        [SerializeField] private QuaternionVariable _playerVRRotation;
+
         [SerializeField] private IntVariable _sceneID;
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private CallableFunction _loadNextLevel;
         [SerializeField] private GameEvent _onOpenDoor;
         [SerializeField] private GameManager gameManager;
+        [SerializeField] private GameEvent _onLose;
+
         public SymbolManager symbolManager;
 
         public void Send(string name, RpcTarget targets, params object[] elements)

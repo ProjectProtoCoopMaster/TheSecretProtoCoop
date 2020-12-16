@@ -717,7 +717,7 @@ PrefabInstance:
     - target: {fileID: 2906806235926443016, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2906806235926443016}
+      objectReference: {fileID: 2906806235926443017}
     - target: {fileID: 2906806235926443016, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Networking.ModifiersManager, Assembly-CSharp
@@ -802,6 +802,14 @@ PrefabInstance:
       propertyPath: _sceneValue
       value: 
       objectReference: {fileID: 11400000, guid: 402a6ff0bf327fe4f859ff3b404f799e, type: 2}
+    - target: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+      propertyPath: _playerVRRotation
+      value: 
+      objectReference: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
+    - target: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+      propertyPath: _sceneID
+      value: 
+      objectReference: {fileID: 11400000, guid: 402a6ff0bf327fe4f859ff3b404f799e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
 --- !u!1 &2906806235926443015 stripped
@@ -840,6 +848,45 @@ MonoBehaviour:
         m_CallState: 2
   methodName: []
   component: []
+--- !u!114 &2906806235926443017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4745324511757968824, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+  m_PrefabInstance: {fileID: 2906806235926443014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906806235926443015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896f32a55ec431f4698eefa3b38a5595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2906806235926443018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906806235926443015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 85901817e2b34ab4c8625f80c610501a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2906806235926443017}
+        m_TargetAssemblyTypeName: Networking.ModifiersManager, Assembly-CSharp
+        m_MethodName: SendShakeStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3938265781608488809
 PrefabInstance:
   m_ObjectHideFlags: 0
