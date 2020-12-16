@@ -24,8 +24,6 @@ namespace Gameplay
         [ShowIf("useLevelGeneration")] public Transform entranceAnchor;
         [ShowIf("useLevelGeneration")] public Transform exitAnchor;
 
-        public ModifiersManager modifiersManager;
-
         public ModifierType roomModifier = ModifierType.None;
 
         void Start()
@@ -37,7 +35,7 @@ namespace Gameplay
         {
             if (roomModifier != ModifierType.None)
             {
-                modifiersManager.Send("Init", RpcTarget.All, roomModifier);
+                ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
             }
         }
     } 

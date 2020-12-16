@@ -10,12 +10,19 @@ namespace Networking
 {
     public class ModifiersManager : SerializedMonoBehaviour
     {
+        public static ModifiersManager instance;
+
         public PhotonView photonView;
 
         public Dictionary<ModifierType, GameEvent> initEvents = new Dictionary<ModifierType, GameEvent>();
 
         public GameEvent shakeStart;
         public BoolVariable shake;
+
+        private void OnEnable()
+        {
+            if (instance == null) instance = this;
+        }
 
         public void Send(string name, RpcTarget targets, params object[] elements)
         {
