@@ -30,33 +30,39 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_GunshotSFX()
         {
+            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
             playerAudioSource.PlayOneShot(gunshotClip, volume);
         }
 
         public void GE_GunshotRicochetSFX()
         {
+            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
             playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
         }
 
         public void GE_HitEnvironementSFX()
         {
+            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
             playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
             playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
         }
 
         public void GE_TeleportationSFX()
         {
+            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
             playerAudioSource.PlayOneShot(teleportationSFX);
             playerAudioSource.PlayOneShot(lastWooshSFX = RandomRicochet(teleportationWooshSFX, lastWooshSFX), volume);
         }
 
         public void GE_DetectionSFX()
         {
+            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
             playerAudioSource.PlayOneShot(metalGearSolidDetection, volume);
         }
 
         public void GE_GameOverAlarmSFX()
         {
+            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
             playerAudioSource.PlayOneShot(gameOverAlarm, volume);
         }
 
