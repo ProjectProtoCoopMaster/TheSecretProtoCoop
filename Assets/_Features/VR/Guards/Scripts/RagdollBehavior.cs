@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +12,11 @@ namespace Gameplay.VR
         public float velocity;
         public GameObject go;
 
-        /*[ExecuteAlways]
+        [Button]
         void GetRB()
         {
             allRB = GetComponentsInChildren<Rigidbody>();
-        }*/
+        }
 
         private void Awake()
         {

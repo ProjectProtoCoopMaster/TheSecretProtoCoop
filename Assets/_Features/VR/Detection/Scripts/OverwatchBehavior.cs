@@ -55,6 +55,8 @@ namespace Gameplay.VR
 
                                 spottedDeadBody.Raise();
                             }
+
+                            else Debug.Log(gameObject.name + "'s Overwatch hit " + hitInfo.collider.GetComponentInParent<AgentDeath>().gameObject.name + "'s " + hitInfo.collider.gameObject.name);
                         }
                     }
                 }
