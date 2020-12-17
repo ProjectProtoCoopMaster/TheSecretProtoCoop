@@ -9,7 +9,6 @@ namespace Gameplay
 {
     public class GameManager : MonoBehaviour
     {
-        public CallableFunction sendGameOver;
         [System.Serializable]
         public enum LoseType
         {
@@ -27,6 +26,7 @@ namespace Gameplay
         [SerializeField] private bool startGame;
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private IntVariable _sceneID;
+        [SerializeField] private BoolVariable _isMobile;
         private GameObject loseCanvas;
         // [SerializeField] GameObjectVariable loseTextVRObj;
         private Text loseText;
@@ -35,13 +35,14 @@ namespace Gameplay
 
         [SerializeField] private GameEvent onRefreshScene;
 
+
         void Start()
         {
             if (startGame)
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
 
-        public void RaiseOnLose(int ID) { Debug.Log((LoseType)ID); loseType = (LoseType)ID; _onLose.Raise(); }
+        public void RaiseOnLose(int ID) {  loseType = (LoseType)ID; _onLose.Raise(); }
 
         [Button]
         public void GameOver()
@@ -50,6 +51,7 @@ namespace Gameplay
             {
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
+
 
                 switch (loseType)
                 {
@@ -74,28 +76,73 @@ namespace Gameplay
                         loseText.text = loseTextVR.Value = "You ran into a Hidden Trap !";
                         break;
                 }
+                if (_isMobile.Value)
+                {
+                    
+                }
 
-                StartCoroutine(WaitGameOver());
+                
+
+                //StartCoroutine(WaitGameOver());
             }
         }
 
-
-        IEnumerator WaitGameOver()
+        public void Victory()
         {
-            yield return new WaitForSeconds(3);
-            Destroy(loseCanvas);
-            StartCoroutine(WaitSceneDestruction()); ;
-            yield return new WaitForSeconds(.5f);
-            isGameOver = false;
-            yield break;
+            if (_isMobile.Value)
+            {
+                Instantiate(Resources.Load("Victory_Canvas") as GameObject);
+            }
+
         }
+
+
+        //IEnumerator WaitGameOver()
+        //{
+        //    yield return new WaitForSeconds(3);
+        //    Destroy(loseCanvas);
+        //    StartCoroutine(WaitSceneDestruction()); ;
+
+        //    yield return new WaitForSeconds(.5f);
+        //    isGameOver = false;
+        //    yield break;
+        //}
 
         IEnumerator WaitSceneDestruction()
         {
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
+            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+
+            yield return new WaitForSeconds(2f);
+
+            onRefreshScene.Raise();
+            yield break;
+        }
+
+        IEnumerator WaitLoadNextScene()
+        {
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            yield return new WaitForEndOfFrame();
+            _sceneID.Value += 2;
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
             onRefreshScene.Raise();
+            yield break;
         }
+
+        public void LoadSameScene()
+        {
+            if(_isMobile.Value) Destroy(loseCanvas);
+            StartCoroutine(WaitSceneDestruction()); ;
+            isGameOver = false;
+        }
+        public void LoadNextScene()
+        {
+            StartCoroutine(WaitLoadNextScene());
+
+        }
+
+        
+
     }
 }
 

@@ -6,7 +6,7 @@ namespace Gameplay.VR
 {
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
-        [SerializeField] private GameEvent playerHitTrap;
+        [SerializeField] private GameEvent playerHitTrap, raiseAlarm;
 
         [SerializeField] private CallableFunction _gameOver;
         [SerializeField] private CallableFunction _sendPlayerPosAndRot;
@@ -15,11 +15,13 @@ namespace Gameplay.VR
         //[SerializeField] private GameObjectVariable pictureCameraObj;
         [SerializeField] private Camera pictureCamera;
         private bool isDead;
+        public float debugRot;
      
         public void Die(Vector3 direction = default)
         {
             if (!isDead)
             {
+                raiseAlarm.Raise();
                 _gameOver.Raise();
                 playerHitTrap.Raise();
                 isDead = true;
@@ -28,6 +30,7 @@ namespace Gameplay.VR
 
         public void Die()
         {
+            raiseAlarm.Raise();
             playerHitTrap.Raise();
         }
 
@@ -35,6 +38,7 @@ namespace Gameplay.VR
         {
             _playerPosition.Value = pictureCamera.WorldToScreenPoint(new Vector3(transform.position.x, 0, transform.position.z));
             _playerRotation.Value = transform.localRotation;
+            _playerRotation.Value.eulerAngles = new Vector3(_playerRotation.Value.eulerAngles.x, _playerRotation.Value.eulerAngles.y+ debugRot, _playerRotation.Value.eulerAngles.z);
             _sendPlayerPosAndRot.Raise();
         }
     }

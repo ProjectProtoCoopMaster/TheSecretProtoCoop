@@ -1,5 +1,4 @@
 ﻿#if UNITY_STANDALONE
-using Gameplay.VR.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -26,7 +25,7 @@ namespace Gameplay.VR.Feedbacks
 
         private void Awake()
         {
-            playerAudioSource = FindObjectOfType<VR_TeleportBehaviour>().gameObject.GetComponent<AudioSource>();
+            GE_RefreshScene();
         }
 
         public void GE_GunshotSFX()
@@ -71,6 +70,11 @@ namespace Gameplay.VR.Feedbacks
                 attempts--;
             }
             return ricochetClip;
+        }
+
+        public void GE_RefreshScene()
+        {
+            playerAudioSource = GameObject.Find("[PlayerRig]").GetComponentInChildren<AudioSource>();
         }
     }
 } 

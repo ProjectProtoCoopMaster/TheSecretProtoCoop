@@ -40,7 +40,6 @@ GameObject:
   m_Component:
   - component: {fileID: 183108308}
   - component: {fileID: 183108310}
-  - component: {fileID: 183108309}
   - component: {fileID: 183108311}
   - component: {fileID: 183108312}
   m_Layer: 15
@@ -107,14 +106,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &183108309
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183108307}
-  m_Enabled: 1
 --- !u!65 &183108311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -396,6 +387,7 @@ Transform:
   m_Children:
   - {fileID: 1256598684}
   - {fileID: 1148180711}
+  - {fileID: 6025737344200462328}
   m_Father: {fileID: 6003109435717310285}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -95, y: 0, z: -90}
@@ -457,7 +449,7 @@ MeshCollider:
   m_GameObject: {fileID: 1393905652}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -617,6 +609,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &62417826115115162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6025737344200462328}
+  m_Layer: 0
+  m_Name: '[GunCanvasAnchor]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6025737344200462328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62417826115115162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1393905653}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4820256802362876207
 GameObject:
   m_ObjectHideFlags: 0
@@ -5631,11 +5653,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHitTrap: {fileID: 11400000, guid: 86d8d57eee7c00d41a8fe79b76cc7756, type: 2}
+  raiseAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   _gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
   _sendPlayerPosAndRot: {fileID: 11400000, guid: 3ef10703e4ae96a4b850ab5dab24df72, type: 2}
   _playerPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   pictureCamera: {fileID: 0}
+  debugRot: 90
 --- !u!114 &7409026258412376008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5844,6 +5868,7 @@ GameObject:
   - component: {fileID: 6003109435717557738}
   - component: {fileID: 334913096}
   - component: {fileID: 7409026258412376009}
+  - component: {fileID: 816853760}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -5936,15 +5961,18 @@ MonoBehaviour:
   shootAction:
     actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
-  shootingLayer:
-    serializedVersion: 2
-    m_Bits: 19456
-  bulletRadius: 0.1
-  bulletForce: 5
   shotTrail: {fileID: 8700703703138933956}
   shooting: {fileID: 11400000, guid: 20dae3f1be2659046834e9d97e437fe8, type: 2}
   ricochet: {fileID: 11400000, guid: 5c12e046bb55cb7449db58b95f5a303a, type: 2}
   shotEnvironment: {fileID: 11400000, guid: 50db5394dd658cd49910330550ec678e, type: 2}
+  gunReloading: {fileID: 11400000, guid: 0e1c885fbe1dc3648bf609be246ea9a6, type: 2}
+  gunEmpty: {fileID: 11400000, guid: f3fbd02659d00774a9597eb96a8fc69e, type: 2}
+  shootingCooldown: {fileID: 11400000, guid: 274eff4f7b20c354d8f24e0fc46021d9, type: 2}
+  bulletRadius: {fileID: 11400000, guid: 7eba92dd79d238d4396865f5f30f7f2a, type: 2}
+  bulletForce: {fileID: 11400000, guid: ed8dacae69991474e9854e1106785c30, type: 2}
+  shootingLayer:
+    serializedVersion: 2
+    m_Bits: 19456
 --- !u!114 &6003109435717710659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6100,6 +6128,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boneToTrack: {fileID: 11400000, guid: 12a2b33e6cec1f64c9bbb1ff8748576f, type: 2}
+--- !u!114 &816853760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435717557739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64919d8695680444ab5276d61e565d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
+    needsReinit: 0
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  pickupOffset: 0.2
+  deadGuard: {fileID: 0}
 --- !u!1 &6003109435717569959
 GameObject:
   m_ObjectHideFlags: 0
@@ -6279,6 +6327,7 @@ GameObject:
   - component: {fileID: 6003109435717588940}
   - component: {fileID: 497112874}
   - component: {fileID: 7409026258412376010}
+  - component: {fileID: 8359000}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -6371,15 +6420,18 @@ MonoBehaviour:
   shootAction:
     actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
-  shootingLayer:
-    serializedVersion: 2
-    m_Bits: 19456
-  bulletRadius: 0.1
-  bulletForce: 5
   shotTrail: {fileID: 8700703703138933956}
   shooting: {fileID: 11400000, guid: 20dae3f1be2659046834e9d97e437fe8, type: 2}
   ricochet: {fileID: 11400000, guid: 5c12e046bb55cb7449db58b95f5a303a, type: 2}
   shotEnvironment: {fileID: 11400000, guid: 50db5394dd658cd49910330550ec678e, type: 2}
+  gunReloading: {fileID: 11400000, guid: 0e1c885fbe1dc3648bf609be246ea9a6, type: 2}
+  gunEmpty: {fileID: 11400000, guid: f3fbd02659d00774a9597eb96a8fc69e, type: 2}
+  shootingCooldown: {fileID: 11400000, guid: 274eff4f7b20c354d8f24e0fc46021d9, type: 2}
+  bulletRadius: {fileID: 11400000, guid: 7eba92dd79d238d4396865f5f30f7f2a, type: 2}
+  bulletForce: {fileID: 11400000, guid: ed8dacae69991474e9854e1106785c30, type: 2}
+  shootingLayer:
+    serializedVersion: 2
+    m_Bits: 19456
 --- !u!114 &6003109435717710656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6535,6 +6587,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boneToTrack: {fileID: 11400000, guid: 081fa034172a0d94db98e5f22efde086, type: 2}
+--- !u!114 &8359000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435717588941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64919d8695680444ab5276d61e565d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
+    needsReinit: 0
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  pickupOffset: 0.2
+  deadGuard: {fileID: 0}
 --- !u!1 &6003109435831060674
 GameObject:
   m_ObjectHideFlags: 0
@@ -6699,7 +6771,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003109435831060674}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f7cb947e4eb72d43a8c538b2b2e425c, type: 3}
   m_Name: 
@@ -6712,22 +6784,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003109435831060674}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42c6ca82f6e46a34983c6831f852359a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootOrigin: {fileID: 142167617}
-  shootingLayer:
-    serializedVersion: 2
-    m_Bits: 19456
-  bulletRadius: 0.1
-  bulletForce: 15
   shotTrail: {fileID: 8700703703138933956}
   shooting: {fileID: 11400000, guid: 20dae3f1be2659046834e9d97e437fe8, type: 2}
   ricochet: {fileID: 11400000, guid: 5c12e046bb55cb7449db58b95f5a303a, type: 2}
   shotEnvironment: {fileID: 11400000, guid: 50db5394dd658cd49910330550ec678e, type: 2}
+  gunReloading: {fileID: 11400000, guid: 0e1c885fbe1dc3648bf609be246ea9a6, type: 2}
+  gunEmpty: {fileID: 11400000, guid: f3fbd02659d00774a9597eb96a8fc69e, type: 2}
   crossHair: {fileID: 268354384}
+  shootingCooldown: {fileID: 11400000, guid: 274eff4f7b20c354d8f24e0fc46021d9, type: 2}
+  bulletRadius: {fileID: 11400000, guid: 7eba92dd79d238d4396865f5f30f7f2a, type: 2}
+  bulletForce: {fileID: 11400000, guid: ed8dacae69991474e9854e1106785c30, type: 2}
+  shootingLayer:
+    serializedVersion: 2
+    m_Bits: 19456
 --- !u!114 &2526640716234072363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6735,7 +6810,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003109435831060674}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 176462bd42c73104ea7bf9f08082bae7, type: 3}
   m_Name: 
@@ -6753,7 +6828,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003109435831060674}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f39d283314eae944597355ae23a3b7bb, type: 3}
   m_Name: 
@@ -6771,7 +6846,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003109435831060674}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dad2465e761c9ae479ef57562b221bea, type: 3}
   m_Name: 
@@ -11777,7 +11852,7 @@ MeshCollider:
   m_GameObject: {fileID: 8576958022644232225}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30

@@ -34,10 +34,6 @@ namespace Gameplay
         {
             isSymbolLoaded.Value = false;
         }
-        private void Update()
-        {
-            Debug.Log("Symbol");
-        }
         public void LoadSymbols()
         {
             if (!isSymbolLoaded.Value)

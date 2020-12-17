@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 1736184303}
   - component: {fileID: 1095356123277400961}
   - component: {fileID: 2100248664}
+  - component: {fileID: 2906806235926443016}
+  - component: {fileID: 7459075962156835230}
   m_Layer: 0
   m_Name: TransmitterManager
   m_TagString: Untagged
@@ -51,10 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 712942561}
   _playerVRPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
+  _sceneID: {fileID: 11400000, guid: 402a6ff0bf327fe4f859ff3b404f799e, type: 2}
   _playerVRRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   _switch: {fileID: 11400000, guid: 6af23fddf1af7204bbbae8981a6051ca, type: 2}
   _destroyJammer: {fileID: 11400000, guid: 6e55d01f9ae685647a7ef133e818cf50, type: 2}
-  _onLose: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
+  _loadNextLevel: {fileID: 11400000, guid: 21f158bb5d70e93498deae7527480881, type: 2}
   _onOpenDoor: {fileID: 11400000, guid: d6032a02634764a4cae45e41c7a40a1d, type: 2}
   gameManager: {fileID: 0}
   symbolManager: {fileID: 0}
@@ -202,22 +205,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Function: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
-  ID: 2
+  ID: 1
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Gameplay.GameManager, Assembly-CSharp
-        m_MethodName: RaiseOnLose
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 6129269782710857282}
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendLoseToOther
@@ -254,6 +245,68 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendDestroyJammerToOthers
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &2906806235926443016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216035856832860937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 8d184be93c9e31c449c0a8681987f8c9, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6129269782710857282}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendLoadNextSceneToOthers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &7459075962156835230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216035856832860937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 4d26704aa28d2fa4a940c43a319bfb79, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6129269782710857282}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendLoadSameSceneToOthers
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
