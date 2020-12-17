@@ -97,10 +97,13 @@ namespace Gameplay.Mobile
         {
             padLock.overrideSprite = padLock_open;
             padLock.DOColor(color_open, .5f);
-            door.DOColor(color_open, .5f);
+            
             GetComponent<Button>().enabled = false;
             anim.enabled = false;
             doorOutline.enabled = false;
+
+            if (power == 1) TurnOn();
+            else TurnOff();
         }
 
         public void RaiseLoadSymbols(CallableFunction loadSymbols) { loadSymbols.Raise(); }

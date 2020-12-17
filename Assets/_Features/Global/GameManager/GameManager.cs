@@ -131,7 +131,7 @@ namespace Gameplay
 
         public void LoadSameScene()
         {
-            if(_isMobile.Value) Destroy(loseCanvas);
+            /*if(_isMobile.Value)*/ Destroy(loseCanvas);
             StartCoroutine(WaitSceneDestruction()); ;
             isGameOver = false;
         }
