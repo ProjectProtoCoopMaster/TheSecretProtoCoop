@@ -4,58 +4,67 @@ using UnityEngine;
 
 namespace Gameplay.Mobile
 {
+
     public class VisionCone : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private Mesh mesh;
+        public float radius;
+        public int numberVertices;
+        public float angle;
+        private void Start()
         {
-            Mesh mesh = new Mesh();
+            //mesh = new Mesh();
+            //GetComponent<MeshFilter>().mesh = mesh;
+            //mesh.vertices = vertices;
+            //mesh.uv = uv;
+            //mesh.triangles = triangles;
+
+        }
+
+
+        private void Update()
+        {
+            
+            mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = mesh;
 
-            float fov = 90f;
-            Vector3 origin = Vector3.zero;
-            int rayCount = 2;
-            float angle = 0f;
-            float angleIncrease = fov / rayCount;
-            float viewDistance = 50f;
+            Vector3[] vertices = new Vector3[numberVertices];
+            int[] triangles = new int[(numberVertices * 3)];
 
-            Vector3[] vertices = new Vector3[3];
-            Vector2[] uv = new Vector2[3];
-            int[] triangles = new int[3];
+            vertices[0] = transform.localPosition;
+            float newAngle = angle / (float)(numberVertices - 1);
 
-            vertices[0] = origin;
-
-            int vertexIndex = 1;
-            int triangleIndex = 0;
-            for (int i = 0; i <= rayCount; i++)
+            for (int i = 1; i < numberVertices; ++i)
             {
-                Vector3 vertex = origin + GetVectorFromAngle(angle) * viewDistance;
-                vertices[vertexIndex] = vertex;
-
-                if (i > 0)
+                RaycastHit hit;
+                Vector3 newVerticePos = Quaternion.AngleAxis((newAngle) * (float)(i - 1), transform.up ) *  transform.forward* radius;
+                if (Physics.Raycast(transform.position, newVerticePos, out hit, radius))
                 {
-                    triangles[triangleIndex + 0] = 0;
-                    triangles[triangleIndex + 1] = vertexIndex - 1;
-                    triangles[triangleIndex + 2] = vertexIndex;
-
-                    triangleIndex += 3;
+                    vertices[i] = new Vector3( hit.point.x,vertices[i].y,hit.point.z);
+                }
+                else
+                {
+                    vertices[i] = newVerticePos;
                 }
 
-                vertexIndex++;
-                angle -= angleIncrease;
             }
 
+            for (int i = 0; i + 2 < numberVertices; ++i)
+            {
+                int index = i * 3;
+                triangles[index + 0] = 0;
+                triangles[index + 1] = i + 1;
+                triangles[index + 2] = i + 2;
+            }
+
+            int lastTriangleIndex = triangles.Length - 3;
+            triangles[lastTriangleIndex + 0] = 0;
+            triangles[lastTriangleIndex + 1] = numberVertices - 1;
+            triangles[lastTriangleIndex + 2] = 1;
+
             mesh.vertices = vertices;
-            mesh.uv = uv;
             mesh.triangles = triangles;
         }
-
-        Vector3 GetVectorFromAngle(float angle)
-        {
-            float angleRad = angle * (Mathf.PI / 180f);
-            return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
-        }
-
     }
 }
 
