@@ -11,6 +11,7 @@ namespace Gameplay.Mobile
         public float radius;
         public int numberVertices;
         public float angle;
+        private float newAngle;
         private void Start()
         {
             //mesh = new Mesh();
@@ -32,12 +33,13 @@ namespace Gameplay.Mobile
             int[] triangles = new int[(numberVertices * 3)];
 
             vertices[0] = transform.localPosition;
-            float newAngle = angle / (float)(numberVertices - 1);
+            newAngle = angle / (float)(numberVertices - 1);
 
             for (int i = 1; i < numberVertices; ++i)
             {
                 RaycastHit hit;
-                Vector3 newVerticePos = Quaternion.AngleAxis((newAngle) * (float)(i - 1), transform.up ) *  transform.forward* radius;
+                //Vector3 axis = Quaternion.AngleAxis(((newAngle + transform.eulerAngles.y) * (float)(i - 1)), transform.up) * transform.forward * radius;
+                Vector3 newVerticePos = Quaternion.AngleAxis((newAngle) * (float)(i - 1), transform.up) *  transform.forward* radius;
                 if (Physics.Raycast(transform.position, newVerticePos, out hit, radius))
                 {
                     vertices[i] = new Vector3( hit.point.x,vertices[i].y,hit.point.z);
@@ -64,6 +66,16 @@ namespace Gameplay.Mobile
 
             mesh.vertices = vertices;
             mesh.triangles = triangles;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 axis = Quaternion.AngleAxis((transform.eulerAngles.y), transform.up) * transform.forward * radius;
+            Vector3 newVerticePos = Quaternion.AngleAxis((newAngle), transform.up) * transform.forward * radius;
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, newVerticePos);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(transform.position, axis);
         }
     }
 }
