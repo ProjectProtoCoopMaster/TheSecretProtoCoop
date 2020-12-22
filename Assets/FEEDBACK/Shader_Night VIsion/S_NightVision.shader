@@ -1,58 +1,67 @@
-﻿Shader "Unlit/S_NightVision"
+﻿Shader "Custom/S_NightVision"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _Color ("Color", Color) = (1,1,1,1)
+        _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _Glossiness ("Smoothness", Range(0,1)) = 0.5
+        _Metallic ("Metallic", Range(0,1)) = 0.0
+
+        _DitherPattern("Dithering Pattern", 2D) = "white" {}
+        _Color1("Dither Color 1", Color) = (0, 0, 0, 1)
+        _Color2("Dither Color 2", Color) = (1, 1, 1, 1)
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-        LOD 100
+        LOD 200
 
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            // make fog work
-            #pragma multi_compile_fog
+        CGPROGRAM
+        // Physically based Standard lighting model, and enable shadows on all light types
+        #pragma surface surf Standard fullforwardshadows
 
-            #include "UnityCG.cginc"
+        // Use shader model 3.0 target, to get nicer looking lighting
+        #pragma target 3.0
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-            };
+        sampler2D _MainTex;
+        
+        struct Input {
+            float2 uv_MainTex;
+            float4 screenPos;
+        };
 
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
-                float4 vertex : SV_POSITION;
-            };
+        half _Glossiness;
+        half _Metallic;
+        fixed4 _Color;
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+        sampler2D _DitherPattern;
+        float4 _DitherPattern_TexelSize;
 
-            v2f vert (appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
-                return o;
-            }
+        float4 _Color1;
+        float4 _Color2;
 
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
-            }
-            ENDCG
+        // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
+        // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+        // #pragma instancing_options assumeuniformscaling
+        UNITY_INSTANCING_BUFFER_START(Props)
+            // put more per-instance properties here
+        UNITY_INSTANCING_BUFFER_END(Props)
+        
+            //the surface shader function which sets parameters the lighting function then uses    
+        void surf(Input i, inout SurfaceOutputStandard o) {
+            //texture value the dithering is based on
+            float texColor = tex2D(_MainTex, i.uv_MainTex).r;
+
+            //value from the dither pattern
+            float2 screenPos = i.screenPos.xy / i.screenPos.w;
+            float2 ditherCoordinate = screenPos * _ScreenParams.xy * _DitherPattern_TexelSize.xy;
+            float ditherValue = tex2D(_DitherPattern, ditherCoordinate).r;
+
+            //combine dither pattern with texture value to get final result
+            float ditheredValue = step(ditherValue, texColor);
+            o.Albedo = lerp(_Color1, _Color2, ditheredValue);
         }
+        ENDCG
     }
+    FallBack "Diffuse"
 }
