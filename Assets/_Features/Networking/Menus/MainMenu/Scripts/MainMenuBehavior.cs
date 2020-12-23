@@ -18,7 +18,7 @@ namespace Gameplay
         [SerializeField] private Canvas mobileCanvas;
         [SerializeField] private Canvas vrCanvas;
         private int index = -1;
-        
+        private int numberOfKeyPressed;
 
         private void OnEnable()
         {
@@ -65,7 +65,20 @@ namespace Gameplay
             }
         }
 
-        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if(numberOfKeyPressed == 0)
+                {
+                    CreateRoom();
+                    numberOfKeyPressed++;
+                }
+                    
+            }
+        }
+
+
 
     }
 }
