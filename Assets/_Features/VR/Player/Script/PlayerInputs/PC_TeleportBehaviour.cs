@@ -7,7 +7,9 @@ namespace Gameplay.PC.Player
 {
     public class PC_TeleportBehaviour : MonoBehaviour
     {
-        [SerializeField] Transform teleportOrigin = null;
+        [Tooltip("Key that fires the Teleportation input.")] [SerializeField] KeyCode teleportKeyCode = default;
+
+        [Tooltip("The point from which the laser emits.")] [SerializeField] Transform teleportOrigin = null;
         TeleportManager teleportationManager = null;
 
         private void Awake()
@@ -18,13 +20,13 @@ namespace Gameplay.PC.Player
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(teleportKeyCode))
             {
                 teleportationManager.pointerOrigin = teleportOrigin;
                 teleportationManager.TallRayPointer(null);
             }
 
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(teleportKeyCode))
             {
                 teleportationManager.TryTeleporting();
             }

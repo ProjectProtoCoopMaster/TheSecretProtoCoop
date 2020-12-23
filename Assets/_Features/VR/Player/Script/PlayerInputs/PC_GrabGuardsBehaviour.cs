@@ -4,19 +4,26 @@ namespace Gameplay.PC.Player
 {
     public class PC_GrabGuardsBehaviour : MonoBehaviour
     {
+        [Tooltip("Key that fires the Grab input.")]
+        [SerializeField] KeyCode grabKeycode = default;
+
+        [Tooltip("Point from which the Grab is initiated.")]
         [SerializeField] Transform grabOrigin = null;
+        [Tooltip("A reference to the Player's Head")]
         [SerializeField] Transform playerHead = null;
         RaycastHit hitInfo;
 
+        [Tooltip("The Layers on which the Player can grab Guards")] 
         [SerializeField] LayerMask pickupLayer;
+        [Tooltip("The Current Guard that is being picked up")] 
         [SerializeField] Rigidbody deadGuard = null;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(grabKeycode))
                 GrabObject();
 
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(grabKeycode))
                 ReleaseObject();
         }
 

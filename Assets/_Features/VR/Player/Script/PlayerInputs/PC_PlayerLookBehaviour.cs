@@ -2,8 +2,10 @@
 
 public class PC_PlayerLookBehaviour : MonoBehaviour
 {
+    [Tooltip("A reference to the Player's Head")] 
     [SerializeField] Transform playerHead = null;
-    float mouseSensitivity = 600f;
+    [Tooltip("The Mouse Sensitivity. Can vary depending on the PC.")] 
+    [SerializeField] float mouseSensitivity = 600f;
     float xRotation = 0f;
 
     // Start is called before the first frame update

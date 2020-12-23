@@ -5,19 +5,26 @@ namespace Gameplay.PC.Player
 {
     public class PC_GrabObjectBehaviour : MonoBehaviour
     {
+        [Tooltip("Key that fires the Grab input.")]
+        [SerializeField] KeyCode grabKeycode = default;
+
+        [Tooltip("Point from which the Grab is initiated.")]
         [SerializeField] Transform grabOrigin = null;
+        [Tooltip("A reference to the Player's Head")]
         [SerializeField] Transform playerHead = null;
         RaycastHit hitInfo;
 
+        [Tooltip("The Layers on which the Player can grab Objects")]
         [SerializeField] LayerMask pickupLayer;
+        [Tooltip("The Current Object that is being picked up")] 
         [SerializeField] InteractableBehaviour interactableObject = null;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(grabKeycode))
                 GrabObject();
 
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(grabKeycode))
                 ReleaseObject();
         }
 

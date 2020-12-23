@@ -9,21 +9,29 @@ namespace Gameplay.VR.Player
 {
     public class TeleportManager : MonoBehaviour
     {
+        [Tooltip("The duration of Teleportation. Expressed in seconds.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] float tweenDuration = .25f;
+        [Tooltip("The Teleportation's movement curve.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
+        [Tooltip("The Particle Effect to play when the player teleports.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
+        [Tooltip("The GameEvent that is called when the player teleports.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleporting;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
 
-        [SerializeField] Transform playerRig, playerHead;
+        [Tooltip("The elements to Track and Move.")] [SerializeField] Transform playerRig, playerHead;
         SteamVR_Behaviour_Pose controllerPose;
         private bool showRayPointer = false;
 
+        [Tooltip("The Layers with which the Teleportation laser will intersect.")]
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] LayerMask teleportationLayers;
+        [Tooltip("The Color of the laser when the player can teleport.")]
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] Gradient validTeleport;
+        [Tooltip("The Color of the laser when the player cannot teleport.")]
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] Gradient invalidTeleport;
+        [Tooltip("The Width of the player's laser.")]
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] float lineWidth;
         LineRenderer bezierVisualization;
         internal Transform pointerOrigin;
@@ -34,16 +42,20 @@ namespace Gameplay.VR.Player
         Vector3 p0, p1, p2;
         float t;
 
+        [Tooltip("The maximum teleportation distance. Expressed in standard Unity units.")]
         [SerializeField] [FoldoutGroup("Internal Values")] float maxDistance = 10f;
+        [Tooltip("The Height from which the laser will be cast downwards.")]
         [SerializeField] [FoldoutGroup("Internal Values")] float castingHeight = 2f;
+        [Tooltip("The minimum and maximum valid angles for aiming the player laser.")]
         [SerializeField] [FoldoutGroup("Internal Values")] float minControllerAngle = 30f, maxControllerAngle = 150f;
-        [SerializeField] [FoldoutGroup("Internal Values")] bool canTeleport;
-        [SerializeField] [FoldoutGroup("Internal Values")] bool VRPlatform;
+        [Tooltip("Define how smooth the laser is. A Higher values incurs a higher performance cost.")]
         [SerializeField] [FoldoutGroup("Internal Values")] int bezierSmoothness;
-        internal bool isTeleporting; // for Awareness Manager time freeze feedback
 
+        internal bool isTeleporting; // for Awareness Manager time freeze feedback
         internal bool isGameOver;
-        
+        bool canTeleport;
+        bool VRPlatform;
+
         private void Awake()
         {
             bezierVisualization = GetComponentInChildren<LineRenderer>();
@@ -255,7 +267,7 @@ namespace Gameplay.VR.Player
 
             teleporting.Raise();
 
-             time = 0;
+            time = 0;
             change = targetPos - startPos;
 
             // don't change yPos
