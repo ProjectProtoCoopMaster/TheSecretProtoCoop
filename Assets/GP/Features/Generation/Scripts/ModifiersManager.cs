@@ -8,11 +8,6 @@ using System;
 
 namespace Networking
 {
-    public class MyAttribute : Attribute
-    {
-
-    }
-
     public class ModifiersManager : SerializedMonoBehaviour
     {
         public static ModifiersManager instance;
@@ -41,8 +36,5 @@ namespace Networking
 
         public void SendShakeResult(BoolVariable check) => Send("ShakeResult", RpcTarget.Others, check.Value);
         [PunRPC] private void ShakeResult(bool complete) => shake.Value = complete;
-
-        public void SendVariable(params object[] variables) => Send("Variable", RpcTarget.Others, variables);
-        [PunRPC] private void Variable(params object[] variables) { }
     }
 }

@@ -22,51 +22,53 @@ namespace Gameplay.VR
 
         // accessed by the Grab Behaviour
         internal Rigidbody rigidBody;
-        AudioSource audioSource;
-        bool canPlaySound;
+        private AudioSource audioSource;
 
-        private void Awake()
+        public DistractionObjectGenerator generator;
+
+        private bool isOnGround;
+
+        public float timeBeforeRespawn;
+        private float currentTime;
+
+        void Awake()
         {
-            canPlaySound = false;
-            
             rigidBody = GetComponent<Rigidbody>();
             audioSource = GetComponent<AudioSource>();
+
             agentsInScene.AddRange(FindObjectsOfType<DistractionBehavior>());
         }
 
-        #region Old
-        /*private void OnCollisionEnter(Collision collision)
+        void Update()
         {
-            if (collision.relativeVelocity.magnitude > maxVelocityLimit) noiseRange = maxRange;
-            else noiseRange = (float)CustomScaler.Scalef(collision.relativeVelocity.magnitude, 0, maxVelocityLimit, 0, maxRange);
+            if (isOnGround)
+            {
+                if (currentTime <= 0.0f)
+                {
+                    isOnGround = false;
 
-            if (canPlaySound) MakeNoise(noiseRange);
+                    generator.PoolObject(gameObject);
+                    generator.SpawnObject();
+                }
+
+                currentTime -= Time.deltaTime;
+            }
         }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") || collision.gameObject.layer == LayerMask.NameToLayer("Window"))
-                canPlaySound = true;
-        }*/
-        #endregion
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.relativeVelocity.magnitude > minimumVelocity) MakeNoise();
-            else return;
-        }
+            if (collision.relativeVelocity.magnitude > minimumVelocity)
+            {
+                MakeNoise();
 
-        private void OnCollisionExit(Collision collision)
-        {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") || collision.gameObject.layer == LayerMask.NameToLayer("Window"))
-                canPlaySound = true;
+                isOnGround = true;
+                currentTime = timeBeforeRespawn;
+            }
         }
 
         private void MakeNoise()
         {
             audioSource.Play();
-
-            canPlaySound = false;
 
             // check to see if the sound has to pass through walls to reach each enemy in the scene
             for (int i = 0; i < agentsInScene.Count; i++)

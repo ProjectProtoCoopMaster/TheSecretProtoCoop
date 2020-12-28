@@ -550,7 +550,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 65335
 --- !u!114 &383575179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,6 +734,7 @@ MonoBehaviour:
   _sendSwitcherChange: {fileID: 11400000, guid: 8fed6ffc2dd448340a467d9884f67544, type: 2}
   button: {fileID: 758702838}
   image: {fileID: 758702840}
+  timerDisplayer: {fileID: 0}
   nodes: []
   state: 1
   power: 1
@@ -928,6 +929,10 @@ PrefabInstance:
     - target: {fileID: 3409338572498560286, guid: 5a0d1a8c8894ca04092436faa370d1a9, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579671775498655693, guid: 5a0d1a8c8894ca04092436faa370d1a9, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a0d1a8c8894ca04092436faa370d1a9, type: 3}
@@ -2240,7 +2245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4009434, g: 0.56149966, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2536,6 +2541,7 @@ MonoBehaviour:
   _sendSwitcherChange: {fileID: 11400000, guid: 8fed6ffc2dd448340a467d9884f67544, type: 2}
   button: {fileID: 1895330071}
   image: {fileID: 1895330073}
+  timerDisplayer: {fileID: 0}
   nodes:
   - {fileID: 1971597378}
   - {fileID: 1958493565}
@@ -2977,6 +2983,10 @@ PrefabInstance:
     - target: {fileID: 3409338572498560286, guid: 5a0d1a8c8894ca04092436faa370d1a9, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579671775498655693, guid: 5a0d1a8c8894ca04092436faa370d1a9, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a0d1a8c8894ca04092436faa370d1a9, type: 3}

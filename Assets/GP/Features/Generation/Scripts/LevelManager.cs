@@ -10,19 +10,22 @@ namespace Gameplay
     [System.Serializable]
     public class Pool
     {
-        public int occurences;
+        public int amountOfRoomsToPick;
         public List<RoomManager> rooms = new List<RoomManager>();
     }
 
     public class LevelManager : SerializedMonoBehaviour
     {
-        public Dictionary<ModifierType, float> modifierSettings = new Dictionary<ModifierType, float>();
+        public Transform levelEntranceAnchor;
+
+        public int maximumModifiersInLevel;
 
         public Pool easyPool, mediumPool, hardPool;
 
-        public Transform levelEntranceAnchor;
-
         private List<RoomManager> levelRooms = new List<RoomManager>();
+
+        public Dictionary<ModifierType, Modifier> modifiers;
+        private List<ModifierType> modifierTypes;
 
         void Start()
         {
@@ -31,32 +34,66 @@ namespace Gameplay
 
         public void GenerateLevel()
         {
-            List<Pool> pools = new List<Pool> { easyPool, mediumPool, hardPool };
+            modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
 
+            List<Pool> pools = new List<Pool> { easyPool, mediumPool, hardPool };
+            SelectRooms(pools);
+
+            ApplyModifiers();
+
+            CreateLevel();
+        }
+
+        private void SelectRooms(List<Pool> pools)
+        {
             foreach (Pool pool in pools)
             {
-                PickRoom(pool.rooms, pool.occurences);
+                PickRoom(pool);
             }
-
-            MakeLevel();
         }
 
-        private void PickRoom(List<RoomManager> rooms, int occurences)
+        private void PickRoom(Pool pool)
         {
-            List<RoomManager> roomPool = rooms;
+            List<RoomManager> availableRoomsInPool = new List<RoomManager>();
+            foreach (RoomManager room in pool.rooms) availableRoomsInPool.Add(room);
+
             int pick;
 
-            for (int i = 0; i < occurences; i++)
+            for (int p = 0; p < pool.amountOfRoomsToPick; p++)
             {
-                pick = Random.Range(0, roomPool.Count);
+                pick = Random.Range(0, availableRoomsInPool.Count);
 
-                levelRooms.Add(roomPool[pick]);
+                levelRooms.Add(availableRoomsInPool[pick]);
 
-                roomPool.RemoveAt(pick);
+                availableRoomsInPool.RemoveAt(pick);
             }
         }
 
-        private void MakeLevel()
+        private void ApplyModifiers()
+        {
+            int modifiersAmount = Random.Range(0, maximumModifiersInLevel) + 1;
+            int[] modifiedRooms = new int[modifiersAmount];
+
+            List<RoomManager> unmodifiedRooms = new List<RoomManager>();
+            foreach (RoomManager room in levelRooms) unmodifiedRooms.Add(room);
+
+            for (int r = 0; r < modifiedRooms.Length; r++)
+            {
+                modifiedRooms[r] = Random.Range(0, unmodifiedRooms.Count);
+
+                int m = Random.Range(0, modifierTypes.Count);
+                ModifierType modifier = modifierTypes[m];
+
+                unmodifiedRooms[modifiedRooms[r]].roomModifier = modifier;
+
+                modifierTypes.RemoveAt(m);
+
+                unmodifiedRooms.RemoveAt(modifiedRooms[r]);
+            }
+            unmodifiedRooms.Clear();
+        }
+
+        private void CreateLevel()
         {
             Transform currentAnchor = levelEntranceAnchor;
 
@@ -71,14 +108,7 @@ namespace Gameplay
                 levelRooms[i].gameObject.transform.parent = this.transform;
 
                 currentAnchor = levelRooms[i].exitAnchor;
-
-
             }
-        }
-
-        private void SetRoomModifier(RoomManager room)
-        {
-
         }
     } 
 }
