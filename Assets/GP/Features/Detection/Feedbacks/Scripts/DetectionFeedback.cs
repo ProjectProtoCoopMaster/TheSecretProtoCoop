@@ -11,6 +11,7 @@ public class DetectionFeedback : MonoBehaviour
         exclamationMark.enabled = false;
     }
 
+    // called by Overwatch and Detection Behaviours
     public void PlayDetectionFeedback()
     {
         exclamationMark.enabled = true;
