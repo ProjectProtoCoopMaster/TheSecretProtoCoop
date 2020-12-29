@@ -6,6 +6,7 @@
         _LineColor("Line Color", Color) = (1, 1, 1, 1)
         _SurfaceColor("Surface Color", Color) = (1, 1, 1, 1)
         _LineWidth("Line Width", Float) = 1
+        _OtherLine("Other Line", Float) = 0.1
     }
     SubShader
     {
@@ -19,42 +20,43 @@
 
             #include "UnityCG.cginc"
 
-            struct appdata
+            struct vin_vct
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-                float4 color : Color;
+                float4 color : COLOR;
             };
 
-            struct v2f
+            struct v2f_vct
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : POSITION;
-                float4 color : Color;
+                float2 uv : TEXCOORD0;
+                float4 color : COLOR;
             };
 
             // re-declaration of the material inspector values
             fixed4 _LineColor;
             fixed4 _SurfaceColor;
             half _LineWidth;
+            half _OtherLine;
 
-            v2f vert (appdata v)
+            v2f_vct vert (vin_vct input)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
-                o.color = v.color;
-                return o;
+                v2f_vct output;
+                output.vertex = UnityObjectToClipPos(input.vertex);
+                output.uv = input.uv;
+                output.color = input.color;
+                return output;
             }
 
-            fixed4 frag(v2f i) : COLOR
+            half4 frag(v2f_vct i) : COLOR
             {
                 float2 d = fwidth(i.uv);
 
-                float lineY = smoothstep(float(0), d.y * _LineWidth, 1 - i.uv.y);
-                float lineX = smoothstep(float(0), d.x * _LineWidth, 1 - i.uv.x);
+                float lineY = step(d.y * _LineWidth, i.uv.y);
+                float lineX = step(d.x * _LineWidth, i.uv.x);
 
-                float diagonal = smoothstep(float(0), fwidth(i.uv.x - i.uv.y) * _LineWidth, i.uv.x - i.uv.y);
+                float diagonal = step(_OtherLine, i.uv.x - i.uv.y);
 
                 float4 color = lerp(_LineColor, _SurfaceColor, diagonal * lineX * lineY);
                 return color;
