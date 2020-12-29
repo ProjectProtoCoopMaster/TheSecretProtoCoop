@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3938265781617762620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3938265781617762609}
+  - component: {fileID: 3938265781617762622}
+  - component: {fileID: 3938265781617762623}
+  - component: {fileID: 3938265781617762608}
+  m_Layer: 0
+  m_Name: SymbolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3938265781617762609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3938265781617762622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848b223035fbc4b458724a723f52c94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transmitterManager: {fileID: 0}
+  isSymbolLoaded: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
+  iconsAsset:
+  - {fileID: 21300000, guid: 2736f8b17787ef54e9a4580db4b3caeb, type: 3}
+  - {fileID: 21300000, guid: f63481b7bb44ad247ad6dc701af72a13, type: 3}
+  - {fileID: 21300000, guid: 76afc6cea6118db4cbc2b01b88ca9f03, type: 3}
+  - {fileID: 21300000, guid: c920676651c155f4b8cca1bae9592ee0, type: 3}
+  - {fileID: 21300000, guid: eb9891b75bfee904298637f6c091330a, type: 3}
+  - {fileID: 21300000, guid: 2393983afb396924cb78a3a0602bf8fb, type: 3}
+  - {fileID: 21300000, guid: ab311ae67e34e024380a3c9f42f699e4, type: 3}
+  - {fileID: 21300000, guid: a60c55156f6e90a429e4da07a5e12dca, type: 3}
+  - {fileID: 21300000, guid: 0f6cde4b5dbbc1e4d8db230f8a991dd8, type: 3}
+  - {fileID: 21300000, guid: fb37e073f86c0b248b600ba97dd7c342, type: 3}
+  - {fileID: 21300000, guid: c10e16c1ae9615646b235e3ec0a79415, type: 3}
+  - {fileID: 21300000, guid: 22a79b93b870f1045b2a2f76cdfd0297, type: 3}
+  - {fileID: 21300000, guid: 9bad97d946090934aa72b859b98de7ef, type: 3}
+  - {fileID: 21300000, guid: 3e6061368ae65364fb23b395a768c5ff, type: 3}
+  - {fileID: 21300000, guid: 9637a0989074ce14cb8b88f9a6a91890, type: 3}
+  - {fileID: 21300000, guid: 490a637b974399f4f958b7413f290ca1, type: 3}
+  - {fileID: 21300000, guid: 2a033cbd64ccc5845bc8355bda95109d, type: 3}
+  - {fileID: 21300000, guid: 25eb17550c418a140818267d9484c333, type: 3}
+  - {fileID: 21300000, guid: f46ed632049102648b9b3987f6a9d4fa, type: 3}
+  - {fileID: 21300000, guid: eb51e186778503e4f86a4c1d50ab706c, type: 3}
+  - {fileID: 21300000, guid: ec988769fcac99848806d93891f515ea, type: 3}
+  - {fileID: 21300000, guid: 49b4c00c70c711a498a5ec7b4e45bc75, type: 3}
+  - {fileID: 21300000, guid: 85c9d7cc3d976d24bb261f3233db5d9b, type: 3}
+  - {fileID: 21300000, guid: f0ab37b7eff913a43be4a4279ecb18b6, type: 3}
+  - {fileID: 21300000, guid: 2c18341d222d0e140a0332049ddc72c0, type: 3}
+  - {fileID: 21300000, guid: c4ba1c6acd5bd7c46ac7319c330fa6ed, type: 3}
+  - {fileID: 21300000, guid: f929287c82d9f0f4a9522640058e28ba, type: 3}
+  - {fileID: 21300000, guid: 29f7c78434a03b84a877d8bad27ddf66, type: 3}
+  - {fileID: 21300000, guid: 96d3791990ed4ed49987689095dfa3c3, type: 3}
+  - {fileID: 21300000, guid: 3e996e6efcdd1b445b27fab5bfe74fb4, type: 3}
+  - {fileID: 21300000, guid: aa3f38e0e9bc2f6468bf38663a19385c, type: 3}
+  - {fileID: 21300000, guid: bac662113df222747b73e2dc382fa535, type: 3}
+  - {fileID: 21300000, guid: 9228d12e9b9ed5e438afe8c06d21f8c3, type: 3}
+  - {fileID: 21300000, guid: 874685156cb803e478cbd055fc184b4f, type: 3}
+  iconsAssetReminder: []
+  iconsSelected:
+  - {fileID: 21300000, guid: 37616095ebf53744c950962f33663458, type: 3}
+  - {fileID: 21300000, guid: 72786b43084161c4c81e83eef0990e1a, type: 3}
+  - {fileID: 21300000, guid: 1959adfdc5c338840858eec9307f0184, type: 3}
+  iconsStashed: []
+  codeNames:
+  - Ether
+  - Cappuccino
+  - Overkill
+  - Eldorado
+  - Checkmate
+  - Big Data
+  - Abracadabra
+  - Boomerang
+  - Calypso
+  - Virus
+  - Opera
+  - Omega
+  - Igloo
+  - Indigo
+  - Jazz
+  - Laser
+  - Lithium
+  - Onyx
+  - Papyrus
+  - Ranch
+  - Safari
+  - Vendetta
+  - Sparrow
+  - Blight
+  - Meridian
+  - Miracle
+  - Spleen
+  - Absolution
+  - Wormhole
+  - Sandstorm
+  pickedNames:
+  - Checkmate
+  - Fischer
+  - French
+  indexes: 
+--- !u!114 &3938265781617762623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 04584ff1801e07948a000d37c9cd0632, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3938265781617762622}
+        m_TargetAssemblyTypeName: Gameplay.SymbolManager, Assembly-CSharp
+        m_MethodName: LoadSymbols
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &3938265781617762608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938265781617762620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
+        m_TargetAssemblyTypeName: Gameplay.BoolVariable, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
