@@ -1,5 +1,6 @@
 ﻿Shader "Unlit/Wireframe"
 {
+    // exposed parameters for the material inspector
     Properties
     {
         _LineColor("Line Color", Color) = (1, 1, 1, 1)
@@ -32,9 +33,10 @@
                 float4 color : Color;
             };
 
+            // re-declaration of the material inspector values
             fixed4 _LineColor;
             fixed4 _SurfaceColor;
-            fixed _LineWidth;
+            half _LineWidth;
 
             v2f vert (appdata v)
             {
@@ -45,7 +47,7 @@
                 return o;
             }
 
-            fixed4 frag(v2f i) : Color
+            fixed4 frag(v2f i) : COLOR
             {
                 float2 d = fwidth(i.uv);
 
