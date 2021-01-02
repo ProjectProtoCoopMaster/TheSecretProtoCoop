@@ -52,10 +52,9 @@ MonoBehaviour:
   m_Name: UniversalRenderPipelineAsset_Renderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: 2909153644233631500}
-  - {fileID: 2111254250147215930}
-  - {fileID: -8967089757235870378}
-  m_RendererFeatureMap: 0c279479d3635f283afa8efa8dae4c1d5685e91e607f8e83
+  - {fileID: 5653621789821747218}
+  - {fileID: 2648573255500000161}
+  m_RendererFeatureMap: 12c0bb4c10b3754ea16badd7579fc124
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -77,7 +76,7 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
---- !u!114 &2111254250147215930
+--- !u!114 &2648573255500000161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,37 +85,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: HalfToneNoise
+  m_Script: {fileID: 11500000, guid: 4ac820d35aa287d4ab2c4d3a3321f699, type: 3}
+  m_Name: Outline
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   settings:
-    passTag: HalfToneNoise
-    Event: 450
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 4294967295
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 3e1c6a603cceb384ca2aba8902989f9b, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 4
-    enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
---- !u!114 &2909153644233631500
+    outlineMaterial: {fileID: 2100000, guid: 4b15833ffed57d144b38308c97e79a06, type: 2}
+--- !u!114 &5653621789821747218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,33 +100,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: NightVision
+  m_Script: {fileID: 11500000, guid: fcfd8e77d3bacca4eb83cc25c2f10945, type: 3}
+  m_Name: DepthNormals
   m_EditorClassIdentifier: 
-  m_Active: 0
-  settings:
-    passTag: NightVision
-    Event: 300
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 4294967295
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 2bf6d1370c4bca24ca30fc4f4c01e322, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 4
-    enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
+  m_Active: 1
