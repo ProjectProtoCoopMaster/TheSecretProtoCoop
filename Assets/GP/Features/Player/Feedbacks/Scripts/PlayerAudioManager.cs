@@ -8,6 +8,7 @@ namespace Gameplay.VR.Feedbacks
     {
         [SerializeField] [FoldoutGroup("General")] AudioSource playerAudioSource;
         [SerializeField] [FoldoutGroup("General")] float volume = 0.5f;
+        [SerializeField] [FoldoutGroup("General")] StringVariable playerRigName;
 
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip gunshotClip;
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] ricochetClips;
@@ -80,7 +81,7 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_RefreshScene()
         {
-            playerAudioSource = GameObject.Find("[PlayerRig]").GetComponentInChildren<AudioSource>();
+            playerAudioSource = GameObject.Find(playerRigName.Value).GetComponentInChildren<AudioSource>();
         }
     }
 } 
