@@ -46,7 +46,7 @@
             fixed4 frag (vertexOutput vert) : Color
             {
                 // get the fragment's width (i think ?)
-                float2 aled = fwidth(vert.uv);
+                float2 d = fwidth(vert.uv);
 
                 // interpolate between 0 and vert pos (?) * line width, based on the vert's position (?)
                 float lineY = smoothstep(float(0), d.y * _LineWidth, vert.uv.y);
@@ -55,7 +55,7 @@
                 // interpolate between 0 and 
                 float diagonal = smoothstep(float(0), fwidth(vert.uv.x - vert.uv.y) * _LineWidth, vert.uv.x - vert.uv.y);
 
-                float4 color = lerp(_LineColor, _SurfaceColor, diagonal * lineX * lineY);
+                float4 color = lerp(_LineColor, _SurfaceColor, lineX * lineY * _LineWidth);
                 return color;
             }
             ENDCG

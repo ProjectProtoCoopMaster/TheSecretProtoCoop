@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_WireframeMat
-  m_Shader: {fileID: 4800000, guid: fb844202b3d05194983eb69aa7ff60a7, type: 3}
+  m_Name: OutlineShader
+  m_Shader: {fileID: 4800000, guid: 1233e9cd7995a1b4996dcbc174213c03, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,10 +18,16 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _LineWidth: 2
+    - _DepthBias: 1
+    - _DepthMult: 1
+    - _NormalBias: 1
+    - _NormalMult: 1
     m_Colors:
-    - _LineColor: {r: 0.40482342, g: 1, b: 0, a: 1}
-    - _SurfaceColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.16078448, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []

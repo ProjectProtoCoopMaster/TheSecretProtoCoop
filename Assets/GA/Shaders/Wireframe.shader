@@ -50,7 +50,7 @@
             }
 
             half4 frag(v2f_vct i) : COLOR
-            {
+            {/*
                 float2 d = fwidth(i.uv);
 
                 float lineY = step(d.y * _LineWidth, i.uv.y);
@@ -58,8 +58,8 @@
 
                 float diagonal = step(_OtherLine, i.uv.x - i.uv.y);
 
-                float4 color = lerp(_LineColor, _SurfaceColor, diagonal * lineX * lineY);
-                return color;
+                float4 color = lerp(_LineColor, _SurfaceColor, diagonal * lineX * lineY);*/
+                return (1, 1, 1, 1);
             }
             ENDCG
         }
