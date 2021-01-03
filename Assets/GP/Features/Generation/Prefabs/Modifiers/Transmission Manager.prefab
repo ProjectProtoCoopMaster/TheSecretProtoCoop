@@ -53,10 +53,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 1729564453842531994}
   _playerVRPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
-  _playerVRPRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
+  _sceneID: {fileID: 0}
+  _playerVRRotation: {fileID: 0}
   _switch: {fileID: 11400000, guid: 6af23fddf1af7204bbbae8981a6051ca, type: 2}
-  _onLose: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
+  _destroyJammer: {fileID: 0}
+  _loadNextLevel: {fileID: 0}
   _onOpenDoor: {fileID: 11400000, guid: d6032a02634764a4cae45e41c7a40a1d, type: 2}
+  _onVictory: {fileID: 0}
+  gameManager: {fileID: 0}
   symbolManager: {fileID: 0}
 --- !u!114 &6474595395251613891
 MonoBehaviour:
@@ -67,16 +71,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1945316181738423922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896f32a55ec431f4698eefa3b38a5595, type: 3}
+  m_Script: {fileID: 11500000, guid: c855423400e6a554f95bf75267175272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: eb7b65a37bfaf9644a4a4cebe114d582, type: 2}
-    - {fileID: 11400000, guid: f19b3c1448d25344291efa2a32717d6d, type: 2}
-    - {fileID: 11400000, guid: 42fb79797c95dac409c944199787f997, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -109,8 +110,8 @@ MonoBehaviour:
       Entry: 3
       Data: 0
     - Name: $v
-      Entry: 10
-      Data: 0
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -121,8 +122,8 @@ MonoBehaviour:
       Entry: 3
       Data: 1
     - Name: $v
-      Entry: 10
-      Data: 1
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -133,8 +134,8 @@ MonoBehaviour:
       Entry: 3
       Data: 2
     - Name: $v
-      Entry: 10
-      Data: 2
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -145,8 +146,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   photonView: {fileID: 1729564453842531994}
-  shakeStart: {fileID: 11400000, guid: 90ee37ac8c9aa9b42ac3b32cdcf5374f, type: 2}
-  shake: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}
+  shakeStart: {fileID: 0}
+  shake: {fileID: 0}
 --- !u!114 &1729564453842531994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Function: {fileID: 11400000, guid: 3ef10703e4ae96a4b850ab5dab24df72, type: 2}
+  ID: 0
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -198,8 +200,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
+  methodName: []
+  component:
+  - {fileID: 0}
 --- !u!114 &3014429616189263637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Function: {fileID: 11400000, guid: 8fed6ffc2dd448340a467d9884f67544, type: 2}
+  ID: 0
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -228,8 +232,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
+  methodName: []
+  component:
+  - {fileID: 0}
 --- !u!114 &1729564454966756500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Function: {fileID: 11400000, guid: 7654ef9887c0a5b4085a1c163ed3c991, type: 2}
+  ID: 0
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -270,8 +276,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
+  methodName: []
+  component:
+  - {fileID: 0}
 --- !u!114 &1671918627196767994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: 00eb0df0cf972e746a06e06f34d21cf3, type: 2}
+  Function: {fileID: 0}
+  ID: 0
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -300,8 +308,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
+  methodName: []
+  component:
+  - {fileID: 0}
 --- !u!114 &1661216796681196950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Function: {fileID: 11400000, guid: 5537004c1643f0741b51c23eaf3b0618, type: 2}
+  ID: 0
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -358,5 +368,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  methodName: 
-  component: {fileID: 0}
+  methodName: []
+  component:
+  - {fileID: 0}

@@ -24,7 +24,7 @@ namespace Gameplay
 
         private List<RoomManager> levelRooms = new List<RoomManager>();
 
-        public Dictionary<ModifierType, Modifier> modifiers;
+        public Dictionary<ModifierType, Modifier> modifiers = new Dictionary<ModifierType, Modifier>();
         private List<ModifierType> modifierTypes;
 
         void Start()
