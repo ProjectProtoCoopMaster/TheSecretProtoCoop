@@ -103,14 +103,19 @@ namespace Gameplay
 
         private void SwitchNode()
         {
-            foreach (ISwitchable node in nodes)
+            if(nodes.Count != 0)
             {
-                if (node.Power == 1) node.Power = 0;
-                else node.Power = 1;
-                if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null)
-                    node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
-            }
+                foreach (ISwitchable node in nodes)
+                {
+                    if (node.Power == 1) node.Power = 0;
+                    else node.Power = 1;
+                    if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null)
+                        node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
+                }
 
+
+
+            }
 
         }
 

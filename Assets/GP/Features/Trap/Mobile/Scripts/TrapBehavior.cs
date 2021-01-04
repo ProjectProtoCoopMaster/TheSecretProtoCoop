@@ -25,13 +25,16 @@ namespace Gameplay.Mobile
 
         private void OnEnable()
         {
-            color = GetComponent<Image>().color;
+            //color = GetComponent<Image>().color;
         }
 
         private void Start() => Power = power;
 
         public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); }
         public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); }
+
+        //public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); }
+        //public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); }
     }
 
 }
