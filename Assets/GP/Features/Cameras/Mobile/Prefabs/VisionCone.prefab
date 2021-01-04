@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4556099928856283914}
   - component: {fileID: 4556099928856283917}
   - component: {fileID: 4556099928856283916}
-  - component: {fileID: 4556099928856283919}
+  - component: {fileID: 7397051660543612718}
   m_Layer: 0
   m_Name: VisionCone
   m_TagString: Untagged
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4556099928856283919
+--- !u!114 &7397051660543612718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,8 +91,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4556099928856283918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c492ab7d949665c4fb746bc6bae1842e, type: 3}
+  m_Script: {fileID: 11500000, guid: f63d117ccc6fa3c44928ae91f95587b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
-  numberVertices: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 65335
+  startingAngle: 0
