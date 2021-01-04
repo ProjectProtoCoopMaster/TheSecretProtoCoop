@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-
+using Photon.Pun;
 namespace Gameplay
 {
     public class MainMenuBehavior : MonoBehaviour
@@ -37,15 +37,15 @@ namespace Gameplay
         {
             if(_isMobile.Value)
             {
-                SceneManager.LoadScene(index + 1, LoadSceneMode.Additive);
-                SceneManager.UnloadScene("MainMenu");
+                SceneManager.LoadSceneAsync(index + 1, LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index + 1;
             }
             else
             {
 
-                SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene("MainMenu");
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
 
             }
