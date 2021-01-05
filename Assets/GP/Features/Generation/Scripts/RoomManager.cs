@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Sirenix.OdinInspector;
 using Networking;
 using Photon.Pun;
@@ -19,12 +20,12 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
-        public bool useLevelGeneration;
-
-        [ShowIf("useLevelGeneration")] public Transform entranceAnchor;
-        [ShowIf("useLevelGeneration")] public Transform exitAnchor;
+        public Transform entranceAnchor;
+        public Transform exitAnchor;
 
         public ModifierType roomModifier = ModifierType.None;
+
+        public NavMeshSurface roomNavigationSurface;
 
         void Start()
         {
@@ -33,10 +34,16 @@ namespace Gameplay
 
         public void OnEnterRoom()
         {
-            if (roomModifier != ModifierType.None)
-            {
-                ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
-            }
+            // Initialize Modifier
+            //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
+
+            // Bake NavMesh
+            roomNavigationSurface.BuildNavMesh();
+            // Initialization AI
+
+
+            // Initialization Switchers
+                // Initialize Elements
         }
     } 
 }
