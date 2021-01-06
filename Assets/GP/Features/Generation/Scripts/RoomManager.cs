@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using Sirenix.OdinInspector;
 using Networking;
 using Photon.Pun;
+using Gameplay.AI;
 
 namespace Gameplay
 {
@@ -20,12 +21,18 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
+        [InfoBox(@"@""The Room Modifier is: "" + this.roomModifier.ToString()")]
+
         public Transform entranceAnchor;
         public Transform exitAnchor;
 
-        public ModifierType roomModifier = ModifierType.None;
+        public Transform playerStart;
+
+        public ModifierType roomModifier { get; set; } = ModifierType.None;
 
         public NavMeshSurface roomNavigationSurface;
+
+        public AIManager aIManager;
 
         void Start()
         {
@@ -40,7 +47,7 @@ namespace Gameplay
             // Bake NavMesh
             roomNavigationSurface.BuildNavMesh();
             // Initialization AI
-
+            aIManager.StartAllAgents();
 
             // Initialization Switchers
                 // Initialize Elements

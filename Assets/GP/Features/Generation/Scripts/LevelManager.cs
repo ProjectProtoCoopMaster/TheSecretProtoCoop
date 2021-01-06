@@ -16,6 +16,10 @@ namespace Gameplay
 
     public class LevelManager : SerializedMonoBehaviour
     {
+        public static LevelManager instance;
+
+        public GameObject playerRig = null;
+
         public Transform levelEntranceAnchor;
 
         public int maximumModifiersInLevel;
@@ -27,9 +31,24 @@ namespace Gameplay
         public Dictionary<ModifierType, Modifier> modifiers = new Dictionary<ModifierType, Modifier>();
         private List<ModifierType> modifierTypes;
 
+        public int currentRoomIndex { get; private set; }
+        public RoomManager currentRoom { get; private set; }
+
+        private void OnEnable()
+        {
+            if (instance == null) instance = this;
+        }
+
         void Start()
         {
             GenerateLevel();
+
+            string msg = "There is no Player attached to the Level Manager. Attach one to initialize the player's position in the level !";
+            if (Utility.SafeCheck(playerRig, msg))
+            {
+                playerRig.transform.position = currentRoom.playerStart.position;
+                playerRig.transform.rotation = currentRoom.playerStart.rotation;
+            }
         }
 
         public void GenerateLevel()
@@ -39,9 +58,21 @@ namespace Gameplay
             List<Pool> pools = new List<Pool> { easyPool, mediumPool, hardPool };
             SelectRooms(pools);
 
-            ApplyModifiers();
+            //ApplyModifiers();
+
+            foreach (RoomManager room in levelRooms) room.gameObject.SetActive(false);
 
             CreateLevel();
+
+            LoadRoom(0);
+        }
+
+        public void LoadRoom(int index)
+        {
+            currentRoomIndex = index;
+            currentRoom = levelRooms[currentRoomIndex];
+
+            currentRoom.gameObject.SetActive(true);
         }
 
         private void SelectRooms(List<Pool> pools)
@@ -99,10 +130,10 @@ namespace Gameplay
 
             for (int i = 0; i < levelRooms.Count; i++)
             {
-                Vector3 translation = currentAnchor.position - levelRooms[i].entranceAnchor.position;
+                Vector3 translation = currentAnchor.position - levelRooms[i].entranceAnchor.localPosition;
                 levelRooms[i].gameObject.transform.position = translation;
-
-                float angle = currentAnchor.rotation.eulerAngles.y - levelRooms[i].entranceAnchor.eulerAngles.y;
+                
+                float angle = currentAnchor.rotation.eulerAngles.y - levelRooms[i].entranceAnchor.localRotation.eulerAngles.y;
                 levelRooms[i].gameObject.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
 
                 levelRooms[i].gameObject.transform.parent = this.transform;

@@ -20,12 +20,18 @@ namespace Gameplay.AI
 
         public bool isDead { get; protected set; }
 
+        void OnEnable() => AIManager.agents.Add(this);
+
+        void OnDisable() => AIManager.agents.Remove(this);
+
         void Awake()
         {
             InitializeAgent();
         }
 
         protected abstract void InitializeAgent();
+
+        public abstract void StartAgent();
 
         public void SwitchAgentState()
         {
