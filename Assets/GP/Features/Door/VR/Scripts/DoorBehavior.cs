@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+
 namespace Gameplay.VR
 {
     public class DoorBehavior : MonoBehaviour, ISwitchable
     {
-        public enum LockState {Locked, Unlocked }
+        public enum LockState { Locked, Unlocked }
         public LockState lockState;
+
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
 
@@ -15,16 +17,18 @@ namespace Gameplay.VR
         [SerializeField] private Material red, green, blue;
         [SerializeField] private Renderer keyPassRenderer;
         [SerializeField] private Animator anim;
+
         public int State
         {
             get { return state; }
-            set { state = value; }
 
+            set { state = value; }
         }
 
         public int Power
         {
             get { return power; }
+
             set
             {
                 power = value;
@@ -38,24 +42,24 @@ namespace Gameplay.VR
 
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
 
-
         private void Start() => Power = power;
 
         public void TurnOn()
         {
             if (lockState == LockState.Locked) keyPassRenderer.material = red;
             else keyPassRenderer.material = green;
+
             anim.ResetTrigger("Open");
             anim.SetTrigger("Close");
-
         }
 
         public void TurnOff()
         {
-            if (lockState == LockState.Unlocked )
+            if (lockState == LockState.Unlocked)
             {
                 anim.ResetTrigger("Close");
                 anim.SetTrigger("Open");
+
                 keyPassRenderer.material = blue;
             }
             else keyPassRenderer.material = red;
@@ -64,8 +68,8 @@ namespace Gameplay.VR
         [Button("Unlock")]
         public void Unlock()
         {
-
             lockState = LockState.Unlocked;
+
             if (Power == 0)
             {
                 TurnOff(); 
@@ -76,15 +80,13 @@ namespace Gameplay.VR
             }
         }
 
-        // Only for Debug !!
-        [Button]
+        [InfoBox("Only for Debug")]
+        [Button("Change Power")]
         public void ChangePower()
         {
             if (Power == 1) Power = 0;
             else Power = 1;
         }
-
     }
-
 }
 

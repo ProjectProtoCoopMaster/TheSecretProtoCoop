@@ -45,9 +45,18 @@ namespace Gameplay
             //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             // Bake NavMesh
-            roomNavigationSurface.BuildNavMesh();
+            string navMsg = "there is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";
+            if (Utility.SafeCheck(roomNavigationSurface, navMsg))
+            {
+                roomNavigationSurface.BuildNavMesh();
+            }
+
             // Initialization AI
-            aIManager.StartAllAgents();
+            string aiMsg = "There's no AI Manager attached to the Room Manager, attach one to initialize this room's AI";
+            if (Utility.SafeCheck(aIManager, aiMsg))
+            {
+                aIManager.StartAllAgents();
+            }
 
             // Initialization Switchers
                 // Initialize Elements

@@ -26,7 +26,7 @@ namespace Gameplay
 
         public Pool easyPool, mediumPool, hardPool;
 
-        private List<RoomManager> levelRooms = new List<RoomManager>();
+        private List<RoomManager> levelRooms = new List<RoomManager>(); public List<RoomManager> LevelRooms { get => levelRooms; }
 
         public Dictionary<ModifierType, Modifier> modifiers = new Dictionary<ModifierType, Modifier>();
         private List<ModifierType> modifierTypes;
@@ -139,6 +139,18 @@ namespace Gameplay
                 levelRooms[i].gameObject.transform.parent = this.transform;
 
                 currentAnchor = levelRooms[i].exitAnchor;
+            }
+        }
+
+        public void OnRoomEnd()
+        {
+            if (currentRoomIndex < LevelRooms.Count - 1)
+            {
+                instance.LoadRoom(currentRoomIndex + 1);
+            }
+            else
+            {
+                Debug.Log("You won the game and one million pesos ! Congratulations !");
             }
         }
     } 
