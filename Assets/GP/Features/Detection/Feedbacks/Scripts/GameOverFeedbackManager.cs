@@ -7,6 +7,7 @@ namespace Gameplay.VR
     {
         [SerializeField] CallableFunction gameOver;
         [SerializeField] Light redAlarmLight;
+        [SerializeField] Vector3Variable playerRigPosition;
 
         private void Awake()
         {
@@ -15,7 +16,7 @@ namespace Gameplay.VR
 
         public void GE_TurnOnAlarmLights()
         {
-            redAlarmLight.transform.position = GameObject.Find("[PlayerRig]").transform.position;
+            redAlarmLight.transform.position = playerRigPosition.Value;
             redAlarmLight.gameObject.SetActive(true);
         }
 

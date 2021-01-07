@@ -12,7 +12,6 @@ namespace Gameplay.VR.Player
         int framesPassed;
         int frequency = 4;
 
-
         private void Update()
         {
             framesPassed++;

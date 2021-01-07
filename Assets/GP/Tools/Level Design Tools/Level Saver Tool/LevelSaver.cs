@@ -14,7 +14,7 @@ namespace Tools.LevelDesign
     {
         const string saveLocation = "Assets/GD/Level Blocking/Saved Levels/";
 
-        [SerializeField] private Camera cam;
+        //[SerializeField] private Camera cam;
 
         public GameObject[] parentSwitchers;
 
@@ -67,9 +67,12 @@ namespace Tools.LevelDesign
 
                         #if UNITY_EDITOR
                         newElement.prefab = PrefabUtility.GetCorrespondingObjectFromSource(switcher.transform.GetChild(j).gameObject) as GameObject;
-                        #endif
+#endif
 
-                        newElement.position = cam.WorldToScreenPoint(switcher.transform.GetChild(j).position);
+                        //newElement.position = cam.WorldToScreenPoint(switcher.transform.GetChild(j).position);
+                        newElement.position = switcher.transform.GetChild(j).position;
+                        newElement.rotation = switcher.transform.GetChild(j).rotation;
+                        newElement.scale = switcher.transform.GetChild(j).localScale;
                         elements.list.Add(newElement);
                     }
                 }
@@ -81,6 +84,8 @@ namespace Tools.LevelDesign
         {
             public GameObject prefab;
             public Vector3 position;
+            public Quaternion rotation;
+            public Vector3 scale;
         }
 
         [System.Serializable]

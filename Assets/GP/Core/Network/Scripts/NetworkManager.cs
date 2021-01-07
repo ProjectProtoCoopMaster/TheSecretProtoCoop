@@ -16,25 +16,27 @@ namespace Networking
         private void Start()
         {
 
-            PhotonNetwork.ConnectToMaster("192.168.56.1", 5055, "bc760756-d6bd-48aa-b511-8d3c5cca5aef");
-            //PhotonNetwork.ConnectUsingSettings();
+            //PhotonNetwork.ConnectToMaster("192.168.56.1", 5055, "bc760756-d6bd-48aa-b511-8d3c5cca5aef");
+            PhotonNetwork.ConnectUsingSettings();
 
         }
-        public void JoinRoom()
+        public void JoinRoom(string roomName)
         {
-            PhotonNetwork.JoinRoom("1");
+            PhotonNetwork.JoinRoom(roomName);
 
         }
 
-        public void CreateRoom()
+        public void CreateRoom(string roomName)
         {
             RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
-            PhotonNetwork.CreateRoom("1", roomOptions);
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
+            
 
         }
 
         public override void OnJoinedRoom()
         {
+            Debug.Log(PhotonNetwork.CurrentRoom);
             if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 _OnRoomFulled.Raise();

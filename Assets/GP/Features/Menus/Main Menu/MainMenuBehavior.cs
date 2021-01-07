@@ -4,7 +4,8 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-
+using Photon.Pun;
+using UnityEngine.UI;
 namespace Gameplay
 {
     public class MainMenuBehavior : MonoBehaviour
@@ -17,6 +18,8 @@ namespace Gameplay
         [SerializeField] private BoolVariable _isMobile;
         [SerializeField] private Canvas mobileCanvas;
         [SerializeField] private Canvas vrCanvas;
+        [SerializeField] private Text codeVR;
+        [SerializeField] private Text codeMobile;
         private int index = -1;
         
 
@@ -28,24 +31,30 @@ namespace Gameplay
         }
 
         public void SetIndex(int ID) => index = ID;
-        public void JoinRoom() { _JoinRoom.Raise(); }
+        public void JoinRoom() { _JoinRoom.Raise(codeMobile.text); }
 
         [Button]
-        public void CreateRoom() => _CreateRoom.Raise();
+        public void CreateRoom()
+        {
+            int roomName = Random.Range(1000000, 10000000);
+            codeVR.text = roomName.ToString();
+            _CreateRoom.Raise(roomName.ToString());
+
+        }
 
         public void OpenScene()
         {
             if(_isMobile.Value)
             {
-                SceneManager.LoadScene(index + 1, LoadSceneMode.Additive);
-                SceneManager.UnloadScene("MainMenu");
+                SceneManager.LoadSceneAsync(index + 1, LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index + 1;
             }
             else
             {
 
-                SceneManager.LoadScene(index, LoadSceneMode.Additive);
-                SceneManager.UnloadScene("MainMenu");
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
 
             }

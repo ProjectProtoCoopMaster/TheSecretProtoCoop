@@ -38,7 +38,7 @@ namespace Tools.LevelDesign
 
         public void CreateSwitcher()
         {
-#if Unity_Editor
+#if UNITY_EDITOR
             GameObject newSwitcher = PrefabUtility.InstantiatePrefab(switcher,canvas.transform) as GameObject;
 
 
@@ -55,7 +55,7 @@ namespace Tools.LevelDesign
         {
             for (int i = 0; i < startPoint.Count; i++)
             {
-#if Unity_Editor
+#if UNITY_EDITOR
                 GameObject newLine = PrefabUtility.InstantiatePrefab(line) as GameObject;
 
 
@@ -83,10 +83,11 @@ namespace Tools.LevelDesign
 
 
             ClearLineLists();
+            Vector3 secondPos = new Vector3(secondSelectedGO.transform.position.x, canvas.GetComponent<RectTransform>().anchoredPosition.y, secondSelectedGO.transform.position.z);
             startPoint.Add(firstSelectedGO.transform.position);
-            endPoint.Add(secondSelectedGO.transform.position);
-            startTangent.Add(secondSelectedGO.transform.position);
-            endTangent.Add(secondSelectedGO.transform.position);
+            endPoint.Add(secondPos);
+            startTangent.Add(secondPos);
+            endTangent.Add(secondPos);
 
             
 
