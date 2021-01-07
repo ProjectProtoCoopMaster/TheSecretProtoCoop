@@ -8,7 +8,7 @@ public class Utility
 {
     public static bool SafeCheck<T>(T element, string message)
     {
-        if (element == null)
+        if (element == null || element.Equals(null))
         {
             Debug.Log(message);
             return false;
