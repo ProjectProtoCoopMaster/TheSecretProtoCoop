@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.VR
 {
@@ -22,6 +23,11 @@ namespace Gameplay.VR
         private float currentTime;
 
         private bool completed;
+
+        //private void Start()
+        //{
+        //    Init();
+        //}
 
         public override void Init()
         {
@@ -47,6 +53,7 @@ namespace Gameplay.VR
         {
             check = false;
             playerNightVisionLight.gameObject.SetActive(true);
+            shake.Value = false;
         }
 
         public override void End()
@@ -86,6 +93,11 @@ namespace Gameplay.VR
         private bool VRCheck()
         {
             return Vector3.Magnitude(playerHead.position - playerHandController.position) <= distance;
+        }
+
+        private void OnDisable()
+        {
+            shake.Value = false;
         }
     }
 }

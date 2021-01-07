@@ -9,13 +9,20 @@ namespace Gameplay.VR
         public float depletionTime;
         private float currentDepletionTime;
 
-        public CallableFunction gameOver;
+        public CallableFunction _gameOver;
+        public CallableFunction _sendOxygenTimer;
+        public FloatVariable _oxygenTimer;
 
         public LightManager lightManager;
         public Color alarmLightColor;
         public float alarmTime;
         private float currentAlarmTime;
         private bool isAlarm;
+
+        private void Start()
+        {
+            Init();
+        }
 
         public override void Init()
         {
@@ -31,9 +38,11 @@ namespace Gameplay.VR
         {
             if (active)
             {
-                if (currentDepletionTime <= 0.0f) gameOver.Raise();
+                if (currentDepletionTime <= 0.0f) _gameOver.Raise();
 
                 currentDepletionTime -= Time.deltaTime;
+                _oxygenTimer.Value = currentDepletionTime;
+                _sendOxygenTimer.Raise(_oxygenTimer.Value);
 
                 Alarm();
             }

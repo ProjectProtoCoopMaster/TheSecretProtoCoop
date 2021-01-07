@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8048453322120509207}
   - component: {fileID: 8048453322120509206}
   - component: {fileID: 7841339502451979206}
+  - component: {fileID: 8696602607261053183}
   m_Layer: 0
   m_Name: Player Mobile
   m_TagString: Untagged
@@ -97,4 +98,33 @@ MonoBehaviour:
   _playerPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   _player: {fileID: 11400000, guid: dd1019a1a8255ea43873e7e8e2dd8c89, type: 2}
+  _hidePlayer: {fileID: 11400000, guid: 445ab5a4eccd36b4eb099b9ea801030c, type: 2}
   _transform: {fileID: 8048453322120509208}
+--- !u!114 &8696602607261053183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8048453322120509205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9d501455ab2186745b226e2b6529b1ad, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8048453322120509205}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
