@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5235814436272435467}
   - component: {fileID: 5235814436272435464}
-  - component: {fileID: 5235814436272435466}
+  - component: {fileID: 7791443522203760463}
   - component: {fileID: 5235814436272435465}
   - component: {fileID: 5235814436272435509}
   m_Layer: 0
@@ -77,7 +77,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &5235814436272435466
+--- !u!114 &7791443522203760463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,13 +86,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5235814436272435470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72df472f2d6742a47a126c95b193eb78, type: 3}
+  m_Script: {fileID: 11500000, guid: dadbfe7d5c6b14948a7d94da7d02a5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transform: {fileID: 5235814436272435467}
-  speed: 0.015
+  _transform: {fileID: 5235814436272435467}
+  speed: 0.001
   clampValue: {x: 10, y: 10}
-  clampHeightValue: 20
+  clampHeightValue: 10
 --- !u!81 &5235814436272435465
 AudioListener:
   m_ObjectHideFlags: 0

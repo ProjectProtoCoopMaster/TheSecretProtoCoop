@@ -20,21 +20,23 @@ namespace Networking
             PhotonNetwork.ConnectUsingSettings();
 
         }
-        public void JoinRoom()
+        public void JoinRoom(string roomName)
         {
-            PhotonNetwork.JoinRoom("1");
+            PhotonNetwork.JoinRoom(roomName);
 
         }
 
-        public void CreateRoom()
+        public void CreateRoom(string roomName)
         {
             RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
-            PhotonNetwork.CreateRoom("1", roomOptions);
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
+            
 
         }
 
         public override void OnJoinedRoom()
         {
+            Debug.Log(PhotonNetwork.CurrentRoom);
             if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 _OnRoomFulled.Raise();

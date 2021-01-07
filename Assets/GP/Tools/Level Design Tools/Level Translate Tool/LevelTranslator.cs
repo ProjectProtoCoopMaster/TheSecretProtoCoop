@@ -29,6 +29,7 @@ namespace Tools.LevelDesign
             {
                 Vector3 position = elements.list[i].position;
                 Quaternion rotation = elements.list[i].rotation;
+                Vector3 scale = elements.list[i].scale;
   
                 for (int j = 0; j < prefabsVR.Count; j++)
                 {
@@ -61,6 +62,7 @@ namespace Tools.LevelDesign
 
                 newObject.transform.position = position;
                 newObject.transform.rotation = rotation;
+                newObject.transform.localScale = scale;
 
             }
 
