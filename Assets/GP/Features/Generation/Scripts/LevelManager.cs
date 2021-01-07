@@ -55,12 +55,12 @@ namespace Gameplay
             currentRoomIndex = index;
             currentRoom = levelRooms[currentRoomIndex];
 
-            currentRoom.gameObject.SetActive(true);
+            currentRoom.roomParent.gameObject.SetActive(true);
             currentRoom.OnEnterRoom();
         }
         private void UnloadRoom(int index)
         {
-            levelRooms[index].gameObject.SetActive(false);
+            levelRooms[index].roomParent.gameObject.SetActive(false);
             currentRoom.OnDisableRoom();
         }
         #endregion
@@ -92,7 +92,7 @@ namespace Gameplay
 
             //ApplyModifiers();
 
-            foreach (RoomManager room in levelRooms) room.gameObject.SetActive(false);
+            foreach (RoomManager room in levelRooms) room.roomParent.gameObject.SetActive(false);
 
             CreateLevel();
         } 
@@ -158,12 +158,12 @@ namespace Gameplay
             for (int i = 0; i < levelRooms.Count; i++)
             {
                 Vector3 translation = currentAnchor.position - levelRooms[i].entranceAnchor.localPosition;
-                levelRooms[i].gameObject.transform.position = translation;
+                levelRooms[i].roomParent.gameObject.transform.position = translation;
 
                 float angle = currentAnchor.rotation.eulerAngles.y - levelRooms[i].entranceAnchor.localRotation.eulerAngles.y;
-                levelRooms[i].gameObject.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
+                levelRooms[i].roomParent.gameObject.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
 
-                levelRooms[i].gameObject.transform.parent = this.transform;
+                levelRooms[i].roomParent.gameObject.transform.parent = this.transform;
 
                 currentAnchor = levelRooms[i].exitAnchor;
             }

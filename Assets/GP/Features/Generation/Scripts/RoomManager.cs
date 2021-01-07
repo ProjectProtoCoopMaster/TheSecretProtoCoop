@@ -28,6 +28,8 @@ namespace Gameplay
 
         public Transform playerStart;
 
+        public Transform roomParent;
+
         public ModifierType roomModifier { get; set; } = ModifierType.None;
 
         public NavMeshSurface roomNavigationSurface;

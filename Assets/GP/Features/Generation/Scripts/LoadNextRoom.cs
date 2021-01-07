@@ -7,16 +7,19 @@ namespace Gameplay
 {
     public class LoadNextRoom : MonoBehaviour
     {
+        public bool passed;
         public DoorBehavior door;
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.name == "[HeadCollider]")
+            if (other.name == "[HeadCollider]" && !passed)
             {
                 LevelManager.instance.OnRoomEnd();
 
                 door.Power = 0;
                 door.Unlock();
+
+                passed = true;
             }
         }
     } 
