@@ -25,8 +25,7 @@ namespace Gameplay
         public int maximumModifiersInLevel;
 
         public Pool easyPool, mediumPool, hardPool;
-
-        private List<RoomManager> levelRooms = new List<RoomManager>(); public List<RoomManager> LevelRooms { get => levelRooms; }
+        public List<RoomManager> levelRooms { get; private set; } = new List<RoomManager>();
 
         public Dictionary<ModifierType, Modifier> modifiers = new Dictionary<ModifierType, Modifier>();
         private List<ModifierType> modifierTypes;
@@ -39,19 +38,52 @@ namespace Gameplay
             if (instance == null) instance = this;
         }
 
+        #region Transition
+        public void OnRoomEnd()
+        {
+            // Unload Previous Room
+            if (currentRoomIndex >= 1) UnloadRoom(currentRoomIndex - 1);
+
+            // Load Next Room
+            if (currentRoomIndex < levelRooms.Count - 1) LoadRoom(currentRoomIndex + 1);
+            // Win the Game
+            else Debug.Log("You won the game and one million pesos ! Congratulations !");
+        }
+
+        private void LoadRoom(int index)
+        {
+            currentRoomIndex = index;
+            currentRoom = levelRooms[currentRoomIndex];
+
+            currentRoom.gameObject.SetActive(true);
+            currentRoom.OnEnterRoom();
+        }
+        private void UnloadRoom(int index)
+        {
+            levelRooms[index].gameObject.SetActive(false);
+            currentRoom.OnDisableRoom();
+        }
+        #endregion
+
+        #region Initialization
         void Start()
         {
+            // Generate a new Procedural Level
             GenerateLevel();
+
+            // Load the first Room of the Level
+            LoadRoom(0);
 
             string msg = "There is no Player attached to the Level Manager. Attach one to initialize the player's position in the level !";
             if (Utility.SafeCheck(playerRig, msg))
             {
+                // Sets the Player Area Position at the Entrance of the Room
                 playerRig.transform.position = currentRoom.playerStart.position;
                 playerRig.transform.rotation = currentRoom.playerStart.rotation;
             }
         }
 
-        public void GenerateLevel()
+        private void GenerateLevel()
         {
             modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
 
@@ -63,18 +95,10 @@ namespace Gameplay
             foreach (RoomManager room in levelRooms) room.gameObject.SetActive(false);
 
             CreateLevel();
+        } 
+        #endregion
 
-            LoadRoom(0);
-        }
-
-        public void LoadRoom(int index)
-        {
-            currentRoomIndex = index;
-            currentRoom = levelRooms[currentRoomIndex];
-
-            currentRoom.gameObject.SetActive(true);
-        }
-
+        #region Rooms
         private void SelectRooms(List<Pool> pools)
         {
             foreach (Pool pool in pools)
@@ -82,7 +106,6 @@ namespace Gameplay
                 PickRoom(pool);
             }
         }
-
         private void PickRoom(Pool pool)
         {
             List<RoomManager> availableRoomsInPool = new List<RoomManager>();
@@ -99,7 +122,9 @@ namespace Gameplay
                 availableRoomsInPool.RemoveAt(pick);
             }
         }
+        #endregion
 
+        #region Modifiers
         private void ApplyModifiers()
         {
             int modifiersAmount = Random.Range(0, maximumModifiersInLevel) + 1;
@@ -123,7 +148,9 @@ namespace Gameplay
             }
             unmodifiedRooms.Clear();
         }
+        #endregion
 
+        #region Level Creation
         private void CreateLevel()
         {
             Transform currentAnchor = levelEntranceAnchor;
@@ -132,7 +159,7 @@ namespace Gameplay
             {
                 Vector3 translation = currentAnchor.position - levelRooms[i].entranceAnchor.localPosition;
                 levelRooms[i].gameObject.transform.position = translation;
-                
+
                 float angle = currentAnchor.rotation.eulerAngles.y - levelRooms[i].entranceAnchor.localRotation.eulerAngles.y;
                 levelRooms[i].gameObject.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
 
@@ -140,18 +167,7 @@ namespace Gameplay
 
                 currentAnchor = levelRooms[i].exitAnchor;
             }
-        }
-
-        public void OnRoomEnd()
-        {
-            if (currentRoomIndex < LevelRooms.Count - 1)
-            {
-                instance.LoadRoom(currentRoomIndex + 1);
-            }
-            else
-            {
-                Debug.Log("You won the game and one million pesos ! Congratulations !");
-            }
-        }
+        } 
+        #endregion
     } 
 }

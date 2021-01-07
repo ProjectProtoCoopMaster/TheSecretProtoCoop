@@ -34,11 +34,6 @@ namespace Gameplay
 
         public AIManager aIManager;
 
-        void Start()
-        {
-            OnEnterRoom();
-        }
-
         public void OnEnterRoom()
         {
             // Initialize Modifier
@@ -60,6 +55,11 @@ namespace Gameplay
 
             // Initialization Switchers
                 // Initialize Elements
+        }
+
+        public void OnDisableRoom()
+        {
+            if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
         }
     } 
 }

@@ -13,7 +13,6 @@ namespace Gameplay.VR
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
 
-        [SerializeField] private Collider collider;
         [SerializeField] private Material red, green, blue;
         [SerializeField] private Renderer keyPassRenderer;
         [SerializeField] private Animator anim;
