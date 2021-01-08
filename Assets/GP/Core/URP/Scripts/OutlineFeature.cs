@@ -1,16 +1,37 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class OutlineFeature : ScriptableRendererFeature
 {
+    [System.Serializable]
+    public class FilterSettings
+    {
+        // TODO: expose opaque, transparent, all ranges as drop down
+        public RenderQueueType RenderQueueType;
+        public LayerMask LayerMask;
+        public string[] PassNames;
+        
+        public FilterSettings()
+        {
+            RenderQueueType = RenderQueueType.Opaque;
+            LayerMask = 0;
+        }
+    }
+
     class OutlinePass : ScriptableRenderPass
     {
         private RenderTargetIdentifier source { get; set; }
         private RenderTargetHandle destination { get; set; }
+
+        public FilterSettings filterSettings = new FilterSettings();
+        public CullingResults cullingResults = new CullingResults();
+        public FilteringSettings filteringSettings = new FilteringSettings();
+
         public Material outlineMaterial = null;
         RenderTargetHandle temporaryColorTexture;
-
+            
         public void Setup(RenderTargetIdentifier source, RenderTargetHandle destination)
         {
             this.source = source;
@@ -21,8 +42,6 @@ public class OutlineFeature : ScriptableRendererFeature
         {
             this.outlineMaterial = outlineMaterial;
         }
-
-
 
         // This method is called before executing the render pass.
         // It can be used to configure render targets and their clear state. Also to create temporary render target textures.
@@ -54,6 +73,15 @@ public class OutlineFeature : ScriptableRendererFeature
             }
             else Blit(cmd, source, destination.Identifier(), outlineMaterial, 0);
 
+
+
+
+
+
+
+
+
+
             context.ExecuteCommandBuffer(cmd);
             CommandBufferPool.Release(cmd);
         }
@@ -70,6 +98,10 @@ public class OutlineFeature : ScriptableRendererFeature
     [System.Serializable]
     public class OutlineSettings
     {
+        public CullingResults cullingResults = new CullingResults();
+        public FilteringSettings filteringSettings = new FilteringSettings();
+        public FilterSettings filterSettings = new FilterSettings();
+
         public Material outlineMaterial = null;
     }
 
@@ -90,7 +122,7 @@ public class OutlineFeature : ScriptableRendererFeature
     {
         if (settings.outlineMaterial == null)
         {
-            Debug.LogWarningFormat("Missing Outline Material");
+            Debug.LogErrorFormat("Missing Outline Material");
             return;
         }
         outlinePass.Setup(renderer.cameraColorTarget, RenderTargetHandle.CameraTarget);
