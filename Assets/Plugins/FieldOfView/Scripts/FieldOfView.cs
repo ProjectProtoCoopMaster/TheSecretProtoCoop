@@ -13,7 +13,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 
 public class FieldOfView : MonoBehaviour {
 
@@ -23,16 +23,32 @@ public class FieldOfView : MonoBehaviour {
     private float viewDistance;
     private Vector3 origin;
     public float rotation;
+    [SerializeField] bool isUpdate = false;
 
-    private void Start() {
+    private IEnumerator Start() {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         fov = 90f;
         viewDistance = 50f;
         origin = Vector3.zero;
+
+        yield return new WaitForSeconds(0.25f);
+        Calculate();
+
     }
 
-    private void LateUpdate() {
+
+
+    private void Update() {
+        if (isUpdate)
+        {
+            Calculate();
+        }
+        
+    }
+
+    private void Calculate()
+    {
         int rayCount = 50;
         float angle = rotation;
         float angleIncrease = fov / rayCount;
@@ -41,17 +57,18 @@ public class FieldOfView : MonoBehaviour {
         Vector2[] uv = new Vector2[vertices.Length];
         int[] triangles = new int[rayCount * 3];
 
-        vertices[0] = origin ;
+        vertices[0] = origin;
 
         int vertexIndex = 1;
         int triangleIndex = 0;
-        for (int i = 0; i <= rayCount; i++) {
+        for (int i = 0; i <= rayCount; i++)
+        {
             Vector3 vertex;
             RaycastHit hit;
 
             if (Physics.Raycast(origin + transform.position, GetVectorFromAngle(angle), out hit, viewDistance, layerMask))
             {
-                vertex =  hit.point - transform.position;
+                vertex = hit.point - transform.position;
             }
             else
             {
@@ -70,7 +87,8 @@ public class FieldOfView : MonoBehaviour {
             //}
             vertices[vertexIndex] = vertex;
 
-            if (i > 0) {
+            if (i > 0)
+            {
                 triangles[triangleIndex + 0] = 0;
                 triangles[triangleIndex + 1] = vertexIndex - 1;
                 triangles[triangleIndex + 2] = vertexIndex;
@@ -86,6 +104,8 @@ public class FieldOfView : MonoBehaviour {
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
+        //mesh.triangles.
+        //mesh.triangles = mesh.triangles.Reverse().ToArray();
         mesh.bounds = new Bounds(origin, Vector3.one * 1000f);
     }
 

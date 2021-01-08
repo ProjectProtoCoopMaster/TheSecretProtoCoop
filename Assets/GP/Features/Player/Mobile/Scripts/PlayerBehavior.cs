@@ -11,6 +11,11 @@ namespace Gameplay.Mobile
         [SerializeField] private GameObjectVariable _player;
         [SerializeField] private BoolVariable _hidePlayer;
         [SerializeField] private Transform _transform;
+
+        private void Start()
+        {
+            _player.Value = this.gameObject;
+        }
         private void Update()
         {
             if (!_hidePlayer.Value)
