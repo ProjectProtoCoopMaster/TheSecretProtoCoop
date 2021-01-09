@@ -5,29 +5,10 @@ using UnityEngine.Rendering;
 
 public class OutlineFeature : ScriptableRendererFeature
 {
-    [System.Serializable]
-    public class FilterSettings
-    {
-        // TODO: expose opaque, transparent, all ranges as drop down
-        public RenderQueueType RenderQueueType;
-        public LayerMask LayerMask;
-        public string[] PassNames;
-        
-        public FilterSettings()
-        {
-            RenderQueueType = RenderQueueType.Opaque;
-            LayerMask = 0;
-        }
-    }
-
     class OutlinePass : ScriptableRenderPass
     {
         private RenderTargetIdentifier source { get; set; }
         private RenderTargetHandle destination { get; set; }
-
-        public FilterSettings filterSettings = new FilterSettings();
-        public CullingResults cullingResults = new CullingResults();
-        public FilteringSettings filteringSettings = new FilteringSettings();
 
         public Material outlineMaterial = null;
         RenderTargetHandle temporaryColorTexture;
@@ -98,10 +79,6 @@ public class OutlineFeature : ScriptableRendererFeature
     [System.Serializable]
     public class OutlineSettings
     {
-        public CullingResults cullingResults = new CullingResults();
-        public FilteringSettings filteringSettings = new FilteringSettings();
-        public FilterSettings filterSettings = new FilterSettings();
-
         public Material outlineMaterial = null;
     }
 

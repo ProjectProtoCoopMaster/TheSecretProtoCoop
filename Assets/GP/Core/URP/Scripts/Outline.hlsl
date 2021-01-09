@@ -1,4 +1,3 @@
-
 TEXTURE2D(_CameraColorTexture);
 SAMPLER(sampler_CameraColorTexture);
 float4 _CameraColorTexture_TexelSize;
