@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 57438722162122607}
   - component: {fileID: 57438722162122606}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: DoorClosedSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 259040996859140251}
   - component: {fileID: 259040996859140263}
   - component: {fileID: 9003017043097480413}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Door Mobile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,10 +132,10 @@ MonoBehaviour:
   lockState: 0
   state: 1
   power: 1
-  color_Open_Unlocked: {r: 0.107794166, g: 1, b: 0, a: 1}
+  color_Open_Unlocked: {r: 1, g: 0.99997777, b: 0, a: 1}
   color_Open_Locked: {r: 1, g: 0.36519483, b: 0, a: 1}
   color_Close: {r: 1, g: 0, b: 0, a: 1}
-  outline: {fileID: 239918234417075015}
+  door: {fileID: 259040998144362749}
   anim: {fileID: 0}
 --- !u!95 &259040996859140263
 Animator:
@@ -195,8 +195,7 @@ GameObject:
   - component: {fileID: 259040998144362750}
   - component: {fileID: 259040998144362745}
   - component: {fileID: 259040998144362744}
-  - component: {fileID: 239918234417075015}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +243,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
+  - {fileID: 2100000, guid: 9b3cb323dbfe09f48b68b2e7946cb38c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,21 +265,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &239918234417075015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259040998144362749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.22800541, g: 1, b: 0, a: 1}
-  outlineWidth: 20
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []

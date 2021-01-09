@@ -8,6 +8,8 @@ namespace Gameplay.Mobile
 {
     public class DoorBehavior : MonoBehaviour, ISwitchable
     {
+
+        private Material mat;
         public enum LockState { Locked, Unlocked }
         public LockState lockState;
 
@@ -18,7 +20,7 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Unlocked;
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
-        [SerializeField] private Outline outline;
+        [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
@@ -35,24 +37,27 @@ namespace Gameplay.Mobile
         private void OnEnable()
         {
             CheckLockState();
+
+            mat = new Material(door.GetComponent<MeshRenderer>().material);
+            door.GetComponent<MeshRenderer>().material = mat;
         }
         private void Start() => Power = power;
 
 
         public void TurnOn()
         {
-            DOTween.To(() => outline.OutlineColor, x => outline.OutlineColor = x, color_Close, .5f);
+            mat.DOColor(color_Close * 2, "_EmissionColor", .5f);
         }
 
         public void TurnOff()
         {
             if (lockState == LockState.Locked)
             {
-                DOTween.To(() => outline.OutlineColor, x => outline.OutlineColor = x, color_Open_Locked, .5f);
+                mat.DOColor(color_Open_Locked * 2, "_EmissionColor", .5f);
             }
             else
             {
-                DOTween.To(() => outline.OutlineColor, x => outline.OutlineColor = x, color_Open_Unlocked, .5f);
+                mat.DOColor(color_Open_Unlocked * 2, "_EmissionColor", .5f);
             }
         }
 
