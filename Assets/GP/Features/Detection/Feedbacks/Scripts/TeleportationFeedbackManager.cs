@@ -1,4 +1,5 @@
-﻿using Gameplay.VR.Player;
+﻿#if UNITY_STANDALONE
+using Gameplay.VR.Player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,3 +66,4 @@ namespace Gameplay.VR.Feedbacks
         }
     }
 }
+#endif
