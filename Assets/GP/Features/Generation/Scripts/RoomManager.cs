@@ -21,7 +21,7 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
-        [InfoBox(@"@""The Room Modifier is: "" + this.roomModifier.ToString()")]
+        [InfoBox(@"@""Modifier : "" + this.roomModifier.ToString()")]
 
         public Transform entranceAnchor;
         public Transform exitAnchor;
@@ -42,7 +42,7 @@ namespace Gameplay
             //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             // Bake NavMesh
-            string navMsg = "there is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";
+            string navMsg = "There is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";
             if (Utility.SafeCheck(roomNavigationSurface, navMsg))
             {
                 roomNavigationSurface.BuildNavMesh();

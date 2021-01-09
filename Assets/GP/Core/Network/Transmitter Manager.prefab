@@ -18,8 +18,9 @@ GameObject:
   - component: {fileID: 2100248664}
   - component: {fileID: 2906806235926443016}
   - component: {fileID: 7459075962156835230}
+  - component: {fileID: 5609338987451628239}
   m_Layer: 0
-  m_Name: TransmitterManager
+  m_Name: Transmitter Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +34,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216035856832860937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 289, y: 162.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,6 +60,7 @@ MonoBehaviour:
   _destroyJammer: {fileID: 11400000, guid: 6e55d01f9ae685647a7ef133e818cf50, type: 2}
   _loadNextLevel: {fileID: 11400000, guid: 21f158bb5d70e93498deae7527480881, type: 2}
   _onOpenDoor: {fileID: 11400000, guid: d6032a02634764a4cae45e41c7a40a1d, type: 2}
+  _onVictory: {fileID: 11400000, guid: a366e3bc86242a649979d403d8537fac, type: 2}
   gameManager: {fileID: 0}
   symbolManager: {fileID: 0}
 --- !u!114 &712942561
@@ -306,6 +308,37 @@ MonoBehaviour:
       - m_Target: {fileID: 6129269782710857282}
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendLoadSameSceneToOthers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &5609338987451628239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216035856832860937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 38b97a089d7e018449a1176e53fa72e1, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6129269782710857282}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendOnVictoryToOthers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
