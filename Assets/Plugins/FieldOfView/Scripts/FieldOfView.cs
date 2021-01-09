@@ -25,6 +25,10 @@ public class FieldOfView : MonoBehaviour {
     public float rotation;
     [SerializeField] bool isUpdate = false;
 
+    private void OnEnable()
+    {
+        Calculate();
+    }
     private IEnumerator Start() {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -33,7 +37,7 @@ public class FieldOfView : MonoBehaviour {
         origin = Vector3.zero;
 
         yield return new WaitForSeconds(0.25f);
-        Calculate();
+
 
     }
 

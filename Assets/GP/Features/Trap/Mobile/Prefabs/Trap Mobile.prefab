@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394562814}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.522, z: 0}
   m_LocalScale: {x: 0.34689358, y: 2.0586162, z: 0.2}
   m_Children: []
   m_Father: {fileID: 9117689954274621140}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &1394562816
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 9117689954274621141}
   - component: {fileID: 9117689954274621146}
   - component: {fileID: 1931621019961368793}
+  - component: {fileID: 1257159977}
   m_Layer: 12
   m_Name: Trap Mobile
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 9117689954274621144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.651, y: 2.227, z: -7.012}
-  m_LocalScale: {x: 2.8827283, y: 5, z: 0.4857632}
+  m_LocalScale: {x: 3.292729, y: 5, z: 0.4857632}
   m_Children:
   - {fileID: 1394562815}
   m_Father: {fileID: 0}
@@ -143,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fef85b93bbe2a274c9a7b6995b8f5755, type: 2}
+  - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,5 +178,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6638ca4564aab0546b40acc57048b4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 1257159977}
   state: 1
-  power: 1
+  power: 0
+--- !u!114 &1257159977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117689954274621144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.978732, b: 0, a: 1}
+  outlineWidth: 20
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

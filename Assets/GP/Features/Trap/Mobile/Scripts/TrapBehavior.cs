@@ -8,6 +8,7 @@ namespace Gameplay.Mobile
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
         private Color color;
+        [SerializeField] private Gameplay.Mobile.Outline outline;
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
@@ -30,8 +31,8 @@ namespace Gameplay.Mobile
 
         private void Start() => Power = power;
 
-        public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); }
-        public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); }
+        public void TurnOff() { DOTween.To(() => outline.OutlineWidth, x => outline.OutlineWidth = x, 0, .5f); }
+        public void TurnOn() { DOTween.To(() => outline.OutlineWidth, x => outline.OutlineWidth = x, 20f, .5f); }
 
         //public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); }
         //public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); }

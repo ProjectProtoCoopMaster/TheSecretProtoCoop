@@ -33,20 +33,20 @@ namespace Mobile
                 {
                     if (_transform.position.x > clampValue.x)
                     {
-                        _transform.DOMoveX(clampValue.x, .5f);
+                        _transform.DOMoveX(-clampValue.x, .5f);
                     }
                     else if (_transform.position.x < -clampValue.x)
                     {
-                        _transform.DOMoveX(-clampValue.x, .5f);
+                        _transform.DOMoveX(clampValue.x, .5f);
                     }
 
                     if (_transform.position.z > clampValue.y)
                     {
-                        _transform.DOMoveZ(clampValue.y, .5f);
+                        _transform.DOMoveZ(-clampValue.y, .5f);
                     }
                     else if (_transform.position.z < -clampValue.y)
                     {
-                        _transform.DOMoveZ(-clampValue.y, .5f);
+                        _transform.DOMoveZ(clampValue.y, .5f);
 
                     }
                 }

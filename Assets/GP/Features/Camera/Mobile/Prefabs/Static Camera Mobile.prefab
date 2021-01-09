@@ -45,8 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976ac98cdd6c9364aa99f740bccb967f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionCone: {fileID: 4191469979946040873}
   state: 1
   power: 0
+--- !u!114 &139394580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952084204970858231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8564266, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &365234688938013991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,8 +133,17 @@ PrefabInstance:
       propertyPath: radius
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7397051660543612718, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
+      propertyPath: rotation
+      value: 123.39
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
+--- !u!1 &4191469979946040873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4556099928856283918, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
+  m_PrefabInstance: {fileID: 365234688938013991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4191469979946040877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4556099928856283914, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
@@ -176,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
     - target: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
       propertyPath: m_Name
       value: Camera Visuals
@@ -190,6 +222,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
+--- !u!1 &8952084204970858231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
+  m_PrefabInstance: {fileID: 8141761517501639590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8608597203719294029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}

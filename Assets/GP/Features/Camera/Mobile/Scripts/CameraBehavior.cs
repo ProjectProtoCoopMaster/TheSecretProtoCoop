@@ -10,6 +10,7 @@ namespace Gameplay.Mobile
     {
         //[SerializeField] private LineRenderer visionLine;
         private Color color;
+        [ SerializeField] private GameObject visionCone;
 
         [Range(0, 1), SerializeField] private int state = 1;
         [Range(0, 1), SerializeField] private int power = 1;
@@ -31,8 +32,8 @@ namespace Gameplay.Mobile
         }
         private void Start() => Power = power;
 
-        public void TurnOff() {  }
-        public void TurnOn() { }
+        public void TurnOff() { visionCone.SetActive(false); }
+        public void TurnOn() { visionCone.SetActive(true); }
         //public void TurnOff() { GetComponent<Image>().DOColor(Color.black, .5f); visionLine.SetColors(Color.black, Color.black); }
         //public void TurnOn() { GetComponent<Image>().DOColor(color, .5f); visionLine.SetColors(Color.red, Color.red); }
 
