@@ -72,7 +72,7 @@ namespace Tools.LevelDesign
                         //newElement.position = cam.WorldToScreenPoint(switcher.transform.GetChild(j).position);
                         newElement.position = switcher.transform.GetChild(j).position;
                         newElement.rotation = switcher.transform.GetChild(j).rotation;
-                        newElement.scale = switcher.transform.GetChild(j).localScale;
+                        newElement.scale = switcher.transform.GetChild(j).transform.Find("Mesh").transform.localScale;
                         elements.list.Add(newElement);
                     }
                 }

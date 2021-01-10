@@ -21,6 +21,7 @@ namespace Gameplay.Mobile
         public int State { get { return state; } set { state = value; } }
         public int Power
         {
+
             get { return power; }
             set
             {
