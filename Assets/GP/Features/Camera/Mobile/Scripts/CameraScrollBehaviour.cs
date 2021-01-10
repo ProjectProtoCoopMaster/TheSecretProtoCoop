@@ -26,27 +26,27 @@ namespace Mobile
                 if (touch.phase == TouchPhase.Moved)
                 {
                     //transform.DOMove(transform.position + (new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y) * speed), .2f);
-                    _transform.Translate(touch.deltaPosition * speed);
+                    _transform.Translate(-touch.deltaPosition * speed);
 
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
                     if (_transform.position.x > clampValue.x)
                     {
-                        _transform.DOMoveX(-clampValue.x, .5f);
+                        _transform.DOMoveX(clampValue.x, .5f);
                     }
                     else if (_transform.position.x < -clampValue.x)
                     {
-                        _transform.DOMoveX(clampValue.x, .5f);
+                        _transform.DOMoveX(-clampValue.x, .5f);
                     }
 
                     if (_transform.position.z > clampValue.y)
                     {
-                        _transform.DOMoveZ(-clampValue.y, .5f);
+                        _transform.DOMoveZ(clampValue.y, .5f);
                     }
                     else if (_transform.position.z < -clampValue.y)
                     {
-                        _transform.DOMoveZ(clampValue.y, .5f);
+                        _transform.DOMoveZ(-clampValue.y, .5f);
 
                     }
                 }
@@ -75,7 +75,7 @@ namespace Mobile
                 else
                 {
                     //transform.Translate(transform.position.y + (difference * .07f));
-                    _transform.DOMoveY(_transform.position.y + (difference * .01f), 0);
+                    _transform.DOMoveY(_transform.position.y + (-difference * .01f), 0);
 
                 }
 

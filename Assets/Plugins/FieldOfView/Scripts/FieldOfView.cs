@@ -35,9 +35,9 @@ public class FieldOfView : MonoBehaviour {
         fov = 90f;
         viewDistance = 50f;
         origin = Vector3.zero;
-
-        yield return new WaitForSeconds(0.25f);
-
+        isUpdate = true;
+        yield return new WaitForSeconds(0.1f);
+        isUpdate = false;
 
     }
 

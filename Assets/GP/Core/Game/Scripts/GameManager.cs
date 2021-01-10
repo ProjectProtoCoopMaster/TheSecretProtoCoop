@@ -24,6 +24,7 @@ namespace Gameplay
 
 
         [SerializeField] private bool startGame;
+        [SerializeField] private bool launchOneScene;
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private IntVariable _sceneID;
         [SerializeField] private BoolVariable _isMobile;
@@ -40,6 +41,8 @@ namespace Gameplay
         {
             if (startGame)
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+
+            if(launchOneScene) SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
         }
 
         public void RaiseOnLose(int ID) {  loseType = (LoseType)ID; _onLose.Raise(); }

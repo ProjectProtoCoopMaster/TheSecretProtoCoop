@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308117188210570705}
   - component: {fileID: 1308117188210570710}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Static Camera Mobile
   m_TagString: Camera/Static Camera
   m_Icon: {fileID: 0}
@@ -46,26 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionCone: {fileID: 4191469979946040873}
+  visualCam: {fileID: 8952084204970858231}
   state: 1
   power: 0
---- !u!114 &139394580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8952084204970858231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8564266, b: 0, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1001 &365234688938013991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 4556099928856283918, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
       propertyPath: m_Name
       value: VisionCone
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556099928856283918, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4556099928856283919, guid: 9140f65b65221b042a0ea5d042944e99, type: 3}
       propertyPath: angle
@@ -207,7 +194,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
+      objectReference: {fileID: 2100000, guid: 614d4a1b0b9b8804b968d7793429b8f9, type: 2}
     - target: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
       propertyPath: m_Name
       value: Camera Visuals
@@ -219,6 +206,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}

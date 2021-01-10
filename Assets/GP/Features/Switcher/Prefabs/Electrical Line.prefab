@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7462249052151418312}
   - component: {fileID: 1377228285512695075}
   - component: {fileID: 3445821262979044658}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Electrical Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8b9784c10f1ef1f4bab8e02523daf628, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,9 +75,9 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 2, y: 0, z: 1}
-  - {x: 2, y: 0, z: 1}
-  - {x: 2, y: 0, z: 1}
+  - {x: 310, y: 0, z: 0}
+  - {x: 310, y: 0, z: -475}
+  - {x: 200, y: 0, z: -475}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4936f58f656f542b2a1f00f4a152e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  power: 0
+  state: 1
+  power: 1
   line: {fileID: 7462249052151418312}
 --- !u!114 &3445821262979044658
 MonoBehaviour:
