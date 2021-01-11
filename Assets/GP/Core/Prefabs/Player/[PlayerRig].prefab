@@ -5685,12 +5685,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80936b59bcbd6ff4abad636cb54d77bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transform: {fileID: 0}
   playerHitTrap: {fileID: 11400000, guid: 86d8d57eee7c00d41a8fe79b76cc7756, type: 2}
   raiseAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   _gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
   _sendPlayerPosAndRot: {fileID: 11400000, guid: 3ef10703e4ae96a4b850ab5dab24df72, type: 2}
   _playerPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
+  _player: {fileID: 0}
   pictureCamera: {fileID: 5983130863245318947}
   debugRot: 0
 --- !u!114 &7409026258412376008
@@ -6733,9 +6735,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tweenDuration: 0.25
   tweenFunction: 0
-  teleportAiming: {fileID: 11400000, guid: 46fbd5a8138bdb4469d687dc256ffec6, type: 2}
-  teleported: {fileID: 11400000, guid: 32bc4af34681270478dbe3e79a54ed4a, type: 2}
-  teleportShifting: {fileID: 11400000, guid: ba33932fa883b7a49a2bfa093f91d894, type: 2}
+  particleDash: {fileID: 7868168292743468123}
+  teleporting: {fileID: 11400000, guid: 46fbd5a8138bdb4469d687dc256ffec6, type: 2}
   playerRig: {fileID: 6003109435717295971}
   playerHead: {fileID: 5999183673499546489}
   teleportationLayers:
