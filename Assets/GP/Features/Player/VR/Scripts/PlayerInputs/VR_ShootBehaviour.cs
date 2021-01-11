@@ -23,6 +23,7 @@ namespace Gameplay.VR.Player
         float timePassed = 2f;
         [SerializeField] [FoldoutGroup("Internal Values")] FloatVariable bulletRadius;
         [SerializeField] [FoldoutGroup("Internal Values")] FloatVariable bulletForce;
+        [SerializeField] [FoldoutGroup("Internal Values")] Transform gunBarrel, target;
         [SerializeField] [FoldoutGroup("Internal Values")] LayerMask shootingLayer = default;
         RaycastHit hitInfo = default;
 
@@ -49,14 +50,14 @@ namespace Gameplay.VR.Player
             {
                 timePassed = shootingCooldown.Value;
 
-                shotTrail.transform.position = transform.position;
-                shotTrail.transform.rotation = transform.rotation;
+                shotTrail.transform.position = gunBarrel.position;
+                shotTrail.transform.LookAt(target);
 
                 shotTrail.Play();
 
                 shooting.Raise();
 
-                if (Physics.SphereCast(transform.position, bulletRadius.Value, transform.forward, out hitInfo, 100f, shootingLayer))
+                if (Physics.SphereCast(transform.position, bulletRadius.Value, (target.position - gunBarrel.position).normalized, out hitInfo, 100f, shootingLayer))
                 {
                     Debug.Log("I shot and hit " + hitInfo.collider.gameObject.name);
 
