@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: ee2e1043-7e95-4eb5-a814-fe463d99ea46
+    AppIdRealtime: c55fd8b5-f106-424a-ade5-fe1ec8834753
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: eu
     Server: 
     Port: 0
     ProxyServer: 
@@ -51,6 +51,22 @@ MonoBehaviour:
   - SendCodeName
   - SendIconsSelected
   - SendOnOpenDoor
+  - SendPosition
+  - SendRotation
+  - SendPosAndRot
+  - SendOnJammerDestroyed
+  - SendDestroyJammer
+  - SendLoadNextScene
+  - SendLoadSameScene
+  - SendOnVictory
+  - SendMobileCheck
+  - Init
+  - Shake
+  - ShakeResult
+  - ShakeStart
+  - Variable
+  - HidePlayer
+  - SendOxygenTimer
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1
