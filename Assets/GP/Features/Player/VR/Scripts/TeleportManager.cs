@@ -15,8 +15,10 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
         [Tooltip("The Particle Effect to play when the player teleports.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
-        [Tooltip("The GameEvent that is called when the player teleports.")]
-        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleporting;
+        [Tooltip("The GameEvent that is called when the player presses down on the teleport input.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
+        [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleported;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -185,6 +187,8 @@ namespace Gameplay.VR.Player
 
             controllerPose = _controllerPose;
             showRayPointer = true;
+
+            teleportAiming.Raise();
         }
 
         void ShowRayPointer()
@@ -265,7 +269,7 @@ namespace Gameplay.VR.Player
 
             particleDash.Play();
 
-            teleporting.Raise();
+            teleported.Raise();
 
             time = 0;
             change = targetPos - startPos;

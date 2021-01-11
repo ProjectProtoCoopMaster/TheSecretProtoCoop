@@ -19,16 +19,14 @@ namespace Gameplay.PC.Player
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKey(teleportKeyCode))
-            {
-                teleportationManager.pointerOrigin = teleportOrigin;
+            if (Input.GetKeyDown(teleportKeyCode))
                 teleportationManager.TallRayPointer(null);
-            }
+
+            if (Input.GetKey(teleportKeyCode))
+                teleportationManager.pointerOrigin = teleportOrigin;
 
             if (Input.GetKeyUp(teleportKeyCode))
-            {
                 teleportationManager.TryTeleporting();
-            }
         }
     }
 }
