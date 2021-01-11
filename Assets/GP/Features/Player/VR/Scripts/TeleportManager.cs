@@ -98,10 +98,10 @@ namespace Gameplay.VR.Player
             get
             {
                 float controllerAngle = Vector3.Angle(Vector3.up * -1.0f, controllerForward);
-                float pitch = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
-                float pitchRange = maxControllerAngle - minControllerAngle;
-                float t = (pitch - minControllerAngle) / pitchRange; // Normalized pitch within range
-                return maxDistance * t;
+                float clampedAngle = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
+                float angleRange = maxControllerAngle - minControllerAngle;
+                float pitch = (clampedAngle - minControllerAngle) / angleRange; // Normalized pitch within range
+                return maxDistance * pitch;
             }
         }
 
@@ -157,15 +157,6 @@ namespace Gameplay.VR.Player
                 return playerHead.position + Vector3.up * castingHeight;
             }
         }
-
-        Vector3 playerFeetPosition
-        {
-            get
-            {
-                return Vector3.zero;
-            }
-        }
-
         #endregion
 
         public void GE_OnGameOver()
