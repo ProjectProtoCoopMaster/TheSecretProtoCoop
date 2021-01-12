@@ -26,12 +26,9 @@ namespace Gameplay.VR.Player
 
         private void FixedUpdate()
         {
-            if (Physics.Raycast(transform.position, transform.GetChild(1).position - transform.position, out hitInfo, collisionMask))
-            {
-                if(hitPoint != null)
-                    hitPoint.position = hitInfo.point;
-                else hitPoint = target;
-            }
+            if (Physics.Raycast(transform.position, target.position - transform.position, out hitInfo, collisionMask))
+                hitPoint.position = hitInfo.point;
+            else hitPoint = target;
         }
 
         private void LateUpdate()
@@ -39,5 +36,5 @@ namespace Gameplay.VR.Player
             laserPointer.SetPosition(0, barrel.position);
             laserPointer.SetPosition(1, hitPoint.position);
         }
-    } 
+    }
 }

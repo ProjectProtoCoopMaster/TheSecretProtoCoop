@@ -379,7 +379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256598683}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.4, y: -0, z: 1.98}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1393905653}
@@ -415,7 +415,7 @@ Transform:
   m_GameObject: {fileID: 1393905652}
   m_LocalRotation: {x: -0.3535534, y: -0.3535534, z: -0.61237246, w: 0.61237246}
   m_LocalPosition: {x: 0, y: -0.05, z: 0}
-  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1256598684}
   - {fileID: 1148180711}
@@ -430,7 +430,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393905652}
-  m_Mesh: {fileID: -5973858502704385786, guid: df6ac01e78a6ee34eaca38aaad943586, type: 3}
+  m_Mesh: {fileID: -7775321886694052203, guid: a56743e590b1e114697f728b60015863, type: 3}
 --- !u!23 &1393905654
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -499,6 +499,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserWidth: 0.01
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 84992
 --- !u!120 &3672720068486090791
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6397,6 +6400,7 @@ GameObject:
   - component: {fileID: 497112874}
   - component: {fileID: 7409026258412376010}
   - component: {fileID: 8359000}
+  - component: {fileID: 1981393828}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -6678,6 +6682,30 @@ MonoBehaviour:
     m_Bits: 2048
   pickupOffset: 0.2
   deadGuard: {fileID: 0}
+--- !u!114 &1981393828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435717588941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f511c1adaa1e94ebe7ca97bbcabd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pose: {fileID: 0}
+  interactWithUI:
+    actionPath: /actions/default/in/InteractUI
+    needsReinit: 0
+  active: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  thickness: 0.002
+  clickColor: {r: 0, g: 1, b: 0, a: 1}
+  holder: {fileID: 0}
+  pointer: {fileID: 0}
+  addRigidBody: 0
+  reference: {fileID: 0}
 --- !u!1 &6003109435831060674
 GameObject:
   m_ObjectHideFlags: 0
@@ -6734,7 +6762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenDuration: 0.25
-  tweenFunction: 0
+  tweenFunction: 2
   particleDash: {fileID: 7868168292743468123}
   teleportAiming: {fileID: 11400000, guid: 46fbd5a8138bdb4469d687dc256ffec6, type: 2}
   teleported: {fileID: 11400000, guid: 32bc4af34681270478dbe3e79a54ed4a, type: 2}
@@ -6804,7 +6832,7 @@ MonoBehaviour:
   lineWidth: 0.01
   maxDistance: 10
   castingHeight: 4
-  minControllerAngle: 30
+  minControllerAngle: 60
   maxControllerAngle: 150
   bezierSmoothness: 10
 --- !u!114 &7956172257271811479
@@ -11964,6 +11992,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserWidth: 0.01
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!120 &8045456307651649766
 LineRenderer:
   m_ObjectHideFlags: 0
