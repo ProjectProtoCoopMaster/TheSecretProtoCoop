@@ -10,6 +10,9 @@ namespace Gameplay.Mobile
     {
 
         private Material mat;
+        private bool selectable;
+        [SerializeField] private Transform mesh;
+
         public enum LockState { Locked, Unlocked }
         public LockState lockState;
 
@@ -81,8 +84,7 @@ namespace Gameplay.Mobile
             if(lockState == LockState.Locked)
             {
 
-                //GetComponent<Button>().enabled = true;
-                //anim.enabled = true;
+                selectable =true;
                 padlock_Close.SetActive(true);
                 padlock_Open.SetActive(false);
             }
@@ -95,8 +97,7 @@ namespace Gameplay.Mobile
         private void FeedbackUnlock()
         {
 
-            //GetComponent<Button>().enabled = false;
-            //anim.enabled = false;
+            selectable = false;
 
             padlock_Close.SetActive(false);
             padlock_Open.SetActive(true);
@@ -115,7 +116,19 @@ namespace Gameplay.Mobile
             else Power = 1;
         }
 
+        [Button]
+        public void SetColliderOnMesh()
+        {
+            GetComponent<BoxCollider>().size = mesh.localScale;
+            GetComponent<BoxCollider>().center = mesh.localPosition;
+        }
+        public void Hello() => Debug.Log("Hello");
 
+        private void OnMouseDown()
+        {
+            if(selectable)
+                Hello();
+        }
     }
 }
 

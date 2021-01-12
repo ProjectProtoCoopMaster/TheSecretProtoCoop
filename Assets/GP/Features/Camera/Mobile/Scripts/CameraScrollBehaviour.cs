@@ -68,9 +68,9 @@ namespace Mobile
                 {
                     _transform.DOMoveY(clampHeightValue, .2f);
                 }
-                else if (_transform.position.y < 7)
+                else if (_transform.position.y < 14)
                 {
-                    _transform.DOMoveY(7, .2f);
+                    _transform.DOMoveY(14, .2f);
                 }
                 else
                 {
