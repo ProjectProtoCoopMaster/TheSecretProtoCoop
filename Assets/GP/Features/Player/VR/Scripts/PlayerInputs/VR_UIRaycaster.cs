@@ -1,60 +1,60 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Valve.VR;
 
 namespace Gameplay.VR.Player
 {
-    public class VR_UIRaycaster : MonoBehaviour
+    public class VR_UIRaycaster : LaserPointer
     {
-        RaycastHit hitInfo;
-        public LayerMask uILayers;
-        public int updateFrequency;
-        int framesPassed;
+        [SerializeField] SteamVR_Action_Boolean clickAction = null;
+        SteamVR_Behaviour_Pose controllerPose = null;
+        SteamVR_Input_Sources handSource;
+
+        MaterialPropertyBlock clickedColor;
 
         public Button currentButton;
-        LineRenderer lineRenderer;
+        public Color clickColor;
 
-        Transform hitPoint;
-
-        private void Awake()
+        new void Awake()
         {
-            lineRenderer = GetComponent<LineRenderer>();
+            base.Awake();
+            controllerPose = GetComponentInParent<SteamVR_Behaviour_Pose>();
+            handSource = controllerPose.inputSource;
+
+            clickedColor = new MaterialPropertyBlock();
+            clickedColor.SetColor("_EmissionColor", clickColor);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && currentButton != null)
-                currentButton.onClick.Invoke();
-        }
-
-        private void FixedUpdate()
-        {
-            if (framesPassed % updateFrequency == 0)
+            if (clickAction.GetStateDown(handSource))
             {
-                if (Physics.Raycast(transform.position, transform.position + transform.forward * 20, out hitInfo, uILayers))
-                {
-                    hitPoint.position = hitInfo.point;
-                    // if you hit a new button
-                    if (hitInfo.collider.gameObject.GetComponent<Button>() != null && hitInfo.collider.gameObject.GetComponent<Button>() != currentButton)
-                        currentButton = hitInfo.collider.gameObject.GetComponent<Button>();
-                }
+                if (currentButton != null)
+                    currentButton.onClick.Invoke();
 
-                else
-                {
-                    hitPoint.position = transform.position + transform.forward * 20;
-                    currentButton = null;
-                }
-
-                framesPassed = 0;
+                laserPointer.SetPropertyBlock(clickedColor);
             }
 
-            framesPassed++;
+            if (clickAction.GetStateUp(handSource))
+                laserPointer.SetPropertyBlock(baseColor);
         }
 
-        private void LateUpdate()
+        new void FixedUpdate()
         {
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, hitPoint.position);
+            base.FixedUpdate();
+
+            if (framesPassed % updateFrequency == 0)
+            {
+                // if you touch a new button
+                if (hitInfo.collider != null &&
+                    hitInfo.collider.gameObject.GetComponent<Button>() != null &&
+                    hitInfo.collider.gameObject.GetComponent<Button>() != currentButton)
+                    currentButton = hitInfo.collider.gameObject.GetComponent<Button>();
+
+                else currentButton = null;
+
+            }
         }
     }
 }
