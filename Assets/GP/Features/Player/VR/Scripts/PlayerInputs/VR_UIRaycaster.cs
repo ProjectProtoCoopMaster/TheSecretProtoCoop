@@ -14,12 +14,10 @@ namespace Gameplay.VR.Player
         public Button currentButton;
         LineRenderer lineRenderer;
 
-        Transform target;
         Transform hitPoint;
 
         private void Awake()
         {
-            target = transform.GetChild(0);
             lineRenderer = GetComponent<LineRenderer>();
         }
 
@@ -33,16 +31,17 @@ namespace Gameplay.VR.Player
         {
             if (framesPassed % updateFrequency == 0)
             {
-                if (Physics.Raycast(transform.position, target.position - transform.position, out hitInfo, 100f, uILayers))
+                if (Physics.Raycast(transform.position, transform.position + transform.forward * 20, out hitInfo, uILayers))
                 {
+                    hitPoint.position = hitInfo.point;
                     // if you hit a new button
                     if (hitInfo.collider.gameObject.GetComponent<Button>() != null && hitInfo.collider.gameObject.GetComponent<Button>() != currentButton)
                         currentButton = hitInfo.collider.gameObject.GetComponent<Button>();
-                    hitPoint.position = hitInfo.point;
                 }
+
                 else
                 {
-                    hitPoint = target;
+                    hitPoint.position = transform.position + transform.forward * 20;
                     currentButton = null;
                 }
 
