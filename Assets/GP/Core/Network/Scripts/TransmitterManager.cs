@@ -36,6 +36,7 @@ namespace Networking
             instance = this;
 
         }
+
         public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
 
 
