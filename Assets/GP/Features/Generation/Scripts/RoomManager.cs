@@ -21,6 +21,8 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
+        public string roomName;
+
         [InfoBox(@"@""Modifier : "" + this.roomModifier.ToString()")]
 
         public Transform entranceAnchor;
@@ -63,5 +65,19 @@ namespace Gameplay
         {
             if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
         }
-    } 
+    }
+
+    public class Room
+    {
+
+    }
+
+    public class RoomVR : Room
+    {
+
+    }
+    public class RoomMobile : Room
+    {
+
+    }
 }
