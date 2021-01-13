@@ -11,6 +11,7 @@ namespace Gameplay
     {
         public LevelFile levelFile;
 
+        [Range(0, 3)]
         public int maximumModifiersInLevel;
         
         private List<ModifierType> modifierTypes;

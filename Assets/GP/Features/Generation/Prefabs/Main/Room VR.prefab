@@ -737,12 +737,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4d4b278f24acb41b91eeb70263301e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entranceAnchor: {fileID: 9193666675410356466}
-  exitAnchor: {fileID: 9193666675600900447}
-  playerStart: {fileID: 1739982368338321639}
-  roomParent: {fileID: 9193666675808806518}
-  roomNavigationSurface: {fileID: 2159680751038568207}
-  aIManager: {fileID: 3788554250609119515}
+  platform: 1
+  roomVR:
+    roomName: 
+    parent: {fileID: 9193666675808806518}
+    roomNavigationSurface: {fileID: 2159680751038568207}
+    aIManager: {fileID: 3788554250609119515}
+    entranceAnchor: {fileID: 9193666675410356466}
+    exitAnchor: {fileID: 9193666675600900447}
+    playerStart: {fileID: 1739982368338321639}
+  roomMobile:
+    roomName: 
+    parent: {fileID: 0}
 --- !u!1 &9193666675871507981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8707202889165120467, guid: e8c65e7729d43724faf05e02ea95ebbd, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8707202889165120467, guid: e8c65e7729d43724faf05e02ea95ebbd, type: 3}
       propertyPath: m_Materials.Array.data[0]

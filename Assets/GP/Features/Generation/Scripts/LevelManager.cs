@@ -30,7 +30,6 @@ namespace Gameplay
         }
     }
 
-    [System.Serializable]
     public abstract class Level
     {
         public List<RoomManager> rooms { get; set; } = new List<RoomManager>();
@@ -56,12 +55,14 @@ namespace Gameplay
     {
         public GameObject playerRig;
 
+        public RoomVR currentRoomVR { get => (RoomVR)currentRoom.room; }
+
         public override void Start()
         {
             LoadRoom(0);
 
-            playerRig.transform.position = currentRoom.playerStart.position;
-            playerRig.transform.rotation = currentRoom.playerStart.rotation;
+            playerRig.transform.position = currentRoomVR.playerStart.position;
+            playerRig.transform.rotation = currentRoomVR.playerStart.rotation;
         }
 
         public override void OnRoomChange()
@@ -76,13 +77,14 @@ namespace Gameplay
             currentRoomIndex = index;
             currentRoom = rooms[currentRoomIndex];
 
-            currentRoom.roomParent.gameObject.SetActive(true);
-            currentRoom.OnEnterRoom();
+            currentRoomVR.parent.gameObject.SetActive(true);
+            currentRoomVR.OnEnterRoom();
         }
         protected override void UnloadRoom(int index)
         {
-            rooms[index].roomParent.gameObject.SetActive(false);
-            currentRoom.OnDisableRoom();
+            RoomVR indexRoom = (RoomVR)rooms[index].room;
+            indexRoom.parent.gameObject.SetActive(false);
+            currentRoomVR.OnDisableRoom();
         }
     }
     public class LevelMobile : Level

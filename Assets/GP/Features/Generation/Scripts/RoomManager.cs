@@ -21,24 +21,53 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
+        public Platform platform;
+
+        [ShowIf("platform", Platform.VR)]
+        [Title("Room VR")]
+        public RoomVR roomVR;
+        [ShowIf("platform", Platform.Mobile)]
+        [Title("Room Mobile")]
+        public RoomMobile roomMobile;
+
+        public Room room { get; private set; }
+
+        void Start()
+        {
+            if (platform == Platform.VR) room = roomVR;
+            else if (platform == Platform.Mobile) room = roomMobile;
+        }
+    }
+
+    [System.Serializable]
+    public abstract class Room
+    {
         public string roomName;
 
         [InfoBox(@"@""Modifier : "" + this.roomModifier.ToString()")]
+
+        public Transform parent;
+
+        public ModifierType roomModifier { get; set; } = ModifierType.None;
+
+        public abstract void OnEnterRoom();
+        public abstract void OnDisableRoom();
+    }
+
+    [System.Serializable]
+    [HideLabel]
+    public class RoomVR : Room
+    {
+        public NavMeshSurface roomNavigationSurface;
+
+        public AIManager aIManager;
 
         public Transform entranceAnchor;
         public Transform exitAnchor;
 
         public Transform playerStart;
 
-        public Transform roomParent;
-
-        public ModifierType roomModifier { get; set; } = ModifierType.None;
-
-        public NavMeshSurface roomNavigationSurface;
-
-        public AIManager aIManager;
-
-        public void OnEnterRoom()
+        public override void OnEnterRoom()
         {
             // Initialize Modifier
             //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
@@ -58,26 +87,27 @@ namespace Gameplay
             }
 
             // Initialization Switchers
-                // Initialize Elements
+            // Initialize Elements
         }
 
-        public void OnDisableRoom()
+        public override void OnDisableRoom()
         {
             if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
         }
     }
 
-    public class Room
-    {
-
-    }
-
-    public class RoomVR : Room
-    {
-
-    }
+    [System.Serializable]
+    [HideLabel]
     public class RoomMobile : Room
     {
+        public override void OnEnterRoom()
+        {
+            throw new System.NotImplementedException();
+        }
 
+        public override void OnDisableRoom()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

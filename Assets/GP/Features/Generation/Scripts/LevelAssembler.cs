@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +12,10 @@ namespace Gameplay
         public Platform platform;
 
         [ShowIf("platform", Platform.VR)]
+        [Title("Assembler VR")]
         public AssemblerVR assemblerVR;
         [ShowIf("platform", Platform.Mobile)]
+        [Title("Assembler Mobile")]
         public AssemblerMobile assemblerMobile;
 
         public Assembler assembler { get; private set; }
@@ -28,7 +29,7 @@ namespace Gameplay
 
             assembler.SetLevel();
 
-            foreach (RoomManager room in assembler.pickedRooms) room.roomParent.gameObject.SetActive(false);
+            foreach (RoomManager _room in assembler.pickedRooms) _room.room.parent.gameObject.SetActive(false);
 
             assembler.CreateLevel();
         }
@@ -44,14 +45,14 @@ namespace Gameplay
 
         public void SetLevel()
         {
-            foreach (RoomManager room in chunks)
+            foreach (RoomManager _room in chunks)
             {
                 foreach (RoomData roomData in levelHolder.LevelRooms)
                 {
-                    if (room.roomName == roomData.roomName)
+                    if (_room.room.roomName == roomData.roomName)
                     {
-                        room.roomModifier = roomData.roomModifier;
-                        pickedRooms.Add(room);
+                        _room.room.roomModifier = roomData.roomModifier;
+                        pickedRooms.Add(_room);
                     }
                 }
             }
@@ -60,6 +61,8 @@ namespace Gameplay
         public abstract void CreateLevel();
     }
 
+    [System.Serializable]
+    [HideLabel]
     public class AssemblerVR : Assembler
     {
         public Transform levelEntranceAnchor;
@@ -71,22 +74,29 @@ namespace Gameplay
 
             Transform currentAnchor = levelEntranceAnchor;
 
+            RoomVR indexRoomVR;
+
             for (int i = 0; i < pickedRooms.Count; i++)
             {
-                Vector3 translation = currentAnchor.position - pickedRooms[i].entranceAnchor.localPosition;
-                pickedRooms[i].roomParent.gameObject.transform.position = translation;
+                indexRoomVR = (RoomVR)pickedRooms[i].room;
 
-                float angle = currentAnchor.rotation.eulerAngles.y - pickedRooms[i].entranceAnchor.localRotation.eulerAngles.y;
-                pickedRooms[i].roomParent.gameObject.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
+                Vector3 translation = currentAnchor.position - indexRoomVR.entranceAnchor.localPosition;
+                indexRoomVR.parent.gameObject.transform.position = translation;
 
-                pickedRooms[i].roomParent.gameObject.transform.parent = LevelParent;
+                float angle = currentAnchor.rotation.eulerAngles.y - indexRoomVR.entranceAnchor.localRotation.eulerAngles.y;
+                indexRoomVR.parent.gameObject.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
+
+                indexRoomVR.parent.gameObject.transform.parent = LevelParent;
 
                 LevelManager.instance.levelRooms.Add(pickedRooms[i]);
 
-                currentAnchor = pickedRooms[i].exitAnchor;
+                currentAnchor = indexRoomVR.exitAnchor;
             }
         }
     }
+
+    [System.Serializable]
+    [HideLabel]
     public class AssemblerMobile : Assembler
     {
         public override void CreateLevel()
