@@ -20,6 +20,7 @@ namespace Gameplay.VR.Feedbacks
         {
             var cameraData = GameObject.Find(playerCamera.Value).GetComponent<Camera>().GetUniversalAdditionalCameraData();
             cameraData.cameraStack.Add(uiCamera);
+            cameraData.cameraStack.Reverse();
         }
 
         public void GE_RefreshScene()

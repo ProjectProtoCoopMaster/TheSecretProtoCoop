@@ -790,7 +790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAudioSource: {fileID: 0}
   volume: 0.5
-  playerHead: {fileID: 0}
+  playerHead: {fileID: 11400000, guid: cee03bd9f179b5d45a01ff2624e939b6, type: 2}
   gunshotClip: {fileID: 8300000, guid: ac161ceed4dcf2d48afcb3e5cd018c48, type: 3}
   ricochetClips:
   - {fileID: 8300000, guid: 5ac3bd9286454b647b2394ab4b12cb07, type: 3}
@@ -809,8 +809,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ed35bc532b7d625459559edb66141c9b, type: 3}
   metalGearSolidDetection: {fileID: 8300000, guid: 718066c4e25a151438e4f046613903b3, type: 3}
   gameOverAlarm: {fileID: 8300000, guid: 87f065f94592ece4ebb0806d80ee4ed2, type: 3}
-  uIHoverClip: {fileID: 0}
-  uIClickClip: {fileID: 0}
+  uIHoverClip: {fileID: 8300000, guid: 0c4c4eb4764f51841b6d59f362b48b13, type: 3}
+  uIClickClip: {fileID: 8300000, guid: 24d3a4a5075289e4a932e3ddff9a6455, type: 3}
 --- !u!1 &2055030888561677628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,22 +2221,27 @@ MonoBehaviour:
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
-  gunshotDuration: 0
-  gunshotFrequency: 0
-  gunshotAmplitude: 0
-  weaponHand: 0
-  reloadDuration: 0
-  reloadFrequency: 0
-  reloadAmplitude: 0
-  reloadHand: 0
-  uIClickDuration: 0
-  uIClickFrequency: 0
-  uIClickAmplitude: 0
-  uIClickHand: 0
-  uIHoverDuration: 0
-  uIHoverFrequency: 0
-  uIHoverAmplitude: 0
-  uIHoverHand: 0
+  gunshotDuration: 0.5
+  gunshotFrequency: 120
+  gunshotAmplitude: 50
+  weaponHand: 2
+  reloadDuration: 0.1
+  reloadFrequency: 20
+  reloadAmplitude: 100
+  reloadHand: 2
+  uIClickDuration: 0.1
+  uIClickFrequency: 2
+  uIClickAmplitude: 5
+  uIClickHand: 1
+  uIHoverDuration: 0.1
+  uIHoverFrequency: 2
+  uIHoverAmplitude: 5
+  uIHoverHand: 1
+  isTesting: 0
+  testDuration: 0.001
+  testFrequency: 1
+  testAmplitude: 1
+  testHand: 1
 --- !u!1 &8482316735453035322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,7 +2330,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7857188697147195295}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
-        m_MethodName: GE_DetectionSFX
+        m_MethodName: GE_GameOverAlarmSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
