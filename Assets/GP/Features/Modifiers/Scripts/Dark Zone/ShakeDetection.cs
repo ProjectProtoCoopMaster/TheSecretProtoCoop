@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ShakeDetection : MonoBehaviour
 {
     public float timeThreshold;
@@ -31,6 +31,7 @@ public class ShakeDetection : MonoBehaviour
         if (currentAmount == shakeAmount)
         {
             complete = true;
+            StartShake();
         }
 
         if (currentTime >= timeThreshold)

@@ -26,7 +26,7 @@ namespace Mobile
                 if (touch.phase == TouchPhase.Moved)
                 {
                     //transform.DOMove(transform.position + (new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y) * speed), .2f);
-                    _transform.Translate(touch.deltaPosition * speed);
+                    _transform.Translate(-touch.deltaPosition * speed);
 
                 }
                 else if (touch.phase == TouchPhase.Ended)
@@ -68,14 +68,14 @@ namespace Mobile
                 {
                     _transform.DOMoveY(clampHeightValue, .2f);
                 }
-                else if (_transform.position.y < 7)
+                else if (_transform.position.y < 14)
                 {
-                    _transform.DOMoveY(7, .2f);
+                    _transform.DOMoveY(14, .2f);
                 }
                 else
                 {
                     //transform.Translate(transform.position.y + (difference * .07f));
-                    _transform.DOMoveY(_transform.position.y + (difference * .01f), 0);
+                    _transform.DOMoveY(_transform.position.y + (-difference * .01f), 0);
 
                 }
 

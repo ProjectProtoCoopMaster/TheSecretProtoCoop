@@ -11,6 +11,12 @@ namespace Gameplay.Mobile
 
         public ShakeDetection shakeDetection;
 
+        //private void Start()
+        //{
+        //    Init();
+        //    check = true;
+        //}
+
         void Update()
         {
             if (active)
@@ -19,8 +25,11 @@ namespace Gameplay.Mobile
                 {
                     MobileCheck(out shake.Value);
 
-                    shakeResult.Raise();
+                    shakeResult.Raise(shake.Value);
+                    shake.Value = false;
+
                 }
+
             }
         }
 
@@ -39,6 +48,11 @@ namespace Gameplay.Mobile
         {
             check = true;
             shakeDetection.StartShake();
+        }
+
+        private void OnDisable()
+        {
+            shake.Value = false;
         }
     }
 }

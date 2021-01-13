@@ -16,11 +16,24 @@ namespace Networking
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private CallableFunction _loadNextLevel;
+        [SerializeField] private BoolVariable _shake;
+        [SerializeField] private BoolVariable _hidePlayer;
+        [SerializeField] private BoolVariable _isMobile;
+        [SerializeField] private FloatVariable _oxygenTimer;
+        [SerializeField] private GameEvent _onHidePlayer;
         [SerializeField] private GameEvent _onOpenDoor;
         [SerializeField] private GameEvent _onVictory;
+        [SerializeField] private GameEvent _onResetCodes;
+
         [SerializeField] private GameManager gameManager;
         public SymbolManager symbolManager;
 
+        public static TransmitterManager instance;
+        private void Awake()
+        {
+            instance = this;
+
+        }
         public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
 
 
@@ -56,6 +69,7 @@ namespace Networking
             for (int i = 0; i < 3; i++)
             {
                 symbolManager.pickedNames[i] = pickedNames[i];
+                if (!_isMobile.Value) _onResetCodes.Raise();
             }
 
         }
@@ -77,7 +91,15 @@ namespace Networking
         [PunRPC]
         public void SendLoadSameScene() { gameManager.LoadSameScene(); Debug.Log("LoadSameScene"); }
 
-       
+        public void SendShakeResultToOthers(bool check) => photonView.RPC("ShakeResult", RpcTarget.Others, check);
+        [PunRPC] private void ShakeResult(bool complete) => _shake.Value = complete;
+
+        public void SendHidePlayerToOthers(bool hidePlayer) => photonView.RPC("HidePlayer", RpcTarget.Others, hidePlayer);
+        [PunRPC] private void HidePlayer(bool hidePlayer) { _hidePlayer.Value = hidePlayer; _onHidePlayer.Raise(); }
+
+        public void SendOxygenTimerToOthers(float oxygenTimer) => photonView.RPC("SendOxygenTimer", RpcTarget.Others, oxygenTimer);
+        [PunRPC] private void SendOxygenTimer(float oxygenTimer) => _oxygenTimer.Value = oxygenTimer;
+
     }
 }
 

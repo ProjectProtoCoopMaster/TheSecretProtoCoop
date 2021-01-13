@@ -14,8 +14,10 @@ namespace Gameplay
         public bool active { get; set; }
         public bool check { get; protected set; }
 
-        public virtual void Init() => active = true;
 
+        [Button]
+        public virtual void Init() => active = true;
+        [Button]
         public virtual void End() => active = false;
     }
 

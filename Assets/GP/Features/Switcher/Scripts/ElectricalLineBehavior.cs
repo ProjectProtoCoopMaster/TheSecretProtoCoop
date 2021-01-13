@@ -6,12 +6,15 @@ using DG.Tweening;
 
 namespace Gameplay.Mobile
 {
+    
     public class ElectricalLineBehavior : MonoBehaviour, ISwitchable
     {
-        [SerializeField] private Color2 color;
+
+        private Material mat;
+        private Color color;
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
-        [SerializeField] private LineRenderer line;
+        public List<GameObject> cylinders;
         public int State { get { return state; } set { state = value; } }
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int Power
@@ -26,24 +29,37 @@ namespace Gameplay.Mobile
         }
         private void OnEnable()
         {
-            color = new Color2(Color.white, Color.white);
-            Power = power;
+
+            mat = new Material(cylinders[0].GetComponent<MeshRenderer>().material);
+            color = mat.GetColor("_EmissionColor");
+            for (int i = 0; i < cylinders.Count; i++)
+            {
+                cylinders[i].GetComponent<MeshRenderer>().material = mat;
+            }
             
+            
+            Power = power;
+
+
+
         }
 
         public void TurnOff()
         {
-            line.DOColor(color, new Color2( Color.black,Color.black), .5f);
+
+            mat.DOColor(color * 0, "_EmissionColor", .5f);
         }
 
         public void TurnOn()
         {
-            line.DOColor(new Color2(Color.black, Color.black),color, .5f);
+            mat.DOColor(color * 2, "_EmissionColor", .5f);
         }
         public void SwitchNode(int changeNodes)
         {
             throw new System.NotImplementedException();
         }
+        
+        public void AddCylinder(GameObject cylinder) => cylinders.Add(cylinder);
 
     }
 }

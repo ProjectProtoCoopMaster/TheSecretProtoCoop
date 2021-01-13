@@ -205,14 +205,18 @@ namespace Gameplay
 
         private void SetTimerDisplayer()
         {
-            timerDisplayer.text = ((int)(timer - currentTimer)).ToString() + "s";
+            if(nodes.Count == 0)
+                timerDisplayer.text = ((int)(timer - currentTimer)).ToString() + "s";
         }
 
         private void ResetTimer() 
         {
-            
-            currentTimer = 0;
-            timerDisplayer.text = timer.ToString() + "s";
+            if (nodes.Count == 0)
+            {
+                currentTimer = 0;
+                timerDisplayer.text = timer.ToString() + "s";
+            }
+
 
         }
 

@@ -36,7 +36,6 @@ namespace Gameplay.VR
 
         protected DetectionFeedback detectionFeedback;
 
-
         protected void Awake()
         {
             entityDataInterface = GetComponent<EntityDataInterface>();

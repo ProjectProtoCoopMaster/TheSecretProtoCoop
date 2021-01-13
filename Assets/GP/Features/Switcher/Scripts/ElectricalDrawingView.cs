@@ -76,18 +76,19 @@ namespace Tools.LevelDesign
         public void LinkPointsToGameObject()
         {
             startPoint[0] = firstSelectedGO.transform.position;
-            endPoint[0] = secondSelectedGO.transform.position;
+            endPoint[0] = new Vector3(secondSelectedGO.transform.position.x, firstSelectedGO.transform.position.y, secondSelectedGO.transform.position.z);
         }
         public void AddLine()
         {
 
 
             ClearLineLists();
-            Vector3 secondPos = new Vector3(secondSelectedGO.transform.position.x, canvas.GetComponent<RectTransform>().anchoredPosition.y, secondSelectedGO.transform.position.z);
+            Vector3 secondPos = new Vector3(secondSelectedGO.transform.position.x, firstSelectedGO.transform.position.y, secondSelectedGO.transform.position.z);
             startPoint.Add(firstSelectedGO.transform.position);
-            endPoint.Add(secondPos);
             startTangent.Add(secondPos);
             endTangent.Add(secondPos);
+            endPoint.Add(secondPos);
+
 
             
 

@@ -2,22 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Mobile
+namespace Gameplay.VR
 {
     public class ThermicModifier : Modifier
     {
-        public bool showPlayer { get; set; } = true;
+        [SerializeField] private BoolVariable _hidePlayer;
+        [SerializeField] private CallableFunction _sendHidePlayer;
+        //private void Start()
+        //{
+        //    Init();
+        //}
 
         public override void Init()
         {
-            showPlayer = false;
+            _hidePlayer.Value = true;
+            _sendHidePlayer.Raise(_hidePlayer.Value);
             base.Init();
         }
 
         public override void End()
         {
-            showPlayer = true;
+            _hidePlayer.Value = false;
+            _sendHidePlayer.Raise(_hidePlayer.Value);
             base.End();
+        }
+
+        private void OnDisable()
+        {
+            End();
         }
     } 
 }
