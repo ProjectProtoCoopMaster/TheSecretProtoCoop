@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Networking;
 
 namespace Gameplay
 {
@@ -18,20 +19,28 @@ namespace Gameplay
 
         public LevelVariable levelHolder;
 
-        void Start()
+        public CallableFunction sendLevelHolder;
+
+        public BoolVariable isMobile;
+
+        public void GenerateLevel()
         {
-            levelHolder.LevelRooms.Clear();
+            if (!isMobile.Value)
+            {
+                levelHolder.LevelRooms.Clear();
 
-            List<PoolData> pools = new List<PoolData>();
-            foreach (PoolData pool in levelFile.roomPools.Values) pools.Add(pool);
+                List<PoolData> pools = new List<PoolData>();
+                foreach (PoolData pool in levelFile.roomPools.Values) pools.Add(pool);
 
-            SelectRooms(pools);
+                SelectRooms(pools);
 
-            modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
+                modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
 
-            ApplyModifiers();
+                ApplyModifiers();
 
-            // Send Level Variable to the Network --> Level Assembler Mobile
+                sendLevelHolder.Raise(levelHolder);
+                TransmitterManager.instance.SendBuildLevelToOthers();
+            }
         }
 
         #region Rooms

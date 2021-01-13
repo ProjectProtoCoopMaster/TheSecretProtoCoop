@@ -405,6 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1538922510}
   - component: {fileID: 1538922511}
+  - component: {fileID: 1538922512}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -450,6 +451,36 @@ MonoBehaviour:
   levelFile: {fileID: 11400000, guid: cf0e6c6806c966a4c8a98336e907e052, type: 2}
   maximumModifiersInLevel: 2
   levelHolder: {fileID: 11400000, guid: 0a035a19ba9bc7f4a95d085f8ea52091, type: 2}
+  sendLevelHolder: {fileID: 11400000, guid: 086ce7451cdf92140aa1e243c6853309, type: 2}
+  isMobile: {fileID: 11400000, guid: 2224b1345099de94e9ce6ed8c63d1b8f, type: 2}
+--- !u!114 &1538922512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538922509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5543c83c245cc724a846480156d03278, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1538922511}
+        m_TargetAssemblyTypeName: Gameplay.LevelGenerator, Assembly-CSharp
+        m_MethodName: GenerateLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1645317100 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
@@ -552,6 +583,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 325131707}
     m_Modifications:
+    - target: {fileID: 119496921, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3521382425665192201, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

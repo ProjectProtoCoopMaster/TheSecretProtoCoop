@@ -89,9 +89,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568268929345138045}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 7.6300006, y: 4.139999, z: -0.02167511}
-  m_LocalScale: {x: 0.83540076, y: 0.8336643, z: 1.0420802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3347902127302110591}
   m_RootOrder: 1
@@ -159,7 +159,8 @@ RectTransform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.020885019, y: 0.020841599, z: 0.020841599}
-  m_Children: []
+  m_Children:
+  - {fileID: 6334913423294649483}
   m_Father: {fileID: 3347902127302110591}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -331,6 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434463332309915463}
+  - component: {fileID: 8114952671531748793}
   m_Layer: 0
   m_Name: Room Mobile
   m_TagString: Untagged
@@ -356,6 +358,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8114952671531748793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434463332309915456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4d4b278f24acb41b91eeb70263301e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platform: 0
+  roomVR:
+    roomName: 
+    parent: {fileID: 0}
+    roomNavigationSurface: {fileID: 0}
+    aIManager: {fileID: 0}
+    entranceAnchor: {fileID: 0}
+    exitAnchor: {fileID: 0}
+    playerStart: {fileID: 0}
+  roomMobile:
+    roomName: 
+    parent: {fileID: 1434463332309915463}
 --- !u!1 &2547479107069822392
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +627,41 @@ Transform:
   m_Father: {fileID: 627247025954949059}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6956474360697729201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6334913423294649483}
+  m_Layer: 5
+  m_Name: Switchers UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6334913423294649483
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956474360697729201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 568268930190168140}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7366000228340707239
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ namespace Gameplay
 
         public List<RoomManager> selectedRooms { get; private set; }
 
-        void Start()
+        public void BuildLevel()
         {
             if (platform == Platform.VR) assembler = assemblerVR;
             else if (platform == Platform.Mobile) assembler = assemblerMobile;
@@ -32,6 +32,8 @@ namespace Gameplay
             foreach (RoomManager _room in assembler.pickedRooms) _room.room.parent.gameObject.SetActive(false);
 
             assembler.CreateLevel();
+
+            LevelManager.instance.StartLevel();
         }
     }
 
@@ -101,7 +103,8 @@ namespace Gameplay
     {
         public override void CreateLevel()
         {
-            throw new System.NotImplementedException();
+            LevelManager.instance.levelRooms.Clear();
+            LevelManager.instance.levelRooms = pickedRooms;
         }
     }
 }

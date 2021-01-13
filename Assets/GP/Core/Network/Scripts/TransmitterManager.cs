@@ -24,6 +24,8 @@ namespace Networking
         [SerializeField] private GameEvent _onOpenDoor;
         [SerializeField] private GameEvent _onVictory;
         [SerializeField] private GameEvent _onResetCodes;
+        [SerializeField] private LevelVariable _levelHolder;
+        [SerializeField] private GameEvent _buildLevel;
 
         [SerializeField] private GameManager gameManager;
         public SymbolManager symbolManager;
@@ -100,6 +102,21 @@ namespace Networking
         public void SendOxygenTimerToOthers(float oxygenTimer) => photonView.RPC("SendOxygenTimer", RpcTarget.Others, oxygenTimer);
         [PunRPC] private void SendOxygenTimer(float oxygenTimer) => _oxygenTimer.Value = oxygenTimer;
 
+
+        public void SendLevelHolderToOthers(LevelVariable levelVariable)
+        {
+            List<(string, ModifierType)> levelRooms = new List<(string, ModifierType)>();
+            foreach (RoomData roomData in levelVariable.LevelRooms) levelRooms.Add((roomData.roomName, roomData.roomModifier));
+            photonView.RPC("SendLevelHolder", RpcTarget.Others, levelRooms);
+        }
+        [PunRPC] private void SendLevelHolder(List<(string, ModifierType)> levelRooms)
+        {
+            _levelHolder.LevelRooms.Clear();
+            for (int i = 0; i < levelRooms.Count; i++) _levelHolder.LevelRooms.Add(new RoomData { roomName = levelRooms[i].Item1, roomModifier = levelRooms[i].Item2 });
+        }
+
+        public void SendBuildLevelToOthers() => photonView.RPC("SendBuildLevel", RpcTarget.Others);
+        [PunRPC] private void SendBuildLevel() => _buildLevel.Raise();
     }
 }
 

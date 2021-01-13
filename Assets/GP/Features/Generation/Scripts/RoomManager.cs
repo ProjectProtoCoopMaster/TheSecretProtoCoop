@@ -72,7 +72,7 @@ namespace Gameplay
         public override void OnEnterRoom()
         {
             // Initialize Modifier
-            //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
+            if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             // Bake NavMesh
             string navMsg = "There is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";

@@ -10,7 +10,7 @@ namespace Gameplay
         public Platform platform;
 
         public static LevelManager instance;
-        public List<RoomManager> levelRooms { get; private set; } = new List<RoomManager>();
+        public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
 
         public Level level { get; private set; }
 
@@ -37,18 +37,25 @@ namespace Gameplay
         public int currentRoomIndex { get; protected set; }
         public RoomManager currentRoom { get; protected set; }
 
+        public Room room { get => currentRoom.room; }
+
         public abstract void Start();
 
-        public virtual void OnRoomChange()
+        public abstract void OnRoomChange();
+
+        protected void LoadRoom(int index)
         {
-            if (currentRoomIndex >= 1) UnloadRoom(currentRoomIndex - 1);
+            currentRoomIndex = index;
+            currentRoom = rooms[currentRoomIndex];
 
-            if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
-            else Debug.Log("You won the game and one million pesos ! Congratulations !");
+            room.parent.gameObject.SetActive(true);
+            room.OnEnterRoom();
         }
-
-        protected abstract void LoadRoom(int index);
-        protected abstract void UnloadRoom(int index);
+        protected void UnloadRoom(int index)
+        {
+            rooms[index].room.parent.gameObject.SetActive(false);
+            room.OnDisableRoom();
+        }
     }
 
     public class LevelVR : Level
@@ -67,40 +74,24 @@ namespace Gameplay
 
         public override void OnRoomChange()
         {
-            base.OnRoomChange();
+            if (currentRoomIndex >= 1) UnloadRoom(currentRoomIndex - 1);
+
+            if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
+            else Debug.Log("You won the game and one million pesos ! Congratulations !");
 
             // Send Event to the Network --> OnRoomChange Mobile
-        }
-
-        protected override void LoadRoom(int index)
-        {
-            currentRoomIndex = index;
-            currentRoom = rooms[currentRoomIndex];
-
-            currentRoomVR.parent.gameObject.SetActive(true);
-            currentRoomVR.OnEnterRoom();
-        }
-        protected override void UnloadRoom(int index)
-        {
-            RoomVR indexRoom = (RoomVR)rooms[index].room;
-            indexRoom.parent.gameObject.SetActive(false);
-            currentRoomVR.OnDisableRoom();
         }
     }
     public class LevelMobile : Level
     {
-        public override void Start()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override void Start() => LoadRoom(0);
 
-        protected override void LoadRoom(int index)
+        public override void OnRoomChange()
         {
-            throw new System.NotImplementedException();
-        }
-        protected override void UnloadRoom(int index)
-        {
-            throw new System.NotImplementedException();
+            if (currentRoomIndex >= 0) UnloadRoom(currentRoomIndex);
+
+            if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
+            else Debug.Log("You won the game and one million pesos ! Congratulations !");
         }
     }
 }
