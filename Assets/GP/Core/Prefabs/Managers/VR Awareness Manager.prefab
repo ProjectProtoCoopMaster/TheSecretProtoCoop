@@ -10,13 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2651522416651946682}
   - component: {fileID: 2651522416651946683}
-  - component: {fileID: 2651522416651946660}
   - component: {fileID: 2651522416651946661}
   - component: {fileID: 2651522416651946662}
   - component: {fileID: 2651522416651946663}
   - component: {fileID: 2651522416651946656}
   m_Layer: 0
-  m_Name: VRAwarenessManager
+  m_Name: VR Awareness Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7355130481287729362}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3915db054a9b4ca4d9f7b828737d01e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflexModeOn: {fileID: 11400000, guid: dcb3e72fe0dbd414aaca4edb5f702b0a, type: 2}
-  reflexModeOff: {fileID: 11400000, guid: c0553922c99bc4d469bad0605b6d5eb2, type: 2}
-  alarmRaiseDuration: 2
+  reflexModeOn: {fileID: 0}
+  reflexModeOff: {fileID: 0}
+  alarmRaiseDuration: 10
   deadGuards: []
   alarmRaisers: []
   gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
@@ -60,19 +60,6 @@ MonoBehaviour:
   spottedDeadBody: 0
   gameIsOver: 0
   timePassed: 0
---- !u!114 &2651522416651946660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651522416651946657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a9050ae7b09fa458fb958c7e105222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reflexModeMultiplier: 2
 --- !u!114 &2651522416651946661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +163,65 @@ MonoBehaviour:
       - m_Target: {fileID: 2651522416651946683}
         m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
         m_MethodName: GE_BodyDetectedByGuard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &7355130481287729363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7355130481287729362}
+  - component: {fileID: 7355130481287729364}
+  m_Layer: 0
+  m_Name: SceneRefresher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7355130481287729362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355130481287729363}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2651522416651946682}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7355130481287729364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355130481287729363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2651522416651946683}
+        m_TargetAssemblyTypeName: Gameplay.VR.AwarenessManager, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
