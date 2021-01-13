@@ -7,14 +7,17 @@ namespace Gameplay.VR.Player
 {
     public class VR_UIRaycaster : LaserPointer
     {
-        [SerializeField] SteamVR_Action_Boolean clickAction = null;
-        SteamVR_Behaviour_Pose controllerPose = null;
-        SteamVR_Input_Sources handSource;
+        [SerializeField] private SteamVR_Action_Boolean clickAction = null;
+        private SteamVR_Behaviour_Pose controllerPose = null;
+        private SteamVR_Input_Sources handSource;
 
-        MaterialPropertyBlock clickedColor;
+        private MaterialPropertyBlock clickedColor;
 
-        public Button currentButton;
-        public Color clickColor;
+        [SerializeField] private Button currentButton;
+        [SerializeField] private Color clickColor;
+
+        [SerializeField] private GameEvent onHover, onClick;
+
 
         new void Awake()
         {
@@ -31,7 +34,10 @@ namespace Gameplay.VR.Player
             if (clickAction.GetStateDown(handSource))
             {
                 if (currentButton != null)
+                {
                     currentButton.onClick.Invoke();
+                    onClick.Raise();
+                }
 
                 laserPointer.SetPropertyBlock(clickedColor);
             }
@@ -50,7 +56,10 @@ namespace Gameplay.VR.Player
                 if (hitInfo.collider != null &&
                     hitInfo.collider.gameObject.GetComponent<Button>() != null &&
                     hitInfo.collider.gameObject.GetComponent<Button>() != currentButton)
+                {
                     currentButton = hitInfo.collider.gameObject.GetComponent<Button>();
+                    onHover.Raise();
+                }
 
                 else currentButton = null;
 
