@@ -11,6 +11,9 @@ public class HapticFeedbackManager : MonoBehaviour
     [SerializeField] [FoldoutGroup("Player Weapon Variables")] private float gunshotDuration, gunshotFrequency, gunshotAmplitude;
     [SerializeField] [FoldoutGroup("Player Weapon Variables")] private SteamVR_Input_Sources weaponHand;
 
+    [SerializeField] [FoldoutGroup("Player Reload Variables")] private float reloadDuration, reloadFrequency, reloadAmplitude;
+    [SerializeField] [FoldoutGroup("Player Reload Variables")] private SteamVR_Input_Sources reloadHand;
+
     [SerializeField] [FoldoutGroup("UI Click Variables")] private float uIClickDuration, uIClickFrequency, uIClickAmplitude;
     [SerializeField] [FoldoutGroup("UI Click Variables")] private SteamVR_Input_Sources uIClickHand;
 
@@ -20,6 +23,11 @@ public class HapticFeedbackManager : MonoBehaviour
     public void GE_Gunshot()
     {
         Pulse(gunshotDuration, gunshotFrequency, gunshotAmplitude, weaponHand);
+    }
+
+    public void GE_Reload()
+    {
+        Pulse(reloadDuration, reloadFrequency, reloadAmplitude, reloadHand);
     }
 
     public void GE_UIClick()

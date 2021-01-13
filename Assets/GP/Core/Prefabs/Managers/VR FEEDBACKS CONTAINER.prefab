@@ -1329,6 +1329,8 @@ GameObject:
   - component: {fileID: 4049425095497932152}
   - component: {fileID: 7370718126510143557}
   - component: {fileID: 5671187599183528403}
+  - component: {fileID: 3814554447981518005}
+  - component: {fileID: 6556599024047077311}
   m_Layer: 0
   m_Name: _PlayerFeedbacks
   m_TagString: Untagged
@@ -1546,6 +1548,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3771761433186651507}
+        m_TargetAssemblyTypeName: HapticFeedbackManager, Assembly-CSharp
+        m_MethodName: GE_Gunshot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4049425095497932152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,6 +1579,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2450728892882568549}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.UI_ReloadingBehaviour, Assembly-CSharp
         m_MethodName: GE_ReloadGun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3771761433186651507}
+        m_TargetAssemblyTypeName: HapticFeedbackManager, Assembly-CSharp
+        m_MethodName: GE_Reload
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1625,6 +1651,86 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3814554447981518005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460130344861366265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0c7c0f0815248f34091cf41dfd9a2c78, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3771761433186651507}
+        m_TargetAssemblyTypeName: HapticFeedbackManager, Assembly-CSharp
+        m_MethodName: GE_UIHover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1931421740020893472}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6556599024047077311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460130344861366265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f044c5c900439dd4da550d969e4928d3, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3771761433186651507}
+        m_TargetAssemblyTypeName: HapticFeedbackManager, Assembly-CSharp
+        m_MethodName: GE_UIClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1931421740020893472}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2113,6 +2219,22 @@ MonoBehaviour:
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
+  gunshotDuration: 0
+  gunshotFrequency: 0
+  gunshotAmplitude: 0
+  weaponHand: 0
+  reloadDuration: 0
+  reloadFrequency: 0
+  reloadAmplitude: 0
+  reloadHand: 0
+  uIClickDuration: 0
+  uIClickFrequency: 0
+  uIClickAmplitude: 0
+  uIClickHand: 0
+  uIHoverDuration: 0
+  uIHoverFrequency: 0
+  uIHoverAmplitude: 0
+  uIHoverHand: 0
 --- !u!1 &8482316735453035322
 GameObject:
   m_ObjectHideFlags: 0
