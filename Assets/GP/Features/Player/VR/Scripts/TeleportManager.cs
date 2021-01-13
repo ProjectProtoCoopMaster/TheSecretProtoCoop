@@ -15,8 +15,10 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
         [Tooltip("The Particle Effect to play when the player teleports.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
-        [Tooltip("The GameEvent that is called when the player teleports.")]
-        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleporting;
+        [Tooltip("The GameEvent that is called when the player presses down on the teleport input.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
+        [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleported;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -96,10 +98,10 @@ namespace Gameplay.VR.Player
             get
             {
                 float controllerAngle = Vector3.Angle(Vector3.up * -1.0f, controllerForward);
-                float pitch = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
-                float pitchRange = maxControllerAngle - minControllerAngle;
-                float t = (pitch - minControllerAngle) / pitchRange; // Normalized pitch within range
-                return maxDistance * t;
+                float clampedAngle = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
+                float angleRange = maxControllerAngle - minControllerAngle;
+                float pitch = (clampedAngle - minControllerAngle) / angleRange; // Normalized pitch within range
+                return maxDistance * pitch;
             }
         }
 
@@ -155,15 +157,6 @@ namespace Gameplay.VR.Player
                 return playerHead.position + Vector3.up * castingHeight;
             }
         }
-
-        Vector3 playerFeetPosition
-        {
-            get
-            {
-                return Vector3.zero;
-            }
-        }
-
         #endregion
 
         public void GE_OnGameOver()
@@ -185,6 +178,8 @@ namespace Gameplay.VR.Player
 
             controllerPose = _controllerPose;
             showRayPointer = true;
+
+            teleportAiming.Raise();
         }
 
         void ShowRayPointer()
@@ -265,7 +260,7 @@ namespace Gameplay.VR.Player
 
             particleDash.Play();
 
-            teleporting.Raise();
+            teleported.Raise();
 
             time = 0;
             change = targetPos - startPos;
