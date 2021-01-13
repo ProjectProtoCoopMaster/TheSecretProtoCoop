@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Valve.VR;
@@ -58,3 +59,4 @@ namespace Gameplay.VR.Player
         }
     }
 }
+#endif
