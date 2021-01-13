@@ -1,7 +1,6 @@
-﻿using Sirenix.OdinInspector;
-using System;
+﻿#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
@@ -66,3 +65,4 @@ public class HapticFeedbackManager : MonoBehaviour
         hapticAction.Execute(0, duration, frequency, amplitude, inputSource);
     }
 }
+#endif
