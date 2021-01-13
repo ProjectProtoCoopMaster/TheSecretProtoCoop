@@ -105,14 +105,26 @@ namespace Networking
 
         public void SendLevelHolderToOthers(LevelVariable levelVariable)
         {
-            List<(string, ModifierType)> levelRooms = new List<(string, ModifierType)>();
-            foreach (RoomData roomData in levelVariable.LevelRooms) levelRooms.Add((roomData.roomName, roomData.roomModifier));
-            photonView.RPC("SendLevelHolder", RpcTarget.Others, levelRooms);
+            photonView.RPC("InitLevelHolder", RpcTarget.Others, levelVariable.LevelRooms.Count);
+
+            for (int i = 0; i < levelVariable.LevelRooms.Count; i++)
+            {
+                photonView.RPC("SendRoomName", RpcTarget.Others, levelVariable.LevelRooms[i].roomName, i);
+                photonView.RPC("SendRoomModifier", RpcTarget.Others, levelVariable.LevelRooms[i].roomModifier, i);
+            }
         }
-        [PunRPC] private void SendLevelHolder(List<(string, ModifierType)> levelRooms)
+        [PunRPC] private void InitLevelHolder(int size)
         {
             _levelHolder.LevelRooms.Clear();
-            for (int i = 0; i < levelRooms.Count; i++) _levelHolder.LevelRooms.Add(new RoomData { roomName = levelRooms[i].Item1, roomModifier = levelRooms[i].Item2 });
+            _levelHolder.LevelRooms.Capacity = size;
+        }
+        [PunRPC] private void SendRoomName(string name, int index)
+        {
+            _levelHolder.LevelRooms[index].roomName = name;
+        }
+        [PunRPC] private void SendRoomModifier(ModifierType modifier, int index)
+        {
+            _levelHolder.LevelRooms[index].roomModifier = modifier;
         }
 
         public void SendBuildLevelToOthers() => photonView.RPC("SendBuildLevel", RpcTarget.Others);
