@@ -27,6 +27,7 @@ namespace Gameplay
         {
             if (!isMobile.Value)
             {
+                Debug.Log("Generate");
                 levelHolder.LevelRooms.Clear();
 
                 List<PoolData> pools = new List<PoolData>();
@@ -38,7 +39,7 @@ namespace Gameplay
 
                 ApplyModifiers();
 
-                sendLevelHolder.Raise(levelHolder);
+                TransmitterManager.instance.SendLevelHolderToOthers(levelHolder);
                 TransmitterManager.instance.SendBuildLevelToOthers();
             }
         }

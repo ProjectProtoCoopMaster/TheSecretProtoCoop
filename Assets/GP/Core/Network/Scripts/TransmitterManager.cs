@@ -106,6 +106,7 @@ namespace Networking
 
         public void SendLevelHolderToOthers(LevelVariable levelVariable)
         {
+            Debug.Log("SendLevelHolderToOthers");
             photonView.RPC("InitLevelHolder", RpcTarget.Others, levelVariable.LevelRooms.Count);
 
             for (int i = 0; i < levelVariable.LevelRooms.Count; i++)
@@ -116,20 +117,23 @@ namespace Networking
         }
         [PunRPC] private void InitLevelHolder(int size)
         {
+            Debug.Log("InitLevelHolder");
             _levelHolder.LevelRooms.Clear();
             _levelHolder.LevelRooms.Capacity = size;
         }
         [PunRPC] private void SendRoomName(string name, int index)
         {
+            Debug.Log("SendRoomName");
             _levelHolder.LevelRooms[index].roomName = name;
         }
         [PunRPC] private void SendRoomModifier(ModifierType modifier, int index)
         {
+            Debug.Log("SendRoomModifier");
             _levelHolder.LevelRooms[index].roomModifier = modifier;
         }
 
-        public void SendBuildLevelToOthers() => photonView.RPC("SendBuildLevel", RpcTarget.Others);
-        [PunRPC] private void SendBuildLevel() => _buildLevel.Raise();
-    }
+        public void SendBuildLevelToOthers() { Debug.Log("SendBuildLevelToOthers"); photonView.RPC("SendBuildLevel", RpcTarget.AllViaServer); }
+        [PunRPC] private void SendBuildLevel() { Debug.Log("SendBuildLevel"); _buildLevel.Raise();  }
+        }
 }
 

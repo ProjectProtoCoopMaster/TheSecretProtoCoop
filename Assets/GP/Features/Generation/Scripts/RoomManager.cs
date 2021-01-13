@@ -34,8 +34,9 @@ namespace Gameplay
 
         public Room room { get; private set; }
 
-        void Start()
+        public void StartRoom()
         {
+            Debug.Log("yes");
             if (platform == Platform.VR) room = roomVR;
             else if (platform == Platform.Mobile) room = roomMobile;
         }
@@ -72,7 +73,7 @@ namespace Gameplay
         public override void OnEnterRoom()
         {
             // Initialize Modifier
-            if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
+            //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             // Bake NavMesh
             string navMsg = "There is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";

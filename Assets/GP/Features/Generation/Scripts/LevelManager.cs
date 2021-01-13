@@ -14,14 +14,23 @@ namespace Gameplay
 
         public Level level { get; private set; }
 
+        public GameEvent onGameSceneVRStart;
+
+        public Transform _playerRig;
+
         private void OnEnable()
         {
             if (instance == null) instance = this;
         }
 
+        private void Start()
+        {
+            onGameSceneVRStart.Raise();
+        }
+
         public void StartLevel()
         {
-            if (platform == Platform.VR) level = new LevelVR();
+            if (platform == Platform.VR) level = new LevelVR { playerRig = _playerRig };
             else if (platform == Platform.Mobile) level = new LevelMobile();
 
             level.rooms = levelRooms;
@@ -60,7 +69,7 @@ namespace Gameplay
 
     public class LevelVR : Level
     {
-        public GameObject playerRig;
+        public Transform playerRig;
 
         public RoomVR currentRoomVR { get => (RoomVR)currentRoom.room; }
 
@@ -68,8 +77,8 @@ namespace Gameplay
         {
             LoadRoom(0);
 
-            playerRig.transform.position = currentRoomVR.playerStart.position;
-            playerRig.transform.rotation = currentRoomVR.playerStart.rotation;
+            playerRig.position = currentRoomVR.playerStart.position;
+            playerRig.rotation = currentRoomVR.playerStart.rotation;
         }
 
         public override void OnRoomChange()

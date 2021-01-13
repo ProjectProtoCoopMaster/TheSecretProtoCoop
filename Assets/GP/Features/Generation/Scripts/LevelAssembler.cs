@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +26,8 @@ namespace Gameplay
             if (platform == Platform.VR) assembler = assemblerVR;
             else if (platform == Platform.Mobile) assembler = assemblerMobile;
 
+            foreach (RoomManager _room in assembler.chunks) _room.StartRoom();
+
             assembler.SetLevel();
 
             foreach (RoomManager _room in assembler.pickedRooms) _room.room.parent.gameObject.SetActive(false);
@@ -43,7 +44,7 @@ namespace Gameplay
         public List<RoomManager> chunks;
 
         public LevelVariable levelHolder;
-        public List<RoomManager> pickedRooms { get; protected set; }
+        public List<RoomManager> pickedRooms { get; protected set; } = new List<RoomManager>();
 
         public void SetLevel()
         {
