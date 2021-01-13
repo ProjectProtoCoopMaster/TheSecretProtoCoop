@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyJammer: {fileID: 11400000, guid: 6e55d01f9ae685647a7ef133e818cf50, type: 2}
   _sendOnJammerDestroyedToOthers: {fileID: 11400000, guid: a6ed9eca4f793914291a84513b6ce4a7, type: 2}
-  switchers: []
+  switchers:
+  - {fileID: 0}
   ID: 0
 --- !u!114 &713062126
 MonoBehaviour:
@@ -65,9 +66,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+        m_TargetAssemblyTypeName: UnityEngine.Video.VideoPlayer, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

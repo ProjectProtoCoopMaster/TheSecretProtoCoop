@@ -23,7 +23,6 @@ namespace Gameplay
 			_material = new Material(shader);
 			_player = GetComponent<VideoPlayer>();
 			_player.isLooping = true;
-			_player.renderMode = VideoRenderMode.APIOnly;
 			_player.audioOutputMode = VideoAudioOutputMode.None;
 			_player.clip = VHSClip;
 			_player.Play();

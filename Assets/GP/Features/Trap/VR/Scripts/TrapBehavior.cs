@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.VR
 {
     [RequireComponent(typeof(BoxCollider))]
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
+        [SerializeField] private MeshRenderer mesh;
+
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
@@ -33,6 +36,12 @@ namespace Gameplay.VR
         {
             if (other.transform.parent.GetComponent<IKillable>() != null) 
                 other.transform.parent.GetComponent<IKillable>().Die();
+        }
+
+        [Button]
+        void SetColliderPosition()
+        {
+            GetComponent<BoxCollider>().size = mesh.transform.localScale;
         }
     }
 }
