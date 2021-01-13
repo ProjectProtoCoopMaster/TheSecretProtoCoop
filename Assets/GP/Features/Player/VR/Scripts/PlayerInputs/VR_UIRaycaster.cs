@@ -59,10 +59,10 @@ namespace Gameplay.VR.Player
                 {
                     currentButton = hitInfo.collider.gameObject.GetComponent<Button>();
                     onHover.Raise();
+                    Debug.Log("Raising");
                 }
 
-                else currentButton = null;
-
+                else if(hitInfo.collider == null) currentButton = null;
             }
         }
     }

@@ -1,6 +1,9 @@
 ﻿#if UNITY_STANDALONE
+using System;
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.VR.Feedbacks
 {
@@ -27,7 +30,7 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIHoverClip;
         [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIClickClip;
 
-        private void Awake()
+        private void OnEnable()
         {
             GE_RefreshScene();
         }
@@ -88,7 +91,16 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_RefreshScene()
         {
-            playerAudioSource = GameObject.Find(playerHead.Value).GetComponent<AudioSource>();
+            StartCoroutine(GetAudioSource());
+        }
+
+        IEnumerator GetAudioSource()
+        {
+            while(playerAudioSource == null)
+            {
+                playerAudioSource = GameObject.Find(playerHead.Value).GetComponent<AudioSource>();
+                yield return null;
+            }
         }
     }
 } 

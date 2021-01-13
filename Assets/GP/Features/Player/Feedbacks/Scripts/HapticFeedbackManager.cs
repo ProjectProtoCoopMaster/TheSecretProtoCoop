@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,26 @@ public class HapticFeedbackManager : MonoBehaviour
 
     [SerializeField] [FoldoutGroup("UI Hover Variables")] private float uIHoverDuration, uIHoverFrequency, uIHoverAmplitude;
     [SerializeField] [FoldoutGroup("UI Hover Variables")] private SteamVR_Input_Sources uIHoverHand;
+
+    [SerializeField] [FoldoutGroup("Testing Variables")] private bool isTesting = false;
+    [SerializeField] [FoldoutGroup("Testing Variables")] private float testDuration, testFrequency, testAmplitude;
+    [SerializeField] [FoldoutGroup("Testing Variables")] private SteamVR_Input_Sources testHand;
+
+    private void Start()
+    {
+        if (isTesting) StartCoroutine(LoopPulse());
+    }
+
+    private IEnumerator LoopPulse()
+    {
+        Pulse(testDuration, testFrequency, testAmplitude, testHand);
+
+        new WaitForSeconds(1.5f);
+
+        yield return null;
+
+        StartCoroutine(LoopPulse());
+    }
 
     public void GE_Gunshot()
     {
