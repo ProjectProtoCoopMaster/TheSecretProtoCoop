@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Networking;
 
 namespace Gameplay
 {
@@ -17,21 +18,16 @@ namespace Gameplay
         [ShowIf("platform", Platform.VR)]
         [Title("Level VR")]
         public LevelVR levelVR;
+
         [ShowIf("platform", Platform.Mobile)]
         [Title("Level Mobile")]
         public LevelMobile levelMobile;
 
         public Level level { get; private set; }
 
-        private void OnEnable()
-        {
-            if (instance == null) instance = this;
-        }
+        void OnEnable() { if (instance == null) instance = this; }
 
-        private void Start()
-        {
-            onGameSceneStart.Raise();
-        }
+        void Start() => onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
 
         public void StartLevel()
         {
@@ -42,6 +38,8 @@ namespace Gameplay
 
             level.Start();
         }
+
+        public void ChangeRoom() => level.OnRoomChange();
     }
 
     [System.Serializable]
@@ -63,12 +61,12 @@ namespace Gameplay
             currentRoomIndex = index;
             currentRoom = rooms[currentRoomIndex];
 
-            room.parent.gameObject.SetActive(true);
+            room.roomHolder.gameObject.SetActive(true);
             room.OnEnterRoom();
         }
         protected void UnloadRoom(int index)
         {
-            rooms[index].room.parent.gameObject.SetActive(false);
+            rooms[index].room.roomHolder.gameObject.SetActive(false);
             room.OnDisableRoom();
         }
     }
@@ -96,7 +94,7 @@ namespace Gameplay
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
 
-            // Send Event to the Network --> OnRoomChange Mobile
+            TransmitterManager.instance.SendRoomChangeToOthers();
         }
     }
 

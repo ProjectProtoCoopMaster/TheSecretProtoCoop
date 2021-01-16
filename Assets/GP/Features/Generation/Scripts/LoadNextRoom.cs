@@ -14,7 +14,7 @@ namespace Gameplay
         {
             if (other.name == "[HeadCollider]" && !passed)
             {
-                LevelManager.instance.level.OnRoomChange();
+                LevelManager.instance.ChangeRoom();
 
                 door.Power = 0;
                 door.Unlock();

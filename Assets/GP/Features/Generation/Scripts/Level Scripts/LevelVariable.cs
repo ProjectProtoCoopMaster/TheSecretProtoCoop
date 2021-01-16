@@ -7,6 +7,6 @@ namespace Gameplay
     [CreateAssetMenu(fileName = "New Level variable", menuName = "Level/Level Variable")]
     public class LevelVariable : ScriptableObject
     {
-        public List<RoomData> LevelRooms { get; set; } = new List<RoomData>();
+        public List<RoomData> LevelRoomsData { get; set; } = new List<RoomData>();
     } 
 }
