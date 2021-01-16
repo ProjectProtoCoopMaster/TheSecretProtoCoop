@@ -24,6 +24,8 @@ namespace Networking
         [SerializeField] private GameEvent _onOpenDoor;
         [SerializeField] private GameEvent _onVictory;
         [SerializeField] private GameEvent _onResetCodes;
+        [SerializeField] private LevelVariable _levelHolder;
+        [SerializeField] private GameEvent _buildLevel;
 
         [SerializeField] private GameManager gameManager;
         public SymbolManager symbolManager;
@@ -34,6 +36,7 @@ namespace Networking
             instance = this;
 
         }
+
         public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
 
 
@@ -100,6 +103,37 @@ namespace Networking
         public void SendOxygenTimerToOthers(float oxygenTimer) => photonView.RPC("SendOxygenTimer", RpcTarget.Others, oxygenTimer);
         [PunRPC] private void SendOxygenTimer(float oxygenTimer) => _oxygenTimer.Value = oxygenTimer;
 
-    }
+
+        public void SendLevelHolderToOthers(LevelVariable levelVariable)
+        {
+            Debug.Log("SendLevelHolderToOthers");
+            photonView.RPC("InitLevelHolder", RpcTarget.Others, levelVariable.LevelRooms.Count);
+
+            for (int i = 0; i < levelVariable.LevelRooms.Count; i++)
+            {
+                photonView.RPC("SendRoomName", RpcTarget.Others, levelVariable.LevelRooms[i].roomName, i);
+                photonView.RPC("SendRoomModifier", RpcTarget.Others, levelVariable.LevelRooms[i].roomModifier, i);
+            }
+        }
+        [PunRPC] private void InitLevelHolder(int size)
+        {
+            Debug.Log("InitLevelHolder");
+            _levelHolder.LevelRooms.Clear();
+            _levelHolder.LevelRooms.Capacity = size;
+        }
+        [PunRPC] private void SendRoomName(string name, int index)
+        {
+            Debug.Log("SendRoomName");
+            _levelHolder.LevelRooms[index].roomName = name;
+        }
+        [PunRPC] private void SendRoomModifier(ModifierType modifier, int index)
+        {
+            Debug.Log("SendRoomModifier");
+            _levelHolder.LevelRooms[index].roomModifier = modifier;
+        }
+
+        public void SendBuildLevelToOthers() { Debug.Log("SendBuildLevelToOthers"); photonView.RPC("SendBuildLevel", RpcTarget.AllViaServer); }
+        [PunRPC] private void SendBuildLevel() { Debug.Log("SendBuildLevel"); _buildLevel.Raise();  }
+        }
 }
 
