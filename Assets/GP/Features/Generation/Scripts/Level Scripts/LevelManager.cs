@@ -7,16 +7,21 @@ namespace Gameplay
 {
     public class LevelManager : MonoBehaviour
     {
+        public GameEvent onGameSceneStart;
+
         public Platform platform;
 
         public static LevelManager instance;
         public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
 
+        [ShowIf("platform", Platform.VR)]
+        [Title("Level VR")]
+        public LevelVR levelVR;
+        [ShowIf("platform", Platform.Mobile)]
+        [Title("Level Mobile")]
+        public LevelMobile levelMobile;
+
         public Level level { get; private set; }
-
-        public GameEvent onGameSceneVRStart;
-
-        public Transform _playerRig;
 
         private void OnEnable()
         {
@@ -25,13 +30,13 @@ namespace Gameplay
 
         private void Start()
         {
-            onGameSceneVRStart.Raise();
+            onGameSceneStart.Raise();
         }
 
         public void StartLevel()
         {
-            if (platform == Platform.VR) level = new LevelVR { playerRig = _playerRig };
-            else if (platform == Platform.Mobile) level = new LevelMobile();
+            if (platform == Platform.VR) level = levelVR;
+            else if (platform == Platform.Mobile) level = levelMobile;
 
             level.rooms = levelRooms;
 
@@ -39,6 +44,7 @@ namespace Gameplay
         }
     }
 
+    [System.Serializable]
     public abstract class Level
     {
         public List<RoomManager> rooms { get; set; } = new List<RoomManager>();
@@ -67,6 +73,8 @@ namespace Gameplay
         }
     }
 
+    [System.Serializable]
+    [HideLabel]
     public class LevelVR : Level
     {
         public Transform playerRig;
@@ -91,6 +99,9 @@ namespace Gameplay
             // Send Event to the Network --> OnRoomChange Mobile
         }
     }
+
+    [System.Serializable]
+    [HideLabel]
     public class LevelMobile : Level
     {
         public override void Start() => LoadRoom(0);

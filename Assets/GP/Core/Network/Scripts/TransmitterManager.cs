@@ -132,8 +132,8 @@ namespace Networking
             _levelHolder.LevelRooms[index].roomModifier = modifier;
         }
 
-        public void SendBuildLevelToOthers() { Debug.Log("SendBuildLevelToOthers"); photonView.RPC("SendBuildLevel", RpcTarget.AllViaServer); }
-        [PunRPC] private void SendBuildLevel() { Debug.Log("SendBuildLevel"); _buildLevel.Raise();  }
-        }
+        public void SendBuildLevelToAll() { Debug.Log("SendBuildLevelToOthers"); photonView.RPC("SendBuildLevel", RpcTarget.AllViaServer); }
+        [PunRPC] private void SendBuildLevel() { Debug.Log("SendBuildLevel"); _buildLevel.Raise(); }
+    }
 }
 

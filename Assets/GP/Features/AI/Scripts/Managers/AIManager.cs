@@ -10,7 +10,7 @@ namespace Gameplay.AI
 
         public static List<AgentManager> agents { get; protected set; } = new List<AgentManager>();
 
-        private void Start()
+        void Start()
         {
             if (testAI) StartAllAgents();
         }

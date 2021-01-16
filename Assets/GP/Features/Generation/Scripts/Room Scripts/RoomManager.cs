@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using Networking;
 using Photon.Pun;
 using Gameplay.AI;
+using Gameplay.Mobile;
 
 namespace Gameplay
 {
@@ -103,9 +104,20 @@ namespace Gameplay
     [HideLabel]
     public class RoomMobile : Room
     {
+        public Transform roomCenter;
+        public CameraManager cameraManager;
+
+        public Canvas canvas;
+
+        public float width, height;
+
         public override void OnEnterRoom()
         {
-            throw new System.NotImplementedException();
+            cameraManager.SetCamera(width, height, roomCenter);
+            canvas.worldCamera = cameraManager._camera;
+
+            Vector3 canvasPosition = new Vector3(roomCenter.position.x, 5f, roomCenter.position.z);
+            canvas.transform.position = canvasPosition;
         }
 
         public override void OnDisableRoom()

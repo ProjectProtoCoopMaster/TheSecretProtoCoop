@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9193666675871507970}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1689002181619006540
 MonoBehaviour:
@@ -668,7 +668,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9193666675871507970}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9193666675600900444
 MonoBehaviour:
@@ -749,6 +749,11 @@ MonoBehaviour:
   roomMobile:
     roomName: 
     parent: {fileID: 0}
+    roomCenter: {fileID: 0}
+    cameraManager: {fileID: 0}
+    canvas: {fileID: 0}
+    width: 0
+    height: 0
 --- !u!1 &9193666675871507981
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,8 +782,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9193666675410356466}
-  - {fileID: 9193666675600900447}
   - {fileID: 1739982368338321639}
+  - {fileID: 9193666675600900447}
   m_Father: {fileID: 154428067609828602}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -825,6 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd01c4464959d1a46a3a62b1a6ac3ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testAI: 0
 --- !u!1 &9193666676187241823
 GameObject:
   m_ObjectHideFlags: 0
