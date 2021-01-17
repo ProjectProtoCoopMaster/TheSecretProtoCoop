@@ -23,12 +23,12 @@ namespace Gameplay
 
         public BoolVariable isMobile;
 
-        public void GenerateLevel()
+        public void GenerateLevel() /// OnGameSceneStart Event
         {
             if (!isMobile.Value)
             {
                 Debug.Log("Generate");
-                levelHolder.LevelRooms.Clear();
+                levelHolder.LevelRoomsData.Clear();
 
                 List<PoolData> pools = new List<PoolData>();
                 foreach (PoolData pool in levelFile.roomPools.Values) pools.Add(pool);
@@ -40,7 +40,7 @@ namespace Gameplay
                 ApplyModifiers();
 
                 TransmitterManager.instance.SendLevelHolderToOthers(levelHolder);
-                TransmitterManager.instance.SendBuildLevelToOthers();
+                TransmitterManager.instance.SendBuildLevelToAll();
             }
         }
 
@@ -63,7 +63,7 @@ namespace Gameplay
             {
                 pick = Random.Range(0, availableRoomsInPool.Count);
 
-                levelHolder.LevelRooms.Add(availableRoomsInPool[pick]);
+                levelHolder.LevelRoomsData.Add(availableRoomsInPool[pick]);
 
                 availableRoomsInPool.RemoveAt(pick);
             }
@@ -77,7 +77,7 @@ namespace Gameplay
             int[] modifiedRooms = new int[modifiersAmount];
 
             List<RoomData> unmodifiedRooms = new List<RoomData>();
-            foreach (RoomData room in levelHolder.LevelRooms) unmodifiedRooms.Add(room);
+            foreach (RoomData room in levelHolder.LevelRoomsData) unmodifiedRooms.Add(room);
 
             for (int r = 0; r < modifiedRooms.Length; r++)
             {
@@ -97,4 +97,3 @@ namespace Gameplay
         #endregion
     }
 }
-

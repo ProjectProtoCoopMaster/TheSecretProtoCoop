@@ -2,43 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Networking;
 
 namespace Gameplay
 {
     public class LevelManager : MonoBehaviour
     {
+        public GameEvent onGameSceneStart;
+
         public Platform platform;
 
         public static LevelManager instance;
         public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
 
+        [ShowIf("platform", Platform.VR)]
+        [Title("Level VR")]
+        public LevelVR levelVR;
+
+        [ShowIf("platform", Platform.Mobile)]
+        [Title("Level Mobile")]
+        public LevelMobile levelMobile;
+
         public Level level { get; private set; }
 
-        public GameEvent onGameSceneVRStart;
+        void OnEnable() { if (instance == null) instance = this; }
 
-        public Transform _playerRig;
-
-        private void OnEnable()
-        {
-            if (instance == null) instance = this;
-        }
-
-        private void Start()
-        {
-            onGameSceneVRStart.Raise();
-        }
+        void Start() => onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
 
         public void StartLevel()
         {
-            if (platform == Platform.VR) level = new LevelVR { playerRig = _playerRig };
-            else if (platform == Platform.Mobile) level = new LevelMobile();
+            if (platform == Platform.VR) level = levelVR;
+            else if (platform == Platform.Mobile) level = levelMobile;
 
             level.rooms = levelRooms;
 
             level.Start();
         }
+
+        public void ChangeRoom() => level.OnRoomChange();
     }
 
+    [System.Serializable]
     public abstract class Level
     {
         public List<RoomManager> rooms { get; set; } = new List<RoomManager>();
@@ -57,18 +61,22 @@ namespace Gameplay
             currentRoomIndex = index;
             currentRoom = rooms[currentRoomIndex];
 
-            room.parent.gameObject.SetActive(true);
+            room.roomHolder.gameObject.SetActive(true);
             room.OnEnterRoom();
         }
         protected void UnloadRoom(int index)
         {
-            rooms[index].room.parent.gameObject.SetActive(false);
+            rooms[index].room.roomHolder.gameObject.SetActive(false);
             room.OnDisableRoom();
         }
     }
 
+    [System.Serializable]
+    [HideLabel]
     public class LevelVR : Level
     {
+        public GameEvent refreshScene;
+
         public Transform playerRig;
 
         public RoomVR currentRoomVR { get => (RoomVR)currentRoom.room; }
@@ -79,6 +87,8 @@ namespace Gameplay
 
             playerRig.position = currentRoomVR.playerStart.position;
             playerRig.rotation = currentRoomVR.playerStart.rotation;
+
+            refreshScene.Raise();
         }
 
         public override void OnRoomChange()
@@ -88,9 +98,12 @@ namespace Gameplay
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
 
-            // Send Event to the Network --> OnRoomChange Mobile
+            TransmitterManager.instance.SendRoomChangeToOthers();
         }
     }
+
+    [System.Serializable]
+    [HideLabel]
     public class LevelMobile : Level
     {
         public override void Start() => LoadRoom(0);

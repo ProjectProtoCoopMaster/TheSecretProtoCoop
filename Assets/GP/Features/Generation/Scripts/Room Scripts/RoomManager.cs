@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using Networking;
 using Photon.Pun;
 using Gameplay.AI;
+using Gameplay.Mobile;
 
 namespace Gameplay
 {
@@ -13,7 +14,6 @@ namespace Gameplay
     {
         public bool active { get; set; }
         public bool check { get; protected set; }
-
 
         [Button]
         public virtual void Init() => active = true;
@@ -28,6 +28,7 @@ namespace Gameplay
         [ShowIf("platform", Platform.VR)]
         [Title("Room VR")]
         public RoomVR roomVR;
+
         [ShowIf("platform", Platform.Mobile)]
         [Title("Room Mobile")]
         public RoomMobile roomMobile;
@@ -36,7 +37,6 @@ namespace Gameplay
 
         public void StartRoom()
         {
-            Debug.Log("yes");
             if (platform == Platform.VR) room = roomVR;
             else if (platform == Platform.Mobile) room = roomMobile;
         }
@@ -49,7 +49,7 @@ namespace Gameplay
 
         [InfoBox(@"@""Modifier : "" + this.roomModifier.ToString()")]
 
-        public Transform parent;
+        public Transform roomHolder;
 
         public ModifierType roomModifier { get; set; } = ModifierType.None;
 
@@ -103,14 +103,23 @@ namespace Gameplay
     [HideLabel]
     public class RoomMobile : Room
     {
+        public Transform roomCenter;
+        public CameraManager cameraManager;
+
+        public Canvas canvas;
+
+        public float width = 10f;
+        public float height = 10f;
+
         public override void OnEnterRoom()
         {
-            throw new System.NotImplementedException();
+            cameraManager.SetCamera(width, height, roomCenter);
+            canvas.worldCamera = cameraManager._camera;
+
+            Vector3 canvasPosition = new Vector3(roomCenter.position.x, 5f, roomCenter.position.z);
+            canvas.transform.position = canvasPosition;
         }
 
-        public override void OnDisableRoom()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override void OnDisableRoom() { }
     }
 }
