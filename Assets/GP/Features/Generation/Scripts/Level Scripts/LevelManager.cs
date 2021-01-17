@@ -75,6 +75,8 @@ namespace Gameplay
     [HideLabel]
     public class LevelVR : Level
     {
+        public GameEvent refreshScene;
+
         public Transform playerRig;
 
         public RoomVR currentRoomVR { get => (RoomVR)currentRoom.room; }
@@ -85,6 +87,8 @@ namespace Gameplay
 
             playerRig.position = currentRoomVR.playerStart.position;
             playerRig.rotation = currentRoomVR.playerStart.rotation;
+
+            refreshScene.Raise();
         }
 
         public override void OnRoomChange()

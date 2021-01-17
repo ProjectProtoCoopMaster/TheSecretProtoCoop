@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR;
 
@@ -61,8 +62,9 @@ namespace Gameplay.VR.Player
                     Debug.Log("Raising");
                 }
 
-                else if(hitInfo.collider == null) currentButton = null;
+                else if (hitInfo.collider == null) currentButton = null;
             }
         }
     }
 }
+#endif
