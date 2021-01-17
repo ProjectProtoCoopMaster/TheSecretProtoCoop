@@ -95,7 +95,11 @@ namespace Networking
                 photonView.RPC("SendRoomModifier", RpcTarget.Others, levelVariable.LevelRoomsData[i].roomModifier, i);
             }
         }
-        [PunRPC] private void InitLevelHolder(int size) => _levelHolder.LevelRoomsData = new List<RoomData>(size);
+        [PunRPC] private void InitLevelHolder(int size)
+        {
+            _levelHolder.LevelRoomsData = new List<RoomData>();
+            for (int i = 0; i < size; i++) _levelHolder.LevelRoomsData.Add(new RoomData());
+        }
         [PunRPC] private void SendRoomName(string name, int index) => _levelHolder.LevelRoomsData[index].roomName = name;
         [PunRPC] private void SendRoomModifier(ModifierType modifier, int index) => _levelHolder.LevelRoomsData[index].roomModifier = modifier;
 
