@@ -108,7 +108,8 @@ namespace Gameplay
 
         public Canvas canvas;
 
-        public float width, height;
+        public float width = 10f;
+        public float height = 10f;
 
         public override void OnEnterRoom()
         {

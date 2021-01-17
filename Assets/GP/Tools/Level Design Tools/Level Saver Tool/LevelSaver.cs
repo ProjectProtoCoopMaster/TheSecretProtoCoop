@@ -12,7 +12,7 @@ namespace Tools.LevelDesign
 {
     public class LevelSaver : MonoBehaviour
     {
-        const string saveLocation = "Assets/GD/Level Blocking/Saved Levels/";
+        const string saveLocation = "Assets/GD/Level Design/Blockout/Levels/";
 
         //[SerializeField] private Camera cam;
 
