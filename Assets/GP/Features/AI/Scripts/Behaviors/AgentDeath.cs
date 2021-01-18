@@ -24,9 +24,9 @@ namespace Gameplay.VR
             enabled = false;
         }
 
-        public void Die()
+        /*public void Die()
         {
             throw new System.NotImplementedException();
-        }
+        }*/
     } 
 }
