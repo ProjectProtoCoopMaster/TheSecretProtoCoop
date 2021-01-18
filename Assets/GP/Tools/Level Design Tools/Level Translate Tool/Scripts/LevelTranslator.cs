@@ -34,7 +34,8 @@ namespace Tools.LevelDesign
   
                 for (int j = 0; j < prefabsVR.Count; j++)
                 {
-                    Debug.Log("Hello");
+                    Debug.Log(elements.list[i].prefab.GetInstanceID());
+                    Debug.Log(prefabsVR[j].GetInstanceID());
                     if (elements.list[i].prefab.GetInstanceID() == prefabsVR[j].GetInstanceID())
                     {
                         Debug.Log("Hello");
