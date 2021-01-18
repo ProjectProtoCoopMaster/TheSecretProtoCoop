@@ -27,7 +27,7 @@ namespace Tools.LevelDesign
             //RectTransform parent = Object.Instantiate(switchablesParent, canvas.transform) as RectTransform;
             for (int i = 0; i < elements.list.Count; i++)
             {
-                Debug.Log("Hello");
+                Debug.Log("1");
                 Vector3 position = elements.list[i].position;
                 Quaternion rotation = elements.list[i].rotation;
                 Vector3 scale = elements.list[i].scale;
@@ -38,16 +38,17 @@ namespace Tools.LevelDesign
                     Debug.Log(prefabsVR[j].GetInstanceID());
                     if (elements.list[i].prefab.GetInstanceID() == prefabsVR[j].GetInstanceID())
                     {
-                        Debug.Log("Hello");
+                        Debug.Log("3");
                         for (int k = 0; k < parent.childCount; k++)
                         {
-                            Debug.Log("Hello");
+                            Debug.Log("4");
                             for (int l = 0; l < parent.GetChild(k).childCount; l++)
                             {
-
+                                Debug.Log("Last");
                                 if (parent.GetChild(k).GetChild(l).position == position)
                                 {
-                                    
+                                    Debug.Log("Last");
+
 
 #if UNITY_EDITOR
                                     newObject = PrefabUtility.InstantiatePrefab(prefabsMobile[j] as GameObject, parent.GetChild(k)) as GameObject;
