@@ -33,20 +33,20 @@ namespace Gameplay.Mobile
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    if (_transform.position.x > clampValue.x + basePosition.x)
+                    if (_transform.position.x > 30 + basePosition.x)
                     {
                         _transform.DOMoveX(clampValue.x, .5f);
                     }
-                    else if (_transform.position.x < -clampValue.x + basePosition.x)
+                    else if (_transform.position.x < -30 + basePosition.x)
                     {
                         _transform.DOMoveX(-clampValue.x, .5f);
                     }
 
-                    if (_transform.position.z > clampValue.y + basePosition.y)
+                    if (_transform.position.z > 30 + basePosition.y)
                     {
                         _transform.DOMoveZ(clampValue.y, .5f);
                     }
-                    else if (_transform.position.z < -clampValue.y + basePosition.y)
+                    else if (_transform.position.z < -30 + basePosition.y)
                     {
                         _transform.DOMoveZ(-clampValue.y, .5f);
 
