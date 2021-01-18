@@ -14,7 +14,7 @@ namespace Gameplay.VR.Player
 
         [SerializeField] LayerMask pickupLayer;
         [SerializeField] float pickupOffset = 0.2f;
-        [SerializeField] InteractableBehaviour interactableObject = null;
+        [SerializeField] LureObjectBehaviour interactableObject = null;
 
         FixedJoint myJoint;
 
@@ -56,7 +56,7 @@ namespace Gameplay.VR.Player
             }
         }
 
-        InteractableBehaviour GetNearestInteractable()
+        LureObjectBehaviour GetNearestInteractable()
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, pickupOffset, pickupLayer);
 
@@ -67,7 +67,7 @@ namespace Gameplay.VR.Player
                     if (colliders[i].CompareTag("Interactable"))
                     {
                         Debug.Log("I'm picking up " + colliders[i].gameObject.name);
-                        return colliders[i].transform.GetComponent<InteractableBehaviour>();
+                        return colliders[i].transform.GetComponent<LureObjectBehaviour>();
                     }
                     else continue;
                 }
