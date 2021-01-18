@@ -20,14 +20,22 @@ namespace Gameplay.VR.Player
         void Awake()
         {
             teleportationMaterial = GetComponent<MeshRenderer>().material;
-            ToggleState();
         }
-                
-        public void ToggleState()
+
+        public void On()
         {
-            float temp = startValue;
-            startValue = endValue;
-            endValue = temp;
+            startValue = 0;
+            endValue = 1;
+
+            timeElapsed = 0f;
+
+            StartCoroutine(Lerp());
+        }
+
+        public void Off()
+        {
+            startValue = 1;
+            endValue = 0;
 
             timeElapsed = 0f;
 
