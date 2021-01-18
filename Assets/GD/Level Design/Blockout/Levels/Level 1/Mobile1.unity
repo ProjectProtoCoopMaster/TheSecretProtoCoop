@@ -236,6 +236,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4936f58f656f542b2a1f00f4a152e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &118951558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1377228285512695075, guid: 00ff7bbff9cea594c86f19095a0da461, type: 3}
+  m_PrefabInstance: {fileID: 939380882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf4936f58f656f542b2a1f00f4a152e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &166126439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,7 +360,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 271573795}
 --- !u!33 &204130323
@@ -672,6 +683,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Static Camera Mobile
       objectReference: {fileID: 0}
+    - target: {fileID: 1308117188210570710, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: power
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: fov
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: isUpdate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: rotation
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 48951
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
 --- !u!1 &260348315
@@ -719,7 +750,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2047579910}
 --- !u!33 &260348318
@@ -1619,7 +1650,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 613065323}
 --- !u!33 &365779275
@@ -2513,7 +2544,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1382852600}
 --- !u!33 &450765963
@@ -2986,6 +3017,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Static Camera Mobile
       objectReference: {fileID: 0}
+    - target: {fileID: 1308117188210570710, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: power
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: rotation
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: fov
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184939364976599561, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 48951
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f10c6e40c536b4a41b049721ca81cb6d, type: 3}
 --- !u!1 &495679827
@@ -3033,7 +3080,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1405888340}
 --- !u!33 &495679830
@@ -3875,7 +3922,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1617804406}
 --- !u!33 &625826957
@@ -4673,7 +4720,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1572136630}
 --- !u!33 &817629567
@@ -5787,7 +5834,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh55068
+  m_Name: pb_Mesh85862
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7179,7 +7226,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh54964
+  m_Name: pb_Mesh85696
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7537,7 +7584,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 909855904}
 --- !u!33 &1504316879
@@ -7850,7 +7897,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1573601287}
 --- !u!33 &1559094283
@@ -9653,7 +9700,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 830595865}
 --- !u!33 &1572749914
@@ -10507,7 +10554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114141761505830324, guid: 8b80920ab150881418d9f4478939deaa, type: 3}
       propertyPath: nodes.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114141761505830324, guid: 8b80920ab150881418d9f4478939deaa, type: 3}
       propertyPath: nodes.Array.data[0]
@@ -10532,7 +10579,7 @@ PrefabInstance:
     - target: {fileID: 114141761505830324, guid: 8b80920ab150881418d9f4478939deaa, type: 3}
       propertyPath: nodes.Array.data[3]
       value: 
-      objectReference: {fileID: 78649520}
+      objectReference: {fileID: 118951558}
     - target: {fileID: 114141761505830324, guid: 8b80920ab150881418d9f4478939deaa, type: 3}
       propertyPath: hasJammer
       value: 0
@@ -10725,7 +10772,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1828388677}
 --- !u!33 &1759659491
@@ -11366,7 +11413,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 670449565}
 --- !u!33 &1859292747
@@ -13599,7 +13646,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2137318841}
 --- !u!33 &1965098787
@@ -13912,7 +13959,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2003279164}
 --- !u!33 &1975357487
@@ -14186,7 +14233,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh55148
+  m_Name: pb_Mesh85952
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14870,7 +14917,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh55136
+  m_Name: pb_Mesh85940
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
