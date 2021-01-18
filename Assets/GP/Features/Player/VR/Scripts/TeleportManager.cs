@@ -59,11 +59,12 @@ namespace Gameplay.VR.Player
         bool canTeleport;
         bool VRPlatform;
 
-        VisualEffect currentArea, oldArea;
+        [SerializeField] VisualEffect currentArea, oldArea;
 
         private void Awake()
         {
             bezierVisualization = GetComponentInChildren<LineRenderer>();
+
         }
 
         private void Start()
@@ -78,6 +79,15 @@ namespace Gameplay.VR.Player
             bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
+
+            Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                Debug.Log(hitColliders[i].name);
+
+                if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
+                    oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+            }
         }
 
         private void FixedUpdate()
