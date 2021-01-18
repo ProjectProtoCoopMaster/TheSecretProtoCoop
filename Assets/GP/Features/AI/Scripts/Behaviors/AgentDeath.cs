@@ -26,7 +26,7 @@ namespace Gameplay.VR
 
         public void Die()
         {
-           
+            Debug.Log("Diiiie");
         }
     } 
 }
