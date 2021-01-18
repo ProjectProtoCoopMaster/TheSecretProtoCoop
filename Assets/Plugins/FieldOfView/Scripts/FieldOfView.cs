@@ -20,7 +20,7 @@ public class FieldOfView : MonoBehaviour {
     [SerializeField] private LayerMask layerMask;
     private Mesh mesh;
     [SerializeField] private float fov;
-    [SerializeField] private float viewDistance = 50;
+    [SerializeField] private float viewDistance;
     private Vector3 origin;
     public float rotation;
     [SerializeField] bool isUpdate = false;
