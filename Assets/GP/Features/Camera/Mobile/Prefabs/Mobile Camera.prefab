@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 7610335961338785655}
   - component: {fileID: 7610335961270269542}
   - component: {fileID: 7610335961270269541}
+  - component: {fileID: 5269332776562060176}
   m_Layer: 0
   m_Name: Mobile Camera
   m_TagString: MainCamera
@@ -226,7 +227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 7610335961338785659}
   speed: 0.012
-  clampValue: {x: 10, y: 10}
   clampHeightValue: 40
 --- !u!114 &7610335961338785655
 MonoBehaviour:
@@ -309,3 +309,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 0a3c04d411f83614ab285ced492c8fcb, type: 3}
   VHSClip: {fileID: 32900000, guid: 52d63a2eb55128c498456280a99c2990, type: 3}
+--- !u!114 &5269332776562060176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7610335961338785648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be311209742fcf6499bb813b53af9686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 7610335961338785652}
+  baseOffset: 20
+  cameraScroll: {fileID: 7610335961338785654}

@@ -46,14 +46,14 @@ namespace Gameplay
         {
             if(_isMobile.Value)
             {
-                SceneManager.LoadSceneAsync(index + 1, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index + 1;
             }
             else
             {
 
-                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
 
