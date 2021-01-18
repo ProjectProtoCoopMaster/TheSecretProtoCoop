@@ -2756,11 +2756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4936f58f656f542b2a1f00f4a152e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!120 &1054999320 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 7462249052151418312, guid: 00ff7bbff9cea594c86f19095a0da461, type: 3}
-  m_PrefabInstance: {fileID: 1043594395}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1071678722
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,7 +2999,7 @@ PrefabInstance:
       objectReference: {fileID: 683934097}
     - target: {fileID: 1215235439306462532, guid: 04312571fcb59ae48b6f4494fc00d17d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 1215235439306462532, guid: 04312571fcb59ae48b6f4494fc00d17d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4080,67 +4075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976ac98cdd6c9364aa99f740bccb967f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1398661790
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.516768
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.8751557
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.382687
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 283832867229433110, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6139433678763809086, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: m_Name
-      value: ElectricalLineToCylinder
-      objectReference: {fileID: 0}
-    - target: {fileID: 7098489632866714481, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
-      propertyPath: line
-      value: 
-      objectReference: {fileID: 1054999320}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dde32b0990fb85d4eb804fc58a0db67c, type: 3}
 --- !u!1 &1415906937
 GameObject:
   m_ObjectHideFlags: 0
@@ -5567,6 +5501,10 @@ PrefabInstance:
     - target: {fileID: 7610335961338785648, guid: 37e3c5dd26b6f89498e82b4d30513cdc, type: 3}
       propertyPath: m_Name
       value: Mobile Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610335961338785654, guid: 37e3c5dd26b6f89498e82b4d30513cdc, type: 3}
+      propertyPath: clampHeightValue
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7610335961338785659, guid: 37e3c5dd26b6f89498e82b4d30513cdc, type: 3}
       propertyPath: m_LocalPosition.x
