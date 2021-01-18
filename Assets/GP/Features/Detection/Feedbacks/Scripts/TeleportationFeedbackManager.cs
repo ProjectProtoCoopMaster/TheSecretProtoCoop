@@ -9,7 +9,6 @@ namespace Gameplay.VR.Feedbacks
     public class TeleportationFeedbackManager : MonoBehaviour
     {
         public VisualEffectAsset teleportationAreaAsset, teleportationEffectAsset;
-        public VisualEffect teleportationEffect;
         public List<VisualEffect> particles = new List<VisualEffect>();
         public List<TeleportArea> teleportGlowers = new List<TeleportArea>();
 
@@ -33,32 +32,29 @@ namespace Gameplay.VR.Feedbacks
         public void GE_TeleportationAreaGlowOn()
         {
             for (int i = 0; i < teleportGlowers.Count; i++)
-                teleportGlowers[i].ToggleState();
+                teleportGlowers[i].On();
         }
 
         public void GE_TeleportationAreaGlowOff()
         {
             for (int i = 0; i < teleportGlowers.Count; i++)
-                teleportGlowers[i].ToggleState();
+                teleportGlowers[i].Off();
         }
 
         public void GE_RefreshScene()
         {
+            particles.Clear();
+            teleportGlowers.Clear();
+
             VisualEffect[] iteratorList = FindObjectsOfType<VisualEffect>();
 
             // sort through all VFX graphs in the scene
             for (int i = 0; i < iteratorList.Length; i++)
-            {
                 if (iteratorList[i].visualEffectAsset == teleportationAreaAsset)
                     particles.Add(iteratorList[i]);
-                if (iteratorList[i].visualEffectAsset == teleportationEffectAsset)
-                    teleportationEffect = iteratorList[i];
-            }
 
             for (int i = 0; i < particles.Count; i++)
                 particles[i].Stop();
-
-            //teleportationEffect.Stop();
 
             teleportGlowers.AddRange(FindObjectsOfType<TeleportArea>());
         }

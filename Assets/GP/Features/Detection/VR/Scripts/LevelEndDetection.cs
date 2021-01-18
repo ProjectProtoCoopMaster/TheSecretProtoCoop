@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.VR
 {
@@ -12,12 +13,18 @@ namespace Gameplay.VR
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                if (!isEnter)
-                {
-                    _onTriggerEnter.Invoke();
-                    isEnter = true;
-                }
 
+                LoadNextLevel();
+            }
+        }
+
+        [Button]
+        public void LoadNextLevel()
+        {
+            if (!isEnter)
+            {
+                _onTriggerEnter.Invoke();
+                isEnter = true;
             }
         }
     }

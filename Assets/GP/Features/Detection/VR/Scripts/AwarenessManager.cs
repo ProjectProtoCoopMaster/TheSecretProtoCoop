@@ -9,7 +9,7 @@ namespace Gameplay.VR
     public class AwarenessManager : MonoBehaviour
     {
 #if UNITY_STANDALONE
-        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent reflexModeOn, reflexModeOff;
+        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent playerSpotted, playerIncognito;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
@@ -36,7 +36,7 @@ namespace Gameplay.VR
             if (raisingAlarm != true)
             {
                 raisingAlarm = true; // prevent the event from being raised more than once
-                reflexModeOn.Raise();
+                playerSpotted.Raise();
             }
         }
 
@@ -53,7 +53,7 @@ namespace Gameplay.VR
             if (raisingAlarm != true)
             {
                 raisingAlarm = true; // prevent the event from being raised more than once
-                reflexModeOn.Raise();
+                playerSpotted.Raise();
             }
         }
 
@@ -100,7 +100,7 @@ namespace Gameplay.VR
         private void KillAlarm()
         {
             raisingAlarm = false;
-            reflexModeOff.Raise();
+            playerIncognito.Raise();
 
             spottedDeadBody = false;
             spottedPlayer = false;

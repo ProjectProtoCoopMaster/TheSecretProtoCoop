@@ -22,41 +22,44 @@ namespace Gameplay.VR
 
             for (int i = 0; i < awarenessManager.deadGuards.Count; i++)
             {
-                targetPos.x = awarenessManager.deadGuards[i].position.x;
-                targetPos.y = awarenessManager.deadGuards[i].position.z;
-
-                myFinalPos.x = transform.position.x;
-                myFinalPos.y = awarenessManager.deadGuards[i].position.y;
-                myFinalPos.z = transform.position.z;
-
-                sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
-
-                // if the target guard is within the vision range
-                if (sqrDistToTarget < rangeOfVision * rangeOfVision)
+                if (awarenessManager.deadGuards[i] != null)
                 {
-                    // get the entity's direction relative to you...
-                    targetDir = awarenessManager.deadGuards[i].position - myFinalPos;
+                    targetPos.x = awarenessManager.deadGuards[i].position.x;
+                    targetPos.y = awarenessManager.deadGuards[i].position.z;
 
-                    //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
-                    if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedBody == false)
+                    myFinalPos.x = transform.position.x;
+                    myFinalPos.y = awarenessManager.deadGuards[i].position.y;
+                    myFinalPos.z = transform.position.z;
+
+                    sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
+
+                    // if the target guard is within the vision range
+                    if (sqrDistToTarget < rangeOfVision * rangeOfVision)
                     {
-                        if (Physics.Linecast(this.transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
+                        // get the entity's direction relative to you...
+                        targetDir = awarenessManager.deadGuards[i].position - myFinalPos;
+
+                        //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
+                        if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedBody == false)
                         {
-                            if (hitInfo.collider.gameObject.CompareTag("Dead"))
+                            if (Physics.Linecast(this.transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
                             {
-                                detectedBody = true; // stop overwatch from looping
+                                if (hitInfo.collider.gameObject.CompareTag("Dead"))
+                                {
+                                    detectedBody = true; // stop overwatch from looping
 
-                                detectionFeedback.PlayDetectionFeedback();
+                                    detectionFeedback.PlayDetectionFeedback();
 
-                                Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
+                                    Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
 
-                                if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
-                                    awarenessManager.alarmRaisers.Add(this.gameObject);
+                                    if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
+                                        awarenessManager.alarmRaisers.Add(this.gameObject);
 
-                                spottedDeadBody.Raise();
+                                    spottedDeadBody.Raise();
+                                }
+
+                                else if (hitInfo.collider != null) Debug.Log(gameObject.name + "'s Overwatch hit " + hitInfo.collider.GetComponentInParent<AgentDeath>().gameObject.name + "'s " + hitInfo.collider.gameObject.name);
                             }
-
-                            else Debug.Log(gameObject.name + "'s Overwatch hit " + hitInfo.collider.GetComponentInParent<AgentDeath>().gameObject.name + "'s " + hitInfo.collider.gameObject.name);
                         }
                     }
                 }
