@@ -4,6 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 namespace Gameplay.VR.Player
 {
@@ -57,6 +58,8 @@ namespace Gameplay.VR.Player
         internal bool isGameOver;
         bool canTeleport;
         bool VRPlatform;
+
+        VisualEffect currentArea, oldArea;
 
         private void Awake()
         {
@@ -196,7 +199,11 @@ namespace Gameplay.VR.Player
             // if you hit something with the Tall Ray, define it as the endpoint
             if (Physics.Raycast(tallRay, out hitTallInfo, 500, teleportationLayers))
             {
-                if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas")) canTeleport = true;
+                if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
+                {
+                    currentArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
+                    canTeleport = true;
+                }
 
                 else canTeleport = false;
 
@@ -252,6 +259,8 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
+            currentArea.enabled = false;
+
             startPos = playerPosition;
             targetPos = teleportTarget;
 
@@ -280,6 +289,11 @@ namespace Gameplay.VR.Player
             }
 
             isTeleporting = false;
+
+            oldArea.enabled = true;
+
+            oldArea = currentArea;
+            currentArea = null;
 
             particleDash.Stop();
         }

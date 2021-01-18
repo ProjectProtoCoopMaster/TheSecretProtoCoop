@@ -31,13 +31,13 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_TeleportationAreaGlowOn()
         {
-            for (int i = 0; i < teleportGlowers.Count; i++)
+            for (int i = 0; i < teleportGlowers.Count; i++) 
                 teleportGlowers[i].On();
         }
 
         public void GE_TeleportationAreaGlowOff()
         {
-            for (int i = 0; i < teleportGlowers.Count; i++)
+            for (int i = 0; i < teleportGlowers.Count; i++) 
                 teleportGlowers[i].Off();
         }
 

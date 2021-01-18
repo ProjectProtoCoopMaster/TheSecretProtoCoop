@@ -19,6 +19,7 @@ namespace Gameplay.VR.Player
         void Awake()
         {
             teleportationMaterial = GetComponent<MeshRenderer>().material;
+            Off();
         }
 
         public void On()
