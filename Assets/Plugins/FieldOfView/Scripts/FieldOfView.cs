@@ -19,7 +19,7 @@ public class FieldOfView : MonoBehaviour {
 
     [SerializeField] private LayerMask layerMask;
     private Mesh mesh;
-    private float fov;
+    [SerializeField] private float fov;
     private float viewDistance;
     private Vector3 origin;
     public float rotation;
@@ -28,7 +28,6 @@ public class FieldOfView : MonoBehaviour {
     private IEnumerator Start() {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        fov = 90f;
         viewDistance = 50f;
         origin = Vector3.zero;
         isUpdate = true;
