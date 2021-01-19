@@ -10,6 +10,8 @@ namespace Gameplay
 
         public static List<JammerBehavior> jammers = new List<JammerBehavior>();
 
+        void OnEnable() { if (instance == null) instance = this; }
+
         public void DestroyJammer(int ID)
         {
             for (int i = 0; i < jammers.Count; i++)

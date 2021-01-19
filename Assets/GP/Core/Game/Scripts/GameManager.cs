@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using Networking;
 
 namespace Gameplay
 {
@@ -34,6 +35,8 @@ namespace Gameplay
 
         [SerializeField] private GameEvent onRefreshScene;
 
+        public GameObject loseCanvasPrefab;
+
         void Start()
         {
             if (startGame) SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
@@ -49,7 +52,7 @@ namespace Gameplay
             if (!isGameOver)
             {
                 isGameOver = true;
-                loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
+                loseCanvas = Instantiate(loseCanvasPrefab);
 
                 switch (loseType)
                 {
@@ -76,7 +79,7 @@ namespace Gameplay
                 }
                 if (_isMobile.Value) { }
 
-                //StartCoroutine(WaitGameOver());
+                loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { TransmitterManager.instance.SendLevelRestartToAll(); });
             }
         }
 
@@ -125,7 +128,7 @@ namespace Gameplay
         public void LoadSameScene()
         {
             /*if(_isMobile.Value)*/ Destroy(loseCanvas);
-            StartCoroutine(WaitSceneDestruction()); ;
+            StartCoroutine(WaitSceneDestruction());
             isGameOver = false;
         }
         public void LoadNextScene()

@@ -44,8 +44,6 @@ namespace Gameplay
         public void RestartLevel()
         {
             level.StartAt(level.currentRoomIndex);
-
-            TransmitterManager.instance.SendLevelRestartToOthers();
         }
 
         public void ChangeRoom() => level.OnRoomChange();

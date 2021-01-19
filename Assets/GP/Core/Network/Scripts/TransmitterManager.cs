@@ -139,7 +139,7 @@ namespace Networking
         public void SendRoomChangeToOthers() => photonView.RPC("SendRoomChange", RpcTarget.Others);
         [PunRPC] private void SendRoomChange() => _changeRoomMobile.Raise();
 
-        public void SendLevelRestartToOthers() => photonView.RPC("SendLevelRestart", RpcTarget.Others);
+        public void SendLevelRestartToAll() => photonView.RPC("SendLevelRestart", RpcTarget.AllViaServer);
         [PunRPC] private void SendLevelRestart() => _onLevelRestart.Raise();
         #endregion
     }

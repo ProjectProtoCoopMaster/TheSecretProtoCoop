@@ -25,6 +25,9 @@ namespace Gameplay
         [ReadOnly]
         public List<int> indexes;
         public ISymbol symbol;
+
+        void OnEnable() { if (instance == null) instance = this; }
+
         private void Awake()
         {
             instance = this;

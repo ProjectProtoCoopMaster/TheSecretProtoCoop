@@ -91,8 +91,8 @@ namespace Gameplay
 
                 for (int i = 0; i < AIManager.agents.Count; i++)
                 {
-                    aIPositions[i] = AIManager.agents[i].transform.position;
-                    aIRotations[i] = AIManager.agents[i].transform.rotation;
+                    aIPositions.Add(AIManager.agents[i].transform.position);
+                    aIRotations.Add(AIManager.agents[i].transform.rotation);
                 }
 
                 firstStart = false;
