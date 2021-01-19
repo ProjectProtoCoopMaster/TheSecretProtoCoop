@@ -3882,10 +3882,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2010511360}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1b981489fdc61c947bcef777803086cc, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c70f02bfa3e30644da07e8511509ec97, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -3933,6 +3929,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c70f02bfa3e30644da07e8511509ec97, type: 3}
       propertyPath: m_Name
       value: M_CeilingDroitVide_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1b981489fdc61c947bcef777803086cc, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b981489fdc61c947bcef777803086cc, type: 3}
@@ -7042,7 +7042,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 909b3a6fe2eed8940b9be6b5cc80fdc8, type: 3}
 --- !u!4 &414104956 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 785165413479417951, guid: 909b3a6fe2eed8940b9be6b5cc80fdc8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 414104955}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &416845352
@@ -24230,7 +24230,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: de382fba7cd4577469dd142faafd3962, type: 3}
 --- !u!4 &1400189201 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de382fba7cd4577469dd142faafd3962, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 1400189200}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403307208
@@ -25984,7 +25984,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 909b3a6fe2eed8940b9be6b5cc80fdc8, type: 3}
 --- !u!4 &1500622544 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 785165413479417951, guid: 909b3a6fe2eed8940b9be6b5cc80fdc8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 1500622543}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1500685893
@@ -40056,7 +40056,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: de382fba7cd4577469dd142faafd3962, type: 3}
 --- !u!4 &2058980415 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de382fba7cd4577469dd142faafd3962, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 2058980414}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2064567858
@@ -40934,6 +40934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: {fileID: 0}
   redAlarmLight: {fileID: 0}
+  playerRigPosition: {fileID: 0}
 --- !u!4 &981254272176248901
 Transform:
   m_ObjectHideFlags: 0
@@ -40990,6 +40991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAudioSource: {fileID: 0}
   volume: 0.5
+  playerRigName: {fileID: 0}
   gunshotClip: {fileID: 8300000, guid: ac161ceed4dcf2d48afcb3e5cd018c48, type: 3}
   ricochetClips:
   - {fileID: 8300000, guid: 5ac3bd9286454b647b2394ab4b12cb07, type: 3}
