@@ -1,19 +1,20 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Valve.VR;
 
 namespace Gameplay.VR.Player
 {
-    public class VR_UIRaycaster : VR_Raycaster
+    public class VR_PickupDeadGuardRay : VR_Raycaster
     {
-        [SerializeField] private Button currentButton;
+        [SerializeField] AgentDeath currentGuard;
 
         private void Update()
         {
             if (clickAction.GetStateDown(handSource))
             {
-                if (currentButton != null)
+                if (currentGuard != null)
                 {
-                    currentButton.onClick.Invoke();
                     onClick.Raise();
                 }
 
@@ -32,16 +33,18 @@ namespace Gameplay.VR.Player
             {
                 // if you touch a new button
                 if (hitInfo.collider != null &&
-                    hitInfo.collider.gameObject.GetComponent<Button>() != null &&
-                    hitInfo.collider.gameObject.GetComponent<Button>() != currentButton)
+                    hitInfo.collider.gameObject.GetComponentInParent<AgentDeath>() != null &&
+                    hitInfo.collider.gameObject.GetComponentInParent<AgentDeath>() != currentGuard)
                 {
-                    currentButton = hitInfo.collider.gameObject.GetComponent<Button>();
+                    currentGuard = hitInfo.collider.gameObject.GetComponentInParent<AgentDeath>();
                     onHover.Raise();
                     Debug.Log("Raising");
                 }
 
-                else if (hitInfo.collider == null) currentButton = null;
+                else if (hitInfo.collider == null) currentGuard = null;
             }
+
+            showLaser = hitInfo.collider.CompareTag("Dead");
         }
     }
 }

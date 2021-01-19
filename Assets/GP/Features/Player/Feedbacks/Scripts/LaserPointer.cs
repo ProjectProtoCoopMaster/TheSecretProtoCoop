@@ -5,6 +5,7 @@ namespace Gameplay.VR.Player
     public class LaserPointer : MonoBehaviour
     {
         [SerializeField] protected float laserWidth;
+        [SerializeField] protected bool showLaser = true;
         protected LineRenderer laserPointer;
 
         [SerializeField] protected Color laserColor;
@@ -50,6 +51,8 @@ namespace Gameplay.VR.Player
         {
             laserPointer.SetPosition(0, laserStart.position);
             laserPointer.SetPosition(1, laserHitPoint.position);
+
+            laserPointer.enabled = showLaser;
         }
     }
 }

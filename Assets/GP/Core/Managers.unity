@@ -164,17 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86d09b348497bf43b7f418bee32d6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &481915984 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2651522416651946683, guid: f71bf1f10b61d4445a76f49ff2177609, type: 3}
-  m_PrefabInstance: {fileID: 4951206299957941935}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3915db054a9b4ca4d9f7b828737d01e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &532594263 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
@@ -446,9 +435,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 481915984}
+      objectReference: {fileID: 929449247488257633}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: GE_RefreshScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Gameplay.VR.GameOverFeedbackManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Gameplay.VR.Feedbacks.TeleportationFeedbackManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 929449247488257634}
     - target: {fileID: 3521382425665192201, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -499,6 +516,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb555567d260a0746a80efded5961758, type: 3}
+--- !u!114 &929449247488257633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6074166611735254540, guid: fb555567d260a0746a80efded5961758, type: 3}
+  m_PrefabInstance: {fileID: 929449247488257632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795f2d98a97a5574587f99811f8b55fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &929449247488257634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7961236333030491142, guid: fb555567d260a0746a80efded5961758, type: 3}
+  m_PrefabInstance: {fileID: 929449247488257632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1525769403186798941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -556,7 +589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: startGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: launchOneScene
