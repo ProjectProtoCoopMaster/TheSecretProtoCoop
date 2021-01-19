@@ -45,10 +45,10 @@ namespace Gameplay.VR
 
         private void Update()
         {
-            _playerRotation.Value = _transform.localRotation;
+            _playerRotation.Value = transform.rotation;
             _playerPosition.Value = _transform.position; /*- centerTransform.position;*/
 
-            _player.Value = this.gameObject;
+            //_player.Value = this.gameObject;
 
             _sendPlayerPosAndRot.Raise();
         }
