@@ -20,6 +20,8 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
         [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleported;
+        [Tooltip("The GameEvent that is called when the player is teleporting.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportDashing;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -64,7 +66,6 @@ namespace Gameplay.VR.Player
         private void Awake()
         {
             bezierVisualization = GetComponentInChildren<LineRenderer>();
-
         }
 
         private void Start()
@@ -262,9 +263,11 @@ namespace Gameplay.VR.Player
 
         public void TryTeleporting()
         {
+            teleported.Raise();
+
             if (canTeleport == true)
                 StartCoroutine(TeleportThePlayer());
-            bezierVisualization.enabled = showRayPointer = canTeleport = false;
+            bezierVisualization.enabled = showRayPointer = canTeleport = false;            
         }
 
         IEnumerator TeleportThePlayer()
@@ -279,7 +282,7 @@ namespace Gameplay.VR.Player
 
             particleDash.Play();
 
-            teleported.Raise();
+            teleportDashing.Raise();
 
             time = 0;
             change = targetPos - startPos;
