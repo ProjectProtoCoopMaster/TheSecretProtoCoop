@@ -34,8 +34,8 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.GetComponent<IKillable>() != null) 
-                other.transform.parent.GetComponent<IKillable>().Die();
+            if (other.transform.parent.GetComponentInParent<IKillable>() != null) 
+                other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
         }
 
         [Button]

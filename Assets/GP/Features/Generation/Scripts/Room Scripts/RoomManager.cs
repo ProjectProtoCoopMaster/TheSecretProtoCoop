@@ -51,6 +51,8 @@ namespace Gameplay
 
         public Transform roomHolder;
 
+        public Transform roomCenter;
+
         public ModifierType roomModifier { get; set; } = ModifierType.None;
 
         public abstract void OnEnterRoom();
@@ -103,7 +105,6 @@ namespace Gameplay
     [HideLabel]
     public class RoomMobile : Room
     {
-        public Transform roomCenter;
         public CameraManager cameraManager;
 
         public Canvas canvas;
