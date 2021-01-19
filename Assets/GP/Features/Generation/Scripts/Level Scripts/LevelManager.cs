@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Networking;
+using Gameplay.VR;
+using Gameplay.Mobile;
 
 namespace Gameplay
 {
@@ -56,19 +58,23 @@ namespace Gameplay
 
         public abstract void OnRoomChange();
 
-        protected void LoadRoom(int index)
+        protected virtual void LoadRoom(int index)
         {
             currentRoomIndex = index;
             currentRoom = rooms[currentRoomIndex];
 
+            SetCenterToRoom(currentRoom);
+
             room.roomHolder.gameObject.SetActive(true);
             room.OnEnterRoom();
         }
-        protected void UnloadRoom(int index)
+        protected virtual void UnloadRoom(int index)
         {
             rooms[index].room.roomHolder.gameObject.SetActive(false);
             room.OnDisableRoom();
         }
+
+        protected abstract void SetCenterToRoom(RoomManager roomManager);
     }
 
     [System.Serializable]
@@ -78,6 +84,7 @@ namespace Gameplay
         public GameEvent refreshScene;
 
         public Transform playerRig;
+        public VR.PlayerBehavior playerBehavior;
 
         public RoomVR currentRoomVR { get => (RoomVR)currentRoom.room; }
 
@@ -100,12 +107,19 @@ namespace Gameplay
 
             TransmitterManager.instance.SendRoomChangeToOthers();
         }
+
+        protected override void SetCenterToRoom(RoomManager roomManager)
+        {
+            playerBehavior.centerTransform = roomManager.room.roomCenter;
+        }
     }
 
     [System.Serializable]
     [HideLabel]
     public class LevelMobile : Level
     {
+        public Mobile.PlayerBehavior playerBehavior;
+
         public override void Start() => LoadRoom(0);
 
         public override void OnRoomChange()
@@ -114,6 +128,11 @@ namespace Gameplay
 
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
+        }
+
+        protected override void SetCenterToRoom(RoomManager roomManager)
+        {
+            playerBehavior.centerTransform = roomManager.room.roomCenter;
         }
     }
 }

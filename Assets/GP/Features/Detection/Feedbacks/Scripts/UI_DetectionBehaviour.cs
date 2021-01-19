@@ -15,7 +15,7 @@ namespace Gameplay.VR.UI
         private void Awake()
         {
             //GE_RefreshScene();
-            GE_DisenageReflexMode();
+            GE_PlayerIncognito();
         }
 
         public void GE_PlayerPeeking()
@@ -28,7 +28,7 @@ namespace Gameplay.VR.UI
             framesToWait = 10;
         }
 
-        public void GE_EngageReflexMode()
+        public void GE_PlayerSpotted()
         {
             detectionText.enabled = true;
             detectionText.color = Color.red;
@@ -36,7 +36,7 @@ namespace Gameplay.VR.UI
             decay = false;
         }
 
-        public void GE_DisenageReflexMode()
+        public void GE_PlayerIncognito()
         {
             detectionText.color = Color.green;
             detectionText.text = "[Incognito]";
@@ -57,7 +57,7 @@ namespace Gameplay.VR.UI
 
                 if (framesPassed % framesToWait == 0)
                 {
-                    GE_DisenageReflexMode();
+                    GE_PlayerIncognito();
                 }
             }
         }
