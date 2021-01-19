@@ -1,9 +1,8 @@
-﻿using Gameplay.VR;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.VR
 {
     public class LoadNextRoom : MonoBehaviour
     {

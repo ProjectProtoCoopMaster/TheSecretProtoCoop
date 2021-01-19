@@ -8,6 +8,7 @@ namespace Gameplay
 {
     public class SymbolManager : MonoBehaviour
     {
+        public static SymbolManager instance;
        
         [SerializeField] private Networking.TransmitterManager transmitterManager;
         public BoolVariable isSymbolLoaded;
@@ -23,7 +24,6 @@ namespace Gameplay
         public string[] pickedNames;
         [ReadOnly]
         public List<int> indexes;
-        public static SymbolManager instance;
         public ISymbol symbol;
         private void Awake()
         {

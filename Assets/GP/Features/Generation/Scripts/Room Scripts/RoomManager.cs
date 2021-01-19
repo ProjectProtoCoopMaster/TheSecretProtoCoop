@@ -66,8 +66,8 @@ namespace Gameplay
         public NavMeshSurface roomNavigationSurface;
 
         public AIManager aIManager;
-        public List<Vector3> aIPositions;
-        public List<Quaternion> aIRotations;
+        public List<Vector3> aIPositions { get; set; }
+        public List<Quaternion> aIRotations { get; set; }
 
         public Transform entranceAnchor;
         public Transform exitAnchor;
@@ -110,8 +110,13 @@ namespace Gameplay
 
             aIManager.StartAllAgents();
 
-            // Initialization Switchers
-            // Initialize Elements
+            /// Initialize Elements
+            
+            SwitcherManager.instance.StartAllSwitchers();
+
+            JammerManager.instance.StartAllJammers();
+
+            SymbolManager.instance.LoadSymbols();
         }
 
         public override void OnDisableRoom()
@@ -133,11 +138,19 @@ namespace Gameplay
 
         public override void OnEnterRoom()
         {
+            /// Initialize Camera
+            
             cameraManager.SetCamera(width, height, roomCenter);
             canvas.worldCamera = cameraManager._camera;
 
             Vector3 canvasPosition = new Vector3(roomCenter.position.x, 5f, roomCenter.position.z);
             canvas.transform.position = canvasPosition;
+
+            /// Initialize Switchers
+
+            SwitcherManager.instance.StartAllSwitchers();
+
+            JammerManager.instance.StartAllJammers();
         }
 
         public override void OnDisableRoom() { }
