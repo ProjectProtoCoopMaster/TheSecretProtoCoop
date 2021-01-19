@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 4605352206057338154}
   - component: {fileID: 4605352206057338157}
   - component: {fileID: 1379281556072007816}
-  - component: {fileID: 1219852604363815338}
   - component: {fileID: 8668388833559456506}
   - component: {fileID: 6146927010924072766}
   m_Layer: 11
@@ -190,26 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exclamationMark: {fileID: 3968929243909163910}
---- !u!114 &1219852604363815338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078856768317732911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538fa4cc186c5874984cf3662a490bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guardHearingLayermask:
-    serializedVersion: 2
-    m_Bits: 19456
-  wallDampenMultiplier: 0.5
-  windowDampenMultiplier: 0.75
-  noiseRange: 7
-  minimumVelocity: 7
-  currNoiseRange: 0
 --- !u!114 &8668388833559456506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +264,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1219852604363815338}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Gameplay.VR.DeathSoundBehaviour, Assembly-CSharp
         m_MethodName: GE_CryOut
         m_Mode: 1
