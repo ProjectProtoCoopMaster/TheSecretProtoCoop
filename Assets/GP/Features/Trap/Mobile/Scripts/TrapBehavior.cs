@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+
 namespace Gameplay.Mobile
 {
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
-        private Color color;
+        [SerializeField] private MeshRenderer mesh;
         private Material mat;
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
@@ -27,8 +28,8 @@ namespace Gameplay.Mobile
         private void OnEnable()
         {
             //color = GetComponent<Image>().color;
-            mat = new Material(GetComponent<MeshRenderer>().material);
-            GetComponent<MeshRenderer>().material = mat;
+            mat = new Material(mesh.material);
+            mesh.material = mat;
         }
 
         private void Start() => Power = power;

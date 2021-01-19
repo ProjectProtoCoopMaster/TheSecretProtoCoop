@@ -39,8 +39,7 @@ namespace Gameplay.VR
             {
                 codes.Add(sm.codeNames[i]);
             }
-
-
+            randoms.Clear();
             random = Random.Range(0, 3);
             randoms.Add(random);
             codeLines[random].codeText.text = sm.pickedNames[0];
@@ -52,8 +51,6 @@ namespace Gameplay.VR
                 icons.Remove(sm.iconsSelected[i]);
             }
 
-
-
             for (int i = 0; i < 2; i++)
             {
 
@@ -61,7 +58,7 @@ namespace Gameplay.VR
 
                 for (int j = 0; j < randoms.Count; j++)
                 {
-                    if(random == randoms[j])
+                    if (random == randoms[j])
                     {
                         j = randoms.Count;
                         i--;
@@ -70,7 +67,7 @@ namespace Gameplay.VR
 
                     else
                     {
-                        if (j == randoms.Count-1)
+                        if (j == randoms.Count - 1)
                         {
                             int newRand = Random.Range(0, codes.Count);
                             codeLines[random].codeText.text = codes[newRand];
@@ -87,17 +84,17 @@ namespace Gameplay.VR
                     }
                 }
 
-                
+
             }
 
         }
 
-    }
-    [System.Serializable]
-    public struct CodeLine
-    {
-        public Text codeText;
-        public Image[] symbols;
+        [System.Serializable]
+        public struct CodeLine
+        {
+            public Text codeText;
+            public Image[] symbols;
+        }
     }
 }
 

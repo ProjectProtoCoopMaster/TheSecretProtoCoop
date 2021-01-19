@@ -1,14 +1,25 @@
 ﻿#if UNITY_STANDALONE
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.VR.Feedbacks
 {
     public class PlayerAudioManager : MonoBehaviour
     {
         [SerializeField] [FoldoutGroup("General")] AudioSource playerAudioSource;
+        AudioSource _playerAudioSource
+        {
+            get
+            {
+                if (playerAudioSource == null) 
+                    playerAudioSource = GameObject.Find(playerHead.Value).GetComponent<AudioSource>();
+                return playerAudioSource;
+            }
+        }
+
         [SerializeField] [FoldoutGroup("General")] float volume = 0.5f;
-        [SerializeField] [FoldoutGroup("General")] StringVariable playerRigName;
+        [SerializeField] [FoldoutGroup("General")] StringVariable playerHead;
 
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip gunshotClip;
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] ricochetClips;
@@ -24,47 +35,49 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("GameOver")] AudioClip metalGearSolidDetection;
         [SerializeField] [FoldoutGroup("GameOver")] AudioClip gameOverAlarm;
 
-        private void Awake()
-        {
-            GE_RefreshScene();
-        }
+        [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIHoverClip;
+        [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIClickClip;
 
         public void GE_GunshotSFX()
         {
-            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
-            playerAudioSource.PlayOneShot(gunshotClip, volume);
+            _playerAudioSource.PlayOneShot(gunshotClip, volume);
         }
 
         public void GE_GunshotRicochetSFX()
         {
-            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
-            playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
+            _playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
         }
 
         public void GE_HitEnvironementSFX()
         {
-            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
-            playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
-            playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
+            _playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
+            //_playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
         }
 
         public void GE_TeleportationSFX()
         {
-            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
-            playerAudioSource.PlayOneShot(teleportationSFX);
-            playerAudioSource.PlayOneShot(lastWooshSFX = RandomRicochet(teleportationWooshSFX, lastWooshSFX), volume);
+            _playerAudioSource.PlayOneShot(teleportationSFX);
+            _playerAudioSource.PlayOneShot(lastWooshSFX = RandomRicochet(teleportationWooshSFX, lastWooshSFX), volume);
         }
 
         public void GE_DetectionSFX()
         {
-            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
-            playerAudioSource.PlayOneShot(metalGearSolidDetection, volume);
+            _playerAudioSource.PlayOneShot(metalGearSolidDetection, volume);
         }
 
         public void GE_GameOverAlarmSFX()
         {
-            if (playerAudioSource == null) playerAudioSource = FindObjectOfType<AudioSource>();
-            playerAudioSource.PlayOneShot(gameOverAlarm, volume);
+            _playerAudioSource.PlayOneShot(gameOverAlarm, volume);
+        }
+
+        public void GE_UIHoverSFX()
+        {
+            _playerAudioSource.PlayOneShot(uIHoverClip, volume);
+        }
+
+        public void GE_UIClickSFX()
+        {
+            _playerAudioSource.PlayOneShot(uIClickClip, volume);
         }
 
         AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)
@@ -78,11 +91,6 @@ namespace Gameplay.VR.Feedbacks
             }
             return ricochetClip;
         }
-
-        public void GE_RefreshScene()
-        {
-            playerAudioSource = GameObject.Find(playerRigName.Value).GetComponentInChildren<AudioSource>();
-        }
     }
-} 
+}
 #endif

@@ -12,7 +12,7 @@ namespace Tools.LevelDesign
 {
     public class LevelSaver : MonoBehaviour
     {
-        const string saveLocation = "Assets/GD/Level Blocking/Saved Levels/";
+        const string saveLocation = "Assets/GD/Level Design/Blockout/Levels/";
 
         //[SerializeField] private Camera cam;
 
@@ -65,14 +65,14 @@ namespace Tools.LevelDesign
                     {
                         ISwitchableElements newElement = new ISwitchableElements();
 
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         newElement.prefab = PrefabUtility.GetCorrespondingObjectFromSource(switcher.transform.GetChild(j).gameObject) as GameObject;
 #endif
 
                         //newElement.position = cam.WorldToScreenPoint(switcher.transform.GetChild(j).position);
                         newElement.position = switcher.transform.GetChild(j).position;
                         newElement.rotation = switcher.transform.GetChild(j).rotation;
-                        newElement.scale = switcher.transform.GetChild(j).localScale;
+                        newElement.scale = switcher.transform.GetChild(j).transform.Find("Mesh").transform.localScale;
                         elements.list.Add(newElement);
                     }
                 }

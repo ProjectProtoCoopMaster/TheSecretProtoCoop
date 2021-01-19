@@ -10,6 +10,9 @@ namespace Gameplay.Mobile
     {
 
         private Material mat;
+        private bool selectable;
+        [SerializeField] private Transform mesh;
+
         public enum LockState { Locked, Unlocked }
         public LockState lockState;
 
@@ -20,6 +23,8 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Unlocked;
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
+        [SerializeField] private GameObject padlock_Open;
+        [SerializeField] private GameObject padlock_Close;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
@@ -36,10 +41,11 @@ namespace Gameplay.Mobile
         }
         private void OnEnable()
         {
-            CheckLockState();
 
             mat = new Material(door.GetComponent<MeshRenderer>().material);
             door.GetComponent<MeshRenderer>().material = mat;
+            CheckLockState();
+
         }
         private void Start() => Power = power;
 
@@ -77,9 +83,10 @@ namespace Gameplay.Mobile
         {
             if(lockState == LockState.Locked)
             {
-                
-                //GetComponent<Button>().enabled = true;
-                //anim.enabled = true;
+
+                selectable =true;
+                padlock_Close.SetActive(true);
+                padlock_Open.SetActive(false);
             }
             else
             {
@@ -89,9 +96,11 @@ namespace Gameplay.Mobile
 
         private void FeedbackUnlock()
         {
-            
-            //GetComponent<Button>().enabled = false;
-            //anim.enabled = false;
+
+            selectable = false;
+
+            padlock_Close.SetActive(false);
+            padlock_Open.SetActive(true);
 
             if (power == 1) TurnOn();
             else TurnOff();
@@ -107,7 +116,19 @@ namespace Gameplay.Mobile
             else Power = 1;
         }
 
+        [Button]
+        public void SetColliderOnMesh()
+        {
+            GetComponent<BoxCollider>().size = mesh.localScale;
+            GetComponent<BoxCollider>().center = mesh.localPosition;
+        }
+        public void Hello() => Debug.Log("Hello");
 
+        private void OnMouseDown()
+        {
+            if(selectable)
+                Hello();
+        }
     }
 }
 

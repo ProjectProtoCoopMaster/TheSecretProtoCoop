@@ -4,6 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 namespace Gameplay.VR.Player
 {
@@ -58,9 +59,12 @@ namespace Gameplay.VR.Player
         bool canTeleport;
         bool VRPlatform;
 
+        [SerializeField] VisualEffect currentArea, oldArea;
+
         private void Awake()
         {
             bezierVisualization = GetComponentInChildren<LineRenderer>();
+
         }
 
         private void Start()
@@ -75,6 +79,15 @@ namespace Gameplay.VR.Player
             bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
+
+            Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                Debug.Log(hitColliders[i].name);
+
+                if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
+                    oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+            }
         }
 
         private void FixedUpdate()
@@ -98,10 +111,10 @@ namespace Gameplay.VR.Player
             get
             {
                 float controllerAngle = Vector3.Angle(Vector3.up * -1.0f, controllerForward);
-                float pitch = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
-                float pitchRange = maxControllerAngle - minControllerAngle;
-                float t = (pitch - minControllerAngle) / pitchRange; // Normalized pitch within range
-                return maxDistance * t;
+                float clampedAngle = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
+                float angleRange = maxControllerAngle - minControllerAngle;
+                float pitch = (clampedAngle - minControllerAngle) / angleRange; // Normalized pitch within range
+                return maxDistance * pitch;
             }
         }
 
@@ -157,15 +170,6 @@ namespace Gameplay.VR.Player
                 return playerHead.position + Vector3.up * castingHeight;
             }
         }
-
-        Vector3 playerFeetPosition
-        {
-            get
-            {
-                return Vector3.zero;
-            }
-        }
-
         #endregion
 
         public void GE_OnGameOver()
@@ -205,7 +209,11 @@ namespace Gameplay.VR.Player
             // if you hit something with the Tall Ray, define it as the endpoint
             if (Physics.Raycast(tallRay, out hitTallInfo, 500, teleportationLayers))
             {
-                if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas")) canTeleport = true;
+                if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
+                {
+                    currentArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
+                    canTeleport = true;
+                }
 
                 else canTeleport = false;
 
@@ -261,6 +269,8 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
+            currentArea.enabled = false;
+
             startPos = playerPosition;
             targetPos = teleportTarget;
 
@@ -289,6 +299,11 @@ namespace Gameplay.VR.Player
             }
 
             isTeleporting = false;
+
+            oldArea.enabled = true;
+
+            oldArea = currentArea;
+            currentArea = null;
 
             particleDash.Stop();
         }
