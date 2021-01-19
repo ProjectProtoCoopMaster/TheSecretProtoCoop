@@ -8,6 +8,7 @@ namespace Gameplay.VR
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
         [SerializeField] private MeshRenderer mesh;
+        [SerializeField] private ParticleSystem ps;
 
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
@@ -34,8 +35,15 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.GetComponentInParent<IKillable>() != null) 
-                other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
+            if (other.GetComponent<RagdollBehavior>() != null)
+            {
+                if (other.transform.parent.GetComponentInParent<IKillable>() != null)
+                {
+                    Debug.Log(other.gameObject.name);
+                    other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
+                    ps.Play();
+                }
+            }
         }
 
         [Button]
