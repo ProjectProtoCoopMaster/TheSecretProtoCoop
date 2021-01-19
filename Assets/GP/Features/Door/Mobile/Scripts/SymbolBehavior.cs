@@ -158,6 +158,8 @@ namespace Gameplay.Mobile
             symbolAreaCodeName.text = sm.pickedNames[0];
 
             transmitterManager.SendCodeNameToOthers(sm.pickedNames);
+
+            door.GetComponent<DoorBehavior>().code.text = sm.pickedNames[0];
         }
     }
 

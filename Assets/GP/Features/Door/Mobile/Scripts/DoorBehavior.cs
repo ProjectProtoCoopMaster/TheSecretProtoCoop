@@ -24,9 +24,12 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
         [SerializeField] private GameObject padlock_Open;
+        [SerializeField] private GameObject hints;
         [SerializeField] private GameObject padlock_Close;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
+        [SerializeField] private Canvas symbolCanvas;
+        public Text code;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
         public int Power
@@ -49,6 +52,21 @@ namespace Gameplay.Mobile
         }
         private void Start() => Power = power;
 
+        private void Update()
+        {
+            if (selectable)
+            {
+                if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position)))
+                    {
+                        hints.SetActive(true);
+                        
+                    }
+                }
+
+            }
+        }
 
         public void TurnOn()
         {
@@ -122,12 +140,9 @@ namespace Gameplay.Mobile
             GetComponent<BoxCollider>().size = mesh.localScale;
             GetComponent<BoxCollider>().center = mesh.localPosition;
         }
-        public void Hello() => Debug.Log("Hello");
-
-        private void OnMouseDown()
+        public void ShowCanvas()
         {
-            if(selectable)
-                Hello();
+            symbolCanvas.enabled = true;
         }
     }
 }
