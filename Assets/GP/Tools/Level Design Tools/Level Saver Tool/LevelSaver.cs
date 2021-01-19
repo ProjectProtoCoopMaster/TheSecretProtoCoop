@@ -65,7 +65,7 @@ namespace Tools.LevelDesign
                     {
                         ISwitchableElements newElement = new ISwitchableElements();
 
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         newElement.prefab = PrefabUtility.GetCorrespondingObjectFromSource(switcher.transform.GetChild(j).gameObject) as GameObject;
 #endif
 
