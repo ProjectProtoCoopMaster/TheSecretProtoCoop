@@ -1,4 +1,4 @@
-﻿#if UNITY_STANDALONE
+﻿ #if UNITY_STANDALONE
 using Gameplay.VR.Player;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +10,7 @@ namespace Gameplay.VR.Feedbacks
     {
         public VisualEffectAsset teleportationAreaAsset, teleportationEffectAsset;
         public List<VisualEffect> particles = new List<VisualEffect>();
-        public List<TeleportArea> teleportGlowers = new List<TeleportArea>();
+        public List<TeleportationArea> teleportGlowers = new List<TeleportationArea>();
 
         private void Awake()
         {
@@ -31,13 +31,13 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_TeleportationAreaGlowOn()
         {
-            for (int i = 0; i < teleportGlowers.Count; i++)
+            for (int i = 0; i < teleportGlowers.Count; i++) 
                 teleportGlowers[i].On();
         }
 
         public void GE_TeleportationAreaGlowOff()
         {
-            for (int i = 0; i < teleportGlowers.Count; i++)
+            for (int i = 0; i < teleportGlowers.Count; i++) 
                 teleportGlowers[i].Off();
         }
 
@@ -56,7 +56,7 @@ namespace Gameplay.VR.Feedbacks
             for (int i = 0; i < particles.Count; i++)
                 particles[i].Stop();
 
-            teleportGlowers.AddRange(FindObjectsOfType<TeleportArea>());
+            teleportGlowers.AddRange(FindObjectsOfType<TeleportationArea>());
         }
     }
 }
