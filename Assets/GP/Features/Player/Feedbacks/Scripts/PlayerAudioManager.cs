@@ -38,6 +38,8 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIHoverClip;
         [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIClickClip;
 
+        [SerializeField] [FoldoutGroup("Elements")] AudioClip electrictyClip;
+
         public void GE_GunshotSFX()
         {
             _playerAudioSource.PlayOneShot(gunshotClip, volume);
