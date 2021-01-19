@@ -25,8 +25,9 @@ namespace Gameplay.Mobile
             {
                 _transform.position = _playerPosition.Value; /*+ centerTransform.position;*/
                 //_transform.forward = _player.Value.transform.forward;
-               // _transform.eulerAngles = new Vector3(0, _transform.eulerAngles.y, 0);
+                
                 transform.rotation = _playerRotation.Value;
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
         }
     }
