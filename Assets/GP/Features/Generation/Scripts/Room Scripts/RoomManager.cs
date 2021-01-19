@@ -66,30 +66,49 @@ namespace Gameplay
         public NavMeshSurface roomNavigationSurface;
 
         public AIManager aIManager;
+        public List<Vector3> aIPositions;
+        public List<Quaternion> aIRotations;
 
         public Transform entranceAnchor;
         public Transform exitAnchor;
 
         public Transform playerStart;
 
+        private bool firstStart = true;
+
         public override void OnEnterRoom()
         {
-            // Initialize Modifier
+            /// Initialize Modifier
+            
             //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
-            // Bake NavMesh
-            string navMsg = "There is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";
-            if (Utility.SafeCheck(roomNavigationSurface, navMsg))
+            /// Initialize AI
+
+            if (firstStart)
             {
-                roomNavigationSurface.BuildNavMesh();
+                aIPositions = new List<Vector3>();
+                aIRotations = new List<Quaternion>();
+
+                for (int i = 0; i < AIManager.agents.Count; i++)
+                {
+                    aIPositions[i] = AIManager.agents[i].transform.position;
+                    aIRotations[i] = AIManager.agents[i].transform.rotation;
+                }
+
+                firstStart = false;
+            }
+            else
+            {
+                for (int i = 0; i < AIManager.agents.Count; i++)
+                {
+                    AIManager.agents[i].transform.position = aIPositions[i];
+                    AIManager.agents[i].transform.rotation = aIRotations[i];
+                }
             }
 
-            // Initialization AI
-            string aiMsg = "There's no AI Manager attached to the Room Manager, attach one to initialize this room's AI";
-            if (Utility.SafeCheck(aIManager, aiMsg))
-            {
-                aIManager.StartAllAgents();
-            }
+            roomNavigationSurface.BuildNavMesh();
+
+            aIManager.StartAllAgents();
 
             // Initialization Switchers
             // Initialize Elements
