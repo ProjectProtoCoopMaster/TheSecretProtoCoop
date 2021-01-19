@@ -2,6 +2,7 @@
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.VFX;
 using Valve.VR;
 
 namespace Gameplay.VR.Player
@@ -18,6 +19,8 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shotEnvironment = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloading = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunEmpty = null;
+        [SerializeField] [FoldoutGroup("Shooting")] GameObject bulletImpactObj = null;
+        VisualEffect bulletImpact = null;
 
         [SerializeField] [FoldoutGroup("Internal Values")] FloatVariable shootingCooldown;
         float timePassed = 2f;
@@ -31,6 +34,8 @@ namespace Gameplay.VR.Player
         {
             controllerPose = GetComponent<SteamVR_Behaviour_Pose>();
             handSource = controllerPose.inputSource;
+
+            bulletImpact = bulletImpactObj.GetComponent<VisualEffect>();
         }
 
         private void Update()
@@ -81,6 +86,9 @@ namespace Gameplay.VR.Player
                     {
                         hitInfo.collider.GetComponent<IKillable>().Die();
                     }
+
+                    bulletImpactObj.transform.position = hitInfo.point;
+                    bulletImpact.Play();
                 }
 
                 gunReloading.Raise();
