@@ -8,6 +8,5 @@ namespace Gameplay
         void Die(Vector3 force = default);
 
         void Die();
-        
     }
 }

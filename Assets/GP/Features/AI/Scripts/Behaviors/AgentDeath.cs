@@ -26,7 +26,7 @@ namespace Gameplay.VR
 
         public void Die()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Diiiie");
         }
     } 
 }
