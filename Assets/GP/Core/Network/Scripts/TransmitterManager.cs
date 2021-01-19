@@ -12,6 +12,7 @@ namespace Networking
         [SerializeField] private Vector3Variable _playerVRPosition;
         [SerializeField] private IntVariable _sceneID;
         [SerializeField] private QuaternionVariable _playerVRRotation;
+        [SerializeField] private GameObjectVariable _player;
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private CallableFunction _loadNextLevel;
@@ -36,8 +37,8 @@ namespace Networking
 
         private void Awake() => instance = this;
 
-        public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
-        [PunRPC] private void SendPosAndRot(Vector3 position, Quaternion rotation) { _playerVRPosition.Value = position; _playerVRRotation.Value = rotation; }
+        public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value, _player.Value);
+        [PunRPC] private void SendPosAndRot(Vector3 position, Quaternion rotation, GameObject player) { _playerVRPosition.Value = position; _playerVRRotation.Value = rotation; _player.Value = player; }
 
         public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
         [PunRPC] private void SendSwitcherChange(float ID) => _switch.Raise(ID);
