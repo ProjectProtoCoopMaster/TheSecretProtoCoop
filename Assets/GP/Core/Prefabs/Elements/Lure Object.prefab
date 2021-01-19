@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674570230588241320}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 5818063044284238064, guid: 23679cc91cb54e54dbab696d6611d10f, type: 3}
 --- !u!23 &674570230588241322
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f5766a8b67794141ac19c1a51d27083, type: 2}
+  - {fileID: 2100000, guid: 216c3e8454e7f854f92dc8fa0d7b7c45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,10 +95,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.55
+  m_Radius: 0.12
+  m_Height: 0.6
   m_Direction: 2
-  m_Center: {x: 0, y: 0.09, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &674570230588241326
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -135,6 +135,8 @@ MonoBehaviour:
   noiseRange: 7
   minimumVelocity: 7
   currNoiseRange: 0
+  generator: {fileID: 0}
+  timeBeforeRespawn: 0
 --- !u!82 &674570230588241313
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ namespace Gameplay.Mobile
 {
     public class DoorBehavior : MonoBehaviour, ISwitchable
     {
+
+        private Material mat;
         public enum LockState { Locked, Unlocked }
         public LockState lockState;
 
@@ -15,15 +17,10 @@ namespace Gameplay.Mobile
         [Range(0, 1), SerializeField] private int power;
 
         [Header("---References---")]
-        [SerializeField] private Sprite door_open;
-        [SerializeField] private Sprite door_close;
-        [SerializeField] private Image door;
-        [SerializeField] private Sprite padLock_open;
-        [SerializeField] private Sprite padLock_close;
-        [SerializeField] private Image padLock;
-        [SerializeField] private Color color_open;
-        [SerializeField] private Color color_close;
-        [SerializeField] private Outline doorOutline;
+        [SerializeField] private Color color_Open_Unlocked;
+        [SerializeField] private Color color_Open_Locked;
+        [SerializeField] private Color color_Close;
+        [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
@@ -40,27 +37,27 @@ namespace Gameplay.Mobile
         private void OnEnable()
         {
             CheckLockState();
+
+            mat = new Material(door.GetComponent<MeshRenderer>().material);
+            door.GetComponent<MeshRenderer>().material = mat;
         }
         private void Start() => Power = power;
 
 
         public void TurnOn()
         {
-            door.overrideSprite = door_close;
-            door.DOColor(Color.red, .5f);
+            mat.DOColor(color_Close * 2, "_EmissionColor", .5f);
         }
 
         public void TurnOff()
         {
             if (lockState == LockState.Locked)
             {
-                door.overrideSprite = door_close;
-                door.DOColor(color_close, .5f);
+                mat.DOColor(color_Open_Locked * 2, "_EmissionColor", .5f);
             }
             else
             {
-                door.overrideSprite = door_open;
-                door.DOColor(color_open, .5f);
+                mat.DOColor(color_Open_Unlocked * 2, "_EmissionColor", .5f);
             }
         }
 
@@ -80,12 +77,9 @@ namespace Gameplay.Mobile
         {
             if(lockState == LockState.Locked)
             {
-                padLock.overrideSprite = padLock_close;
-                padLock.DOColor(color_close, .5f);
                 
-                GetComponent<Button>().enabled = true;
-                anim.enabled = true;
-                doorOutline.enabled = true;
+                //GetComponent<Button>().enabled = true;
+                //anim.enabled = true;
             }
             else
             {
@@ -95,12 +89,9 @@ namespace Gameplay.Mobile
 
         private void FeedbackUnlock()
         {
-            padLock.overrideSprite = padLock_open;
-            padLock.DOColor(color_open, .5f);
             
-            GetComponent<Button>().enabled = false;
-            anim.enabled = false;
-            doorOutline.enabled = false;
+            //GetComponent<Button>().enabled = false;
+            //anim.enabled = false;
 
             if (power == 1) TurnOn();
             else TurnOff();

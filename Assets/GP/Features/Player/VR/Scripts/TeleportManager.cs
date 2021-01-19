@@ -13,8 +13,12 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation Transition")] float tweenDuration = .25f;
         [Tooltip("The Teleportation's movement curve.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
-        [Tooltip("The GameEvent that is called when the player teleports.")]
-        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming, teleported, teleportShifting;
+        [Tooltip("The Particle Effect to play when the player teleports.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
+        [Tooltip("The GameEvent that is called when the player presses down on the teleport input.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
+        [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleported;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -182,7 +186,8 @@ namespace Gameplay.VR.Player
                 VRPlatform = true;
 
             controllerPose = _controllerPose;
-            showRayPointer = true; 
+            showRayPointer = true;
+
             teleportAiming.Raise();
         }
 
@@ -252,7 +257,6 @@ namespace Gameplay.VR.Player
             if (canTeleport == true)
                 StartCoroutine(TeleportThePlayer());
             bezierVisualization.enabled = showRayPointer = canTeleport = false;
-            teleported.Raise();
         }
 
         IEnumerator TeleportThePlayer()
@@ -263,7 +267,9 @@ namespace Gameplay.VR.Player
             showRayPointer = false;
             isTeleporting = true;
 
-            teleportShifting.Raise();
+            particleDash.Play();
+
+            teleported.Raise();
 
             time = 0;
             change = targetPos - startPos;
@@ -283,6 +289,8 @@ namespace Gameplay.VR.Player
             }
 
             isTeleporting = false;
+
+            particleDash.Stop();
         }
     }
 }

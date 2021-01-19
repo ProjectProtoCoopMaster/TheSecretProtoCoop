@@ -23,7 +23,7 @@ namespace Gameplay.AI
             if (guardType == GuardType.Patrol) { agentBehaviors.Add(StateType.Patrol, patrolBehavior); patrolBehavior.agent = this; }
         }
 
-        void Start()
+        public override void StartAgent()
         {
             if (guardType == GuardType.Patrol)
             {

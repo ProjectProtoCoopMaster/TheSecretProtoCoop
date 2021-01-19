@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.04327238, g: 0.04461724, b: 0.058884095, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 898d8d84126438a4fa5ea2e6f515cefe, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -463,6 +463,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 119496921, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3521382425665192201, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -511,66 +515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRFeedbackManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.size
+    - target: {fileID: 7722693676489309464, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[6]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[8]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[10]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: particles.Array.data[11]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: teleportationEffectAsset
-      value: 
-      objectReference: {fileID: 8926484042661614526, guid: 18c0b4d00f7887746a77667fe00b045a, type: 3}
-    - target: {fileID: 5157479652023371991, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: teleportationAreaAsset
-      value: 
-      objectReference: {fileID: 8926484042661614526, guid: c577377c4b23782428f10c0121cab4e1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb555567d260a0746a80efded5961758, type: 3}
 --- !u!114 &929449247488257633 stripped
@@ -593,6 +541,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 795f2d98a97a5574587f99811f8b55fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &929449247488257635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8716512227724604809, guid: fb555567d260a0746a80efded5961758, type: 3}
+  m_PrefabInstance: {fileID: 929449247488257632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c6abcf783994449840c260e92043b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &929449247488257637 stripped
@@ -659,11 +618,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360473695713784221, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
       propertyPath: m_Name
-      value: SceneRefresher
+      value: SceneRefresher (Call when Level Loaded)
       objectReference: {fileID: 0}
     - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -686,27 +645,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 929449247488257633}
     - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
-      value: Gameplay.VR.Feedbacks.TeleportationFeedbackManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 929449247488257637}
     - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
-      value: GE_RefreshScene
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
+      value: Gameplay.VR.Feedbacks.UI_InitCameraLayering, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[6].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[6].m_Target
+      value: 
+      objectReference: {fileID: 929449247488257635}
+    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
+      value: OnLevelLoaded
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360473695713784223, guid: 6584b8a0b23c89b4fa346051c52f6f10, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -768,7 +731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: startGame
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+      propertyPath: launchOneScene
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
@@ -847,6 +814,22 @@ PrefabInstance:
       propertyPath: _onVictory
       value: 
       objectReference: {fileID: 11400000, guid: a366e3bc86242a649979d403d8537fac, type: 2}
+    - target: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+      propertyPath: _shake
+      value: 
+      objectReference: {fileID: 11400000, guid: 173faad83de3f0946a7ec07483ae0feb, type: 2}
+    - target: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+      propertyPath: _hidePlayer
+      value: 
+      objectReference: {fileID: 11400000, guid: 445ab5a4eccd36b4eb099b9ea801030c, type: 2}
+    - target: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+      propertyPath: _onHidePlayer
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d501455ab2186745b226e2b6529b1ad, type: 2}
+    - target: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
+      propertyPath: _oxygenTimer
+      value: 
+      objectReference: {fileID: 11400000, guid: a836ec61e5876f244bedc3c6e5b33639, type: 2}
     - target: {fileID: 7459075962156835230, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -919,6 +902,99 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
         m_MethodName: SendOnVictoryToOthers
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &2906806235926443017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906806235926443015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 5537004c1643f0741b51c23eaf3b0618, type: 2}
+  ID: 1
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 230033386}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendShakeResultToOthers
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &2906806235926443018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906806235926443015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: dce7ccba179096347b33a24b3f03d3d3, type: 2}
+  ID: 1
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 230033386}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendOxygenTimerToOthers
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &2906806235926443027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906806235926443015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 20b3f0dc1dac9f0429d286a610925d89, type: 2}
+  ID: 1
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 230033386}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendHidePlayerToOthers
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
