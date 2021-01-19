@@ -137,9 +137,9 @@ namespace Gameplay
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
         }
 
-        protected override void SetCenterToRoom(RoomManager roomManager)
+        protected override void SetCenterToRoom(RoomManager _currentRoom)
         {
-            playerBehavior.centerTransform = roomManager.room.roomCenter;
+            playerBehavior.currentRoom = _currentRoom;
         }
     }
 }
