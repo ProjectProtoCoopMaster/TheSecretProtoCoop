@@ -21,11 +21,9 @@ namespace Gameplay.VR
 
         [SerializeField] private GameObjectVariable _player;
 
-        [SerializeField] private Camera pictureCamera;
 
         private bool isDead;
 
-        public float debugRot;
      
         public void Die(Vector3 direction = default)
         {
