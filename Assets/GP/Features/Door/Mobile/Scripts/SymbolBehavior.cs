@@ -23,6 +23,7 @@ namespace Gameplay.Mobile
 
         private float timer;
         private bool startTimer;
+        private bool hasWin;
         [SerializeField] private Canvas canvas;
         [SerializeField] private float timerStartValue;
         private IEnumerator Start()
@@ -37,7 +38,7 @@ namespace Gameplay.Mobile
         {
             if (canvas.enabled && !startTimer) { startTimer = true; timer = timerStartValue; }
 
-            if (startTimer) timer -= Time.deltaTime;
+            if (startTimer && !hasWin) timer -= Time.deltaTime;
 
             if (timer < 0) { ResetCodes(); startTimer = false; }
         }
@@ -90,7 +91,7 @@ namespace Gameplay.Mobile
         [Button]
         private void Succeed()
         {
-
+            hasWin = true;
             door.Unlock();
             results[missNumber].color = Color.green;
             _sendOnOpenDoor.Raise();
@@ -99,7 +100,7 @@ namespace Gameplay.Mobile
 
         IEnumerator WaitCloseSymbolCanvas()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
             gameObject.SetActive(false);
             yield break;
         }
