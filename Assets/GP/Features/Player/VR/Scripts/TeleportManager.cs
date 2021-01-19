@@ -61,7 +61,7 @@ namespace Gameplay.VR.Player
         bool canTeleport;
         bool VRPlatform;
 
-        [SerializeField] VisualEffect currentArea, oldArea;
+        [SerializeField] VisualEffect targetArea, oldArea;
 
         private void Awake()
         {
@@ -212,7 +212,7 @@ namespace Gameplay.VR.Player
             {
                 if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
                 {
-                    currentArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
+                    targetArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
                     canTeleport = true;
                 }
 
@@ -272,7 +272,9 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
-            currentArea.enabled = false;
+            oldArea.enabled = true;
+            oldArea = targetArea;
+            targetArea.enabled = false;
 
             startPos = playerPosition;
             targetPos = teleportTarget;
@@ -302,11 +304,6 @@ namespace Gameplay.VR.Player
             }
 
             isTeleporting = false;
-
-            oldArea.enabled = true;
-
-            oldArea = currentArea;
-            currentArea = null;
 
             particleDash.Stop();
         }
