@@ -27,6 +27,7 @@ namespace Gameplay.Mobile
         [SerializeField] private GameObject padlock_Close;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
+        [SerializeField] private Canvas symbolCanvas;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
         public int Power
@@ -49,6 +50,20 @@ namespace Gameplay.Mobile
         }
         private void Start() => Power = power;
 
+        private void Update()
+        {
+            if (selectable)
+            {
+                if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position)))
+                    {
+                        symbolCanvas.enabled = true;
+                    }
+                }
+
+            }
+        }
 
         public void TurnOn()
         {
