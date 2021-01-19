@@ -3,47 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Gameplay;
+using Sirenix.OdinInspector;
 
 namespace Networking
 {
     public class TransmitterManager : MonoBehaviour
     {
         [SerializeField] private PhotonView photonView;
-        [SerializeField] private Vector3Variable _playerVRPosition;
+
+        public GameManager gameManager;
         [SerializeField] private IntVariable _sceneID;
+
+        [SerializeField] private BoolVariable _isMobile;
+
+        [SerializeField] private GameEvent _onVictory;
+
+        [Title("Player")]
+        [SerializeField] private Vector3Variable _playerVRPosition;
         [SerializeField] private QuaternionVariable _playerVRRotation;
+
+        [Title("Elements")]
         [SerializeField] private CallableFunction _switch;
         [SerializeField] private CallableFunction _destroyJammer;
-        [SerializeField] private CallableFunction _loadNextLevel;
+
+        [Title("Modifiers")]
         [SerializeField] private BoolVariable _shake;
         [SerializeField] private BoolVariable _hidePlayer;
-        [SerializeField] private BoolVariable _isMobile;
-        [SerializeField] private FloatVariable _oxygenTimer;
         [SerializeField] private GameEvent _onHidePlayer;
-        [SerializeField] private GameEvent _onOpenDoor;
-        [SerializeField] private GameEvent _onVictory;
-        [SerializeField] private GameEvent _onResetCodes;
+        [SerializeField] private FloatVariable _oxygenTimer;
 
+        [Title("Level Generation")]
         [SerializeField] private LevelVariable _levelHolder;
         [SerializeField] private GameEvent _buildLevel;
 
+        [Title("Level Management")]
         [SerializeField] private GameEvent _changeRoomMobile;
+        [SerializeField] private GameEvent _onLevelRestart;
 
-        public GameManager gameManager;
+        [Title("Symbol Door")]
         public SymbolManager symbolManager;
+        [SerializeField] private GameEvent _onOpenDoor;
+        [SerializeField] private GameEvent _onResetCodes;
 
         public static TransmitterManager instance;
 
         private void Awake() => instance = this;
 
-        public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
-        [PunRPC] private void SendPosAndRot(Vector3 position, Quaternion rotation) { _playerVRPosition.Value = position; _playerVRRotation.Value = rotation; }
-
-        public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
-        [PunRPC] private void SendSwitcherChange(float ID) => _switch.Raise(ID);
-
-        public void SendDestroyJammerToOthers(int ID) => photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID);
-        [PunRPC] private void SendDestroyJammer(int ID) => _destroyJammer.Raise(ID);
+        /// Game Manager
 
         public void SendLoseToOther(int loseType) { gameManager.RaiseOnLose(loseType); photonView.RPC("SendLose", RpcTarget.Others, loseType); }
         [PunRPC] private void SendLose(int loseType) => gameManager.RaiseOnLose(loseType);
@@ -51,6 +57,30 @@ namespace Networking
         public void SendOnVictoryToOthers() => photonView.RPC("SendOnVictory", RpcTarget.Others);
         [PunRPC] private void SendOnVictory() => _onVictory.Raise();
 
+        public void SendLoadNextSceneToOthers() => photonView.RPC("SendLoadNextScene", RpcTarget.Others);
+        [PunRPC] private void SendLoadNextScene() => gameManager.LoadNextScene();
+
+        public void SendLoadSameSceneToOthers() => photonView.RPC("SendLoadSameScene", RpcTarget.Others);
+        [PunRPC] private void SendLoadSameScene() => gameManager.LoadSameScene();
+
+        ///\
+
+        #region Player Position
+        public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);
+        [PunRPC] private void SendPosAndRot(Vector3 position, Quaternion rotation) { _playerVRPosition.Value = position; _playerVRRotation.Value = rotation; }
+        #endregion
+
+        #region Switcher
+        public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
+        [PunRPC] private void SendSwitcherChange(float ID) => _switch.Raise(ID);
+        #endregion
+
+        #region Jammer
+        public void SendDestroyJammerToOthers(int ID) => photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID);
+        [PunRPC] private void SendDestroyJammer(int ID) => _destroyJammer.Raise(ID);
+        #endregion
+
+        #region Symbol Door
         public void SendSymbolIDToOther(int value) => photonView.RPC("SendSymbolID", RpcTarget.Others, value);
         [PunRPC] private void SendSymbolID(int value) => symbolManager.indexes.Add(value);
 
@@ -58,23 +88,20 @@ namespace Networking
         [PunRPC] private void SendSetSymbol() { symbolManager.isSymbolLoaded.Value = true; symbolManager.SetSymbols(); }
 
         public void SendCodeNameToOthers(string[] pickedNames) => photonView.RPC("SendCodeName", RpcTarget.Others, pickedNames);
-        [PunRPC] private void SendCodeName(string[] pickedNames)
+        [PunRPC]
+        private void SendCodeName(string[] pickedNames)
         {
             for (int i = 0; i < 3; i++) { symbolManager.pickedNames[i] = pickedNames[i]; if (!_isMobile.Value) _onResetCodes.Raise(); }
         }
 
-        public void SendIconsSelectedToOthers(int i, int ID) => photonView.RPC("SendIconsSelected", RpcTarget.Others,i, ID);
+        public void SendIconsSelectedToOthers(int i, int ID) => photonView.RPC("SendIconsSelected", RpcTarget.Others, i, ID);
         [PunRPC] private void SendIconsSelected(int i, int ID) => symbolManager.iconsSelected[i] = symbolManager.iconsStashed[ID];
 
         public void SendOnOpenDoorToOther() => photonView.RPC("SendOnOpenDoor", RpcTarget.Others);
         [PunRPC] private void SendOnOpenDoor() => _onOpenDoor.Raise();
+        #endregion
 
-        public void SendLoadNextSceneToOthers() => photonView.RPC("SendLoadNextScene", RpcTarget.Others);
-        [PunRPC] private void SendLoadNextScene() => gameManager.LoadNextScene();
-
-        public void SendLoadSameSceneToOthers() => photonView.RPC("SendLoadSameScene", RpcTarget.Others);
-        [PunRPC] private void SendLoadSameScene() => gameManager.LoadSameScene();
-
+        #region Modifiers
         public void SendShakeResultToOthers(bool check) => photonView.RPC("ShakeResult", RpcTarget.Others, check);
         [PunRPC] private void ShakeResult(bool check) => _shake.Value = check;
 
@@ -83,6 +110,7 @@ namespace Networking
 
         public void SendOxygenTimerToOthers(float oxygenTimer) => photonView.RPC("SendOxygenTimer", RpcTarget.Others, oxygenTimer);
         [PunRPC] private void SendOxygenTimer(float oxygenTimer) => _oxygenTimer.Value = oxygenTimer;
+        #endregion
 
         #region Level Generation
         public void SendLevelHolderToOthers(LevelVariable levelVariable)
@@ -107,9 +135,12 @@ namespace Networking
         [PunRPC] private void SendBuildLevel() => _buildLevel.Raise();
         #endregion
 
-        #region Room Change
+        #region Level Management
         public void SendRoomChangeToOthers() => photonView.RPC("SendRoomChange", RpcTarget.Others);
         [PunRPC] private void SendRoomChange() => _changeRoomMobile.Raise();
+
+        public void SendLevelRestartToOthers() => photonView.RPC("SendLevelRestart", RpcTarget.Others);
+        [PunRPC] private void SendLevelRestart() => _onLevelRestart.Raise();
         #endregion
     }
 }

@@ -21,8 +21,6 @@ namespace Gameplay
         [HideInInspector]
         public LoseType loseType;
 
-
-
         [SerializeField] private bool startGame;
         [SerializeField] private bool launchOneScene;
         [SerializeField] private GameEvent _onLose;
@@ -36,16 +34,14 @@ namespace Gameplay
 
         [SerializeField] private GameEvent onRefreshScene;
 
-
         void Start()
         {
-            if (startGame)
-                SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+            if (startGame) SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
 
-            if(launchOneScene) SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            if (launchOneScene) SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
         }
 
-        public void RaiseOnLose(int ID) {  loseType = (LoseType)ID; _onLose.Raise(); }
+        public void RaiseOnLose(int ID) { loseType = (LoseType)ID; _onLose.Raise(); }
 
         [Button]
         public void GameOver()
@@ -54,7 +50,6 @@ namespace Gameplay
             {
                 isGameOver = true;
                 loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
-
 
                 switch (loseType)
                 {
@@ -79,12 +74,7 @@ namespace Gameplay
                         loseText.text = loseTextVR.Value = "You ran into a Hidden Trap !";
                         break;
                 }
-                if (_isMobile.Value)
-                {
-                    
-                }
-
-                
+                if (_isMobile.Value) { }
 
                 //StartCoroutine(WaitGameOver());
             }
@@ -96,9 +86,7 @@ namespace Gameplay
             {
                 Instantiate(Resources.Load("Victory_Canvas") as GameObject);
             }
-
         }
-
 
         //IEnumerator WaitGameOver()
         //{
@@ -126,8 +114,10 @@ namespace Gameplay
         {
             SceneManager.UnloadSceneAsync(_sceneID.Value);
             yield return new WaitForEndOfFrame();
+
             _sceneID.Value += 2;
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+
             onRefreshScene.Raise();
             yield break;
         }
@@ -141,11 +131,6 @@ namespace Gameplay
         public void LoadNextScene()
         {
             StartCoroutine(WaitLoadNextScene());
-
         }
-
-        
-
     }
 }
-

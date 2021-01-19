@@ -4877,6 +4877,7 @@ GameObject:
   - component: {fileID: 1578288187}
   - component: {fileID: 1578288186}
   - component: {fileID: 1578288188}
+  - component: {fileID: 1578288190}
   - component: {fileID: 1578288189}
   m_Layer: 0
   m_Name: Level Manager
@@ -4991,6 +4992,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1578288187}
         m_TargetAssemblyTypeName: Gameplay.LevelManager, Assembly-CSharp
         m_MethodName: ChangeRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1578288190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578288184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4b02b9eef013b2c4eb7d52bf6bfa79bc, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1578288187}
+        m_TargetAssemblyTypeName: Gameplay.LevelManager, Assembly-CSharp
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

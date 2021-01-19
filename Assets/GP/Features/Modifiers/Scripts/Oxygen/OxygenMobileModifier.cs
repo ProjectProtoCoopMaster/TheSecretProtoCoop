@@ -7,7 +7,6 @@ namespace Gameplay.Mobile
 {
     public class OxygenMobileModifier : Modifier
     {
-
         [SerializeField] IntVariable _oxygenTimerVR;
         [SerializeField] IntVariable _oxygenTimerMobile;
         [SerializeField] Text oxygenText;
@@ -18,7 +17,6 @@ namespace Gameplay.Mobile
             {
                 oxygenText.text = _oxygenTimerVR.Value.ToString();
             }
-
         }
 
         private void OnDisable()
@@ -26,7 +24,5 @@ namespace Gameplay.Mobile
             _oxygenTimerVR.Value = 0;
             _oxygenTimerMobile.Value = 0;
         }
-
-
     } 
 }

@@ -38,7 +38,14 @@ namespace Gameplay
 
             level.rooms = levelRooms;
 
-            level.Start();
+            level.StartAt(0);
+        }
+
+        public void RestartLevel()
+        {
+            level.StartAt(level.currentRoomIndex);
+
+            TransmitterManager.instance.SendLevelRestartToOthers();
         }
 
         public void ChangeRoom() => level.OnRoomChange();
@@ -54,7 +61,7 @@ namespace Gameplay
 
         public Room room { get => currentRoom.room; }
 
-        public abstract void Start();
+        public abstract void StartAt(int roomIndex);
 
         public abstract void OnRoomChange();
 
@@ -88,9 +95,9 @@ namespace Gameplay
 
         public RoomVR currentRoomVR { get => (RoomVR)currentRoom.room; }
 
-        public override void Start()
+        public override void StartAt(int roomIndex)
         {
-            LoadRoom(0);
+            LoadRoom(roomIndex);
 
             playerRig.position = currentRoomVR.playerStart.position;
             playerRig.rotation = currentRoomVR.playerStart.rotation;
@@ -120,7 +127,7 @@ namespace Gameplay
     {
         public Mobile.PlayerBehavior playerBehavior;
 
-        public override void Start() => LoadRoom(0);
+        public override void StartAt(int roomIndex) => LoadRoom(roomIndex);
 
         public override void OnRoomChange()
         {

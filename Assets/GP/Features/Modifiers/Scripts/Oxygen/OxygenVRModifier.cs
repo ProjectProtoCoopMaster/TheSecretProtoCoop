@@ -69,12 +69,10 @@ namespace Gameplay.VR
             currentAlarmTime -= Time.deltaTime;
         }
 
-
         private void OnDisable()
         {
             _oxygenTimerVR.Value = 0;
             _oxygenTimerMobile.Value = 0;
         }
-
     }
 }
