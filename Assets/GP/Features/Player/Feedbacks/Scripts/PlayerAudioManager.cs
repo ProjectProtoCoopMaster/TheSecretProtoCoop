@@ -51,7 +51,7 @@ namespace Gameplay.VR.Feedbacks
         public void GE_HitEnvironementSFX()
         {
             _playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
-            _playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
+            //_playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
         }
 
         public void GE_TeleportationSFX()
