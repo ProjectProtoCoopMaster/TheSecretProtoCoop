@@ -1297,6 +1297,8 @@ GameObject:
   - component: {fileID: 5671187599183528403}
   - component: {fileID: 3814554447981518005}
   - component: {fileID: 6556599024047077311}
+  - component: {fileID: 2596741681655090984}
+  - component: {fileID: 1636770446}
   m_Layer: 0
   m_Name: _PlayerFeedbacks
   m_TagString: Untagged
@@ -1693,6 +1695,62 @@ MonoBehaviour:
       - m_Target: {fileID: 7857188697147195295}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
         m_MethodName: GE_UIClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2596741681655090984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460130344861366265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 32fd894d6daa1ea40b3f7030b7485a2c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1678453365}
+        m_TargetAssemblyTypeName: Gameplay.VR.UI.UI_DetectionBehaviour, Assembly-CSharp
+        m_MethodName: GE_PlayerSpotted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1636770446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460130344861366265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: bc49c5d2a1f74a74a9c2ad5f9115ca9b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1678453365}
+        m_TargetAssemblyTypeName: Gameplay.VR.UI.UI_DetectionBehaviour, Assembly-CSharp
+        m_MethodName: GE_PlayerIncognito
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2136,7 +2194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportationAreaAsset: {fileID: 8926484042661614526, guid: c577377c4b23782428f10c0121cab4e1, type: 3}
   teleportationEffectAsset: {fileID: 8926484042661614526, guid: 18c0b4d00f7887746a77667fe00b045a, type: 3}
-  teleportationEffect: {fileID: 0}
   particles: []
   teleportGlowers: []
 --- !u!1 &7961236333030491142

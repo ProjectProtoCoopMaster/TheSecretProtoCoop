@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 674570230588241322}
   - component: {fileID: 8455770285359436254}
   - component: {fileID: 674570230588241326}
-  - component: {fileID: 674570230588241327}
   - component: {fileID: 674570230588241313}
   m_Layer: 13
   m_Name: Lure Object
@@ -63,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 216c3e8454e7f854f92dc8fa0d7b7c45, type: 2}
+  - {fileID: 670224309865224971, guid: 23679cc91cb54e54dbab696d6611d10f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,28 +114,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &674570230588241327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674570230588241320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9850046ea6f012149ac96b813e81b280, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guardHearingLayermask:
-    serializedVersion: 2
-    m_Bits: 19456
-  wallDampenMultiplier: 0.5
-  windowDampenMultiplier: 0.75
-  noiseRange: 7
-  minimumVelocity: 7
-  currNoiseRange: 0
-  generator: {fileID: 0}
-  timeBeforeRespawn: 0
 --- !u!82 &674570230588241313
 AudioSource:
   m_ObjectHideFlags: 0

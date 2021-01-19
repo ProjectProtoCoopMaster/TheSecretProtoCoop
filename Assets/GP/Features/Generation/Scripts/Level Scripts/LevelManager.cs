@@ -81,7 +81,7 @@ namespace Gameplay
             room.OnDisableRoom();
         }
 
-        protected abstract void SetCenterToRoom(RoomManager roomManager);
+        protected abstract void SetCenterToRoom(RoomManager _currentRoom);
     }
 
     [System.Serializable]
@@ -115,9 +115,9 @@ namespace Gameplay
             TransmitterManager.instance.SendRoomChangeToOthers();
         }
 
-        protected override void SetCenterToRoom(RoomManager roomManager)
+        protected override void SetCenterToRoom(RoomManager _currentRoom)
         {
-            playerBehavior.centerTransform = roomManager.room.roomCenter;
+            playerBehavior.currentRoom = _currentRoom;
         }
     }
 
