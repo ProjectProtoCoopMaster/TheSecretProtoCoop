@@ -17,6 +17,8 @@ namespace Gameplay.Mobile
         [SerializeField] Text codeNameText;
         [SerializeField] Text timerText;
         [SerializeField] Image timerImage;
+        [SerializeField] Sprite cross;
+        [SerializeField] Sprite winImage;
 
         private int missNumber;
         [Header("---IMPORTANT---")]
@@ -76,13 +78,15 @@ namespace Gameplay.Mobile
                     break;
                 }
             }
+
+            if(iconsAnswers[2].overrideSprite != null) Unlock();
         }
 
         public void Unlock()
         {
             for (int i = 0; i < sm.iconsSelected.Count; i++)
             {
-                if(sm.iconsSelected[i] != iconsAnswers[i].overrideSprite)
+                if (sm.iconsSelected[i] != iconsAnswers[i].overrideSprite)
                 {
                     Miss();
                     i = sm.iconsSelected.Count;
@@ -105,6 +109,8 @@ namespace Gameplay.Mobile
         {
             hasWin = true;
             door.Unlock();
+            results[missNumber].gameObject.SetActive(true);
+            results[missNumber].overrideSprite = winImage;
             results[missNumber].color = Color.green;
             _sendOnOpenDoor.Raise();
             StartCoroutine(WaitCloseSymbolCanvas());
@@ -113,6 +119,7 @@ namespace Gameplay.Mobile
         IEnumerator WaitCloseSymbolCanvas()
         {
             yield return new WaitForSeconds(1f);
+            canvas.enabled = false;
             gameObject.SetActive(false);
             yield break;
         }
@@ -120,7 +127,13 @@ namespace Gameplay.Mobile
         private void Miss()
         {
             missNumber++;
-            results[missNumber - 1].color = Color.red;
+            results[missNumber - 1].gameObject.SetActive(true);
+            results[missNumber - 1].overrideSprite = cross;
+
+            foreach (Image answers in iconsAnswers)
+            {
+                answers.overrideSprite = null;
+            }
             if (missNumber == 2)
             {
                 _sendGameOver.Raise();
