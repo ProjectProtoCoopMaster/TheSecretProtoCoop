@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_STANDALONE
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Gameplay.VR.Player
@@ -45,3 +46,5 @@ namespace Gameplay.VR.Player
         }
     }
 }
+
+#endif
