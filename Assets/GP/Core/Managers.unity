@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04327238, g: 0.04461724, b: 0.058884095, a: 1}
+  m_IndirectSpecularColor: {r: 0.043387376, g: 0.044548247, b: 0.05929023, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -434,38 +434,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 929449247488257633}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: GE_RefreshScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Gameplay.VR.GameOverFeedbackManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: Gameplay.VR.Feedbacks.TeleportationFeedbackManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Target
-      value: 
-      objectReference: {fileID: 929449247488257634}
     - target: {fileID: 3521382425665192201, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -514,24 +482,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRFeedbackManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7857188697147195295, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: impactEnemyClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7857188697147195295, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: impactEnemyClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e1b7af578802954288c46f5a03f8369, type: 3}
+    - target: {fileID: 7857188697147195295, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: impactEnemyClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f061b2473ba2464e8ef9b1885c37135, type: 3}
+    - target: {fileID: 7857188697147195295, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: impactEnemyClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 39849a142406bc64dab7b3280853d845, type: 3}
+    - target: {fileID: 7857188697147195295, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: impactEnemyClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 172171a477f64904eb803f50aaa7d346, type: 3}
+    - target: {fileID: 7857188697147195295, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: impactEnemyClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 081665a499aa8384381c032421a451c0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb555567d260a0746a80efded5961758, type: 3}
---- !u!114 &929449247488257633 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6074166611735254540, guid: fb555567d260a0746a80efded5961758, type: 3}
-  m_PrefabInstance: {fileID: 929449247488257632}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795f2d98a97a5574587f99811f8b55fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &929449247488257634 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7961236333030491142, guid: fb555567d260a0746a80efded5961758, type: 3}
-  m_PrefabInstance: {fileID: 929449247488257632}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1525769403186798941
 PrefabInstance:
   m_ObjectHideFlags: 0
