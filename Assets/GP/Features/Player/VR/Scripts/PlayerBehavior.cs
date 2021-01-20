@@ -44,7 +44,7 @@ namespace Gameplay.VR
         void Update()
         {
             _playerRotation.Value = rigTransform.localRotation;
-            if (currentRoom != null) _playerPosition.Value = rigTransform.position - (currentRoom.room.roomOrigin.position + currentRoom.room.roomCenter.localPosition);
+            if (currentRoom != null) _playerPosition.Value = rigTransform.position - (currentRoom.room.roomOrigin.position + currentRoom.room.roomOrigin.localPosition);
 
             //_player.Value = this.gameObject;
 
