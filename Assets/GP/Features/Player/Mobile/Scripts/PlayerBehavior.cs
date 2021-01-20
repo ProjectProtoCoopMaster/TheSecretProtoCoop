@@ -23,7 +23,7 @@ namespace Gameplay.Mobile
         {
             if (!_hidePlayer.Value)
             {
-                if (currentRoom != null) playerTransform.position = _playerPosition.Value + (currentRoom.room.roomOrigin.position);
+                if (currentRoom != null) playerTransform.position = _playerPosition.Value + (currentRoom.room.roomCenter.position);
                 playerTransform.forward = _player.Value.transform.forward;
                 playerTransform.eulerAngles = new Vector3(0, playerTransform.eulerAngles.y, 0);
             }
