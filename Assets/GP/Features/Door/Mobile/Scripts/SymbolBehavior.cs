@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+
 namespace Gameplay.Mobile
 {
     public class SymbolBehavior : MonoBehaviour, ISymbol
@@ -30,6 +31,7 @@ namespace Gameplay.Mobile
         private bool hasWin;
         [SerializeField] private Canvas canvas;
         [SerializeField] private float timerStartValue;
+
         private IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
@@ -80,7 +82,7 @@ namespace Gameplay.Mobile
                 }
             }
 
-            if(iconsAnswers[2].overrideSprite != null) Unlock();
+            if (iconsAnswers[2].overrideSprite != null) Unlock();
         }
 
         public void Unlock()
@@ -124,6 +126,7 @@ namespace Gameplay.Mobile
             gameObject.SetActive(false);
             yield break;
         }
+
         [Button]
         private void Miss()
         {
@@ -142,7 +145,6 @@ namespace Gameplay.Mobile
             }
         }
 
-
         public void SetSymbols()
         {
             sm.iconsAssetReminder.Clear();
@@ -154,20 +156,20 @@ namespace Gameplay.Mobile
             }
             for (int i = 0; i < iconsGame.Length; i++)
             {
-
                 iconsGame[i].overrideSprite = sm.iconsAsset[sm.indexes[i]];
                 sm.iconsStashed.Add(sm.iconsAsset[sm.indexes[i]]);
                 sm.iconsAsset.Remove(sm.iconsAsset[sm.indexes[i]]);
             }
+
             sm.iconsSelected.Clear();
 
             for (int i = 0; i < 3; i++)
             {
                 sm.iconsSelected.Add(sm.iconsStashed[sm.indexes[i + iconsGame.Length]]);
-
             }
 
             sm.iconsAsset.Clear();
+
             for (int i = 0; i < sm.iconsAssetReminder.Count; i++)
             {
                 sm.iconsAsset.Add(sm.iconsAssetReminder[i]);
@@ -175,7 +177,6 @@ namespace Gameplay.Mobile
 
             codeNameText.text = sm.pickedNames[0];
             symbolAreaCodeName.text = sm.pickedNames[0];
-
         }
 
         private void ResetCodes()
@@ -190,5 +191,4 @@ namespace Gameplay.Mobile
             door.GetComponent<DoorBehavior>().code.text = sm.pickedNames[0];
         }
     }
-
 }

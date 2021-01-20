@@ -118,7 +118,6 @@ namespace Gameplay
 
         public void SetSymbols()
         {
-            Debug.Log("symbol nuuuuuul");
             if (symbol != null)
             {
                 Debug.Log("Going To Set Symbol");
