@@ -2,6 +2,7 @@
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.VFX;
 using Valve.VR;
 
 namespace Gameplay.VR.Player
@@ -15,9 +16,10 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet = null;
-        [SerializeField] [FoldoutGroup("Shooting")] GameEvent shotEnvironment = null;
+        [SerializeField] [FoldoutGroup("Shooting")] GameEvent hitEnemy = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloading = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunEmpty = null;
+        [SerializeField] [FoldoutGroup("Shooting")] GameObject bulletImpactObj = null;
 
         [SerializeField] [FoldoutGroup("Internal Values")] FloatVariable shootingCooldown;
         float timePassed = 2f;
@@ -63,24 +65,28 @@ namespace Gameplay.VR.Player
 
                     if (hitInfo.collider.CompareTag("Enemy/Light Guard"))
                     {
+                        hitEnemy.Raise();
                         hitInfo.collider.GetComponentInParent<AgentDeath>().Die((transform.forward) * bulletForce.Value);
                     }
 
                     else if (hitInfo.collider.CompareTag("Enemy/Heavy Guard"))
                     {
+                        hitEnemy.Raise();
                         ricochet.Raise();
                     }
 
                     else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Environment"))
                     {
                         ricochet.Raise();
-                        shotEnvironment.Raise();
                     }
 
                     else if (hitInfo.collider.gameObject.tag == "Jammer")
                     {
                         hitInfo.collider.GetComponent<IKillable>().Die();
                     }
+
+                    GameObject newObj = Instantiate(bulletImpactObj, hitInfo.point, Quaternion.identity);
+                    newObj.GetComponent<VisualEffect>().Play();
                 }
 
                 gunReloading.Raise();

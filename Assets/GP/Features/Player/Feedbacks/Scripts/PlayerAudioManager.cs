@@ -21,12 +21,17 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("General")] float volume = 0.5f;
         [SerializeField] [FoldoutGroup("General")] StringVariable playerHead;
 
-        [SerializeField] [FoldoutGroup("Shooting")] AudioClip gunshotClip;
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] gunshotsMain;
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] gunshotBacking;
+        AudioClip lastGunshotClip;
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] casingClips;
+        AudioClip lastCasingClip;
+
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] ricochetClips;
         AudioClip lastRicochetClip; // to avoid repeating the sound
-        int attempts = 3; // 1-out-of-3 chance to replay the same sound 
-        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] hitEnvironmentClips;
-        AudioClip lastEnvironmentClip;
+
+        [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] impactEnemyClips;
+        AudioClip lastImpactClip; // to avoid repeating the sound
 
         [SerializeField] [FoldoutGroup("Teleportation")] AudioClip teleportationSFX;
         [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationWooshSFX;
@@ -38,26 +43,32 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIHoverClip;
         [SerializeField] [FoldoutGroup("User Interface")] AudioClip uIClickClip;
 
+        [SerializeField] [FoldoutGroup("Elements")] AudioClip electrictyClip;
+
+        int attempts = 3; // 1-out-of-3 chance to replay the same sound 
+
         public void GE_GunshotSFX()
         {
-            _playerAudioSource.PlayOneShot(gunshotClip, volume);
+            // play two "layers" of SFX for the silenced gun
+            _playerAudioSource.PlayOneShot(RandomClip(gunshotsMain, null), volume);
+            _playerAudioSource.PlayOneShot(lastGunshotClip = RandomClip(gunshotBacking, lastGunshotClip), volume);
+            _playerAudioSource.PlayOneShot(lastCasingClip = RandomClip(casingClips, lastCasingClip), volume);
         }
 
-        public void GE_GunshotRicochetSFX()
+        public void GE_HitRicochetSFX()
         {
-            _playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
+            _playerAudioSource.PlayOneShot(lastRicochetClip = RandomClip(ricochetClips, lastRicochetClip), volume);
         }
 
-        public void GE_HitEnvironementSFX()
+        public void GE_HitEnemySFX()
         {
-            _playerAudioSource.PlayOneShot(lastRicochetClip = RandomRicochet(ricochetClips, lastRicochetClip), volume);
-            //_playerAudioSource.PlayOneShot(lastEnvironmentClip = RandomRicochet(hitEnvironmentClips, lastEnvironmentClip), volume);
+            _playerAudioSource.PlayOneShot(lastImpactClip = RandomClip(impactEnemyClips, lastImpactClip), volume);
         }
 
         public void GE_TeleportationSFX()
         {
             _playerAudioSource.PlayOneShot(teleportationSFX);
-            _playerAudioSource.PlayOneShot(lastWooshSFX = RandomRicochet(teleportationWooshSFX, lastWooshSFX), volume);
+            _playerAudioSource.PlayOneShot(lastWooshSFX = RandomClip(teleportationWooshSFX, lastWooshSFX), volume);
         }
 
         public void GE_DetectionSFX()
@@ -80,7 +91,7 @@ namespace Gameplay.VR.Feedbacks
             _playerAudioSource.PlayOneShot(uIClickClip, volume);
         }
 
-        AudioClip RandomRicochet(AudioClip[] clipArray, AudioClip previousClip)
+        AudioClip RandomClip(AudioClip[] clipArray, AudioClip previousClip)
         {
             AudioClip ricochetClip = clipArray[Random.Range(0, clipArray.Length)];
 
@@ -90,6 +101,11 @@ namespace Gameplay.VR.Feedbacks
                 attempts--;
             }
             return ricochetClip;
+        }
+
+        void LayeredSounds()
+        {
+
         }
     }
 }
