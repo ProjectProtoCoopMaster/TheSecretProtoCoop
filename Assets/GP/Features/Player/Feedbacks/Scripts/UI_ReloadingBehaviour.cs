@@ -11,10 +11,6 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] Canvas canvas;
         [SerializeField] FloatVariable shootingCooldown;
         [SerializeField] Slider shootingCooldownSlider;
-        private void Awake()
-        {
-            GE_RefreshScene();
-        }
 
         private void Update()
         {

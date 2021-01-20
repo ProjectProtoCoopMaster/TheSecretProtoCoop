@@ -10,7 +10,7 @@ namespace Gameplay.VR
     public class AwarenessManager : MonoBehaviour
     {
 #if UNITY_STANDALONE
-        [SerializeField] [FoldoutGroup("Slow Motion")] GameEvent playerSpotted, playerIncognito;
+        [SerializeField] [FoldoutGroup("Player Detection")] GameEvent playerSpotted, playerIncognito;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
