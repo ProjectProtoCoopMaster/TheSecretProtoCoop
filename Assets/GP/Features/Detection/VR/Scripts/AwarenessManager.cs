@@ -115,9 +115,14 @@ namespace Gameplay.VR
 
         public void GE_RefreshScene()
         {
+            raisingAlarm = false;
+            spottedPlayer = false;
+            spottedDeadBody = false;
+            gameOver = false;
+
             deadGuards.Clear();
             alarmRaisers.Clear();
-            raisingAlarm = false;
+
             timePassed = 0f;
             Time.timeScale = 1f;
         }
