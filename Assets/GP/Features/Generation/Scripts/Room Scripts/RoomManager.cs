@@ -52,6 +52,7 @@ namespace Gameplay
         public Transform roomHolder;
 
         public Transform roomCenter;
+        public Transform roomOrigin;
 
         public ModifierType roomModifier { get; set; } = ModifierType.None;
 
