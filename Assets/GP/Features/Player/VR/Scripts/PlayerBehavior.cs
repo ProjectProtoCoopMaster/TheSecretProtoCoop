@@ -21,11 +21,9 @@ namespace Gameplay.VR
 
         [SerializeField] private GameObjectVariable _player;
 
-        [SerializeField] private Camera pictureCamera;
 
         private bool isDead;
 
-        public float debugRot;
      
         public void Die(Vector3 direction = default)
         {
@@ -47,10 +45,10 @@ namespace Gameplay.VR
 
         private void Update()
         {
-            _playerRotation.Value = _transform.localRotation;
-            _playerPosition.Value = _transform.position - centerTransform.position;
+            _playerRotation.Value = transform.rotation;
+            _playerPosition.Value = _transform.position; /*- centerTransform.position;*/
 
-            _player.Value = this.gameObject;
+            //_player.Value = this.gameObject;
 
             _sendPlayerPosAndRot.Raise();
         }

@@ -15,6 +15,10 @@ namespace Gameplay.Mobile
         [SerializeField] private Image[] results;
         [SerializeField] private Image[] iconsGame;
         [SerializeField] Text codeNameText;
+        [SerializeField] Text timerText;
+        [SerializeField] Image timerImage;
+        [SerializeField] Sprite cross;
+        [SerializeField] Sprite winImage;
 
         private int missNumber;
         [Header("---IMPORTANT---")]
@@ -23,6 +27,7 @@ namespace Gameplay.Mobile
 
         private float timer;
         private bool startTimer;
+        private bool hasWin;
         [SerializeField] private Canvas canvas;
         [SerializeField] private float timerStartValue;
         private IEnumerator Start()
@@ -37,7 +42,17 @@ namespace Gameplay.Mobile
         {
             if (canvas.enabled && !startTimer) { startTimer = true; timer = timerStartValue; }
 
-            if (startTimer) timer -= Time.deltaTime;
+            if (startTimer && !hasWin)
+            {
+                timer -= Time.deltaTime;
+                timerText.text = ((int)timer).ToString();
+                timerImage.fillAmount = (timer / timerStartValue);
+            }
+            else
+            {
+                timerText.text = 0.ToString();
+                timerImage.fillAmount = 0;
+            }
 
             if (timer < 0) { ResetCodes(); startTimer = false; }
         }
@@ -63,13 +78,15 @@ namespace Gameplay.Mobile
                     break;
                 }
             }
+
+            if(iconsAnswers[2].overrideSprite != null) Unlock();
         }
 
         public void Unlock()
         {
             for (int i = 0; i < sm.iconsSelected.Count; i++)
             {
-                if(sm.iconsSelected[i] != iconsAnswers[i].overrideSprite)
+                if (sm.iconsSelected[i] != iconsAnswers[i].overrideSprite)
                 {
                     Miss();
                     i = sm.iconsSelected.Count;
@@ -90,8 +107,10 @@ namespace Gameplay.Mobile
         [Button]
         private void Succeed()
         {
-
+            hasWin = true;
             door.Unlock();
+            results[missNumber].gameObject.SetActive(true);
+            results[missNumber].overrideSprite = winImage;
             results[missNumber].color = Color.green;
             _sendOnOpenDoor.Raise();
             StartCoroutine(WaitCloseSymbolCanvas());
@@ -99,7 +118,8 @@ namespace Gameplay.Mobile
 
         IEnumerator WaitCloseSymbolCanvas()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
+            canvas.enabled = false;
             gameObject.SetActive(false);
             yield break;
         }
@@ -107,7 +127,13 @@ namespace Gameplay.Mobile
         private void Miss()
         {
             missNumber++;
-            results[missNumber - 1].color = Color.red;
+            results[missNumber - 1].gameObject.SetActive(true);
+            results[missNumber - 1].overrideSprite = cross;
+
+            foreach (Image answers in iconsAnswers)
+            {
+                answers.overrideSprite = null;
+            }
             if (missNumber == 2)
             {
                 _sendGameOver.Raise();
