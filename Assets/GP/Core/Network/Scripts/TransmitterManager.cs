@@ -56,6 +56,9 @@ namespace Networking
 
         public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
         [PunRPC] private void SendWin() => _onWin.Raise();
+
+        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
+        [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
         #endregion
 
         #region Player Position
@@ -131,9 +134,6 @@ namespace Networking
         #region Level Management
         public void SendRoomChangeToOthers() => photonView.RPC("SendRoomChange", RpcTarget.Others);
         [PunRPC] private void SendRoomChange() => _changeRoomMobile.Raise();
-
-        public void SendLevelRestartToAll() => photonView.RPC("SendLevelRestart", RpcTarget.AllViaServer);
-        [PunRPC] private void SendLevelRestart() => _onLevelRestart.Raise();
         #endregion
     }
 }

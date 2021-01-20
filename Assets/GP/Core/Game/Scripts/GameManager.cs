@@ -18,12 +18,12 @@ namespace Gameplay
 
         public bool startGame;
 
-        private bool gameOver = false;
+        public bool gameOver { get; set; } = false;
 
         public Transform UICanvas;
 
         [Title("Lose")]
-        public GameObject loseCanvasPrefab; private GameObject loseCanvas;
+        public GameObject loseCanvasPrefab; public GameObject loseCanvas { get; set; }
         public StringVariable _loseText;
 
         [Title("Win")]
@@ -67,10 +67,7 @@ namespace Gameplay
 
         public void Restart()
         {
-            Destroy(loseCanvas);
-            gameOver = false;
-
-            TransmitterManager.instance.SendLevelRestartToAll();
+            TransmitterManager.instance.SendRestartToAll();
         }
     }
 }
