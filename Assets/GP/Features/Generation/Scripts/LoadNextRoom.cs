@@ -6,7 +6,8 @@ namespace Gameplay.VR
 {
     public class LoadNextRoom : MonoBehaviour
     {
-        public bool passed;
+        public bool passed { get; set; }
+
         public DoorBehavior door;
 
         void OnTriggerEnter(Collider other)

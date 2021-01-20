@@ -21,10 +21,8 @@ namespace Gameplay.VR
 
         [SerializeField] private GameObjectVariable _player;
 
-
         private bool isDead;
 
-     
         public void Die(Vector3 direction = default)
         {
             if (!isDead)
@@ -43,7 +41,7 @@ namespace Gameplay.VR
             playerHitTrap.Raise();
         }
 
-        private void Update()
+        void Update()
         {
             _playerRotation.Value = rigTransform.localRotation;
             if (currentRoom != null) _playerPosition.Value = rigTransform.position - (currentRoom.transform.position - currentRoom.room.roomCenter.localPosition);
@@ -54,4 +52,3 @@ namespace Gameplay.VR
         }
     }
 }
-

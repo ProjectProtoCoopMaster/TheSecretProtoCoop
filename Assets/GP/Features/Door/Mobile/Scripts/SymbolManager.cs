@@ -1,55 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using Networking;
 
 namespace Gameplay
 {
     public class SymbolManager : MonoBehaviour
     {
         public static SymbolManager instance;
-       
-        [SerializeField] private Networking.TransmitterManager transmitterManager;
+        
         public BoolVariable isSymbolLoaded;
+
         public List<Sprite> iconsAsset;
-        [ReadOnly]
-        public List<Sprite> iconsAssetReminder;
-        [ReadOnly]
-        public List<Sprite> iconsSelected;
-        [ReadOnly]
-        public List<Sprite> iconsStashed;
+
+        [ReadOnly] public List<Sprite> iconsAssetReminder;
+        [ReadOnly] public List<Sprite> iconsSelected;
+        [ReadOnly] public List<Sprite> iconsStashed;
+
         [SerializeField] public string[] codeNames;
-        [ReadOnly]
-        public string[] pickedNames;
-        [ReadOnly]
-        public List<int> indexes;
+
+        [ReadOnly] public string[] pickedNames;
+        [ReadOnly] public List<int> indexes;
+
         public ISymbol symbol;
 
         void OnEnable() { if (instance == null) instance = this; }
 
-        private void Awake()
-        {
-            instance = this;
-            
-        }
-        private void OnDisable()
-        {
-            isSymbolLoaded.Value = false;
-        }
+        void Awake() => instance = this;
+
+        void OnDisable() => isSymbolLoaded.Value = false;
+
         public void LoadSymbols()
         {
             if (!isSymbolLoaded.Value)
             {
                 Debug.Log("Load Symbols");
+
                 iconsSelected.Clear();
                 iconsAssetReminder.Clear();
                 iconsStashed.Clear();
+
                 indexes.Clear();
+
                 for (int i = 0; i < iconsAsset.Count; i++)
                 {
                     iconsAssetReminder.Add(iconsAsset[i]);
                 }
+
                 for (int i = 0; i < 15; i++)
                 {
                     int random = Random.Range(0, iconsAsset.Count);
@@ -57,10 +55,7 @@ namespace Gameplay
 
                     iconsStashed.Add(iconsAsset[random]);
                     iconsAsset.Remove(iconsAsset[random]);
-
                 }
-
-
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -90,12 +85,11 @@ namespace Gameplay
                     {
                         iconsSelected.Add(iconsStashed[randomSelected]);
                         indexes.Add(randomSelected);
-
                     }
-
-
                 }
+
                 iconsAsset.Clear();
+
                 for (int i = 0; i < iconsAssetReminder.Count; i++)
                 {
                     iconsAsset.Add(iconsAssetReminder[i]);
@@ -104,23 +98,22 @@ namespace Gameplay
                 for (int i = 0; i < indexes.Count; i++)
                 {
                     Debug.Log("ID");
-                    transmitterManager.SendSymbolIDToOther(indexes[i]);
+                    TransmitterManager.instance.SendSymbolIDToOther(indexes[i]);
                 }
+
                 PickCodeName();
+
                 SetSymbols();
 
-                
-                transmitterManager.SendSetSymbolToOthers();
+                TransmitterManager.instance.SendSetSymbolToOthers();
 
                 for (int i = 0; i < 3; i++)
                 {
-                    transmitterManager.SendIconsSelectedToOthers(i,iconsStashed.IndexOf(iconsSelected[i]));
+                    TransmitterManager.instance.SendIconsSelectedToOthers(i,iconsStashed.IndexOf(iconsSelected[i]));
                 }
                 
                 isSymbolLoaded.Value = true;
             }
-
-
         }
 
         public void SetSymbols()
@@ -130,10 +123,8 @@ namespace Gameplay
             {
                 Debug.Log("Going To Set Symbol");
                 symbol.SetSymbols();
-                    
             }
         }
-
 
         public void PickCodeName()
         {
@@ -144,6 +135,7 @@ namespace Gameplay
             for (int i = 1; i < 3; i++)
             {
                 int randomSelected = Random.Range(0, codeNames.Length);
+
                 for (int j = 0; j < pickedNames.Length; j++)
                 {
                     if (codeNames[randomSelected] == pickedNames[j])
@@ -157,14 +149,9 @@ namespace Gameplay
                         break;
                     }
                 }
-
-
             }
-
-            transmitterManager.SendCodeNameToOthers(pickedNames);
-
+            TransmitterManager.instance.SendCodeNameToOthers(pickedNames);
         }
-
     }
 }
 

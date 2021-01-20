@@ -113,7 +113,6 @@ namespace Gameplay
             /// Initialize Elements
             
             SwitcherManager.instance.StartAllSwitchers();
-
             JammerManager.instance.StartAllJammers();
 
             SymbolManager.instance.LoadSymbols();
@@ -149,7 +148,6 @@ namespace Gameplay
             /// Initialize Switchers
 
             SwitcherManager.instance.StartAllSwitchers();
-
             JammerManager.instance.StartAllJammers();
         }
 

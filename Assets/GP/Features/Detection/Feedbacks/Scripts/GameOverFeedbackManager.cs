@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Networking;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Gameplay.VR
@@ -22,8 +23,8 @@ namespace Gameplay.VR
 
         public void GE_PlayerHitTrap()
         {
-            Debug.Log((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
-            gameOver.Raise((int)Gameplay.GameManager.LoseType.PlayerHitTrap);
+            Debug.Log((int)LoseType.PlayerHitTrap);
+            TransmitterManager.instance.SendLoseToAll((int)LoseType.PlayerHitTrap);
         }
 
         public void GE_RefreshScene()
