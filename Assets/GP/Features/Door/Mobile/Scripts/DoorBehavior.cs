@@ -118,7 +118,7 @@ namespace Gameplay.Mobile
             selectable = false;
 
             padlock_Close.SetActive(false);
-            padlock_Open.SetActive(true);
+            padlock_Open.SetActive(false);
 
             if (power == 1) TurnOn();
             else TurnOff();

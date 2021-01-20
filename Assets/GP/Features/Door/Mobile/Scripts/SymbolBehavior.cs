@@ -15,6 +15,8 @@ namespace Gameplay.Mobile
         [SerializeField] private Image[] results;
         [SerializeField] private Image[] iconsGame;
         [SerializeField] Text codeNameText;
+        [SerializeField] Text timerText;
+        [SerializeField] Image timerImage;
 
         private int missNumber;
         [Header("---IMPORTANT---")]
@@ -38,7 +40,17 @@ namespace Gameplay.Mobile
         {
             if (canvas.enabled && !startTimer) { startTimer = true; timer = timerStartValue; }
 
-            if (startTimer && !hasWin) timer -= Time.deltaTime;
+            if (startTimer && !hasWin)
+            {
+                timer -= Time.deltaTime;
+                timerText.text = ((int)timer).ToString();
+                timerImage.fillAmount = (timer / timerStartValue);
+            }
+            else
+            {
+                timerText.text = 0.ToString();
+                timerImage.fillAmount = 0;
+            }
 
             if (timer < 0) { ResetCodes(); startTimer = false; }
         }
