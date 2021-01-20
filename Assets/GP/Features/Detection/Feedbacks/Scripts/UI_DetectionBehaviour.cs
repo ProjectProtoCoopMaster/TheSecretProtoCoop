@@ -14,7 +14,6 @@ namespace Gameplay.VR.UI
 
         private void Awake()
         {
-            //GE_RefreshScene();
             GE_PlayerIncognito();
         }
 
@@ -38,6 +37,7 @@ namespace Gameplay.VR.UI
 
         public void GE_PlayerIncognito()
         {
+            detectionText.enabled = true;
             detectionText.color = Color.green;
             detectionText.text = "[Incognito]";
             framesPassed = 0;
@@ -64,7 +64,7 @@ namespace Gameplay.VR.UI
 
         public void GE_RefreshScene()
         {
-            detectionText.enabled = true;
+            GE_PlayerIncognito();
         }
     }
 }
