@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public enum Platform { Mobile, VR }
-
     public class LevelAssembler : MonoBehaviour
     {
         public Platform platform;

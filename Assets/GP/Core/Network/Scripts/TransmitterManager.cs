@@ -12,11 +12,12 @@ namespace Networking
         [SerializeField] private PhotonView photonView;
 
         public GameManager gameManager;
-        [SerializeField] private IntVariable _sceneID;
 
         [SerializeField] private BoolVariable _isMobile;
 
-        [SerializeField] private GameEvent _onVictory;
+        [Title("Win/Lose")]
+        [SerializeField] private GameEvent _onLose;
+        [SerializeField] private GameEvent _onWin;
 
         [Title("Player")]
         [SerializeField] private Vector3Variable _playerVRPosition;
@@ -49,21 +50,13 @@ namespace Networking
 
         private void Awake() => instance = this;
 
-        /// Game Manager
+        #region Win / Lose
+        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
+        [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 
-        public void SendLoseToOther(int loseType) { gameManager.RaiseOnLose(loseType); photonView.RPC("SendLose", RpcTarget.Others, loseType); }
-        [PunRPC] private void SendLose(int loseType) => gameManager.RaiseOnLose(loseType);
-
-        public void SendOnVictoryToOthers() => photonView.RPC("SendOnVictory", RpcTarget.Others);
-        [PunRPC] private void SendOnVictory() => _onVictory.Raise();
-
-        public void SendLoadNextSceneToOthers() => photonView.RPC("SendLoadNextScene", RpcTarget.Others);
-        [PunRPC] private void SendLoadNextScene() => gameManager.LoadNextScene();
-
-        public void SendLoadSameSceneToOthers() => photonView.RPC("SendLoadSameScene", RpcTarget.Others);
-        [PunRPC] private void SendLoadSameScene() => gameManager.LoadSameScene();
-
-        ///\
+        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
+        [PunRPC] private void SendWin() => _onWin.Raise();
+        #endregion
 
         #region Player Position
         public void SendPlayerVRPosAndRotToOthers() => photonView.RPC("SendPosAndRot", RpcTarget.Others, _playerVRPosition.Value, _playerVRRotation.Value);

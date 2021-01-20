@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Networking;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +16,10 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
         [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<GameObject> alarmRaisers = new List<GameObject>();
 
-        [SerializeField] [FoldoutGroup("Alarm Raising")] CallableFunction gameOver;
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
 
-        [SerializeField] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameIsOver = false;
+        [SerializeField] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameOver = false;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
-        //[SerializeField] [FoldoutGroup("Debugging")] internal int alarmRaisers;
 
         private void Awake()
         {
@@ -28,7 +27,6 @@ namespace Gameplay.VR
         }
 
         #region Game Events
-        // called when the player is detected by a guard
         public void GE_PlayerDetectedByGuard()
         {
             spottedPlayer = true;
@@ -43,7 +41,7 @@ namespace Gameplay.VR
         public void GE_PlayerDetectedByCamera()
         {
             Debug.Log("Restarting the game, a camera saw me");
-            GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByCam);
+            GameOver(LoseType.PlayerSpottedByCam);
         }
 
         public void GE_BodyDetectedByGuard()
@@ -60,7 +58,7 @@ namespace Gameplay.VR
         public void GE_BodyDetectedByCamera()
         {
             Debug.Log("Restarting the game, a camera saw a body");
-            GameOver(Gameplay.GameManager.LoseType.BodySpottedByCam);
+            GameOver(LoseType.BodySpottedByCam);
         }
         #endregion
 
@@ -83,12 +81,12 @@ namespace Gameplay.VR
                         if (spottedDeadBody)
                         {
                             Debug.Log("Restarting the game, a guard saw a body");
-                            GameOver(Gameplay.GameManager.LoseType.BodySpottedByGuard);
+                            GameOver(LoseType.BodySpottedByGuard);
                         }
                         if (spottedPlayer)
                         {
                             Debug.Log("Restarting the game, a guard saw me");
-                            GameOver(Gameplay.GameManager.LoseType.PlayerSpottedByGuard);
+                            GameOver(LoseType.PlayerSpottedByGuard);
                         }
 
                         GE_RefreshScene();
@@ -108,13 +106,10 @@ namespace Gameplay.VR
             timePassed = 0f;
         }
 
-        private void GameOver(Gameplay.GameManager.LoseType loseReason)
+        private void GameOver(LoseType loseType)
         {
-            if (!gameIsOver)
-            {
-                gameIsOver = true;
-            }
-            gameOver.Raise((int)loseReason);
+            if (!gameOver) gameOver = true;
+            TransmitterManager.instance.SendLoseToAll((int)loseType);
             gameOverAlarm.Raise();
         }
 
