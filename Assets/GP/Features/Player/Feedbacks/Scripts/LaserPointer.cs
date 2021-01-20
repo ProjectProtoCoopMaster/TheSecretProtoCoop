@@ -16,7 +16,7 @@ namespace Gameplay.VR.Player
 
         [SerializeField] protected int updateFrequency;
         protected int framesPassed;
-        
+
         protected void Awake()
         {
             laserPointer = GetComponent<LineRenderer>();
@@ -48,8 +48,12 @@ namespace Gameplay.VR.Player
 
         private void LateUpdate()
         {
-            laserPointer.SetPosition(0, laserStart.position);
-            laserPointer.SetPosition(1, laserHitPoint.position);
+            if (laserHitPoint != null)
+            {
+                laserPointer.SetPosition(0, laserStart.position);
+                laserPointer.SetPosition(1, laserHitPoint.position);
+
+            }
         }
     }
 }

@@ -64,7 +64,6 @@ namespace Gameplay.VR.Player
         private void Awake()
         {
             bezierVisualization = GetComponentInChildren<LineRenderer>();
-
         }
 
         private void Start()
@@ -186,6 +185,8 @@ namespace Gameplay.VR.Player
         // show the pointer, using the referenced controller's transform.forward
         internal void TallRayPointer(SteamVR_Behaviour_Pose _controllerPose)
         {
+            Debug.Log("Aiming");
+
             if (_controllerPose != null && VRPlatform == false)
                 VRPlatform = true;
 
@@ -300,7 +301,7 @@ namespace Gameplay.VR.Player
 
             isTeleporting = false;
 
-            oldArea.enabled = true;
+            if (oldArea != null) oldArea.enabled = true;
 
             oldArea = currentArea;
             currentArea = null;
