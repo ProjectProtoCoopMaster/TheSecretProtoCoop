@@ -1,33 +1,12 @@
 ﻿#if UNITY_STANDALONE
 using UnityEngine;
 using UnityEngine.UI;
-using Valve.VR;
 
 namespace Gameplay.VR.Player
 {
-    public class VR_UIRaycaster : LaserPointer
+    public class VR_UIRaycaster : VR_Raycaster
     {
-        [SerializeField] private SteamVR_Action_Boolean clickAction = null;
-        private SteamVR_Behaviour_Pose controllerPose = null;
-        private SteamVR_Input_Sources handSource;
-
-        private MaterialPropertyBlock clickedColor;
-
         [SerializeField] private Button currentButton;
-        [SerializeField] private Color clickColor;
-
-        [SerializeField] private GameEvent onHover, onClick;
-
-
-        new void Awake()
-        {
-            base.Awake();
-            controllerPose = GetComponentInParent<SteamVR_Behaviour_Pose>();
-            handSource = controllerPose.inputSource;
-
-            clickedColor = new MaterialPropertyBlock();
-            clickedColor.SetColor("_EmissionColor", clickColor);
-        }
 
         private void Update()
         {
@@ -67,4 +46,5 @@ namespace Gameplay.VR.Player
         }
     }
 }
+
 #endif

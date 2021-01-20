@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 4605352206057338154}
   - component: {fileID: 4605352206057338157}
   - component: {fileID: 1379281556072007816}
+  - component: {fileID: 7946297560870905156}
+  - component: {fileID: 1219852604363815338}
   - component: {fileID: 8668388833559456506}
   - component: {fileID: 6146927010924072766}
   m_Layer: 11
@@ -189,6 +191,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exclamationMark: {fileID: 3968929243909163910}
+--- !u!114 &7946297560870905156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078856768317732911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ed56bdf1e5e874e923cc0893076d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderers:
+  - {fileID: 7632896557073908201}
+  - {fileID: 2464768985643150391}
+  - {fileID: 4110420844831945735}
+  skinnedMesh: {fileID: 8971415111233696872}
+  glowEffect: {fileID: 2100000, guid: ea7684964c7be69429d6e24f37646c51, type: 2}
+--- !u!114 &1219852604363815338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078856768317732911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538fa4cc186c5874984cf3662a490bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guardHearingLayermask:
+    serializedVersion: 2
+    m_Bits: 19456
+  wallDampenMultiplier: 0.5
+  windowDampenMultiplier: 0.75
+  noiseRange: 7
+  minimumVelocity: 7
+  currNoiseRange: 0
 --- !u!114 &8668388833559456506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,9 +304,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1219852604363815338}
         m_TargetAssemblyTypeName: Gameplay.VR.DeathSoundBehaviour, Assembly-CSharp
         m_MethodName: GE_CryOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7946297560870905156}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.ActivateGlow, Assembly-CSharp
+        m_MethodName: UE_ActivateGow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -298,8 +350,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 29.3
+  MaxDistance: 2000
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -334,7 +386,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -746,5 +798,25 @@ MonoBehaviour:
 --- !u!4 &1763920667760395951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1150942409570554661, guid: 9726960a2afea50418a2a0db597640a2, type: 3}
+  m_PrefabInstance: {fileID: 1694000550044407178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7632896557073908201 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 9110556080307950691, guid: 9726960a2afea50418a2a0db597640a2, type: 3}
+  m_PrefabInstance: {fileID: 1694000550044407178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2464768985643150391 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3870512733587667389, guid: 9726960a2afea50418a2a0db597640a2, type: 3}
+  m_PrefabInstance: {fileID: 1694000550044407178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4110420844831945735 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3353327381386830221, guid: 9726960a2afea50418a2a0db597640a2, type: 3}
+  m_PrefabInstance: {fileID: 1694000550044407178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8971415111233696872 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7710886061094822370, guid: 9726960a2afea50418a2a0db597640a2, type: 3}
   m_PrefabInstance: {fileID: 1694000550044407178}
   m_PrefabAsset: {fileID: 0}

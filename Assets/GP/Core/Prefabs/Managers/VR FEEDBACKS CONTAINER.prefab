@@ -684,6 +684,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6074166611735254540}
+        m_TargetAssemblyTypeName: Gameplay.VR.GameOverFeedbackManager, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 9086660911637341291}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.TeleportationFeedbackManager,
           Assembly-CSharp
@@ -743,26 +755,44 @@ MonoBehaviour:
   playerAudioSource: {fileID: 0}
   volume: 0.5
   playerHead: {fileID: 11400000, guid: cee03bd9f179b5d45a01ff2624e939b6, type: 2}
-  gunshotClip: {fileID: 8300000, guid: ac161ceed4dcf2d48afcb3e5cd018c48, type: 3}
+  gunshotsMain:
+  - {fileID: 8300000, guid: fcc630a1069de1446915380a67114ed6, type: 3}
+  - {fileID: 8300000, guid: 40938bc2037f75848bd9263fdc968cec, type: 3}
+  gunshotBacking:
+  - {fileID: 8300000, guid: 506c9bee90f264d4d82782e56821d127, type: 3}
+  - {fileID: 8300000, guid: 0f659f8c026e60c4ab6863946d53871e, type: 3}
+  casingClips:
+  - {fileID: 8300000, guid: 713eb021609f614468ebade7008fa857, type: 3}
+  - {fileID: 8300000, guid: a978e633c70c61940ac4bf195d62708a, type: 3}
+  - {fileID: 8300000, guid: 29a136856f5f5754da0c8932648acd85, type: 3}
+  - {fileID: 8300000, guid: bbb6e108bde5d474eb3e4c4a815960d5, type: 3}
   ricochetClips:
-  - {fileID: 8300000, guid: 5ac3bd9286454b647b2394ab4b12cb07, type: 3}
-  - {fileID: 8300000, guid: 5afbd5b9b119ba447acf81df0fc88e3d, type: 3}
-  - {fileID: 8300000, guid: f65e4da10e269dc4aa9b753c28c4eaaa, type: 3}
-  - {fileID: 8300000, guid: 8746f1bab3124ea49bfb77543041b60a, type: 3}
-  - {fileID: 8300000, guid: 8f33492f263e76240a7b6ac1f4e1b29a, type: 3}
-  - {fileID: 8300000, guid: 516187b76f6a9824da96903794a120aa, type: 3}
-  - {fileID: 8300000, guid: c2247912792e15842b5b64f5c3af99cd, type: 3}
-  - {fileID: 8300000, guid: 340af1279a82ab344bb52ed93397c60e, type: 3}
-  - {fileID: 8300000, guid: b19de55f73363f5499168dfc5d2e3df5, type: 3}
-  hitEnvironmentClips: []
-  teleportationSFX: {fileID: 8300000, guid: 81342a278015a3143adb58b9c4293625, type: 3}
-  teleportationWooshSFX:
-  - {fileID: 8300000, guid: 3496719da28320b4a9c489788c954c3f, type: 3}
-  - {fileID: 8300000, guid: ed35bc532b7d625459559edb66141c9b, type: 3}
+  - {fileID: 8300000, guid: 6ab3a6ffd133e8a4e8562dbf134a9b41, type: 3}
+  - {fileID: 8300000, guid: bf5c2f39f35e5554283ba10c2091bcd3, type: 3}
+  - {fileID: 8300000, guid: 787a181912a579d43b59210957ef366e, type: 3}
+  - {fileID: 8300000, guid: 42482ec2e5fbfc6448011df618205a86, type: 3}
+  impactEnemyClips:
+  - {fileID: 8300000, guid: 7e1b7af578802954288c46f5a03f8369, type: 3}
+  - {fileID: 8300000, guid: 4f061b2473ba2464e8ef9b1885c37135, type: 3}
+  - {fileID: 8300000, guid: 39849a142406bc64dab7b3280853d845, type: 3}
+  - {fileID: 8300000, guid: 172171a477f64904eb803f50aaa7d346, type: 3}
+  - {fileID: 8300000, guid: 081665a499aa8384381c032421a451c0, type: 3}
+  teleportationMain:
+  - {fileID: 8300000, guid: d9cf66017764d6e4a9cecec0ac9d4319, type: 3}
+  - {fileID: 8300000, guid: 750cf19cbd01c2946b2648ec4357fe86, type: 3}
+  - {fileID: 8300000, guid: 54f44c28203353d48afe89297408096a, type: 3}
+  teleportationBacking:
+  - {fileID: 8300000, guid: 98a9262317dd5c448aa4da18f716f370, type: 3}
+  - {fileID: 8300000, guid: 961ba7499543e3c488fc175e2c470e59, type: 3}
+  - {fileID: 8300000, guid: 9d23458e9cf119143bc868743f6ddff9, type: 3}
+  - {fileID: 8300000, guid: 6c4da83f344832746a1727351d235215, type: 3}
+  - {fileID: 8300000, guid: fc257f3b81e887140a13395793e4475c, type: 3}
+  - {fileID: 8300000, guid: 38b9d2d3a0e47c14489f54eabdd08d13, type: 3}
   metalGearSolidDetection: {fileID: 8300000, guid: 718066c4e25a151438e4f046613903b3, type: 3}
   gameOverAlarm: {fileID: 8300000, guid: 87f065f94592ece4ebb0806d80ee4ed2, type: 3}
   uIHoverClip: {fileID: 8300000, guid: 0c4c4eb4764f51841b6d59f362b48b13, type: 3}
   uIClickClip: {fileID: 8300000, guid: 24d3a4a5075289e4a932e3ddff9a6455, type: 3}
+  electrictyClip: {fileID: 0}
 --- !u!1 &2055030888561677628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1604,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7857188697147195295}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
-        m_MethodName: GE_HitEnvironementSFX
+        m_MethodName: GE_HitEnemySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1602,7 +1632,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7857188697147195295}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.PlayerAudioManager, Assembly-CSharp
-        m_MethodName: GE_GunshotRicochetSFX
+        m_MethodName: GE_HitRicochetSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

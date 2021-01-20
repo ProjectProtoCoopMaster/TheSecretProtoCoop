@@ -8,9 +8,9 @@ namespace Gameplay.VR.Feedbacks
 {
     public class TeleportationFeedbackManager : MonoBehaviour
     {
-        public VisualEffectAsset teleportationAreaAsset, teleportationEffectAsset;
-        public List<VisualEffect> particles = new List<VisualEffect>();
-        public List<TeleportationArea> teleportGlowers = new List<TeleportationArea>();
+        [SerializeField] private VisualEffectAsset teleportationAreaAsset, teleportationEffectAsset;
+        [SerializeField] private List<VisualEffect> particles = new List<VisualEffect>();
+        [SerializeField] private List<TeleportationArea> teleportGlowers = new List<TeleportationArea>();
 
         private void Awake()
         {

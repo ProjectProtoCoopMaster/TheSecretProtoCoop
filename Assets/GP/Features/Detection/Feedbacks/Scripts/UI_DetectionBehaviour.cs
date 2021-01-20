@@ -64,7 +64,7 @@ namespace Gameplay.VR.UI
 
         public void GE_RefreshScene()
         {
-            detectionText.enabled = false;
+            detectionText.enabled = true;
         }
     }
 }

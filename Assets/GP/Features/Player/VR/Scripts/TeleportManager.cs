@@ -20,6 +20,8 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
         [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleported;
+        [Tooltip("The GameEvent that is called when the player is teleporting.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportDashing;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -59,7 +61,7 @@ namespace Gameplay.VR.Player
         bool canTeleport;
         bool VRPlatform;
 
-        [SerializeField] VisualEffect currentArea, oldArea;
+        [SerializeField] VisualEffect targetArea, oldArea;
 
         private void Awake()
         {
@@ -212,7 +214,7 @@ namespace Gameplay.VR.Player
             {
                 if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
                 {
-                    currentArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
+                    targetArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
                     canTeleport = true;
                 }
 
@@ -263,14 +265,18 @@ namespace Gameplay.VR.Player
 
         public void TryTeleporting()
         {
+            teleported.Raise();
+
             if (canTeleport == true)
                 StartCoroutine(TeleportThePlayer());
-            bezierVisualization.enabled = showRayPointer = canTeleport = false;
+            bezierVisualization.enabled = showRayPointer = canTeleport = false;            
         }
 
         IEnumerator TeleportThePlayer()
         {
-            currentArea.enabled = false;
+            oldArea.enabled = true;
+            oldArea = targetArea;
+            targetArea.enabled = false;
 
             startPos = playerPosition;
             targetPos = teleportTarget;
@@ -280,7 +286,7 @@ namespace Gameplay.VR.Player
 
             particleDash.Play();
 
-            teleported.Raise();
+            teleportDashing.Raise();
 
             time = 0;
             change = targetPos - startPos;
@@ -300,11 +306,6 @@ namespace Gameplay.VR.Player
             }
 
             isTeleporting = false;
-
-            if (oldArea != null) oldArea.enabled = true;
-
-            oldArea = currentArea;
-            currentArea = null;
 
             particleDash.Stop();
         }
