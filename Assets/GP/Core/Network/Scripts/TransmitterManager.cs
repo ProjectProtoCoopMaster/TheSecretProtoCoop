@@ -50,7 +50,7 @@ namespace Networking
 
         private void Awake() => instance = this;
 
-        #region Win / Lose
+        #region Game Management
         public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.All, loseType); }
         [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 
@@ -108,7 +108,7 @@ namespace Networking
         [PunRPC] private void SendOxygenTimer(float oxygenTimer) => _oxygenTimer.Value = oxygenTimer;
         #endregion
 
-        #region Level Generation
+        #region Level
         public void SendLevelHolderToOthers(LevelVariable levelVariable)
         {
             photonView.RPC("InitLevelHolder", RpcTarget.Others, levelVariable.LevelRoomsData.Count);
@@ -129,9 +129,7 @@ namespace Networking
 
         public void SendBuildLevelToAll() => photonView.RPC("SendBuildLevel", RpcTarget.All);
         [PunRPC] private void SendBuildLevel() => _buildLevel.Raise();
-        #endregion
 
-        #region Level Management
         public void SendRoomChangeToOthers() => photonView.RPC("SendRoomChange", RpcTarget.Others);
         [PunRPC] private void SendRoomChange() => _changeRoomMobile.Raise();
         #endregion
