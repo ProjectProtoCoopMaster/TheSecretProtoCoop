@@ -81,13 +81,29 @@ namespace Gameplay.VR.Player
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
 
-            Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
-            for (int i = 0; i < hitColliders.Length; i++)
-            {
-                Debug.Log(hitColliders[i].name);
+        }
 
-                if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
-                    oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+        VisualEffect _oldArea
+        {
+            get
+            {
+                if(oldArea == null)
+                {
+                    Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
+                    for (int i = 0; i < hitColliders.Length; i++)
+                    {
+                        Debug.Log(hitColliders[i].name);
+
+                        if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
+                            oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+                    }
+                    return oldArea;
+                }
+                else return oldArea;
+            }
+            set
+            {
+                _oldArea = value;
             }
         }
 
@@ -274,9 +290,12 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
-            oldArea.enabled = true;
-            oldArea = targetArea;
-            targetArea.enabled = false;
+            if (oldArea != null)
+            {
+                _oldArea.enabled = true;
+                _oldArea = targetArea;
+                targetArea.enabled = false;
+            }
 
             startPos = playerPosition;
             targetPos = teleportTarget;
