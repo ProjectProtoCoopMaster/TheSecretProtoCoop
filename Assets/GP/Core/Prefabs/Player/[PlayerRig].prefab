@@ -6170,8 +6170,6 @@ MonoBehaviour:
   _playerPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   _player: {fileID: 11400000, guid: dd1019a1a8255ea43873e7e8e2dd8c89, type: 2}
-  pictureCamera: {fileID: 0}
-  debugRot: 0
 --- !u!114 &7409026258412376008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6604,7 +6602,7 @@ MonoBehaviour:
   shotTrail: {fileID: 8700703703138933956}
   shooting: {fileID: 11400000, guid: 20dae3f1be2659046834e9d97e437fe8, type: 2}
   ricochet: {fileID: 11400000, guid: 5c12e046bb55cb7449db58b95f5a303a, type: 2}
-  shotEnvironment: {fileID: 11400000, guid: 50db5394dd658cd49910330550ec678e, type: 2}
+  hitEnemy: {fileID: 11400000, guid: 50db5394dd658cd49910330550ec678e, type: 2}
   gunReloading: {fileID: 11400000, guid: 0e1c885fbe1dc3648bf609be246ea9a6, type: 2}
   gunEmpty: {fileID: 11400000, guid: f3fbd02659d00774a9597eb96a8fc69e, type: 2}
   bulletImpactObj: {fileID: 1889853966}
@@ -7073,6 +7071,7 @@ MonoBehaviour:
   particleDash: {fileID: 7868168292743468123}
   teleportAiming: {fileID: 11400000, guid: 46fbd5a8138bdb4469d687dc256ffec6, type: 2}
   teleported: {fileID: 11400000, guid: 32bc4af34681270478dbe3e79a54ed4a, type: 2}
+  teleportDashing: {fileID: 11400000, guid: ba33932fa883b7a49a2bfa093f91d894, type: 2}
   playerRig: {fileID: 6003109435717295971}
   playerHead: {fileID: 5999183673499546489}
   teleportationLayers:
@@ -7142,7 +7141,7 @@ MonoBehaviour:
   minControllerAngle: 60
   maxControllerAngle: 150
   bezierSmoothness: 10
-  currentArea: {fileID: 0}
+  targetArea: {fileID: 0}
   oldArea: {fileID: 0}
 --- !u!114 &7956172257271811479
 MonoBehaviour:
