@@ -100,6 +100,11 @@ namespace Gameplay.VR
             poweredOn = false;
         }
         #endregion
+
+        public void GE_RefreshScene()
+        {
+            detectedBody = false;
+        }
     }
 }
 #endif

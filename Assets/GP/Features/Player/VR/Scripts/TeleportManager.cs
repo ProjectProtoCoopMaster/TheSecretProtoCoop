@@ -56,7 +56,6 @@ namespace Gameplay.VR.Player
         [Tooltip("Define how smooth the laser is. A Higher values incurs a higher performance cost.")]
         [SerializeField] [FoldoutGroup("Internal Values")] int bezierSmoothness;
 
-        internal bool isTeleporting; // for Awareness Manager time freeze feedback
         internal bool isGameOver;
         bool canTeleport;
         bool VRPlatform;
@@ -80,7 +79,6 @@ namespace Gameplay.VR.Player
             bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
-
         }
 
         VisualEffect _oldArea
@@ -301,8 +299,7 @@ namespace Gameplay.VR.Player
             targetPos = teleportTarget;
 
             showRayPointer = false;
-            isTeleporting = true;
-
+            
             particleDash.Play();
 
             teleportDashing.Raise();
@@ -324,9 +321,12 @@ namespace Gameplay.VR.Player
                 yield return null;
             }
 
-            isTeleporting = false;
-
             particleDash.Stop();
+        }
+
+        public void GE_ResetGameOver()
+        {
+            isGameOver = false;
         }
     }
 }
