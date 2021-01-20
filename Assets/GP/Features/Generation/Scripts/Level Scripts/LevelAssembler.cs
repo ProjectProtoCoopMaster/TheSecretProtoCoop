@@ -18,8 +18,6 @@ namespace Gameplay
 
         public Assembler assembler { get; private set; }
 
-        public List<RoomManager> selectedRooms { get; private set; }
-
         public void BuildLevel()
         {
             if (platform == Platform.VR) assembler = assemblerVR;

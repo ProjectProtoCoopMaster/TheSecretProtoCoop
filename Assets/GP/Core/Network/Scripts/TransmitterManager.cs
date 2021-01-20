@@ -51,13 +51,13 @@ namespace Networking
         private void Awake() => instance = this;
 
         #region Win / Lose
-        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
+        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.All, loseType); }
         [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 
-        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
+        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.All);
         [PunRPC] private void SendWin() => _onWin.Raise();
 
-        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
+        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.All);
         [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
         #endregion
 
@@ -127,7 +127,7 @@ namespace Networking
         [PunRPC] private void SendRoomName(string name, int index) => _levelHolder.LevelRoomsData[index].roomName = name;
         [PunRPC] private void SendRoomModifier(ModifierType modifier, int index) => _levelHolder.LevelRoomsData[index].roomModifier = modifier;
 
-        public void SendBuildLevelToAll() => photonView.RPC("SendBuildLevel", RpcTarget.AllViaServer);
+        public void SendBuildLevelToAll() => photonView.RPC("SendBuildLevel", RpcTarget.All);
         [PunRPC] private void SendBuildLevel() => _buildLevel.Raise();
         #endregion
 
