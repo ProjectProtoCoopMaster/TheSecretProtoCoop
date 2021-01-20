@@ -64,6 +64,7 @@ namespace Gameplay.Mobile
         public void ResetIcon(Image image)
         {
             image.overrideSprite = null;
+            image.color = new Color(0, 0, 0, 0);
         }
 
         public void SelectIcon(Image image)
@@ -72,7 +73,7 @@ namespace Gameplay.Mobile
             {
                 if (iconsAnswers[i].overrideSprite == null)
                 {
-                    
+                    iconsAnswers[i].color = Color.white;
                     iconsAnswers[i].overrideSprite = image.overrideSprite;
                     i = iconsAnswers.Length;
                     break;
@@ -133,6 +134,7 @@ namespace Gameplay.Mobile
             foreach (Image answers in iconsAnswers)
             {
                 answers.overrideSprite = null;
+                answers.color = new Color(0, 0, 0, 0);
             }
             if (missNumber == 2)
             {
