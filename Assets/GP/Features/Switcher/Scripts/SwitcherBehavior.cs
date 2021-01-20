@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+
 namespace Gameplay
 {
     public class SwitcherBehavior : MonoBehaviour, ISwitchable
@@ -21,7 +22,7 @@ namespace Gameplay
         [Range(0, 10)]
         public float ID = default;
 
-        public enum SwitchTimer { None, Fixed}
+        public enum SwitchTimer { None, Fixed }
 
         public SwitchTimer switchTimer = default;
         [HideInInspector]
