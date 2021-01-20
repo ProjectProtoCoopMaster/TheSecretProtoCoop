@@ -23,7 +23,7 @@ namespace Gameplay
         public Transform UICanvas;
 
         [Title("Lose")]
-        public GameObject loseCanvasPrefab;
+        public GameObject loseCanvasPrefab; private GameObject loseCanvas;
         public StringVariable _loseText;
 
         [Title("Win")]
@@ -40,7 +40,7 @@ namespace Gameplay
             {
                 gameOver = true;
 
-                GameObject loseCanvas = Instantiate(loseCanvasPrefab);
+                loseCanvas = Instantiate(loseCanvasPrefab);
                 loseCanvas.transform.parent = UICanvas;
                 Text loseText = loseCanvas.GetComponentInChildren<Text>();
 
@@ -65,6 +65,12 @@ namespace Gameplay
             winCanvas.transform.parent = UICanvas;
         }
 
-        public void Restart() => TransmitterManager.instance.SendLevelRestartToAll();
+        public void Restart()
+        {
+            Destroy(loseCanvas);
+            gameOver = false;
+
+            TransmitterManager.instance.SendLevelRestartToAll();
+        }
     }
 }
