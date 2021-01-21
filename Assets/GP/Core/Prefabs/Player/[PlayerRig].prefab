@@ -215,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &226532939
 Transform:
   m_ObjectHideFlags: 0
@@ -342,19 +342,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab947583e8633642b137615f90ee6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserWidth: 0
+  laserWidth: 0.1
   showLaser: 1
-  laserColor: {r: 0.26666668, g: 0.59607846, b: 0.27058825, a: 0}
+  laserColor: {r: 0.26666668, g: 0.59607846, b: 0.27058825, a: 1}
   collisionMask:
     serializedVersion: 2
     m_Bits: 32
-  laserStart: {fileID: 0}
-  laserEnd: {fileID: 0}
+  laserStart: {fileID: 84110611}
+  laserEnd: {fileID: 1423188129}
   updateFrequency: 12
   clickAction:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
-  clickColor: {r: 0.3019608, g: 1, b: 0, a: 0}
+  clickColor: {r: 0.3019608, g: 1, b: 0, a: 1}
   onHover: {fileID: 11400000, guid: 0c7c0f0815248f34091cf41dfd9a2c78, type: 2}
   onClick: {fileID: 11400000, guid: f044c5c900439dd4da550d969e4928d3, type: 2}
   currentButton: {fileID: 0}
