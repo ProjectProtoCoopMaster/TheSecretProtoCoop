@@ -366,7 +366,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 1
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -699,6 +699,18 @@ MonoBehaviour:
       - m_Target: {fileID: 9086660911637341291}
         m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.TeleportationFeedbackManager,
           Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8716512227724604809}
+        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.UI_InitCameraLayering, Assembly-CSharp
         m_MethodName: GE_RefreshScene
         m_Mode: 1
         m_Arguments:
