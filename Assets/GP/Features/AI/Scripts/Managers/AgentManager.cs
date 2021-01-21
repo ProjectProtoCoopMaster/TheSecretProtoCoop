@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,11 @@ namespace Gameplay.AI
 
         public bool isDead { get; protected set; }
 
+        [Title("Agent")]
+
+        public Transform agentRig;
+        public GameObject ragdollPrefab; public GameObject ragdoll { get; set; }
+        
         void OnEnable() => AIManager.agents.Add(this);
 
         void OnDisable() => AIManager.agents.Remove(this);
@@ -80,6 +86,13 @@ namespace Gameplay.AI
             StopAgent();
 
             isDead = true;
+
+            agentRig.gameObject.SetActive(false);
+        }
+
+        public void DeleteRagdoll()
+        {
+            if (ragdoll != null) Destroy(ragdoll);
         }
     }
 }

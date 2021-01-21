@@ -9,6 +9,7 @@ namespace Gameplay.AI
 
     public class GuardManager : AgentManager
     {
+        [Title("Guard")]
         [SerializeField] private GuardType guardType; public GuardType GuardType { get => guardType; }
 
         [ShowIf("guardType", GuardType.Patrol), SerializeField] private PatrolBehavior patrolBehavior;
