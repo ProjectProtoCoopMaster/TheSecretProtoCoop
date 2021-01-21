@@ -12,7 +12,7 @@ namespace Gameplay.VR.Player
         protected MaterialPropertyBlock baseColor;
 
         [SerializeField] protected LayerMask collisionMask;
-        [SerializeField] protected Transform laserStart, laserEnd;
+        [SerializeField] public Transform laserStart, laserEnd;
         protected Transform laserHitPoint;
         protected RaycastHit hitInfo;
 
@@ -27,7 +27,7 @@ namespace Gameplay.VR.Player
             baseColor.SetColor("_EmissionColor", laserColor);
         }
 
-        protected void OnEnable()
+        private void OnEnable()
         {
             laserPointer.startWidth = laserPointer.endWidth = laserWidth;
             laserPointer.SetPropertyBlock(baseColor);

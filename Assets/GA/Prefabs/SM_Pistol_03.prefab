@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 8615400066480075383}
   - component: {fileID: 5642680247837593952}
   - component: {fileID: 4170350937327489669}
+  - component: {fileID: 4595496639775011466}
   m_Layer: 0
   m_Name: SM_Pistol_03
   m_TagString: Untagged
@@ -358,8 +359,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 84992
-  laserStart: {fileID: 5707646804766909291}
-  laserEnd: {fileID: 8122389791042645564}
   updateFrequency: 6
 --- !u!120 &4170350937327489669
 LineRenderer:
@@ -459,3 +458,29 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &4595496639775011466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885995034454953781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab947583e8633642b137615f90ee6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserWidth: 0
+  showLaser: 1
+  laserColor: {r: 0, g: 0, b: 0, a: 0}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  updateFrequency: 0
+  clickAction:
+    actionPath: 
+    needsReinit: 0
+  clickColor: {r: 0, g: 0, b: 0, a: 0}
+  onHover: {fileID: 0}
+  onClick: {fileID: 0}
+  currentButton: {fileID: 0}

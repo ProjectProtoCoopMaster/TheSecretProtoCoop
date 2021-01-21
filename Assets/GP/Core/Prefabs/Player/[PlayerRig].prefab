@@ -207,8 +207,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 226532939}
-  - component: {fileID: 9013540718936883147}
   - component: {fileID: 226532940}
+  - component: {fileID: 5114046669547939577}
   m_Layer: 5
   m_Name: UI Raycaster
   m_TagString: Untagged
@@ -232,33 +232,6 @@ Transform:
   m_Father: {fileID: 6003109435717251985}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9013540718936883147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226532938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ad5647fbf143448a262176154ced20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserWidth: 0.01
-  showLaser: 1
-  laserColor: {r: 0.26633143, g: 0.5943396, b: 0.27040604, a: 1}
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 32
-  laserStart: {fileID: 0}
-  laserEnd: {fileID: 0}
-  updateFrequency: 12
-  clickAction:
-    actionPath: /actions/default/in/InteractUI
-    needsReinit: 0
-  clickColor: {r: 0.3020805, g: 1, b: 0, a: 1}
-  onHover: {fileID: 11400000, guid: 0c7c0f0815248f34091cf41dfd9a2c78, type: 2}
-  onClick: {fileID: 11400000, guid: f044c5c900439dd4da550d969e4928d3, type: 2}
 --- !u!120 &226532940
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -357,6 +330,34 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &5114046669547939577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226532938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab947583e8633642b137615f90ee6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserWidth: 0
+  showLaser: 1
+  laserColor: {r: 0.26666668, g: 0.59607846, b: 0.27058825, a: 0}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 32
+  laserStart: {fileID: 0}
+  laserEnd: {fileID: 0}
+  updateFrequency: 12
+  clickAction:
+    actionPath: /actions/default/in/InteractUI
+    needsReinit: 0
+  clickColor: {r: 0.3019608, g: 1, b: 0, a: 0}
+  onHover: {fileID: 11400000, guid: 0c7c0f0815248f34091cf41dfd9a2c78, type: 2}
+  onClick: {fileID: 11400000, guid: f044c5c900439dd4da550d969e4928d3, type: 2}
+  currentButton: {fileID: 0}
 --- !u!1 &268354383
 GameObject:
   m_ObjectHideFlags: 0
@@ -5795,7 +5796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80936b59bcbd6ff4abad636cb54d77bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigTransform: {fileID: 6003109435717295971}
+  rigTransform: {fileID: 0}
   playerHitTrap: {fileID: 11400000, guid: 86d8d57eee7c00d41a8fe79b76cc7756, type: 2}
   raiseAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   _gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
@@ -6699,7 +6700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tweenDuration: 0.25
   tweenFunction: 2
-  dashEffect: {fileID: 7807789386827534171}
+  dashEffect: {fileID: 0}
   teleportAiming: {fileID: 11400000, guid: 46fbd5a8138bdb4469d687dc256ffec6, type: 2}
   teleported: {fileID: 11400000, guid: 32bc4af34681270478dbe3e79a54ed4a, type: 2}
   teleportDashing: {fileID: 11400000, guid: ba33932fa883b7a49a2bfa093f91d894, type: 2}
@@ -7012,6 +7013,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6003109435717310285}
     m_Modifications:
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: updateFrequency
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: laserStart
+      value: 
+      objectReference: {fileID: 4780621382126095196}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: laserEnd
+      value: 
+      objectReference: {fileID: 9067163514541311499}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: clickAction.actionPath
+      value: /actions/default/in/InteractUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: onHover
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c7c0f0815248f34091cf41dfd9a2c78, type: 2}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: onClick
+      value: 
+      objectReference: {fileID: 11400000, guid: f044c5c900439dd4da550d969e4928d3, type: 2}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: clickColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: clickColor.g
+      value: 0.35794666
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: clickColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595496639775011466, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+      propertyPath: clickColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8077968769321981327, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7065,5 +7110,15 @@ PrefabInstance:
 --- !u!4 &9040759226190265784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8077968769321981327, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+  m_PrefabInstance: {fileID: 967587095470483511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4780621382126095196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5707646804766909291, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+  m_PrefabInstance: {fileID: 967587095470483511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9067163514541311499 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8122389791042645564, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
   m_PrefabInstance: {fileID: 967587095470483511}
   m_PrefabAsset: {fileID: 0}

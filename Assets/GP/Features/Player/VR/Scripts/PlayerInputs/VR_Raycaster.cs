@@ -20,11 +20,9 @@ namespace Gameplay.VR.Player
         new void Awake()
         {
             base.Awake();
+
             controllerPose = GetComponentInParent<SteamVR_Behaviour_Pose>();
             handSource = controllerPose.inputSource;
-
-            clickedColor = new MaterialPropertyBlock();
-            clickedColor.SetColor("_EmissionColor", clickColor);
         }
     }
 }
