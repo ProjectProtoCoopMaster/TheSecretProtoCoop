@@ -295,6 +295,8 @@ GameObject:
   - component: {fileID: 5642680247837593952}
   - component: {fileID: 4170350937327489669}
   - component: {fileID: 4595496639775011466}
+  - component: {fileID: 7474339174473300667}
+  - component: {fileID: 7299941578156714591}
   m_Layer: 0
   m_Name: SM_Pistol_03
   m_TagString: Untagged
@@ -359,6 +361,8 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 84992
+  laserStart: {fileID: 0}
+  laserEnd: {fileID: 0}
   updateFrequency: 6
 --- !u!120 &4170350937327489669
 LineRenderer:
@@ -476,6 +480,8 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
+  laserStart: {fileID: 0}
+  laserEnd: {fileID: 0}
   updateFrequency: 0
   clickAction:
     actionPath: 
@@ -484,3 +490,59 @@ MonoBehaviour:
   onHover: {fileID: 0}
   onClick: {fileID: 0}
   currentButton: {fileID: 0}
+--- !u!114 &7474339174473300667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885995034454953781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0e1c885fbe1dc3648bf609be246ea9a6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: VR_GunReloading, Assembly-CSharp
+        m_MethodName: GE_StartReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: isPulling
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7299941578156714591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885995034454953781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f3fbd02659d00774a9597eb96a8fc69e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: VR_GunReloading, Assembly-CSharp
+        m_MethodName: GE_EndReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: isPulling
+          m_BoolArgument: 0
+        m_CallState: 2

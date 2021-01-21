@@ -18,6 +18,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent hitEnemy = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloading = null;
+        [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloaded = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunEmpty = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameObject bulletImpactObj = null;
 
@@ -37,9 +38,10 @@ namespace Gameplay.VR.Player
 
         private void Update()
         {
-            if (timePassed > 0)
+            if (timePassed >= 0)
             {
                 timePassed -= Time.unscaledDeltaTime;
+                if (timePassed <= 0) gunReloaded.Raise();
             }
 
             if (shootAction.GetStateDown(handSource))
