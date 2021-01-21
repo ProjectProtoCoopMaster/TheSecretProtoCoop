@@ -56,7 +56,6 @@ namespace Gameplay.VR.Player
         [Tooltip("Define how smooth the laser is. A Higher values incurs a higher performance cost.")]
         [SerializeField] [FoldoutGroup("Internal Values")] int bezierSmoothness;
 
-        internal bool isTeleporting; // for Awareness Manager time freeze feedback
         internal bool isGameOver;
         bool canTeleport;
         bool VRPlatform;
@@ -80,14 +79,29 @@ namespace Gameplay.VR.Player
             bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
+        }
 
-            Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
-            for (int i = 0; i < hitColliders.Length; i++)
+        VisualEffect _oldArea
+        {
+            get
             {
-                Debug.Log(hitColliders[i].name);
+                if(oldArea == null)
+                {
+                    Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
+                    for (int i = 0; i < hitColliders.Length; i++)
+                    {
+                        Debug.Log(hitColliders[i].name);
 
-                if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
-                    oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+                        if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
+                            oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+                    }
+                    return oldArea;
+                }
+                else return oldArea;
+            }
+            set
+            {
+                _oldArea = value;
             }
         }
 
@@ -274,9 +288,12 @@ namespace Gameplay.VR.Player
 
         IEnumerator TeleportThePlayer()
         {
-            oldArea.enabled = true;
-            oldArea = targetArea;
-            targetArea.enabled = false;
+            if (oldArea != null)
+            {
+                _oldArea.enabled = true;
+                _oldArea = targetArea;
+                targetArea.enabled = false;
+            }
 
             startPos = playerPosition;
             targetPos = teleportTarget;
@@ -308,6 +325,11 @@ namespace Gameplay.VR.Player
             isTeleporting = false;
 
             dashEffect.Stop();
+        }
+
+        public void GE_ResetGameOver()
+        {
+            isGameOver = false;
         }
     }
 }

@@ -7,40 +7,26 @@ namespace Gameplay.VR
 {
     public class RagdollBehavior : MonoBehaviour
     {
-        public Rigidbody rb;
-        public Rigidbody[] allRB;
-        public float velocity;
-        public GameObject go;
-
-        [Button]
-        void GetRB()
-        {
-            allRB = GetComponentsInChildren<Rigidbody>();
-        }
+        public Rigidbody[] rigidbodies;
 
         private void Awake()
         {
+            rigidbodies = GetComponentsInChildren<Rigidbody>();
 
-            for (int i = 0; i < allRB.Length; i++)
-            {
-                allRB[i].isKinematic = true;
-            }
+            for (int i = 0; i < rigidbodies.Length; i++) rigidbodies[i].isKinematic = true;
         }
 
         public void ActivateRagdoll()
         {
-            for (int i = 0; i < allRB.Length; i++)
-            {
-                allRB[i].isKinematic = false;
-            }
+            for (int i = 0; i < rigidbodies.Length; i++) rigidbodies[i].isKinematic = false;
         }
 
-        public void ActivateRagdollWithForce(Vector3 force, ForceMode forceMode)
+        public void ActivateRagdollWithForce(Vector3 force, ForceMode mode)
         {
-            for (int i = 0; i < allRB.Length; i++)
+            for (int i = 0; i < rigidbodies.Length; i++)
             {
-                allRB[i].isKinematic = false;
-                allRB[i].AddForce(force, ForceMode.Impulse);
+                rigidbodies[i].isKinematic = false;
+                rigidbodies[i].AddForce(force, mode);
             }
         }
     }

@@ -6655,6 +6655,7 @@ GameObject:
   - component: {fileID: 6003109435831060673}
   - component: {fileID: 6003109435831060672}
   - component: {fileID: 7956172257271811479}
+  - component: {fileID: 3234130737288548259}
   - component: {fileID: 498836825}
   - component: {fileID: 498836826}
   - component: {fileID: 2526640716234072363}
@@ -6794,6 +6795,34 @@ MonoBehaviour:
       - m_Target: {fileID: 6003109435831060672}
         m_TargetAssemblyTypeName: Gameplay.VR.Player.TeleportManager, Assembly-CSharp
         m_MethodName: GE_OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3234130737288548259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003109435831060674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6003109435831060672}
+        m_TargetAssemblyTypeName: Gameplay.VR.Player.TeleportManager, Assembly-CSharp
+        m_MethodName: GE_ResetGameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
