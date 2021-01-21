@@ -12,7 +12,8 @@ namespace Gameplay.VR.Player
         protected MaterialPropertyBlock baseColor;
 
         [SerializeField] protected LayerMask collisionMask;
-        protected Transform laserStart, laserEnd, laserHitPoint;
+        [SerializeField] protected Transform laserStart, laserEnd;
+        protected Transform laserHitPoint;
         protected RaycastHit hitInfo;
 
         [SerializeField] protected int updateFrequency;
@@ -21,8 +22,6 @@ namespace Gameplay.VR.Player
         protected void Awake()
         {
             laserPointer = GetComponent<LineRenderer>();
-            laserStart = transform.GetChild(0);
-            laserEnd = transform.GetChild(1);
 
             baseColor = new MaterialPropertyBlock();
             baseColor.SetColor("_EmissionColor", laserColor);
