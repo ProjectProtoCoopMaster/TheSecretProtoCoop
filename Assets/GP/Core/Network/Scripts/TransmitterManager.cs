@@ -60,7 +60,8 @@ namespace Networking
         public void SendCodeNameToOthers(string[] pickedNames) => photonView.RPC("SendCodeName", RpcTarget.Others, pickedNames);
         [PunRPC] private void SendCodeName(string[] pickedNames)
         {
-            for (int i = 0; i < 3; i++) { symbolManager.pickedNames[i] = pickedNames[i]; if (!_isMobile.Value) _onResetCodes.Raise(); }
+            for (int i = 0; i < 3; i++) { symbolManager.pickedNames[i] = pickedNames[i]; }
+            if (!_isMobile.Value) _onResetCodes.Raise();
         }
 
         public void SendIconsSelectedToOthers(int i, int ID) => photonView.RPC("SendIconsSelected", RpcTarget.Others,i, ID);

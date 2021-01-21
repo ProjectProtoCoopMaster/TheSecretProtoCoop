@@ -47,6 +47,7 @@ namespace Gameplay.VR
 
             for (int i = 0; i < codeLines[random].symbols.Length; i++)
             {
+
                 codeLines[random].symbols[i].overrideSprite = sm.iconsSelected[i];
                 icons.Remove(sm.iconsSelected[i]);
             }
@@ -88,6 +89,34 @@ namespace Gameplay.VR
             }
 
         }
+
+
+        public void ResetSymbols()
+        {
+            SetSymbols();
+
+            for (int i = 0; i < codeLines.Length; i++)
+            {
+                if(codeLines[i].symbols[0].overrideSprite == sm.iconsSelected[0])
+                {
+                    if (i == 0)
+                    {
+                        string textReminder = codeLines[2].codeText.text;
+                        codeLines[2].codeText.text = codeLines[i].codeText.text;
+                        codeLines[i].codeText.text = textReminder;
+                    }
+                    else
+                    {
+                        string textReminder = codeLines[i - 1].codeText.text;
+                        codeLines[i - 1].codeText.text = codeLines[i].codeText.text;
+                        codeLines[i].codeText.text = textReminder;
+                    }
+
+
+                }
+            }
+        }
+
 
         [System.Serializable]
         public struct CodeLine

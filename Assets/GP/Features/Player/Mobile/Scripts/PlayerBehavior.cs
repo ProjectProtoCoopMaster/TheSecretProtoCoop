@@ -17,7 +17,13 @@ namespace Gameplay.Mobile
 
         [SerializeField] private Transform _transform;
 
-        void Start() => _player.Value = this.gameObject;
+
+        void Start()
+        { 
+            _player.Value = this.gameObject;
+            _transform.localScale = new Vector3(2, 2, 2);
+        
+        }
 
         void Update()
         {
@@ -27,7 +33,7 @@ namespace Gameplay.Mobile
                 //_transform.forward = _player.Value.transform.forward;
                 
                 transform.rotation = _playerRotation.Value;
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+                transform.eulerAngles = new Vector3(-90, transform.eulerAngles.y, 0);
             }
         }
     }

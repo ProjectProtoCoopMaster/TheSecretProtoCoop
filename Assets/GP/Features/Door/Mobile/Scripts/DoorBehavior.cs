@@ -24,7 +24,7 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
         [SerializeField] private GameObject padlock_Open;
-        [SerializeField] private GameObject hints;
+        public GameObject hints;
         [SerializeField] private GameObject padlock_Close;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
@@ -77,7 +77,7 @@ namespace Gameplay.Mobile
         {
             if (lockState == LockState.Locked)
             {
-                mat.DOColor(color_Open_Locked * 2, "_EmissionColor", .5f);
+                mat.DOColor(color_Close * .5f, "_EmissionColor", .5f);
             }
             else
             {

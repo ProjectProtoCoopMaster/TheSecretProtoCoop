@@ -16,7 +16,8 @@ namespace Gameplay
             PlayerSpottedByCam = 1,
             BodySpottedByCam = 2,
             BodySpottedByGuard = 3,
-            PlayerHitTrap = 4
+            PlayerHitTrap = 4,
+            FailSymbols = 5,
         };
         [HideInInspector]
         public LoseType loseType;
@@ -28,6 +29,7 @@ namespace Gameplay
         [SerializeField] private GameEvent _onLose;
         [SerializeField] private IntVariable _sceneID;
         [SerializeField] private BoolVariable _isMobile;
+        [SerializeField] private Sprite[] deathIcons;
         private GameObject loseCanvas;
         // [SerializeField] GameObjectVariable loseTextVRObj;
         private Text loseText;
@@ -59,24 +61,34 @@ namespace Gameplay
                 switch (loseType)
                 {
                     case LoseType.PlayerSpottedByGuard:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
+                        loseText = loseCanvas.transform.Find("ExplanationText").GetComponent<Text>();
                         loseText.text = loseTextVR.Value = "You were spotted by a Guard";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[0];
                         break;
                     case LoseType.PlayerSpottedByCam:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You were spotted by a Camera";
+                        loseText = loseCanvas.transform.Find("ExplanationText").GetComponent<Text>();
+                        loseText.text = loseTextVR.Value = "You were spotted by a Cam";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[1];
                         break;
                     case LoseType.BodySpottedByCam:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Camera";
+                        loseText = loseCanvas.transform.Find("ExplanationText").GetComponent<Text>();
+                        loseText.text = loseTextVR.Value = "A body was spotted by a Cam";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[2];
                         break;
                     case LoseType.BodySpottedByGuard:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Guard";
+                        loseText = loseCanvas.transform.Find("ExplanationText").GetComponent<Text>();
+                        loseText.text = loseTextVR.Value = "A body was spotted by a Guard";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[3];
                         break;
                     case LoseType.PlayerHitTrap:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You ran into a Hidden Trap !";
+                        loseText = loseCanvas.transform.Find("ExplanationText").GetComponent<Text>();
+                        loseText.text = loseTextVR.Value = "You died in a Trap";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
+                        break;
+                    case LoseType.FailSymbols:
+                        loseText = loseCanvas.transform.Find("ExplanationText").GetComponent<Text>();
+                        loseText.text = loseTextVR.Value = "You failed to enter the right Code";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
                         break;
                 }
                 if (_isMobile.Value)
