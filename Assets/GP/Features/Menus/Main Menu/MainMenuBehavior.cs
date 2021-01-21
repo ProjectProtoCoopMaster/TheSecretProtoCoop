@@ -1,6 +1,5 @@
 ﻿
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
@@ -44,21 +43,18 @@ namespace Gameplay
 
         public void OpenScene()
         {
-            if(_isMobile.Value)
+            if (_isMobile.Value)
             {
-                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index + 1;
             }
             else
             {
-
-                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
-
             }
-
         }
 
         public void OpenCanvas()

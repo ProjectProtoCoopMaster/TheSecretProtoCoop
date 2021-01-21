@@ -6,9 +6,9 @@ namespace Gameplay.VR
 {
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
-        public Transform centerTransform { get; set; }
+        public RoomManager currentRoom { get; set; }
 
-        [SerializeField] private Transform _transform;
+        [SerializeField] private Transform rigTransform;
 
         [SerializeField] private GameEvent playerHitTrap, raiseAlarm;
 
@@ -21,10 +21,8 @@ namespace Gameplay.VR
 
         [SerializeField] private GameObjectVariable _player;
 
-
         private bool isDead;
 
-     
         public void Die(Vector3 direction = default)
         {
             if (!isDead)
@@ -43,10 +41,10 @@ namespace Gameplay.VR
             playerHitTrap.Raise();
         }
 
-        private void Update()
+        void Update()
         {
-            _playerRotation.Value = transform.rotation;
-            _playerPosition.Value = _transform.position; /*- centerTransform.position;*/
+            _playerRotation.Value = rigTransform.localRotation;
+            if (currentRoom != null) _playerPosition.Value = rigTransform.position - (currentRoom.transform.position - currentRoom.room.roomCenter.localPosition);
 
             //_player.Value = this.gameObject;
 
@@ -54,4 +52,3 @@ namespace Gameplay.VR
         }
     }
 }
-

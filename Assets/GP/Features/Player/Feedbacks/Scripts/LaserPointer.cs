@@ -12,23 +12,22 @@ namespace Gameplay.VR.Player
         protected MaterialPropertyBlock baseColor;
 
         [SerializeField] protected LayerMask collisionMask;
-        protected Transform laserStart, laserEnd, laserHitPoint;
+        [SerializeField] public Transform laserStart, laserEnd;
+        protected Transform laserHitPoint;
         protected RaycastHit hitInfo;
 
         [SerializeField] protected int updateFrequency;
         protected int framesPassed;
-        
+
         protected void Awake()
         {
             laserPointer = GetComponent<LineRenderer>();
-            laserStart = transform.GetChild(0);
-            laserEnd = transform.GetChild(1);
 
             baseColor = new MaterialPropertyBlock();
             baseColor.SetColor("_EmissionColor", laserColor);
         }
 
-        protected void OnEnable()
+        private void OnEnable()
         {
             laserPointer.startWidth = laserPointer.endWidth = laserWidth;
             laserPointer.SetPropertyBlock(baseColor);
@@ -49,9 +48,11 @@ namespace Gameplay.VR.Player
 
         private void LateUpdate()
         {
-            laserPointer.SetPosition(0, laserStart.position);
-            laserPointer.SetPosition(1, laserHitPoint.position);
-
+            if (laserHitPoint != null)
+            {
+                laserPointer.SetPosition(0, laserStart.position);
+                laserPointer.SetPosition(1, laserHitPoint.position);
+            }
             laserPointer.enabled = showLaser;
         }
     }

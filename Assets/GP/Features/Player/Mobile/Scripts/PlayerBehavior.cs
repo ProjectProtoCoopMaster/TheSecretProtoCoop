@@ -6,7 +6,7 @@ namespace Gameplay.Mobile
 {
     public class PlayerBehavior : MonoBehaviour
     {
-        public Transform centerTransform { get; set; }
+        public RoomManager currentRoom { get; set; }
 
         [SerializeField] private Vector3Variable _playerPosition;
         [SerializeField] private QuaternionVariable _playerRotation;
@@ -15,7 +15,7 @@ namespace Gameplay.Mobile
 
         [SerializeField] private BoolVariable _hidePlayer;
 
-        [SerializeField] private Transform _transform;
+        [SerializeField] private Transform playerTransform;
 
 
         void Start()
@@ -29,11 +29,9 @@ namespace Gameplay.Mobile
         {
             if (!_hidePlayer.Value)
             {
-                _transform.position = _playerPosition.Value; /*+ centerTransform.position;*/
-                //_transform.forward = _player.Value.transform.forward;
-                
-                transform.rotation = _playerRotation.Value;
-                transform.eulerAngles = new Vector3(-90, transform.eulerAngles.y, 0);
+                if (currentRoom != null) playerTransform.position = _playerPosition.Value + (currentRoom.room.roomCenter.position);
+                playerTransform.forward = _player.Value.transform.forward;
+                playerTransform.eulerAngles = new Vector3(0, playerTransform.eulerAngles.y, 0);
             }
         }
     }

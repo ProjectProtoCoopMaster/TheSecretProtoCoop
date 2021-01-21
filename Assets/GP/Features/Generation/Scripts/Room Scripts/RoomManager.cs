@@ -66,33 +66,56 @@ namespace Gameplay
         public NavMeshSurface roomNavigationSurface;
 
         public AIManager aIManager;
+        public List<Vector3> aIPositions { get; set; }
+        public List<Quaternion> aIRotations { get; set; }
 
         public Transform entranceAnchor;
         public Transform exitAnchor;
 
         public Transform playerStart;
 
+        private bool firstStart = true;
+
         public override void OnEnterRoom()
         {
-            // Initialize Modifier
+            /// Initialize Modifier
+            
             //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
-            // Bake NavMesh
-            string navMsg = "There is no NavMesh Surface attached to the Room Manager, attach one to initialize this room's Navigation Mesh";
-            if (Utility.SafeCheck(roomNavigationSurface, navMsg))
+            /// Initialize AI
+
+            if (firstStart)
             {
-                roomNavigationSurface.BuildNavMesh();
+                aIPositions = new List<Vector3>();
+                aIRotations = new List<Quaternion>();
+
+                for (int i = 0; i < AIManager.agents.Count; i++)
+                {
+                    aIPositions.Add(AIManager.agents[i].transform.position);
+                    aIRotations.Add(AIManager.agents[i].transform.rotation);
+                }
+
+                firstStart = false;
+            }
+            else
+            {
+                for (int i = 0; i < AIManager.agents.Count; i++)
+                {
+                    AIManager.agents[i].transform.position = aIPositions[i];
+                    AIManager.agents[i].transform.rotation = aIRotations[i];
+                }
             }
 
-            // Initialization AI
-            string aiMsg = "There's no AI Manager attached to the Room Manager, attach one to initialize this room's AI";
-            if (Utility.SafeCheck(aIManager, aiMsg))
-            {
-                aIManager.StartAllAgents();
-            }
+            roomNavigationSurface.BuildNavMesh();
 
-            // Initialization Switchers
-            // Initialize Elements
+            aIManager.StartAllAgents();
+
+            /// Initialize Elements
+            
+            SwitcherManager.instance.StartAllSwitchers();
+            JammerManager.instance.StartAllJammers();
+
+            SymbolManager.instance.LoadSymbols();
         }
 
         public override void OnDisableRoom()
@@ -114,11 +137,18 @@ namespace Gameplay
 
         public override void OnEnterRoom()
         {
+            /// Initialize Camera
+            
             cameraManager.SetCamera(width, height, roomCenter);
             canvas.worldCamera = cameraManager._camera;
 
             Vector3 canvasPosition = new Vector3(roomCenter.position.x, 5f, roomCenter.position.z);
             canvas.transform.position = canvasPosition;
+
+            /// Initialize Switchers
+
+            SwitcherManager.instance.StartAllSwitchers();
+            JammerManager.instance.StartAllJammers();
         }
 
         public override void OnDisableRoom() { }

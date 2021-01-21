@@ -43,6 +43,9 @@ namespace Gameplay
             }
         }
 
+        public void OnEnable() => JammerManager.jammers.Add(this);
+        public void OnDisable() => JammerManager.jammers.Remove(this);
+
         private IEnumerator Start()
         {
             yield return new WaitForSeconds(.5f);

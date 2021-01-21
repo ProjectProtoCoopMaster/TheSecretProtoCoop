@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public enum Platform { Mobile, VR }
-
     public class LevelAssembler : MonoBehaviour
     {
         public Platform platform;
@@ -19,8 +17,6 @@ namespace Gameplay
         public AssemblerMobile assemblerMobile;
 
         public Assembler assembler { get; private set; }
-
-        public List<RoomManager> selectedRooms { get; private set; }
 
         public void BuildLevel()
         {

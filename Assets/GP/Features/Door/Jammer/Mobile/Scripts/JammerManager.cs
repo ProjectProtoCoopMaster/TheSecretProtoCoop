@@ -6,13 +6,15 @@ namespace Gameplay
 {
     public class JammerManager : MonoBehaviour
     {
-        [SerializeField] private JammerBehavior[] jammers;
+        public static JammerManager instance;
 
+        public static List<JammerBehavior> jammers = new List<JammerBehavior>();
+
+        void OnEnable() { if (instance == null) instance = this; }
 
         public void DestroyJammer(int ID)
         {
-            SearchJammersInScene();
-            for (int i = 0; i < jammers.Length; i++)
+            for (int i = 0; i < jammers.Count; i++)
             {
                 if (jammers[i].ID == ID)
                 {
@@ -21,7 +23,13 @@ namespace Gameplay
             }
         }
 
-        public void SearchJammersInScene() => jammers = FindObjectsOfType<JammerBehavior>();
+        public void StartAllJammers()
+        {
+            foreach (JammerBehavior jammer in jammers)
+            {
+                jammer.SetState(true);
+            }
+        }
     }
 
 }
