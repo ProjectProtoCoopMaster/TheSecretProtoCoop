@@ -17,7 +17,13 @@ namespace Gameplay.Mobile
 
         [SerializeField] private Transform playerTransform;
 
-        void Start() => _player.Value = this.gameObject;
+
+        void Start()
+        { 
+            _player.Value = this.gameObject;
+            playerTransform.localScale = new Vector3(2, 2, 2);
+        
+        }
 
         void Update()
         {

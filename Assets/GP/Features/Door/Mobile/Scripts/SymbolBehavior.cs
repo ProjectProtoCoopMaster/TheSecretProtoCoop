@@ -29,6 +29,7 @@ namespace Gameplay.Mobile
         private float timer;
         private bool startTimer;
         private bool hasWin;
+        private bool isOpenOnce;
         [SerializeField] private Canvas canvas;
         [SerializeField] private float timerStartValue;
 
@@ -42,7 +43,16 @@ namespace Gameplay.Mobile
 
         private void Update()
         {
-            if (canvas.enabled && !startTimer) { startTimer = true; timer = timerStartValue; }
+            if (canvas.enabled && !isOpenOnce) isOpenOnce = true;
+            if (isOpenOnce)
+            {
+                if (!startTimer)
+                {
+                    startTimer = true;
+                    timer = timerStartValue;
+                }
+ 
+            }
 
             if (startTimer && !hasWin)
             {
@@ -56,7 +66,10 @@ namespace Gameplay.Mobile
                 timerImage.fillAmount = 0;
             }
 
-            if (timer < 0) { ResetCodes(); startTimer = false; }
+            if (timer < 0 && startTimer) 
+            { 
+                ResetCodes(); startTimer = false; 
+            }
         }
 
         private void OnDisable()
@@ -115,13 +128,14 @@ namespace Gameplay.Mobile
             results[missNumber].gameObject.SetActive(true);
             results[missNumber].overrideSprite = winImage;
             results[missNumber].color = Color.green;
-            _sendOnOpenDoor.Raise();
             StartCoroutine(WaitCloseSymbolCanvas());
+            _sendOnOpenDoor.Raise();
         }
 
         IEnumerator WaitCloseSymbolCanvas()
         {
             yield return new WaitForSeconds(1f);
+            door.GetComponent<DoorBehavior>().hints.SetActive(false);
             canvas.enabled = false;
             gameObject.SetActive(false);
             yield break;

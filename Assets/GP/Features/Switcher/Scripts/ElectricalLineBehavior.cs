@@ -47,7 +47,7 @@ namespace Gameplay.Mobile
         public void TurnOff()
         {
 
-            mat.DOColor(color * 0, "_EmissionColor", .5f);
+            mat.DOColor(color * .4f, "_EmissionColor", .5f);
         }
 
         public void TurnOn()
