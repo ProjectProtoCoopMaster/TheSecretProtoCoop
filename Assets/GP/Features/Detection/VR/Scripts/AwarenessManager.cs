@@ -21,11 +21,6 @@ namespace Gameplay.VR
         [SerializeField] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameOver = false;
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
 
-        private void Awake()
-        {
-            GE_RefreshScene();
-        }
-
         #region Game Events
         public void GE_PlayerDetectedByGuard()
         {
