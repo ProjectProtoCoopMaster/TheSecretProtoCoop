@@ -58,8 +58,12 @@ namespace Gameplay
 
         public ModifierType roomModifier { get; set; } = ModifierType.None;
 
-        public abstract void OnEnterRoom();
-        public abstract void OnDisableRoom();
+        protected bool init = true;
+
+        public virtual void OnInitRoom() => init = false;
+
+        public virtual void OnEnterRoom() { if (init) OnInitRoom(); }
+        public virtual void OnDisableRoom() { }
     }
 
     [System.Serializable]
@@ -77,36 +81,38 @@ namespace Gameplay
 
         public Transform playerStart;
 
-        private bool firstStart = true;
+        public override void OnInitRoom()
+        {
+            /// Initialize AI
+
+            aIPositions = new List<Vector3>();
+            aIRotations = new List<Quaternion>();
+
+            for (int i = 0; i < AIManager.agents.Count; i++)
+            {
+                aIPositions.Add(AIManager.agents[i].transform.position);
+                aIRotations.Add(AIManager.agents[i].transform.rotation);
+            }
+
+            base.OnInitRoom();
+        }
 
         public override void OnEnterRoom()
         {
+            base.OnEnterRoom();
+
             /// Initialize Modifier
-            
+
             //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             /// Initialize AI
 
-            if (firstStart)
+            for (int i = 0; i < AIManager.agents.Count; i++)
             {
-                aIPositions = new List<Vector3>();
-                aIRotations = new List<Quaternion>();
+                AIManager.agents[i].gameObject.SetActive(true);
 
-                for (int i = 0; i < AIManager.agents.Count; i++)
-                {
-                    aIPositions.Add(AIManager.agents[i].transform.position);
-                    aIRotations.Add(AIManager.agents[i].transform.rotation);
-                }
-
-                firstStart = false;
-            }
-            else
-            {
-                for (int i = 0; i < AIManager.agents.Count; i++)
-                {
-                    AIManager.agents[i].transform.position = aIPositions[i];
-                    AIManager.agents[i].transform.rotation = aIRotations[i];
-                }
+                AIManager.agents[i].transform.position = aIPositions[i];
+                AIManager.agents[i].transform.rotation = aIRotations[i];
             }
 
             roomNavigationSurface.BuildNavMesh();
@@ -136,11 +142,22 @@ namespace Gameplay
         public float width = 10f;
         public float height = 10f;
 
-        public override void OnEnterRoom()
+        private CameraManager cameraManager;
+
+        public override void OnInitRoom()
         {
             /// Initialize Camera
 
-            CameraManager cameraManager = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+            cameraManager = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+
+            base.OnInitRoom();
+        }
+
+        public override void OnEnterRoom()
+        {
+            base.OnEnterRoom();
+
+            /// Initialize Camera
 
             cameraManager.SetCamera(width, height, roomCenter);
             canvas.worldCamera = cameraManager._camera;
@@ -153,7 +170,5 @@ namespace Gameplay
             SwitcherManager.instance.StartAllSwitchers();
             JammerManager.instance.StartAllJammers();
         }
-
-        public override void OnDisableRoom() { }
     }
 }
