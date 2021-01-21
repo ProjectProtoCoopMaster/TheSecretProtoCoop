@@ -25,14 +25,16 @@ namespace Gameplay
         [Title("Lose")]
         public GameObject loseCanvasPrefab; public GameObject loseCanvas { get; set; }
         public StringVariable _loseText;
+        [SerializeField] private Sprite[] deathIcons;
 
         [Title("Win")]
         public GameObject winCanvasPrefab;
 
         void Start()
         {
-            if (startGame) SceneManager.LoadScene("GameSceneMainMenu", LoadSceneMode.Additive);
+            if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
+        [Button]
 
         public void Lose()
         {
@@ -42,17 +44,27 @@ namespace Gameplay
 
                 loseCanvas = Instantiate(loseCanvasPrefab);
                 loseCanvas.transform.parent = UICanvas;
-                Text loseText = loseCanvas.GetComponentInChildren<Text>();
+                Text loseText = loseCanvas.transform.Find("ExplanationText").GetComponentInChildren<Text>();
 
                 switch (loseType)
                 {
-                    case LoseType.PlayerSpottedByGuard: loseText.text = _loseText.Value = "You were spotted by a Guard"; break;
-                    case LoseType.PlayerSpottedByCam: loseText.text = _loseText.Value = "You were spotted by a Camera"; break;
+                    case LoseType.PlayerSpottedByGuard: loseText.text = _loseText.Value = "You were spotted by a Guard";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[0];
+                        break;
+                    case LoseType.PlayerSpottedByCam: loseText.text = _loseText.Value = "You were spotted by a Camera";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[1];
+                        break;
 
-                    case LoseType.BodySpottedByCam: loseText.text = _loseText.Value = "A dead body was spotted by a Camera"; break;
-                    case LoseType.BodySpottedByGuard: loseText.text = _loseText.Value = "A dead body was spotted by a Guard"; break;
+                    case LoseType.BodySpottedByCam: loseText.text = _loseText.Value = "A dead body was spotted by a Camera";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[2];
+                        break;
+                    case LoseType.BodySpottedByGuard: loseText.text = _loseText.Value = "A dead body was spotted by a Guard";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[3];
+                        break;
 
-                    case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !"; break;
+                    case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
+                        break;
                 }
 
                 loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
