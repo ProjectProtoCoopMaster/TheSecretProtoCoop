@@ -39,7 +39,7 @@ namespace Gameplay.Mobile
                 }
 
                 playerTransform.forward = _player.Value.transform.forward;
-                playerTransform.eulerAngles = new Vector3(0, playerTransform.eulerAngles.y, 0);
+                playerTransform.eulerAngles = new Vector3(-90, playerTransform.eulerAngles.y, 0);
             }
         }
     }
