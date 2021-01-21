@@ -43,10 +43,18 @@ namespace Gameplay.VR
 
         void Update()
         {
+            // Rotation
             _playerRotation.Value = rigTransform.localRotation;
-            if (currentRoom != null) _playerPosition.Value = rigTransform.position - (currentRoom.room.roomOrigin.position + currentRoom.room.roomOrigin.localPosition);
 
-            //_player.Value = this.gameObject;
+            // Position
+            if (currentRoom != null)
+            {
+                // Sets the Position of the Player in the Room to the position of the Player in the World
+                currentRoom.room.LocalPlayer.position = rigTransform.position;
+
+                // Sets the Position Variable to the Local Position of the Player (Relative to the Room)
+                _playerPosition.Value = currentRoom.room.LocalPlayer.localPosition;
+            }
 
             _sendPlayerPosAndRot.Raise();
         }

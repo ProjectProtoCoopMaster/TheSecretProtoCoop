@@ -54,6 +54,8 @@ namespace Gameplay
         public Transform roomCenter;
         public Transform roomOrigin;
 
+        public Transform LocalPlayer;
+
         public ModifierType roomModifier { get; set; } = ModifierType.None;
 
         public abstract void OnEnterRoom();
