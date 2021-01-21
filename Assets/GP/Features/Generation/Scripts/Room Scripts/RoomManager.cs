@@ -85,6 +85,8 @@ namespace Gameplay
         {
             /// Initialize AI
 
+            Debug.Log("setting guards");
+
             aIPositions = new List<Vector3>();
             aIRotations = new List<Quaternion>();
 
@@ -109,7 +111,10 @@ namespace Gameplay
 
             for (int i = 0; i < AIManager.agents.Count; i++)
             {
-                AIManager.agents[i].gameObject.SetActive(true);
+                Debug.Log("resetting guards");
+
+                AIManager.agents[i].DeletePreviousRagdoll();
+                AIManager.agents[i].agentRig.gameObject.SetActive(true);
 
                 AIManager.agents[i].transform.position = aIPositions[i];
                 AIManager.agents[i].transform.rotation = aIRotations[i];

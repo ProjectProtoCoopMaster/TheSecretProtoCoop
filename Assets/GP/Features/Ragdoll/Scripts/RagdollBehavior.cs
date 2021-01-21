@@ -9,10 +9,10 @@ namespace Gameplay.VR
     {
         public Rigidbody[] rigidbodies;
 
-        private void Awake()
+        [Button]
+        public void GetAllRigidbodies()
         {
             rigidbodies = GetComponentsInChildren<Rigidbody>();
-
             for (int i = 0; i < rigidbodies.Length; i++) rigidbodies[i].isKinematic = true;
         }
 
