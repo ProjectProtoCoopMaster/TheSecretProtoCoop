@@ -23,28 +23,31 @@ namespace Gameplay
         public Transform UICanvas;
 
         [Title("Lose")]
-        public GameObject loseCanvasPrefab; public GameObject loseCanvas { get; set; }
+        public Transform loseCanvas;
         public StringVariable _loseText;
         [SerializeField] private Sprite[] deathIcons;
 
         [Title("Win")]
-        public GameObject winCanvasPrefab;
+        public Transform winCanvas;
 
         void Start()
         {
+            winCanvas.gameObject.SetActive(false);
+            loseCanvas.gameObject.SetActive(false);
+
             if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
-        [Button]
 
+        [Button]
         public void Lose()
         {
             if (!gameOver)
             {
                 gameOver = true;
 
-                loseCanvas = Instantiate(loseCanvasPrefab);
-                loseCanvas.transform.parent = UICanvas;
-                Text loseText = loseCanvas.transform.Find("ExplanationText").GetComponentInChildren<Text>();
+                loseCanvas.gameObject.SetActive(true);
+
+                Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
 
                 switch (loseType)
                 {
@@ -73,8 +76,7 @@ namespace Gameplay
 
         public void Win()
         {
-            GameObject winCanvas = Instantiate(winCanvasPrefab);
-            winCanvas.transform.parent = UICanvas;
+            winCanvas.gameObject.SetActive(true);
         }
 
         public void Restart()
