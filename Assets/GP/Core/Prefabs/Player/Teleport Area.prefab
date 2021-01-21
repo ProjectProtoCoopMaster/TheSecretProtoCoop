@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4568364011495356598}
   - component: {fileID: 4568364011495356599}
   - component: {fileID: 4568364011495356593}
-  - component: {fileID: 5537501363255264528}
   - component: {fileID: 1025815277997134528}
+  - component: {fileID: 5819747313935859527}
   m_Layer: 9
   m_Name: Teleport Area
   m_TagString: Untagged
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94ca07492acfb4e4698d19ef244237ee, type: 2}
+  - {fileID: 2100000, guid: 2c05144297346ce4ca6d83a41d2c3695, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,19 +99,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5819747313935859527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4568364011495356595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b8c5f3aafb2b24eb32262ea6d3f383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lerpDuration: 0.75
 --- !u!114 &1025815277997134528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +115,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5537501363255264528}
+      - m_Target: {fileID: 5819747313935859527}
         m_TargetAssemblyTypeName: Gameplay.VR.Player.TeleportationArea, Assembly-CSharp
         m_MethodName: Off
         m_Mode: 1
@@ -140,6 +127,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5819747313935859527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568364011495356595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b8c5f3aafb2b24eb32262ea6d3f383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lerpDuration: 0.75
 --- !u!1 &4710897111758891641
 GameObject:
   m_ObjectHideFlags: 0

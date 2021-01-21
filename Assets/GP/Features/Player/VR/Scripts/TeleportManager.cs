@@ -29,7 +29,6 @@ namespace Gameplay.VR.Player
         [Tooltip("The elements to Track and Move.")] [SerializeField] Transform playerRig, playerHead;
         SteamVR_Behaviour_Pose controllerPose;
         private bool showRayPointer = false;
-
         [Tooltip("The Layers with which the Teleportation laser will intersect.")]
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] LayerMask teleportationLayers;
         [Tooltip("The Color of the laser when the player can teleport.")]
@@ -299,7 +298,6 @@ namespace Gameplay.VR.Player
             targetPos = teleportTarget;
 
             showRayPointer = false;
-            isTeleporting = true;
 
             dashEffect.Play();
 
@@ -321,8 +319,6 @@ namespace Gameplay.VR.Player
                 this.transform.position = movingPosition;
                 yield return null;
             }
-
-            isTeleporting = false;
 
             dashEffect.Stop();
         }
