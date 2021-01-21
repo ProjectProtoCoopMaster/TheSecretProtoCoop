@@ -83,6 +83,8 @@ namespace Gameplay.AI
 
         public void KillAgent()
         {
+            Debug.Log("Kill Agent");
+
             StopAgent();
 
             isDead = true;
@@ -90,9 +92,13 @@ namespace Gameplay.AI
             agentRig.gameObject.SetActive(false);
         }
 
-        public void DeleteRagdoll()
+        public void DeletePreviousRagdoll()
         {
-            if (ragdoll != null) Destroy(ragdoll);
+            if (ragdoll != null)
+            {
+                Debug.Log("Previous Ragdoll Destroyed");
+                Destroy(ragdoll);
+            }
         }
     }
 }

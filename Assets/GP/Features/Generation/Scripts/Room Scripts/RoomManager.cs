@@ -109,7 +109,7 @@ namespace Gameplay
 
             for (int i = 0; i < AIManager.agents.Count; i++)
             {
-                AIManager.agents[i].DeleteRagdoll();
+                AIManager.agents[i].DeletePreviousRagdoll();
                 AIManager.agents[i].agentRig.gameObject.SetActive(true);
 
                 AIManager.agents[i].transform.position = aIPositions[i];
