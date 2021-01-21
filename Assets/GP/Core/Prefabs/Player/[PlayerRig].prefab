@@ -5606,7 +5606,6 @@ Transform:
   m_Children:
   - {fileID: 6003109436356268098}
   - {fileID: 183108308}
-  - {fileID: 892823780}
   m_Father: {fileID: 6003109435717295971}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6131,8 +6130,8 @@ MonoBehaviour:
   shootingCooldown: {fileID: 11400000, guid: 274eff4f7b20c354d8f24e0fc46021d9, type: 2}
   bulletRadius: {fileID: 11400000, guid: 7eba92dd79d238d4396865f5f30f7f2a, type: 2}
   bulletForce: {fileID: 11400000, guid: ed8dacae69991474e9854e1106785c30, type: 2}
-  gunBarrel: {fileID: 0}
-  target: {fileID: 0}
+  gunBarrel: {fileID: 70354536284970740}
+  target: {fileID: 9067163514541311499}
   shootingLayer:
     serializedVersion: 2
     m_Bits: 19456
@@ -6154,7 +6153,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 2048
-  pickupOffset: 0.2
+  pickupOffset: 0.75
   deadGuard: {fileID: 0}
 --- !u!114 &7409026258412376009
 MonoBehaviour:
@@ -6488,7 +6487,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 2048
-  pickupOffset: 0.2
+  pickupOffset: 0.75
   deadGuard: {fileID: 0}
 --- !u!114 &7409026258412376010
 MonoBehaviour:
@@ -11798,5 +11797,15 @@ PrefabInstance:
 --- !u!4 &9040759226190265784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8077968769321981327, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+  m_PrefabInstance: {fileID: 967587095470483511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &70354536284970740 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 978543658286413507, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
+  m_PrefabInstance: {fileID: 967587095470483511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9067163514541311499 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8122389791042645564, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
   m_PrefabInstance: {fileID: 967587095470483511}
   m_PrefabAsset: {fileID: 0}
