@@ -13,7 +13,8 @@ namespace Gameplay
         public CallableFunction _sendSwitcherChange = default;
         [SerializeField] private Button button;
         [SerializeField] private Image image;
-        [SerializeField] private Text timerDisplayer;
+        
+        [SerializeField] private Image timerEnable;
         public List<Object> nodes = default;
 
         [Header("---IMPORTANT---")]
@@ -83,10 +84,9 @@ namespace Gameplay
 
         public void StartSwitcher() 
         {
-            if (timerDisplayer != null)
+            if (timerEnable != null)
             {
-                if (switchTimer == SwitchTimer.Fixed) { timerDisplayer.transform.parent.gameObject.SetActive(true); ResetTimer(); }
-                else timerDisplayer.transform.parent.gameObject.SetActive(false);
+                if (switchTimer == SwitchTimer.Fixed) {  ResetTimer(); }
 
 
             }
@@ -207,8 +207,8 @@ namespace Gameplay
 
         private void SetTimerDisplayer()
         {
-            if(nodes.Count == 0)
-                timerDisplayer.text = ((int)(timer - currentTimer)).ToString() + "s";
+            if (nodes.Count == 0)
+                timerEnable.fillAmount = 1-( currentTimer / timer);
         }
 
         private void ResetTimer() 
@@ -216,7 +216,7 @@ namespace Gameplay
             if (nodes.Count == 0)
             {
                 currentTimer = 0;
-                timerDisplayer.text = timer.ToString() + "s";
+                timerEnable.fillAmount = 0;
             }
 
 
