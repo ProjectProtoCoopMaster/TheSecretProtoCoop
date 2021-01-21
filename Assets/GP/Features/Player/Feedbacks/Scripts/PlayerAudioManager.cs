@@ -23,9 +23,9 @@ namespace Gameplay.VR.Feedbacks
 
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] gunshotsMain;
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] gunshotBacking;
-        AudioClip lastGunshotClip;
+        AudioClip lastGunshotClip; // to avoid repeating the sound
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] casingClips;
-        AudioClip lastCasingClip;
+        AudioClip lastCasingClip; // to avoid repeating the sound
 
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] ricochetClips;
         AudioClip lastRicochetClip; // to avoid repeating the sound
@@ -33,9 +33,9 @@ namespace Gameplay.VR.Feedbacks
         [SerializeField] [FoldoutGroup("Shooting")] AudioClip[] impactEnemyClips;
         AudioClip lastImpactClip; // to avoid repeating the sound
 
-        [SerializeField] [FoldoutGroup("Teleportation")] AudioClip teleportationSFX;
-        [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationWooshSFX;
-        AudioClip lastWooshSFX;
+        [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationMain;
+        [SerializeField] [FoldoutGroup("Teleportation")] AudioClip[] teleportationBacking;
+        AudioClip lastTeleportationClip; // to avoid repeating the sound
 
         [SerializeField] [FoldoutGroup("GameOver")] AudioClip metalGearSolidDetection;
         [SerializeField] [FoldoutGroup("GameOver")] AudioClip gameOverAlarm;
@@ -67,8 +67,8 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_TeleportationSFX()
         {
-            _playerAudioSource.PlayOneShot(teleportationSFX);
-            _playerAudioSource.PlayOneShot(lastWooshSFX = RandomClip(teleportationWooshSFX, lastWooshSFX), volume);
+            _playerAudioSource.PlayOneShot(RandomClip(teleportationMain, null), volume);
+            _playerAudioSource.PlayOneShot(lastTeleportationClip = RandomClip(teleportationBacking, lastTeleportationClip), volume);
         }
 
         public void GE_DetectionSFX()

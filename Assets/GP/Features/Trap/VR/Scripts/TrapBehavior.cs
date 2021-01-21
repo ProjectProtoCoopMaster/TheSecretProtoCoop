@@ -40,10 +40,10 @@ namespace Gameplay.VR
             {
                 if (other.transform.parent.GetComponentInParent<IKillable>() != null)
                 {
-                    Debug.Log(other.gameObject.name);
-                    other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
                     ps.Play();
                     audioSource.Play();
+                    Debug.Log(other.gameObject.name);
+                    other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
                 }
             }
         }
