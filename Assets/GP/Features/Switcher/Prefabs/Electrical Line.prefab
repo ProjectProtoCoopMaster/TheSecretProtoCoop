@@ -75,9 +75,6 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 310, y: 0, z: 0}
-  - {x: 310, y: 0, z: -475}
-  - {x: 200, y: 0, z: -475}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.3
@@ -145,9 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4936f58f656f542b2a1f00f4a152e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mat: {fileID: 0}
   state: 1
-  power: 1
-  line: {fileID: 7462249052151418312}
+  power: 0
+  cylinders: []
 --- !u!114 &3445821262979044658
 MonoBehaviour:
   m_ObjectHideFlags: 0

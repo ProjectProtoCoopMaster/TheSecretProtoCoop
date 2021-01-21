@@ -39,8 +39,7 @@ namespace Gameplay.VR
             {
                 codes.Add(sm.codeNames[i]);
             }
-
-
+            randoms.Clear();
             random = Random.Range(0, 3);
             randoms.Add(random);
             codeLines[random].codeText.text = sm.pickedNames[0];
@@ -48,11 +47,10 @@ namespace Gameplay.VR
 
             for (int i = 0; i < codeLines[random].symbols.Length; i++)
             {
+
                 codeLines[random].symbols[i].overrideSprite = sm.iconsSelected[i];
                 icons.Remove(sm.iconsSelected[i]);
             }
-
-
 
             for (int i = 0; i < 2; i++)
             {
@@ -61,7 +59,7 @@ namespace Gameplay.VR
 
                 for (int j = 0; j < randoms.Count; j++)
                 {
-                    if(random == randoms[j])
+                    if (random == randoms[j])
                     {
                         j = randoms.Count;
                         i--;
@@ -70,7 +68,7 @@ namespace Gameplay.VR
 
                     else
                     {
-                        if (j == randoms.Count-1)
+                        if (j == randoms.Count - 1)
                         {
                             int newRand = Random.Range(0, codes.Count);
                             codeLines[random].codeText.text = codes[newRand];
@@ -87,17 +85,45 @@ namespace Gameplay.VR
                     }
                 }
 
-                
+
             }
 
         }
 
-    }
-    [System.Serializable]
-    public struct CodeLine
-    {
-        public Text codeText;
-        public Image[] symbols;
+
+        public void ResetSymbols()
+        {
+            SetSymbols();
+
+            for (int i = 0; i < codeLines.Length; i++)
+            {
+                if(codeLines[i].symbols[0].overrideSprite == sm.iconsSelected[0])
+                {
+                    if (i == 0)
+                    {
+                        string textReminder = codeLines[2].codeText.text;
+                        codeLines[2].codeText.text = codeLines[i].codeText.text;
+                        codeLines[i].codeText.text = textReminder;
+                    }
+                    else
+                    {
+                        string textReminder = codeLines[i - 1].codeText.text;
+                        codeLines[i - 1].codeText.text = codeLines[i].codeText.text;
+                        codeLines[i].codeText.text = textReminder;
+                    }
+
+
+                }
+            }
+        }
+
+
+        [System.Serializable]
+        public struct CodeLine
+        {
+            public Text codeText;
+            public Image[] symbols;
+        }
     }
 }
 

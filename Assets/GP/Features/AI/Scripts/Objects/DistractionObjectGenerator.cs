@@ -6,7 +6,7 @@ namespace Gameplay.VR
 {
     public class DistractionObjectGenerator : MonoBehaviour
     {
-        public List<InteractableBehaviour> distractionObjects;
+        public List<SoundMaker> distractionObjects;
 
         public Transform dispenserPool;
         public Transform dispenserSpawn;

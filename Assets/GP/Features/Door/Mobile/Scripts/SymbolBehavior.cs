@@ -3,37 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+
 namespace Gameplay.Mobile
 {
     public class SymbolBehavior : MonoBehaviour, ISymbol
     {
         [SerializeField] private CallableFunction _sendOnOpenDoor;
         [SerializeField] private CallableFunction _sendGameOver;
-        private SymbolManager symbolManager;
+        private SymbolManager sm;
+        private Networking.TransmitterManager transmitterManager;
         [SerializeField] public Image[] iconsAnswers;
         [SerializeField] private Image[] results;
         [SerializeField] private Image[] iconsGame;
         [SerializeField] Text codeNameText;
+        [SerializeField] Text timerText;
+        [SerializeField] Image timerImage;
+        [SerializeField] Sprite cross;
+        [SerializeField] Sprite winImage;
 
         private int missNumber;
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
         [SerializeField] private Text symbolAreaCodeName;
 
+        private float timer;
+        private bool startTimer;
+        private bool hasWin;
+        private bool isOpenOnce;
+        [SerializeField] private Canvas canvas;
+        [SerializeField] private float timerStartValue;
+
         private IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
-            symbolManager = SymbolManager.instance;
-            symbolManager.symbol = this;
+            sm = SymbolManager.instance;
+            sm.symbol = this;
+            transmitterManager = Networking.TransmitterManager.instance;
+        }
+
+        private void Update()
+        {
+            if (canvas.enabled && !isOpenOnce) isOpenOnce = true;
+            if (isOpenOnce)
+            {
+                if (!startTimer)
+                {
+                    startTimer = true;
+                    timer = timerStartValue;
+                }
+ 
+            }
+
+            if (startTimer && !hasWin)
+            {
+                timer -= Time.deltaTime;
+                timerText.text = ((int)timer).ToString();
+                timerImage.fillAmount = (timer / timerStartValue);
+            }
+            else
+            {
+                timerText.text = 0.ToString();
+                timerImage.fillAmount = 0;
+            }
+
+            if (timer < 0 && startTimer) 
+            { 
+                ResetCodes(); startTimer = false; 
+            }
         }
 
         private void OnDisable()
         {
-            symbolManager.indexes.Clear();
+            sm.indexes.Clear();
         }
         public void ResetIcon(Image image)
         {
             image.overrideSprite = null;
+            image.color = new Color(0, 0, 0, 0);
         }
 
         public void SelectIcon(Image image)
@@ -42,27 +88,29 @@ namespace Gameplay.Mobile
             {
                 if (iconsAnswers[i].overrideSprite == null)
                 {
-                    
+                    iconsAnswers[i].color = Color.white;
                     iconsAnswers[i].overrideSprite = image.overrideSprite;
                     i = iconsAnswers.Length;
                     break;
                 }
             }
+
+            if (iconsAnswers[2].overrideSprite != null) Unlock();
         }
 
         public void Unlock()
         {
-            for (int i = 0; i < symbolManager.iconsSelected.Count; i++)
+            for (int i = 0; i < sm.iconsSelected.Count; i++)
             {
-                if(symbolManager.iconsSelected[i] != iconsAnswers[i].overrideSprite)
+                if (sm.iconsSelected[i] != iconsAnswers[i].overrideSprite)
                 {
                     Miss();
-                    i = symbolManager.iconsSelected.Count;
+                    i = sm.iconsSelected.Count;
                     break;
                 }
                 else
                 {
-                    if (i == symbolManager.iconsSelected.Count - 1)
+                    if (i == sm.iconsSelected.Count - 1)
                     {
                         Succeed();
 
@@ -75,65 +123,86 @@ namespace Gameplay.Mobile
         [Button]
         private void Succeed()
         {
-
+            hasWin = true;
             door.Unlock();
+            results[missNumber].gameObject.SetActive(true);
+            results[missNumber].overrideSprite = winImage;
             results[missNumber].color = Color.green;
-            _sendOnOpenDoor.Raise();
             StartCoroutine(WaitCloseSymbolCanvas());
+            _sendOnOpenDoor.Raise();
         }
 
         IEnumerator WaitCloseSymbolCanvas()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
+            door.GetComponent<DoorBehavior>().hints.SetActive(false);
+            canvas.enabled = false;
             gameObject.SetActive(false);
             yield break;
         }
+
         [Button]
         private void Miss()
         {
             missNumber++;
-            results[missNumber - 1].color = Color.red;
+            results[missNumber - 1].gameObject.SetActive(true);
+            results[missNumber - 1].overrideSprite = cross;
+
+            foreach (Image answers in iconsAnswers)
+            {
+                answers.overrideSprite = null;
+                answers.color = new Color(0, 0, 0, 0);
+            }
             if (missNumber == 2)
             {
                 _sendGameOver.Raise();
             }
         }
 
-
         public void SetSymbols()
         {
-            symbolManager.iconsAssetReminder.Clear();
-            symbolManager.iconsStashed.Clear();
+            sm.iconsAssetReminder.Clear();
+            sm.iconsStashed.Clear();
             
-            for (int i = 0; i < symbolManager.iconsAsset.Count; i++)
+            for (int i = 0; i < sm.iconsAsset.Count; i++)
             {
-                symbolManager.iconsAssetReminder.Add(symbolManager.iconsAsset[i]);
+                sm.iconsAssetReminder.Add(sm.iconsAsset[i]);
             }
             for (int i = 0; i < iconsGame.Length; i++)
             {
-
-                iconsGame[i].overrideSprite = symbolManager.iconsAsset[symbolManager.indexes[i]];
-                symbolManager.iconsStashed.Add(symbolManager.iconsAsset[symbolManager.indexes[i]]);
-                symbolManager.iconsAsset.Remove(symbolManager.iconsAsset[symbolManager.indexes[i]]);
+                iconsGame[i].overrideSprite = sm.iconsAsset[sm.indexes[i]];
+                sm.iconsStashed.Add(sm.iconsAsset[sm.indexes[i]]);
+                sm.iconsAsset.Remove(sm.iconsAsset[sm.indexes[i]]);
             }
-            symbolManager.iconsSelected.Clear();
+
+            sm.iconsSelected.Clear();
 
             for (int i = 0; i < 3; i++)
             {
-                symbolManager.iconsSelected.Add(symbolManager.iconsStashed[symbolManager.indexes[i + iconsGame.Length]]);
-
+                sm.iconsSelected.Add(sm.iconsStashed[sm.indexes[i + iconsGame.Length]]);
             }
 
-            symbolManager.iconsAsset.Clear();
-            for (int i = 0; i < symbolManager.iconsAssetReminder.Count; i++)
+            sm.iconsAsset.Clear();
+
+            for (int i = 0; i < sm.iconsAssetReminder.Count; i++)
             {
-                symbolManager.iconsAsset.Add(symbolManager.iconsAssetReminder[i]);
+                sm.iconsAsset.Add(sm.iconsAssetReminder[i]);
             }
 
-            codeNameText.text = symbolManager.pickedNames[0];
-            symbolAreaCodeName.text = symbolManager.pickedNames[0];
+            codeNameText.text = sm.pickedNames[0];
+            symbolAreaCodeName.text = sm.pickedNames[0];
+        }
 
+        private void ResetCodes()
+        {
+            sm.PickCodeName();
+
+            codeNameText.text = sm.pickedNames[0];
+            symbolAreaCodeName.text = sm.pickedNames[0];
+
+            transmitterManager.SendCodeNameToOthers(sm.pickedNames);
+
+            door.GetComponent<DoorBehavior>().code.text = sm.pickedNames[0];
         }
     }
-
 }

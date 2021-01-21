@@ -6,14 +6,15 @@ using DG.Tweening;
 
 namespace Gameplay.Mobile
 {
+    
     public class ElectricalLineBehavior : MonoBehaviour, ISwitchable
     {
-        [SerializeField] private Color2 color;
 
         private Material mat;
+        private Color color;
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
-        [SerializeField] private LineRenderer line;
+        public List<GameObject> cylinders;
         public int State { get { return state; } set { state = value; } }
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int Power
@@ -28,9 +29,15 @@ namespace Gameplay.Mobile
         }
         private void OnEnable()
         {
-            color = new Color2(Color.white, Color.white);
-            mat = new Material(GetComponent<LineRenderer>().material);
-            GetComponent<LineRenderer>().material = mat;
+
+            mat = new Material(cylinders[0].GetComponent<MeshRenderer>().material);
+            color = mat.GetColor("_EmissionColor");
+            for (int i = 0; i < cylinders.Count; i++)
+            {
+                cylinders[i].GetComponent<MeshRenderer>().material = mat;
+            }
+            
+            
             Power = power;
 
 
@@ -39,19 +46,20 @@ namespace Gameplay.Mobile
 
         public void TurnOff()
         {
-            mat.DOColor(Color.white * 0, "_EmissionColor", .5f);
-            //line.DOColor(color, new Color2( Color.black,Color.black), .5f);
+
+            mat.DOColor(color * .4f, "_EmissionColor", .5f);
         }
 
         public void TurnOn()
         {
-            mat.DOColor(Color.white * 2, "_EmissionColor", .5f);
-            //line.DOColor(new Color2(Color.black, Color.black),color, .5f);
+            mat.DOColor(color * 2, "_EmissionColor", .5f);
         }
         public void SwitchNode(int changeNodes)
         {
             throw new System.NotImplementedException();
         }
+        
+        public void AddCylinder(GameObject cylinder) => cylinders.Add(cylinder);
 
     }
 }

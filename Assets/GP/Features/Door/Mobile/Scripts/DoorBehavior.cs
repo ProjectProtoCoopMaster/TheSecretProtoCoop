@@ -10,6 +10,9 @@ namespace Gameplay.Mobile
     {
 
         private Material mat;
+        private bool selectable;
+        [SerializeField] private Transform mesh;
+
         public enum LockState { Locked, Unlocked }
         public LockState lockState;
 
@@ -20,8 +23,12 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Unlocked;
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
+        public GameObject hints;
+        [SerializeField] private GameObject padlock_Close;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
+        [SerializeField] private Canvas symbolCanvas;
+        public Text code;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
         public int Power
@@ -36,13 +43,29 @@ namespace Gameplay.Mobile
         }
         private void OnEnable()
         {
-            CheckLockState();
 
             mat = new Material(door.GetComponent<MeshRenderer>().material);
             door.GetComponent<MeshRenderer>().material = mat;
+            CheckLockState();
+
         }
         private void Start() => Power = power;
 
+        private void Update()
+        {
+            if (selectable)
+            {
+                if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position)))
+                    {
+                        hints.SetActive(true);
+                        
+                    }
+                }
+
+            }
+        }
 
         public void TurnOn()
         {
@@ -53,7 +76,7 @@ namespace Gameplay.Mobile
         {
             if (lockState == LockState.Locked)
             {
-                mat.DOColor(color_Open_Locked * 2, "_EmissionColor", .5f);
+                mat.DOColor(color_Close * .5f, "_EmissionColor", .5f);
             }
             else
             {
@@ -77,9 +100,9 @@ namespace Gameplay.Mobile
         {
             if(lockState == LockState.Locked)
             {
-                
-                //GetComponent<Button>().enabled = true;
-                //anim.enabled = true;
+
+                selectable =true;
+                padlock_Close.SetActive(true);
             }
             else
             {
@@ -89,9 +112,10 @@ namespace Gameplay.Mobile
 
         private void FeedbackUnlock()
         {
-            
-            //GetComponent<Button>().enabled = false;
-            //anim.enabled = false;
+
+            selectable = false;
+
+            padlock_Close.SetActive(false);
 
             if (power == 1) TurnOn();
             else TurnOff();
@@ -107,7 +131,16 @@ namespace Gameplay.Mobile
             else Power = 1;
         }
 
-
+        [Button]
+        public void SetColliderOnMesh()
+        {
+            GetComponent<BoxCollider>().size = mesh.localScale;
+            GetComponent<BoxCollider>().center = mesh.localPosition;
+        }
+        public void ShowCanvas()
+        {
+            symbolCanvas.enabled = true;
+        }
     }
 }
 

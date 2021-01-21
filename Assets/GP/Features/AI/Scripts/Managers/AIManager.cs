@@ -6,7 +6,14 @@ namespace Gameplay.AI
 {
     public class AIManager : MonoBehaviour
     {
+        public bool testAI;
+
         public static List<AgentManager> agents { get; protected set; } = new List<AgentManager>();
+
+        void Start()
+        {
+            if (testAI) StartAllAgents();
+        }
 
         public void StartAllAgents()
         {

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-namespace Mobile
+
+namespace Gameplay.Mobile
 {
     public class CameraScrollBehaviour : MonoBehaviour
     {
         [SerializeField] private Transform _transform;
+        public Vector2 basePosition { get; set; }
         [SerializeField] private float speed;
-        [SerializeField] private Vector2 clampValue;
+        public Vector2 clampValue { get; set; }
         [SerializeField] private float clampHeightValue;
         private Touch touch;
         private float magnitudeReminder;
@@ -31,20 +33,20 @@ namespace Mobile
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    if (_transform.position.x > clampValue.x)
+                    if (_transform.position.x > 30 + basePosition.x)
                     {
                         _transform.DOMoveX(clampValue.x, .5f);
                     }
-                    else if (_transform.position.x < -clampValue.x)
+                    else if (_transform.position.x < -30 + basePosition.x)
                     {
                         _transform.DOMoveX(-clampValue.x, .5f);
                     }
 
-                    if (_transform.position.z > clampValue.y)
+                    if (_transform.position.z > 30 + basePosition.y)
                     {
                         _transform.DOMoveZ(clampValue.y, .5f);
                     }
-                    else if (_transform.position.z < -clampValue.y)
+                    else if (_transform.position.z < -30 + basePosition.y)
                     {
                         _transform.DOMoveZ(-clampValue.y, .5f);
 
@@ -68,9 +70,9 @@ namespace Mobile
                 {
                     _transform.DOMoveY(clampHeightValue, .2f);
                 }
-                else if (_transform.position.y < 7)
+                else if (_transform.position.y < 14)
                 {
-                    _transform.DOMoveY(7, .2f);
+                    _transform.DOMoveY(14, .2f);
                 }
                 else
                 {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2243126664052907476}
   - component: {fileID: 5671818033234735358}
+  - component: {fileID: 5141060245256773672}
   m_Layer: 0
   m_Name: Static Camera
   m_TagString: Camera/Static Camera
@@ -127,6 +128,70 @@ MonoBehaviour:
         m_CallState: 2
   state: 1
   power: 1
+--- !u!114 &5141060245256773672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243126664052907472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1426856480474875317}
+        m_TargetAssemblyTypeName: Gameplay.VR.DetectionBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6734529643668475166}
+        m_TargetAssemblyTypeName: Gameplay.VR.OverwatchBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3340561288250468278}
+        m_TargetAssemblyTypeName: DetectionFeedback, Assembly-CSharp
+        m_MethodName: PlayDetectionFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5671818033234735358}
+        m_TargetAssemblyTypeName: Gameplay.VR.CameraBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4859161265381388714
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 613a89eebfc923d4d89e92d5e6e77f0f, type: 2}
     - target: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
       propertyPath: m_Name
-      value: Camera Visuals
+      value: Mesh
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5c9fdced4a292364c80916bb627ab365, type: 3}
       propertyPath: m_IsActive

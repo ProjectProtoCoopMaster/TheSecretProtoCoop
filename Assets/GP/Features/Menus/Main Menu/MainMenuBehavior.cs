@@ -1,6 +1,5 @@
 ﻿
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
@@ -16,8 +15,8 @@ namespace Gameplay
         [SerializeField] private CallableFunction _CreateRoom;
         [SerializeField] private IntVariable _sceneID;
         [SerializeField] private BoolVariable _isMobile;
-        [SerializeField] private Canvas mobileCanvas;
-        [SerializeField] private Canvas vrCanvas;
+        [SerializeField] private GameObject lobbyMobile;
+        [SerializeField] private GameObject lobbyVR;
         [SerializeField] private Text codeVR;
         [SerializeField] private Text codeMobile;
         private int index = -1;
@@ -25,8 +24,8 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            vrCanvas.enabled = false;
-            mobileCanvas.enabled = false;
+            lobbyMobile.SetActive(false);
+            lobbyVR.SetActive(false);
             index = 2;
         }
 
@@ -44,32 +43,29 @@ namespace Gameplay
 
         public void OpenScene()
         {
-            if(_isMobile.Value)
+            if (_isMobile.Value)
             {
-                SceneManager.LoadSceneAsync(index + 1, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index + 1;
             }
             else
             {
-
-                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
-
             }
-
         }
 
         public void OpenCanvas()
         {
             if (_isMobile.Value)
             {
-                mobileCanvas.enabled = true;
+                lobbyMobile.SetActive(true);
             }
             else
             {
-                vrCanvas.enabled = true;
+                lobbyVR.SetActive(true);
 
             }
         }

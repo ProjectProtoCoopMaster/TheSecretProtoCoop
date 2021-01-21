@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
 namespace Gameplay.VR
 {
@@ -10,6 +10,8 @@ namespace Gameplay.VR
 
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
+
+        private int baseState, basePower;
 
         public int State
         {
@@ -32,6 +34,8 @@ namespace Gameplay.VR
 
         private void Awake()
         {
+            baseState = state;
+            basePower = power;
             Power = power;
         }
 
@@ -45,6 +49,12 @@ namespace Gameplay.VR
         public void TurnOn()
         {
             camerasOn.Invoke();
+        }
+
+        public void GE_RefreshScene()
+        {
+            State = baseState;
+            Power = basePower;
         }
     }
 }

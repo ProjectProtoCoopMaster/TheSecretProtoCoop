@@ -4,6 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 namespace Gameplay.VR.Player
 {
@@ -14,11 +15,13 @@ namespace Gameplay.VR.Player
         [Tooltip("The Teleportation's movement curve.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
         [Tooltip("The Particle Effect to play when the player teleports.")]
-        [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem particleDash;
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] VisualEffect dashEffect;
         [Tooltip("The GameEvent that is called when the player presses down on the teleport input.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
         [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleported;
+        [Tooltip("The GameEvent that is called when the player is teleporting.")]
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportDashing;
         TweenManagerLibrary.TweenFunction delegateTween;
         Vector3 startPos, targetPos, movingPosition, change;
         float time;
@@ -26,7 +29,6 @@ namespace Gameplay.VR.Player
         [Tooltip("The elements to Track and Move.")] [SerializeField] Transform playerRig, playerHead;
         SteamVR_Behaviour_Pose controllerPose;
         private bool showRayPointer = false;
-
         [Tooltip("The Layers with which the Teleportation laser will intersect.")]
         [SerializeField] [FoldoutGroup("Teleportation Pointer")] LayerMask teleportationLayers;
         [Tooltip("The Color of the laser when the player can teleport.")]
@@ -53,10 +55,11 @@ namespace Gameplay.VR.Player
         [Tooltip("Define how smooth the laser is. A Higher values incurs a higher performance cost.")]
         [SerializeField] [FoldoutGroup("Internal Values")] int bezierSmoothness;
 
-        internal bool isTeleporting; // for Awareness Manager time freeze feedback
         internal bool isGameOver;
         bool canTeleport;
         bool VRPlatform;
+
+        [SerializeField] VisualEffect targetArea, oldArea;
 
         private void Awake()
         {
@@ -75,6 +78,30 @@ namespace Gameplay.VR.Player
             bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
+        }
+
+        VisualEffect _oldArea
+        {
+            get
+            {
+                if(oldArea == null)
+                {
+                    Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
+                    for (int i = 0; i < hitColliders.Length; i++)
+                    {
+                        Debug.Log(hitColliders[i].name);
+
+                        if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
+                            oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+                    }
+                    return oldArea;
+                }
+                else return oldArea;
+            }
+            set
+            {
+                _oldArea = value;
+            }
         }
 
         private void FixedUpdate()
@@ -98,10 +125,10 @@ namespace Gameplay.VR.Player
             get
             {
                 float controllerAngle = Vector3.Angle(Vector3.up * -1.0f, controllerForward);
-                float pitch = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
-                float pitchRange = maxControllerAngle - minControllerAngle;
-                float t = (pitch - minControllerAngle) / pitchRange; // Normalized pitch within range
-                return maxDistance * t;
+                float clampedAngle = Mathf.Clamp(controllerAngle, minControllerAngle, maxControllerAngle);
+                float angleRange = maxControllerAngle - minControllerAngle;
+                float pitch = (clampedAngle - minControllerAngle) / angleRange; // Normalized pitch within range
+                return maxDistance * pitch;
             }
         }
 
@@ -157,15 +184,6 @@ namespace Gameplay.VR.Player
                 return playerHead.position + Vector3.up * castingHeight;
             }
         }
-
-        Vector3 playerFeetPosition
-        {
-            get
-            {
-                return Vector3.zero;
-            }
-        }
-
         #endregion
 
         public void GE_OnGameOver()
@@ -182,6 +200,8 @@ namespace Gameplay.VR.Player
         // show the pointer, using the referenced controller's transform.forward
         internal void TallRayPointer(SteamVR_Behaviour_Pose _controllerPose)
         {
+            Debug.Log("Aiming");
+
             if (_controllerPose != null && VRPlatform == false)
                 VRPlatform = true;
 
@@ -205,7 +225,11 @@ namespace Gameplay.VR.Player
             // if you hit something with the Tall Ray, define it as the endpoint
             if (Physics.Raycast(tallRay, out hitTallInfo, 500, teleportationLayers))
             {
-                if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas")) canTeleport = true;
+                if (hitTallInfo.collider.gameObject.layer == LayerMask.NameToLayer("TeleportAreas"))
+                {
+                    targetArea = hitTallInfo.collider.GetComponentInChildren<VisualEffect>();
+                    canTeleport = true;
+                }
 
                 else canTeleport = false;
 
@@ -254,22 +278,30 @@ namespace Gameplay.VR.Player
 
         public void TryTeleporting()
         {
+            teleported.Raise();
+
             if (canTeleport == true)
                 StartCoroutine(TeleportThePlayer());
-            bezierVisualization.enabled = showRayPointer = canTeleport = false;
+            bezierVisualization.enabled = showRayPointer = canTeleport = false;            
         }
 
         IEnumerator TeleportThePlayer()
         {
+            if (oldArea != null)
+            {
+                _oldArea.enabled = true;
+                _oldArea = targetArea;
+                targetArea.enabled = false;
+            }
+
             startPos = playerPosition;
             targetPos = teleportTarget;
 
             showRayPointer = false;
-            isTeleporting = true;
 
-            particleDash.Play();
+            dashEffect.Play();
 
-            teleported.Raise();
+            teleportDashing.Raise();
 
             time = 0;
             change = targetPos - startPos;
@@ -288,9 +320,12 @@ namespace Gameplay.VR.Player
                 yield return null;
             }
 
-            isTeleporting = false;
+            dashEffect.Stop();
+        }
 
-            particleDash.Stop();
+        public void GE_ResetGameOver()
+        {
+            isGameOver = false;
         }
     }
 }

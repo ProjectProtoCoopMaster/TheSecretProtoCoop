@@ -2,150 +2,84 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using Networking;
+using Sirenix.OdinInspector;
 
 namespace Gameplay
 {
+    public enum Platform { Mobile, VR }
+
+    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4 };
+
     public class GameManager : MonoBehaviour
     {
-        [System.Serializable]
-        public enum LoseType
-        {
-            PlayerSpottedByGuard = 0,
-            PlayerSpottedByCam = 1,
-            BodySpottedByCam = 2,
-            BodySpottedByGuard = 3,
-            PlayerHitTrap = 4
-        };
-        [HideInInspector]
-        public LoseType loseType;
+        public LoseType loseType { get; set; }
 
+        public bool startGame;
 
+        public bool gameOver { get; set; } = false;
 
-        [SerializeField] private bool startGame;
-        [SerializeField] private bool launchOneScene;
-        [SerializeField] private GameEvent _onLose;
-        [SerializeField] private IntVariable _sceneID;
-        [SerializeField] private BoolVariable _isMobile;
-        private GameObject loseCanvas;
-        // [SerializeField] GameObjectVariable loseTextVRObj;
-        private Text loseText;
-        [SerializeField] StringVariable loseTextVR;
-        private bool isGameOver = false;
+        public Transform UICanvas;
 
-        [SerializeField] private GameEvent onRefreshScene;
+        [Title("Lose")]
+        public GameObject loseCanvasPrefab; public GameObject loseCanvas { get; set; }
+        public StringVariable _loseText;
+        [SerializeField] private Sprite[] deathIcons;
 
+        [Title("Win")]
+        public GameObject winCanvasPrefab;
 
         void Start()
         {
-            if (startGame)
-                SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
-
-            if(launchOneScene) SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
-
-        public void RaiseOnLose(int ID) {  loseType = (LoseType)ID; _onLose.Raise(); }
-
         [Button]
-        public void GameOver()
-        {
-            if (!isGameOver)
-            {
-                isGameOver = true;
-                loseCanvas = Instantiate(Resources.Load("Lose_Canvas") as GameObject);
 
+        public void Lose()
+        {
+            if (!gameOver)
+            {
+                gameOver = true;
+
+                loseCanvas = Instantiate(loseCanvasPrefab);
+                loseCanvas.transform.parent = UICanvas;
+                Text loseText = loseCanvas.transform.Find("ExplanationText").GetComponentInChildren<Text>();
 
                 switch (loseType)
                 {
-                    case LoseType.PlayerSpottedByGuard:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You were spotted by a Guard";
+                    case LoseType.PlayerSpottedByGuard: loseText.text = _loseText.Value = "You were spotted by a Guard";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[0];
                         break;
-                    case LoseType.PlayerSpottedByCam:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You were spotted by a Camera";
+                    case LoseType.PlayerSpottedByCam: loseText.text = _loseText.Value = "You were spotted by a Camera";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[1];
                         break;
-                    case LoseType.BodySpottedByCam:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Camera";
+
+                    case LoseType.BodySpottedByCam: loseText.text = _loseText.Value = "A dead body was spotted by a Camera";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[2];
                         break;
-                    case LoseType.BodySpottedByGuard:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "A dead body was spotted by a Guard";
+                    case LoseType.BodySpottedByGuard: loseText.text = _loseText.Value = "A dead body was spotted by a Guard";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[3];
                         break;
-                    case LoseType.PlayerHitTrap:
-                        loseText = loseCanvas.GetComponentInChildren(typeof(Text)) as Text;
-                        loseText.text = loseTextVR.Value = "You ran into a Hidden Trap !";
+
+                    case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
                         break;
                 }
-                if (_isMobile.Value)
-                {
-                    
-                }
 
-                
-
-                //StartCoroutine(WaitGameOver());
+                loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
             }
         }
 
-        public void Victory()
+        public void Win()
         {
-            if (_isMobile.Value)
-            {
-                Instantiate(Resources.Load("Victory_Canvas") as GameObject);
-            }
-
+            GameObject winCanvas = Instantiate(winCanvasPrefab);
+            winCanvas.transform.parent = UICanvas;
         }
 
-
-        //IEnumerator WaitGameOver()
-        //{
-        //    yield return new WaitForSeconds(3);
-        //    Destroy(loseCanvas);
-        //    StartCoroutine(WaitSceneDestruction()); ;
-
-        //    yield return new WaitForSeconds(.5f);
-        //    isGameOver = false;
-        //    yield break;
-        //}
-
-        IEnumerator WaitSceneDestruction()
+        public void Restart()
         {
-            yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
-            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
-
-            yield return new WaitForSeconds(2f);
-
-            onRefreshScene.Raise();
-            yield break;
+            TransmitterManager.instance.SendRestartToAll();
         }
-
-        IEnumerator WaitLoadNextScene()
-        {
-            SceneManager.UnloadSceneAsync(_sceneID.Value);
-            yield return new WaitForEndOfFrame();
-            _sceneID.Value += 2;
-            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
-            onRefreshScene.Raise();
-            yield break;
-        }
-
-        public void LoadSameScene()
-        {
-            /*if(_isMobile.Value)*/ Destroy(loseCanvas);
-            StartCoroutine(WaitSceneDestruction()); ;
-            isGameOver = false;
-        }
-        public void LoadNextScene()
-        {
-            StartCoroutine(WaitLoadNextScene());
-
-        }
-
-        
-
     }
 }
-

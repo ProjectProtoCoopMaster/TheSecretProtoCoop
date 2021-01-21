@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+
 namespace Gameplay
 {
     public class SwitcherBehavior : MonoBehaviour, ISwitchable
@@ -12,7 +13,8 @@ namespace Gameplay
         public CallableFunction _sendSwitcherChange = default;
         [SerializeField] private Button button;
         [SerializeField] private Image image;
-        [SerializeField] private Text timerDisplayer;
+        
+        [SerializeField] private Image timerEnable;
         public List<Object> nodes = default;
 
         [Header("---IMPORTANT---")]
@@ -21,7 +23,7 @@ namespace Gameplay
         [Range(0, 10)]
         public float ID = default;
 
-        public enum SwitchTimer { None, Fixed}
+        public enum SwitchTimer { None, Fixed }
 
         public SwitchTimer switchTimer = default;
         [HideInInspector]
@@ -77,14 +79,14 @@ namespace Gameplay
 
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
 
+        public void OnEnable() => SwitcherManager.switchers.Add(this);
+        public void OnDisable() => SwitcherManager.switchers.Remove(this);
 
-
-        private void Start() 
+        public void StartSwitcher() 
         {
-            if (timerDisplayer != null)
+            if (timerEnable != null)
             {
-                if (switchTimer == SwitchTimer.Fixed) { timerDisplayer.transform.parent.gameObject.SetActive(true); ResetTimer(); }
-                else timerDisplayer.transform.parent.gameObject.SetActive(false);
+                if (switchTimer == SwitchTimer.Fixed) {  ResetTimer(); }
 
 
             }
@@ -205,14 +207,18 @@ namespace Gameplay
 
         private void SetTimerDisplayer()
         {
-            timerDisplayer.text = ((int)(timer - currentTimer)).ToString() + "s";
+            if (nodes.Count == 0)
+                timerEnable.fillAmount = 1-( currentTimer / timer);
         }
 
         private void ResetTimer() 
         {
-            
-            currentTimer = 0;
-            timerDisplayer.text = timer.ToString() + "s";
+            if (nodes.Count == 0)
+            {
+                currentTimer = 0;
+                timerEnable.fillAmount = 0;
+            }
+
 
         }
 

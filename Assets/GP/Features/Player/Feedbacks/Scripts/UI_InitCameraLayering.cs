@@ -8,23 +8,20 @@ namespace Gameplay.VR.Feedbacks
 {
     public class UI_InitCameraLayering : MonoBehaviour
     {
-        Camera uiCamera;
         [SerializeField] StringVariable playerCamera;
+        Camera uiCamera;
+        UniversalAdditionalCameraData targetCamera;
 
-        void Awake()
+        public void GE_RefreshScene()
         {
-            uiCamera = GetComponentInChildren<Camera>();
-        }
+            if (uiCamera == null) uiCamera = GetComponentInChildren<Camera>();
+            if (targetCamera == null) targetCamera = GameObject.Find(playerCamera.Value).GetComponent<Camera>().GetUniversalAdditionalCameraData();
 
-        void Start()
-        {
-            OnLevelLoaded();
-        }
-
-        public void OnLevelLoaded()
-        {
-            var cameraData = GameObject.Find(playerCamera.Value).GetComponent<Camera>().GetUniversalAdditionalCameraData();
-            cameraData.cameraStack.Add(uiCamera);
+            if (!targetCamera.cameraStack.Contains(uiCamera))
+            {
+                targetCamera.cameraStack.Add(uiCamera);
+                targetCamera.cameraStack.Reverse();
+            }
         }
     }
 }

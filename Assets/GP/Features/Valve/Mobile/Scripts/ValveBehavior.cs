@@ -12,58 +12,60 @@ namespace Gameplay.Mobile
         public float delta;
         private float deltaSign;
         private float timer;
+
+        private Vector3 mousePos;
+        private float angle;
         private void Update()
         {
-            if (timer >= 100) timer = 101;
-            if (timer <= 0) timer = 0;
 
             if (isTouching)
             {
-                if(timer >= 0 && timer <= 100)
-                {
-                    delta = Input.GetTouch(0).deltaPosition.x;
-                    if (delta > 0) deltaSign = 1;
-                    else deltaSign = -1;
+                if (timer >= 100) timer = 101;
+                if (timer <= 0) timer = 0;
 
-                    //if (delta == 0 && deltaSign == 1) deltaSign = 1;
-                    //else deltaSign = -1;
-                    if (Input.GetTouch(0).position.y > rect.anchoredPosition.y)
+                if (timer >= 0 && timer <= 100)
+                {
+                    mousePos = Input.mousePosition;
+                    mousePos.x = mousePos.x - rect.anchoredPosition.x;
+                    mousePos.y = mousePos.y - rect.anchoredPosition.y;
+
+                    angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+                    
+                    rect.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+                    if (angle < 0)
                     {
-                        if (deltaSign < 0)
+                        if(Input.GetTouch(0).deltaPosition.x > 0)
                         {
-                           
+                            timer++;
                             
                         }
                         else
                         {
-
-                            rect.Rotate(-transform.forward * 10f);
-                            timer++;
+                            timer--;
                         }
 
                     }
                     else
                     {
-                        if (deltaSign < 0)
+                        if (Input.GetTouch(0).deltaPosition.x > 0)
                         {
-                            rect.Rotate(-transform.forward * 10f);
-                            timer++;
+                            timer--;
                         }
                         else
                         {
-                            if (timer > 0)
-                            {
-                                rect.Rotate(transform.forward * 10f);
-                                timer--;
-
-                            }
+                            timer++;
                         }
                     }
+                    
 
                 }
-                else deltaSign = 0;
-            }
+                else 
+                {
                 
+                }
+            }
+
         }
 
         public void SetIsTouching(bool value) => isTouching = value;

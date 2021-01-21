@@ -102,6 +102,11 @@ namespace Gameplay.VR
             poweredOn = false;
         }
         #endregion
+
+        public void GE_RefreshScene()
+        {
+            detectedPlayer = false;
+        }
     }
 }
 #endif

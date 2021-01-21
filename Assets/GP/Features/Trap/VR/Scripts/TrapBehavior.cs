@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.VR
 {
     [RequireComponent(typeof(BoxCollider))]
     public class TrapBehavior : MonoBehaviour, ISwitchable
     {
+        [SerializeField] private MeshRenderer mesh;
+        [SerializeField] private ParticleSystem ps;
+        [SerializeField] private AudioSource audioSource;
+
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
@@ -31,8 +36,22 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.GetComponent<IKillable>() != null) 
-                other.transform.parent.GetComponent<IKillable>().Die();
+            if (other.GetComponent<RagdollBehavior>() != null)
+            {
+                if (other.transform.parent.GetComponentInParent<IKillable>() != null)
+                {
+                    ps.Play();
+                    audioSource.Play();
+                    Debug.Log(other.gameObject.name);
+                    other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
+                }
+            }
+        }
+
+        [Button]
+        void SetColliderPosition()
+        {
+            GetComponent<BoxCollider>().size = mesh.transform.localScale;
         }
     }
 }

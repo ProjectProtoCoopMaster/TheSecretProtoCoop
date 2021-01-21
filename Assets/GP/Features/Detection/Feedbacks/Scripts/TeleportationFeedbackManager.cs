@@ -1,4 +1,4 @@
-﻿#if UNITY_STANDALONE
+﻿ #if UNITY_STANDALONE
 using Gameplay.VR.Player;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +8,9 @@ namespace Gameplay.VR.Feedbacks
 {
     public class TeleportationFeedbackManager : MonoBehaviour
     {
-        public VisualEffectAsset teleportationAreaAsset, teleportationEffectAsset;
-        public VisualEffect teleportationEffect;
-        public List<VisualEffect> particles = new List<VisualEffect>();
-        public List<TeleportArea> teleportGlowers = new List<TeleportArea>();
+        [SerializeField] private VisualEffectAsset teleportationAreaAsset, teleportationEffectAsset;
+        [SerializeField] private List<VisualEffect> particles = new List<VisualEffect>();
+        [SerializeField] private List<TeleportationArea> teleportGlowers = new List<TeleportationArea>();
 
         private void Awake()
         {
@@ -32,35 +31,32 @@ namespace Gameplay.VR.Feedbacks
 
         public void GE_TeleportationAreaGlowOn()
         {
-            for (int i = 0; i < teleportGlowers.Count; i++)
-                teleportGlowers[i].ToggleState();
+            for (int i = 0; i < teleportGlowers.Count; i++) 
+                teleportGlowers[i].On();
         }
 
         public void GE_TeleportationAreaGlowOff()
         {
-            for (int i = 0; i < teleportGlowers.Count; i++)
-                teleportGlowers[i].ToggleState();
+            for (int i = 0; i < teleportGlowers.Count; i++) 
+                teleportGlowers[i].Off();
         }
 
         public void GE_RefreshScene()
         {
+            particles.Clear();
+            teleportGlowers.Clear();
+
             VisualEffect[] iteratorList = FindObjectsOfType<VisualEffect>();
 
             // sort through all VFX graphs in the scene
             for (int i = 0; i < iteratorList.Length; i++)
-            {
                 if (iteratorList[i].visualEffectAsset == teleportationAreaAsset)
                     particles.Add(iteratorList[i]);
-                if (iteratorList[i].visualEffectAsset == teleportationEffectAsset)
-                    teleportationEffect = iteratorList[i];
-            }
 
             for (int i = 0; i < particles.Count; i++)
                 particles[i].Stop();
 
-            //teleportationEffect.Stop();
-
-            teleportGlowers.AddRange(FindObjectsOfType<TeleportArea>());
+            teleportGlowers.AddRange(FindObjectsOfType<TeleportationArea>());
         }
     }
 }
