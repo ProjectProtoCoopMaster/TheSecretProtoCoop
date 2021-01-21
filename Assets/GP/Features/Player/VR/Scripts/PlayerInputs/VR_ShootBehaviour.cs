@@ -13,7 +13,7 @@ namespace Gameplay.VR.Player
         SteamVR_Behaviour_Pose controllerPose = null;
         SteamVR_Input_Sources handSource = default;
 
-        [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
+        //[SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent hitEnemy = null;
@@ -52,10 +52,10 @@ namespace Gameplay.VR.Player
             {
                 timePassed = shootingCooldown.Value;
 
-                shotTrail.transform.position = gunBarrel.position;
+                /*shotTrail.transform.position = gunBarrel.position;
                 shotTrail.transform.LookAt(target);
 
-                shotTrail.Play();
+                shotTrail.Play();*/
 
                 shooting.Raise();
 
