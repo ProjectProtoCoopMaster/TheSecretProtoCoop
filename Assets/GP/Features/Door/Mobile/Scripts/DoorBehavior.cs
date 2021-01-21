@@ -23,7 +23,6 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Unlocked;
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
-        [SerializeField] private GameObject padlock_Open;
         public GameObject hints;
         [SerializeField] private GameObject padlock_Close;
         [SerializeField] private GameObject door;
@@ -104,7 +103,6 @@ namespace Gameplay.Mobile
 
                 selectable =true;
                 padlock_Close.SetActive(true);
-                padlock_Open.SetActive(false);
             }
             else
             {
@@ -118,7 +116,6 @@ namespace Gameplay.Mobile
             selectable = false;
 
             padlock_Close.SetActive(false);
-            padlock_Open.SetActive(false);
 
             if (power == 1) TurnOn();
             else TurnOff();
