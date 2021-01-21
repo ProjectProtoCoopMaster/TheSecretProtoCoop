@@ -131,8 +131,6 @@ namespace Gameplay
     [HideLabel]
     public class RoomMobile : Room
     {
-        public CameraManager cameraManager;
-
         public Canvas canvas;
 
         public float width = 10f;
@@ -141,7 +139,9 @@ namespace Gameplay
         public override void OnEnterRoom()
         {
             /// Initialize Camera
-            
+
+            CameraManager cameraManager = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+
             cameraManager.SetCamera(width, height, roomCenter);
             canvas.worldCamera = cameraManager._camera;
 
