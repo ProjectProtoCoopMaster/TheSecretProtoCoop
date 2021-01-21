@@ -21,7 +21,7 @@ namespace Gameplay.Mobile
         void Start()
         { 
             _player.Value = this.gameObject;
-            _transform.localScale = new Vector3(2, 2, 2);
+            playerTransform.localScale = new Vector3(2, 2, 2);
         
         }
 
