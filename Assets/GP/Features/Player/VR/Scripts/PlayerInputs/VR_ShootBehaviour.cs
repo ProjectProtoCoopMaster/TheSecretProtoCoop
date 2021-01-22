@@ -1,8 +1,6 @@
 ﻿#if UNITY_STANDALONE
-using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.VFX;
 using Valve.VR;
 
 namespace Gameplay.VR.Player
@@ -13,14 +11,34 @@ namespace Gameplay.VR.Player
         SteamVR_Behaviour_Pose controllerPose = null;
         SteamVR_Input_Sources handSource = default;
 
-        //[SerializeField] [FoldoutGroup("Shooting")] ParticleSystem shotTrail = null;
+        [SerializeField] [FoldoutGroup("Shooting")] ParticleSystem impactVFXPrefab = null;
+
+
+        ParticleSystem impactVFX;
+
+        ParticleSystem _impactVFX
+        {
+            get
+            {
+                if(impactVFX == null)
+                {
+                    impactVFX = Instantiate(impactVFXPrefab);
+                    return impactVFX;
+                }
+                else return impactVFX;
+            }
+            set
+            {
+                impactVFX = value;
+            }
+        }
+
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent shooting = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent ricochet = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent hitEnemy = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloading = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloaded = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunEmpty = null;
-        [SerializeField] [FoldoutGroup("Shooting")] GameObject bulletImpactObj = null;
 
         [SerializeField] [FoldoutGroup("Internal Values")] FloatVariable shootingCooldown;
         float timePassed = 2f;
@@ -29,7 +47,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Internal Values")] Transform gunBarrel, target;
         [SerializeField] [FoldoutGroup("Internal Values")] LayerMask shootingLayer = default;
         RaycastHit hitInfo = default;
-
+        
         private void Awake()
         {
             controllerPose = GetComponent<SteamVR_Behaviour_Pose>();
@@ -53,11 +71,6 @@ namespace Gameplay.VR.Player
             if (timePassed <= 0)
             {
                 timePassed = shootingCooldown.Value;
-
-                /*shotTrail.transform.position = gunBarrel.position;
-                shotTrail.transform.LookAt(target);
-
-                shotTrail.Play();*/
 
                 shooting.Raise();
 
@@ -87,8 +100,9 @@ namespace Gameplay.VR.Player
                         hitInfo.collider.GetComponent<IKillable>().Die();
                     }
 
-                    GameObject newObj = Instantiate(bulletImpactObj, hitInfo.point, Quaternion.identity);
-                    newObj.GetComponent<VisualEffect>().Play();
+                    _impactVFX.transform.position = hitInfo.point;
+                    _impactVFX.transform.up = hitInfo.normal;
+                    _impactVFX.Play();
                 }
 
                 gunReloading.Raise();
