@@ -40,6 +40,8 @@ namespace Networking
         [Title("Level Management")]
         [SerializeField] private GameEvent _changeRoomMobile;
         [SerializeField] private GameEvent _onLevelRestart;
+        [SerializeField] private CallableFunction _loadNextScene;
+        [SerializeField] private CallableFunction _loadSameScene;
 
         [Title("Symbol Door")]
         public SymbolManager symbolManager;
@@ -59,6 +61,12 @@ namespace Networking
 
         public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.All);
         [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
+
+        public void SendLoadNextSceneToAll() => photonView.RPC("SendLoadNextScene", RpcTarget.All);
+        [PunRPC] private void SendLoadNextScene() { _loadNextScene.Raise(); }
+        public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.All);
+        [PunRPC] private void SendLoadSameScene() { _loadSameScene.Raise(); }
+
         #endregion
 
         #region Player Position

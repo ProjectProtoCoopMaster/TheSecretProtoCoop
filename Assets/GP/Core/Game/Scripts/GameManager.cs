@@ -18,6 +18,8 @@ namespace Gameplay
 
         public bool startGame;
 
+        [SerializeField] private IntVariable _sceneID;
+
         public bool gameOver { get; set; } = false;
 
         public Transform UICanvas;
@@ -72,6 +74,7 @@ namespace Gameplay
                 }
 
                 loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
+
             }
         }
 
@@ -84,6 +87,21 @@ namespace Gameplay
         public void Restart()
         {
             TransmitterManager.instance.SendRestartToAll();
+        }
+
+        public void LaunchNextLevel()
+        {
+            SceneManager.LoadSceneAsync(_sceneID.Value += 2, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            _sceneID.Value += 2;
+        }
+
+        public void LaunchSameLevel()
+        {
+
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+
         }
     }
 }

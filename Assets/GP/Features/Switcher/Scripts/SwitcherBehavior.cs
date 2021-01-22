@@ -84,7 +84,11 @@ namespace Gameplay
 
         private void Start()
         {
-            ResetTimer();
+            if (anim != null)
+            {
+                ResetTimer();
+            }
+
         }
 
         public void StartSwitcher() 
@@ -132,7 +136,8 @@ namespace Gameplay
             {
                 StartCoroutine(DelaySwitchNode());
                 DOTween.To(() => currentTimer, x => currentTimer = x, timer, timer).SetEase(Ease.Linear).OnUpdate(SetTimerDisplayer).OnComplete(ResetTimer);
-                anim.SetBool("OnTimer", true);
+                if(anim != null)
+                    anim.SetBool("OnTimer", true);
 
             }
             else

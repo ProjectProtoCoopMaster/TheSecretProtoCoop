@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5025227620011305608}
   - component: {fileID: 6129269782710857282}
   - component: {fileID: 712942561}
+  - component: {fileID: 7421143965816416413}
+  - component: {fileID: 584391201}
   m_Layer: 0
   m_Name: Transmitter Manager
   m_TagString: Untagged
@@ -51,7 +53,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   _isMobile: {fileID: 11400000, guid: 2224b1345099de94e9ce6ed8c63d1b8f, type: 2}
   _onLose: {fileID: 11400000, guid: 7c65fa4748372794cabdf72d75ebd129, type: 2}
-  _onWin: {fileID: 11400000, guid: e3f804ce08697af4c8bf7051afc040c4, type: 2}
+  _onWin: {fileID: 0}
   _playerVRPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerVRRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   _switch: {fileID: 11400000, guid: 6af23fddf1af7204bbbae8981a6051ca, type: 2}
@@ -63,7 +65,9 @@ MonoBehaviour:
   _levelHolder: {fileID: 11400000, guid: 0a035a19ba9bc7f4a95d085f8ea52091, type: 2}
   _buildLevel: {fileID: 11400000, guid: e17b5321ace7d9a4f9a73d921f7b39ed, type: 2}
   _changeRoomMobile: {fileID: 11400000, guid: 1ae9c50f40cf08a418303fb627818b20, type: 2}
-  _onLevelRestart: {fileID: 11400000, guid: 4b02b9eef013b2c4eb7d52bf6bfa79bc, type: 2}
+  _onLevelRestart: {fileID: 0}
+  _loadNextScene: {fileID: 11400000, guid: 21f158bb5d70e93498deae7527480881, type: 2}
+  _loadSameScene: {fileID: 11400000, guid: 4627c5112f01c6648866b0b8a08381b7, type: 2}
   symbolManager: {fileID: 0}
   _onOpenDoor: {fileID: 11400000, guid: d6032a02634764a4cae45e41c7a40a1d, type: 2}
   _onResetCodes: {fileID: 11400000, guid: 6b62b1612016dec47b42644bcef27186, type: 2}
@@ -87,9 +91,71 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 0
+  viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7421143965816416413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216035856832860937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 8d184be93c9e31c449c0a8681987f8c9, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6129269782710857282}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendLoadNextSceneToAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &584391201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216035856832860937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: 4d26704aa28d2fa4a940c43a319bfb79, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6129269782710857282}
+        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
+        m_MethodName: SendLoadSameSceneToAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
 --- !u!1 &2162801414027507598
 GameObject:
   m_ObjectHideFlags: 0
