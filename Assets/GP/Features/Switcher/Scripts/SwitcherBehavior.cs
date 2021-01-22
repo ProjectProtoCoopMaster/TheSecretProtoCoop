@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Networking;
 
 namespace Gameplay
 {
@@ -83,7 +84,7 @@ namespace Gameplay
         public void OnEnable() { SwitcherManager.switchers.Add(this); }
         public void OnDisable() => SwitcherManager.switchers.Remove(this);
 
-        public void StartSwitcher() 
+        public void StartSwitcher()
         {
             if (timerEnable != null)
             {
@@ -96,9 +97,9 @@ namespace Gameplay
         }
 
         public void CallSwitchManager()
-        { 
+        {
             _switch.Raise(ID);
-            _sendSwitcherChange.Raise(ID);
+            TransmitterManager.instance.SendSwicherChangeToOthers(ID);
         }
 
         private void SwitchNode()

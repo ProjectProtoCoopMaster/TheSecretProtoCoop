@@ -113,6 +113,7 @@ namespace Networking
         public void SendLevelHolderToOthers(LevelVariable levelVariable)
         {
             Debug.Log("Send Level Holder VR");
+            foreach(RoomData roomData in levelVariable.LevelRoomsData) { Debug.Log("with room :" + roomData.roomName + "and modifier :" + roomData.roomModifier); }
 
             string[] _names = new string[levelVariable.LevelRoomsData.Count];
             int[] _types = new int[levelVariable.LevelRoomsData.Count];
