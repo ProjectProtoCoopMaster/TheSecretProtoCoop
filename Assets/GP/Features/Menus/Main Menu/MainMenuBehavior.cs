@@ -47,7 +47,7 @@ namespace Gameplay
             {
                 SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
-                _sceneID.Value = index + 1;
+                _sceneID.Value = index;
             }
             else
             {

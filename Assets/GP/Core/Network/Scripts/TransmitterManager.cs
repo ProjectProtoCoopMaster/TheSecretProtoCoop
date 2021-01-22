@@ -55,18 +55,18 @@ namespace Networking
         #region Game Management
 
         [Button]
-        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.All, loseType); }
+        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
         [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 
-        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.All);
+        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
         [PunRPC] private void SendWin() => _onWin.Raise();
 
-        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.All);
+        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
         [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
 
         public void SendLoadNextSceneToAll() => photonView.RPC("SendLoadNextScene", RpcTarget.All);
         [PunRPC] private void SendLoadNextScene() { _loadNextScene.Raise(); }
-        public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.All);
+        public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.AllViaServer);
         [PunRPC] private void SendLoadSameScene() { _loadSameScene.Raise(); }
 
         #endregion

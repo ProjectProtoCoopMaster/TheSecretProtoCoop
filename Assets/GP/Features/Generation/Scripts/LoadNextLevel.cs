@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.Mobile
 {
@@ -14,9 +15,14 @@ namespace Gameplay.Mobile
             if (other.name == "[HeadCollider]" && !passed)
             {
 
-                _sendLoadNextRoom.Raise();
+                LoadNextScene();
                 passed = true;
             }
+        }
+        [Button]
+        public void LoadNextScene()
+        {
+            _sendLoadNextRoom.Raise();
         }
     }
 }

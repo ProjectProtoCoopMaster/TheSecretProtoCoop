@@ -91,17 +91,35 @@ namespace Gameplay
             TransmitterManager.instance.SendRestartToAll();
         }
 
-        public void LaunchNextLevel()
-        {
-            SceneManager.LoadSceneAsync(_sceneID.Value += 2, LoadSceneMode.Additive);
-            SceneManager.UnloadSceneAsync(_sceneID.Value);
-            _sceneID.Value += 2;
-        }
 
         public void LaunchSameLevel()
         {
 
-            SceneManager.LoadSceneAsync(_sceneID.Value);
+            StartCoroutine(WaitSceneDestruction()); ;
+
+        }
+
+        IEnumerator WaitSceneDestruction()
+        {
+            yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
+            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+
+            yield return new WaitForSeconds(2f);
+            yield break;
+        }
+
+        IEnumerator WaitLoadNextScene()
+        {
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            yield return new WaitForEndOfFrame();
+            _sceneID.Value += 2;
+            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            yield break;
+        }
+
+        public void LoadNextScene()
+        {
+            StartCoroutine(WaitLoadNextScene());
 
         }
     }

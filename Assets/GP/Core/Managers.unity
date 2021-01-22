@@ -158,7 +158,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
   m_PrefabInstance: {fileID: 2906806235926443014}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584391200}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a86d09b348497bf43b7f418bee32d6c7, type: 3}
@@ -241,42 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848b223035fbc4b458724a723f52c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &584391200 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 216035856832860937, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
-  m_PrefabInstance: {fileID: 2906806235926443014}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &584391201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584391200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: 4d26704aa28d2fa4a940c43a319bfb79, type: 2}
-  ID: 0
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 230033386}
-        m_TargetAssemblyTypeName: Networking.TransmitterManager, Assembly-CSharp
-        m_MethodName: SendLoadSameSceneToAll
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  methodName: []
-  component: []
 --- !u!1001 &814800402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,11 +463,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &1462274170 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6269878309487729358, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-  m_PrefabInstance: {fileID: 1678654528}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1645317100 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
@@ -522,34 +481,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1044335847}
     m_Modifications:
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1462274170}
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 5158618838956339608, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6269878309487729354, guid: 683eae02f624f534791a34a767b2255e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -637,10 +568,6 @@ PrefabInstance:
     - target: {fileID: 6269878309487729358, guid: 683eae02f624f534791a34a767b2255e, type: 3}
       propertyPath: m_Name
       value: Lose Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6269878309487729358, guid: 683eae02f624f534791a34a767b2255e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683eae02f624f534791a34a767b2255e, type: 3}
@@ -912,6 +839,10 @@ PrefabInstance:
       propertyPath: loseCanvas
       value: 
       objectReference: {fileID: 1678654529}
+    - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+      propertyPath: startGame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
 --- !u!1001 &2906806235926443014
