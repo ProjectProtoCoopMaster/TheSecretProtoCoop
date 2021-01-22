@@ -61,6 +61,33 @@ namespace Gameplay.VR.Player
 
         [SerializeField] VisualEffect targetArea, oldArea;
 
+        VisualEffect _oldArea
+        {
+            get
+            {
+                if (oldArea == null)
+                {
+
+                    Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
+                    for (int i = 0; i < hitColliders.Length; i++)
+                    {
+                        Debug.Log(hitColliders[i].name);
+
+                        if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
+                            oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
+                    }
+                    return oldArea;
+                }
+
+                else return oldArea;
+            }
+
+            set
+            {
+                oldArea = value;
+            }
+        }
+
         private void Awake()
         {
             bezierVisualization = GetComponentInChildren<LineRenderer>();
@@ -78,30 +105,6 @@ namespace Gameplay.VR.Player
             bezierVisualization.positionCount = bezierSmoothness;
 
             delegateTween = TweenManagerLibrary.GetTweenFunction((int)tweenFunction);
-        }
-
-        VisualEffect _oldArea
-        {
-            get
-            {
-                if(oldArea == null)
-                {
-                    Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
-                    for (int i = 0; i < hitColliders.Length; i++)
-                    {
-                        Debug.Log(hitColliders[i].name);
-
-                        if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
-                            oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
-                    }
-                    return oldArea;
-                }
-                else return oldArea;
-            }
-            set
-            {
-                _oldArea = value;
-            }
         }
 
         private void FixedUpdate()
@@ -282,17 +285,14 @@ namespace Gameplay.VR.Player
 
             if (canTeleport == true)
                 StartCoroutine(TeleportThePlayer());
-            bezierVisualization.enabled = showRayPointer = canTeleport = false;            
+            bezierVisualization.enabled = showRayPointer = canTeleport = false;
         }
 
         IEnumerator TeleportThePlayer()
         {
-            if (oldArea != null)
-            {
-                _oldArea.enabled = true;
-                _oldArea = targetArea;
-                targetArea.enabled = false;
-            }
+            _oldArea.enabled = true;
+            _oldArea = targetArea;
+            targetArea.enabled = false;
 
             startPos = playerPosition;
             targetPos = teleportTarget;

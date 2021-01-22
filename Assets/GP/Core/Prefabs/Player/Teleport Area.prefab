@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 4568364011495356599}
   - component: {fileID: 4568364011495356593}
   - component: {fileID: 1025815277997134528}
-  - component: {fileID: 5819747313935859527}
+  - component: {fileID: 5537501363255264528}
   m_Layer: 9
   m_Name: Teleport Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4568364011495356594
 Transform:
@@ -115,7 +115,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5819747313935859527}
+      - m_Target: {fileID: 5537501363255264528}
         m_TargetAssemblyTypeName: Gameplay.VR.Player.TeleportationArea, Assembly-CSharp
         m_MethodName: Off
         m_Mode: 1
@@ -127,7 +127,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5819747313935859527
+--- !u!114 &5537501363255264528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b8c5f3aafb2b24eb32262ea6d3f383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportationMaterial: {fileID: 2100000, guid: 2c05144297346ce4ca6d83a41d2c3695, type: 2}
   lerpDuration: 0.75
 --- !u!1 &4710897111758891641
 GameObject:
