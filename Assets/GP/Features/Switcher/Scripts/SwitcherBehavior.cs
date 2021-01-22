@@ -12,8 +12,8 @@ namespace Gameplay
         public CallableFunction _switch = default;
         public CallableFunction _sendSwitcherChange = default;
         [SerializeField] private Button button;
-        [SerializeField] private Image image;
-        
+        [SerializeField] private Animator anim;
+        [SerializeField] private Text timerText;
         [SerializeField] private Image timerEnable;
         public List<Object> nodes = default;
 
@@ -82,6 +82,15 @@ namespace Gameplay
         public void OnEnable() => SwitcherManager.switchers.Add(this);
         public void OnDisable() => SwitcherManager.switchers.Remove(this);
 
+        private void Start()
+        {
+            if (anim != null)
+            {
+                ResetTimer();
+            }
+
+        }
+
         public void StartSwitcher() 
         {
             if (timerEnable != null)
@@ -127,6 +136,8 @@ namespace Gameplay
             {
                 StartCoroutine(DelaySwitchNode());
                 DOTween.To(() => currentTimer, x => currentTimer = x, timer, timer).SetEase(Ease.Linear).OnUpdate(SetTimerDisplayer).OnComplete(ResetTimer);
+                if(anim != null)
+                    anim.SetBool("OnTimer", true);
 
             }
             else
@@ -208,15 +219,21 @@ namespace Gameplay
         private void SetTimerDisplayer()
         {
             if (nodes.Count == 0)
+            { 
                 timerEnable.fillAmount = currentTimer / timer;
+                timerText.text = (timer - currentTimer).ToString("F1");
+            }
+
         }
 
         private void ResetTimer() 
         {
             if (nodes.Count == 0)
             {
+                timerText.text = timer.ToString();
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
+                anim.SetBool("OnTimer", false);
             }
 
 
