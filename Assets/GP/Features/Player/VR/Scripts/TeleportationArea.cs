@@ -1,5 +1,4 @@
 ﻿#if UNITY_STANDALONE
-using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
@@ -10,18 +9,12 @@ namespace Gameplay.VR.Player
     [RequireComponent(typeof(MeshCollider))]
     public class TeleportationArea : MonoBehaviour
     {
-        Material teleportationMaterial;
+        [SerializeField] Material teleportationMaterial;
         [SerializeField] float lerpDuration = .75f;
         float timeElapsed;
         float startValue = 0, endValue = 1;
         float valueToLerp;
-
-        void Awake()
-        {
-            teleportationMaterial = GetComponent<MeshRenderer>().material;
-            Off();
-        }
-
+        
         public void On()
         {
             startValue = 0;
