@@ -112,6 +112,8 @@ namespace Networking
         #region Level
         public void SendLevelHolderToOthers(LevelVariable levelVariable)
         {
+            Debug.Log("Send Level Holder VR");
+
             string[] _names = new string[levelVariable.LevelRoomsData.Count];
             ModifierType[] _types = new ModifierType[levelVariable.LevelRoomsData.Count];
 
@@ -133,6 +135,7 @@ namespace Networking
         }
         [PunRPC] private void SendLevelHolder(int size, string[] names, ModifierType[] modifierTypes)
         {
+            Debug.Log("Send Level Holder Mobile");
             _levelHolder.LevelRoomsData = new List<RoomData>();
             for (int i = 0; i < size; i++)
             {
