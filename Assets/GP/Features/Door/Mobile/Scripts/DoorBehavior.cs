@@ -24,12 +24,19 @@ namespace Gameplay.Mobile
         [SerializeField] private Color color_Open_Locked;
         [SerializeField] private Color color_Close;
         public GameObject hints;
+        [SerializeField] private RectTransform hintsTextArea;
+        private Vector3 initialHintsTextAreaScale;
+        [SerializeField] private RectTransform hintsCircle;
+        private Vector3 initialHintsCircleScale;
         [SerializeField] private GameObject padlock_Close;
+        private Vector3 initialPadlockScale;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
         [SerializeField] private Canvas symbolCanvas;
         private Sequence s;
+        private bool isSelected = false;
         public Text code;
+        private RaycastHit hit;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
         public int Power
@@ -56,26 +63,61 @@ namespace Gameplay.Mobile
         {
             if (selectable)
             {
+                
+
                 if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position)))
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position), out hit))
                     {
-                        hints.SetActive(true);
-                        if(s == null)
+                        if(hit.collider.gameObject == this.gameObject)
                         {
+                            isSelected = true;
+                            hints.SetActive(true);
+
+                            StopAllCoroutines();
+                            s.Kill();
                             s = DOTween.Sequence();
                             s.Append(padlock_Close.transform.DOScale(.25f, .2f).SetEase(Ease.OutBounce));
                             s.Append(padlock_Close.transform.DOScale(.2f, .2f).SetEase(Ease.Linear));
                             s.Play();
+                            StartCoroutine(WaitBounceIDLE());
+
                         }
 
-
-
-                        
                     }
                 }
 
             }
+        }
+
+        IEnumerator WaitBounceIDLE()
+        {
+            if (!isSelected)
+            {
+                yield return new WaitForSeconds(3);
+                s = DOTween.Sequence();
+                s.Append(padlock_Close.transform.DOScale(initialPadlockScale + new Vector3(0.05f,0.05f,0.05f), .5f).SetEase(Ease.OutBounce));
+                s.Append(padlock_Close.transform.DOScale(initialPadlockScale, 1f).SetEase(Ease.Linear));
+                s.Play();
+                
+                StartCoroutine(WaitBounceIDLE());
+                yield break;
+            }
+
+            else
+            {
+                yield return new WaitForSeconds(5);
+                s = DOTween.Sequence();
+                s.Append(hintsTextArea.DOScale(initialHintsTextAreaScale + new Vector3(0.25f, 0.25f, 0.25f), .5f).SetEase(Ease.OutBounce));
+                s.Append(hintsTextArea.DOScale(initialHintsTextAreaScale, 1f).SetEase(Ease.Linear));
+                s.Append(hintsCircle.DOScale(initialHintsCircleScale + new Vector3(0.5f, 0.5f, 0.5f), .5f).SetEase(Ease.OutBounce));
+                s.Append(hintsCircle.DOScale(initialHintsCircleScale, 1f).SetEase(Ease.Linear));
+                s.Play();
+
+                StartCoroutine(WaitBounceIDLE());
+                yield break;
+            }
+
         }
 
         public void TurnOn()
@@ -114,6 +156,11 @@ namespace Gameplay.Mobile
 
                 selectable =true;
                 padlock_Close.SetActive(true);
+                initialHintsTextAreaScale = hintsTextArea.localScale;
+                initialHintsCircleScale = hintsCircle.localScale;
+                initialPadlockScale = padlock_Close.transform.localScale;
+
+                StartCoroutine(WaitBounceIDLE());
             }
             else
             {
@@ -127,6 +174,9 @@ namespace Gameplay.Mobile
             selectable = false;
 
             padlock_Close.SetActive(false);
+            hints.SetActive(false);
+            StopAllCoroutines();
+            s.Kill();
 
             if (power == 1) TurnOn();
             else TurnOff();
