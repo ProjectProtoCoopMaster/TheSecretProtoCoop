@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ namespace Gameplay
         public GameObject lobbyMobile;
         public GameObject lobbyVR;
 
-        public Text codeVRComponent;
+        public TMP_Text codeVRComponent;
         public Text codeMobileComponent;
 
         private void OnEnable()
