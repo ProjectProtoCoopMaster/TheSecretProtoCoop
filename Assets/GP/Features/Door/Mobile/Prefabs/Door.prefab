@@ -602,19 +602,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79aef5e48a76a447b6a7bf3d86d794a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
   lockState: 0
   state: 1
   power: 1
-  door_open: {fileID: 21300000, guid: 9fb9f664defffc0439251aec9196563a, type: 3}
-  door_close: {fileID: 21300000, guid: a569d725ea4cd0d49b365885c06a06cb, type: 3}
-  door: {fileID: 723550408814300077}
-  padLock_open: {fileID: 21300000, guid: 2940c14baa1e53f48ad3e36b3b0170fd, type: 3}
-  padLock_close: {fileID: 21300000, guid: 1aed7ee1a0049cf4f8ff67a294d670db, type: 3}
-  padLock: {fileID: 8356945772540004217}
-  color_open: {r: 0, g: 0.97121596, b: 1, a: 1}
-  color_close: {r: 1, g: 0, b: 0, a: 1}
-  doorOutline: {fileID: 834505934}
+  color_Open_Unlocked: {r: 0, g: 0, b: 0, a: 0}
+  color_Open_Locked: {r: 0, g: 0, b: 0, a: 0}
+  color_Close: {r: 0, g: 0, b: 0, a: 0}
+  hints: {fileID: 0}
+  padlock_Close: {fileID: 0}
+  door: {fileID: 0}
   anim: {fileID: 834505933}
+  symbolCanvas: {fileID: 0}
+  code: {fileID: 0}
 --- !u!114 &6491037760284598754
 MonoBehaviour:
   m_ObjectHideFlags: 0
