@@ -60,6 +60,7 @@ namespace Gameplay.Mobile
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position)))
                     {
                         hints.SetActive(true);
+
                         
                     }
                 }
