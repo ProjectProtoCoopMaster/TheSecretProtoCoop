@@ -40,7 +40,7 @@ namespace Gameplay
                 ApplyModifiers();
 
                 TransmitterManager.instance.SendLevelHolderToOthers(levelHolder);
-                TransmitterManager.instance.SendBuildLevelToAll();
+                TransmitterManager.instance.BuildLevel();
             }
         }
 
