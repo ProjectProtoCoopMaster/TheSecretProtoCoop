@@ -32,11 +32,12 @@ namespace Gameplay
         [HideInInspector]
         public JammerBehavior jammer;
         private float currentTimer = 0;
+
         public int State 
         { 
-            get { return state; } 
-            set 
-            {
+            get { return state; }
+
+            set {
                 state = value;
 
                 if(state == 0)
@@ -49,7 +50,6 @@ namespace Gameplay
                     else TurnOn();
                 }
             }
-        
         }
 
         public int Power
@@ -80,7 +80,7 @@ namespace Gameplay
 
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
 
-        public void OnEnable() { if (button != null) SwitcherManager.switchers.Add(this); }
+        public void OnEnable() { SwitcherManager.switchers.Add(this); }
         public void OnDisable() => SwitcherManager.switchers.Remove(this);
 
         public void StartSwitcher() 
