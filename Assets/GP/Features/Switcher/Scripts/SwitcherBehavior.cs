@@ -12,7 +12,7 @@ namespace Gameplay
         public CallableFunction _switch = default;
         public CallableFunction _sendSwitcherChange = default;
         [SerializeField] private Button button;
-        [SerializeField] private Image image;
+        [SerializeField] private Animator anim;
         
         [SerializeField] private Image timerEnable;
         public List<Object> nodes = default;
@@ -127,6 +127,7 @@ namespace Gameplay
             {
                 StartCoroutine(DelaySwitchNode());
                 DOTween.To(() => currentTimer, x => currentTimer = x, timer, timer).SetEase(Ease.Linear).OnUpdate(SetTimerDisplayer).OnComplete(ResetTimer);
+                anim.SetBool("OnTimer", true);
 
             }
             else
@@ -217,6 +218,7 @@ namespace Gameplay
             {
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
+                anim.SetBool("OnTimer", false);
             }
 
 

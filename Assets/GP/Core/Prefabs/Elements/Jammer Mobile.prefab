@@ -48,7 +48,7 @@ MonoBehaviour:
   _sendOnJammerDestroyedToOthers: {fileID: 11400000, guid: a6ed9eca4f793914291a84513b6ce4a7, type: 2}
   switchers:
   - {fileID: 0}
-  ID: 0
+  ID: 1
 --- !u!114 &713062126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,9 +65,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Video.VideoPlayer, UnityEngine
-        m_MethodName: Stop
+      - m_Target: {fileID: 8098218842331729494}
+        m_TargetAssemblyTypeName: Gameplay.JammerBehavior, Assembly-CSharp
+        m_MethodName: StopGlitch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
