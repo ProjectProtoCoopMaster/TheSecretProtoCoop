@@ -58,7 +58,7 @@ namespace Networking
         [PunRPC] private void SendWin() => _onWin.Raise();
 
         public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.All);
-        [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
+        [PunRPC] private void SendRestart() { gameManager.loseCanvas.gameObject.SetActive(false); gameManager.gameOver = false; _onLevelRestart.Raise(); }
         #endregion
 
         #region Player Position

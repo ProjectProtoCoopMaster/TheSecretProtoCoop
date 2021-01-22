@@ -208,7 +208,7 @@ namespace Gameplay
         private void SetTimerDisplayer()
         {
             if (nodes.Count == 0)
-                timerEnable.fillAmount = 1-( currentTimer / timer);
+                timerEnable.fillAmount = currentTimer / timer;
         }
 
         private void ResetTimer() 
