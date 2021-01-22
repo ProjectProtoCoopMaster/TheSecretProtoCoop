@@ -79,8 +79,8 @@ namespace Gameplay
 
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
 
-        public void OnEnable() => SwitcherManager.switchers.Add(this);
-        public void OnDisable() => SwitcherManager.switchers.Remove(this);
+        //public void OnEnable() => SwitcherManager.switchers.Add(this);
+        //public void OnDisable() => SwitcherManager.switchers.Remove(this);
 
         private void Start()
         {
