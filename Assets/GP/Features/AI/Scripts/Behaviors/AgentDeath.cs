@@ -26,8 +26,6 @@ namespace Gameplay.VR
             ragdollBehavior.ActivateRagdollWithForce(force, ForceMode.Impulse);
 
             deathEvent.Invoke();
-            
-            enabled = false;
         }
 
         public void Die() { }
