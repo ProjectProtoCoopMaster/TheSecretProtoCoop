@@ -115,12 +115,12 @@ namespace Networking
             Debug.Log("Send Level Holder VR");
 
             string[] _names = new string[levelVariable.LevelRoomsData.Count];
-            ModifierType[] _types = new ModifierType[levelVariable.LevelRoomsData.Count];
+            int[] _types = new int[levelVariable.LevelRoomsData.Count];
 
             for (int i = 0; i < levelVariable.LevelRoomsData.Count; i++)
             {
                 _names[i] = levelVariable.LevelRoomsData[i].roomName;
-                _types[i] = levelVariable.LevelRoomsData[i].roomModifier;
+                _types[i] = (int)levelVariable.LevelRoomsData[i].roomModifier;
             }
 
             photonView.RPC("SendLevelHolder", RpcTarget.Others, levelVariable.LevelRoomsData.Count, _names as object, _types as object);
@@ -133,13 +133,13 @@ namespace Networking
             //    photonView.RPC("SendRoomModifier", RpcTarget.Others, levelVariable.LevelRoomsData[i].roomModifier, i);
             //}
         }
-        [PunRPC] private void SendLevelHolder(int size, string[] names, ModifierType[] modifierTypes)
+        [PunRPC] private void SendLevelHolder(int size, string[] names, int[] modifierTypes)
         {
             Debug.Log("Send Level Holder Mobile");
             _levelHolder.LevelRoomsData = new List<RoomData>();
             for (int i = 0; i < size; i++)
             {
-                _levelHolder.LevelRoomsData.Add(new RoomData { roomName = names[i], roomModifier = modifierTypes[i] });
+                _levelHolder.LevelRoomsData.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
             }
 
             BuildLevel();

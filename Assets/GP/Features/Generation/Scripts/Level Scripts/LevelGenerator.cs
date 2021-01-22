@@ -6,7 +6,7 @@ using Networking;
 
 namespace Gameplay
 {
-    public enum ModifierType { DarkZone, Thermic, Oxygen, None }
+    public enum ModifierType { DarkZone = 0, Thermic = 1, Oxygen = 2, None = 3 }
 
     public class LevelGenerator : SerializedMonoBehaviour
     {
