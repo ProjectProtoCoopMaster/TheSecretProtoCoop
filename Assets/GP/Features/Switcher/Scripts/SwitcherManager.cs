@@ -9,6 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private SwitcherBehavior[] switchers;
 
+        
 
         public void RaiseSwitch(float ID)
         {
