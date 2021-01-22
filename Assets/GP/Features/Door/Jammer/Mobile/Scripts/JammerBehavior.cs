@@ -53,6 +53,7 @@ namespace Gameplay
 
             yield return new WaitForSeconds(.5f);
             video = FindObjectOfType<VideoPlayer>();
+            video.enabled = true;
             State = true;
         }
 
@@ -63,8 +64,9 @@ namespace Gameplay
         [Button]
         public void Die() 
         {
-            _destroyJammer.Raise(ID);
             _sendOnJammerDestroyedToOthers.Raise(ID);
+            _destroyJammer.Raise(ID);
+            
 
         }
 

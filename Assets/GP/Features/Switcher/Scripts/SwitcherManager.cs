@@ -11,6 +11,7 @@ namespace Gameplay
 
         public static List<SwitcherBehavior> switchers = new List<SwitcherBehavior>();
 
+        
         void OnEnable() { if (instance == null) instance = this; }
 
         public void RaiseSwitch(float ID)
