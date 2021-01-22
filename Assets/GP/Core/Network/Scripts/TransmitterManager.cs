@@ -53,6 +53,8 @@ namespace Networking
         private void Awake() => instance = this;
 
         #region Game Management
+
+        [Button]
         public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.All, loseType); }
         [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 

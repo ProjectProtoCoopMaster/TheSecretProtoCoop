@@ -34,7 +34,7 @@ namespace Gameplay
 
         void Start()
         {
-            winCanvas.gameObject.SetActive(false);
+           // winCanvas.gameObject.SetActive(false);
             loseCanvas.gameObject.SetActive(false);
 
             if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
@@ -101,8 +101,7 @@ namespace Gameplay
         public void LaunchSameLevel()
         {
 
-            SceneManager.UnloadSceneAsync(_sceneID.Value);
-            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(_sceneID.Value);
 
         }
     }
