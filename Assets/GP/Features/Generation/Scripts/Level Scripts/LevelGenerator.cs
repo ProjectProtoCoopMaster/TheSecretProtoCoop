@@ -39,7 +39,9 @@ namespace Gameplay
 
                 ApplyModifiers();
 
+                // Build the Level in Mobile
                 TransmitterManager.instance.SendLevelHolderToOthers(levelHolder);
+                // Build the Level in VR
                 TransmitterManager.instance.BuildLevel();
             }
         }

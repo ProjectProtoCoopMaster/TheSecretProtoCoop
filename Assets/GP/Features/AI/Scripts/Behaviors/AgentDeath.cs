@@ -25,6 +25,7 @@ namespace Gameplay.VR
             RagdollBehavior ragdollBehavior = agent.ragdoll.GetComponentInChildren<RagdollBehavior>();
             ragdollBehavior.ActivateRagdollWithForce(force, ForceMode.Impulse);
 
+            // Will not be called if there are Listeners with null references (Check the Inspector)
             deathEvent.Invoke();
             
             enabled = false;
