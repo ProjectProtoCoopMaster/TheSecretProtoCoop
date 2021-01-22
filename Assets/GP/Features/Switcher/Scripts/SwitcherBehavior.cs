@@ -55,9 +55,10 @@ namespace Gameplay
         public int Power
         {
             get { return power; }
-            set 
-            { 
+
+            set { 
                 power = value;
+
                 if (power == 1)
                 {
                     if (state == 1) 
@@ -86,16 +87,13 @@ namespace Gameplay
         {
             if (timerEnable != null)
             {
-                if (switchTimer == SwitchTimer.Fixed) {  ResetTimer(); }
-
-
+                if (switchTimer == SwitchTimer.Fixed) ResetTimer();
             }
 
             if (hasJammer) jammer.AddSwitcher(this);
 
             Power = power;
         }
-
 
         public void CallSwitchManager()
         { 
@@ -105,59 +103,46 @@ namespace Gameplay
 
         private void SwitchNode()
         {
-            if(nodes.Count != 0)
+            if (nodes.Count != 0)
             {
                 foreach (ISwitchable node in nodes)
                 {
                     if (node.Power == 1) node.Power = 0;
                     else node.Power = 1;
-                    if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null)
-                        node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
+
+                    if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null) node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
                 }
-
-
-
             }
-
         }
 
         public void TriggerSwitch()
         {
-            if(switchTimer == SwitchTimer.Fixed)
+            if (switchTimer == SwitchTimer.Fixed)
             {
                 StartCoroutine(DelaySwitchNode());
                 DOTween.To(() => currentTimer, x => currentTimer = x, timer, timer).SetEase(Ease.Linear).OnUpdate(SetTimerDisplayer).OnComplete(ResetTimer);
-
             }
             else
             {
-
                 SwitchNode();
             }
-
-            
         }
 
         public void SwitchChildrens()
         {
-
             foreach (ISwitchable node in nodes)
             {
                 if (Power == 1)
                 {
                     if (node.Power == 1) node.TurnOn();
                     else node.TurnOff();
-
-
                 }
                 else
                 {
                     node.TurnOff();
                 }
 
-                if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null)
-                    node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
-
+                if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null) node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
             }
         }
 
@@ -166,49 +151,43 @@ namespace Gameplay
             SwitchNode();
             TurnOff();
             yield return new WaitForSeconds(timer);
+
             SwitchNode();
             TurnOn();
-            
             yield break;
         }
 
-
         public void SearchReferences()
         {
-            if (nodes.Count > 0)
-                nodes.Clear();
+            if (nodes.Count > 0) nodes.Clear();
+
             for (int i = 0; i < transform.childCount; i++)
             {
                 if (transform.GetChild(i).gameObject.GetComponent<ISwitchable>() != null)
                 {
                     nodes.Add(transform.GetChild(i).gameObject.GetComponent<ISwitchable>() as Object);
                 }
-
             }
         }
 
         public void TurnOn()
         {
             ChangeSwitch(true);
-
         }
 
         public void TurnOff()
         {
             ChangeSwitch(false);
-            
         }
 
         void ChangeSwitch(bool buttonState)
         {
-            if (button != null)
-                button.interactable = buttonState;
+            if (button != null) button.interactable = buttonState;
         }
 
         private void SetTimerDisplayer()
         {
-            if (nodes.Count == 0)
-                timerEnable.fillAmount = currentTimer / timer;
+            if (nodes.Count == 0) timerEnable.fillAmount = currentTimer / timer;
         }
 
         private void ResetTimer() 
@@ -218,23 +197,18 @@ namespace Gameplay
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
             }
-
-
         }
 
         public void ShowLines(bool value)
         {
             for (int i = 0; i < nodes.Count; i++)
             {
-                if(nodes[i].GetType() == typeof(Gameplay.Mobile.ElectricalLineBehavior))
+                if (nodes[i].GetType() == typeof(Gameplay.Mobile.ElectricalLineBehavior))
                 {
                     Gameplay.Mobile.ElectricalLineBehavior node = nodes[i] as Gameplay.Mobile.ElectricalLineBehavior;
                     node.gameObject.GetComponent<LineRenderer>().enabled = value;
                 }
-
             }
-
         }
     }
-
 }
