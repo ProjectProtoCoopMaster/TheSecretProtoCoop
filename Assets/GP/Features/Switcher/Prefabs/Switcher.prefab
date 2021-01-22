@@ -220,7 +220,7 @@ MonoBehaviour:
   _switch: {fileID: 11400000, guid: 6af23fddf1af7204bbbae8981a6051ca, type: 2}
   _sendSwitcherChange: {fileID: 11400000, guid: 8fed6ffc2dd448340a467d9884f67544, type: 2}
   button: {fileID: 3409338572498560287}
-  image: {fileID: 0}
+  anim: {fileID: 177858954279291424}
   timerEnable: {fileID: 4485415049979872652}
   nodes: []
   state: 1
@@ -277,6 +277,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Gameplay.SwitcherBehavior, Assembly-CSharp
         m_MethodName: CallSwitchManager
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 177858954279291424}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
