@@ -27,8 +27,6 @@ namespace Gameplay.VR
 
             // Will not be called if there are Listeners with null references (Check the Inspector)
             deathEvent.Invoke();
-            
-            enabled = false;
         }
 
         public void Die() { }

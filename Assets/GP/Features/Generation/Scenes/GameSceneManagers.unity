@@ -558,17 +558,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &938661480 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8716512227724604809, guid: fb555567d260a0746a80efded5961758, type: 3}
-  m_PrefabInstance: {fileID: 929449247488257632}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c6abcf783994449840c260e92043b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1101125392
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,34 +914,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: Gameplay.VR.Feedbacks.UI_InitCameraLayering, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Target
-      value: 
-      objectReference: {fileID: 938661480}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: GE_RefreshScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 929449248649316098, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3521382425665192201, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1000,10 +961,6 @@ PrefabInstance:
     - target: {fileID: 3521382425665192206, guid: fb555567d260a0746a80efded5961758, type: 3}
       propertyPath: m_Name
       value: VR Feedback Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521382425665192206, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb555567d260a0746a80efded5961758, type: 3}
@@ -1073,7 +1030,7 @@ PrefabInstance:
       objectReference: {fileID: 871996875}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: startGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: loseCanvas
