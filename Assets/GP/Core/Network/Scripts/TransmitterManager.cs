@@ -40,6 +40,8 @@ namespace Networking
         [Title("Level Management")]
         [SerializeField] private GameEvent _changeRoomMobile;
         [SerializeField] private GameEvent _onLevelRestart;
+        [SerializeField] private CallableFunction _loadNextScene;
+        [SerializeField] private CallableFunction _loadSameScene;
 
         [Title("Symbol Door")]
         public SymbolManager symbolManager;
@@ -51,14 +53,22 @@ namespace Networking
         private void Awake() => instance = this;
 
         #region Game Management
-        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.All, loseType); }
+
+        [Button]
+        public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
         [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 
-        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.All);
+        public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
         [PunRPC] private void SendWin() => _onWin.Raise();
 
-        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.All);
-        [PunRPC] private void SendRestart() { gameManager.loseCanvas.gameObject.SetActive(false); gameManager.gameOver = false; _onLevelRestart.Raise(); }
+        public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
+        [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
+
+        public void SendLoadNextSceneToAll() => photonView.RPC("SendLoadNextScene", RpcTarget.All);
+        [PunRPC] private void SendLoadNextScene() { _loadNextScene.Raise(); }
+        public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.AllViaServer);
+        [PunRPC] private void SendLoadSameScene() { _loadSameScene.Raise(); }
+
         #endregion
 
         #region Player Position

@@ -155,7 +155,7 @@ namespace Gameplay.Mobile
             }
             if (missNumber == 2)
             {
-                _sendGameOver.Raise();
+                Networking.TransmitterManager.instance.SendLoseToAll(5);
             }
         }
 
