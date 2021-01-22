@@ -28,6 +28,7 @@ namespace Gameplay.Mobile
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
         [SerializeField] private Canvas symbolCanvas;
+        private Sequence s;
         public Text code;
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
         public int State { get { return state; } set { state = value; } }
@@ -60,6 +61,15 @@ namespace Gameplay.Mobile
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.GetTouch(0).position)))
                     {
                         hints.SetActive(true);
+                        if(s == null)
+                        {
+                            s = DOTween.Sequence();
+                            s.Append(padlock_Close.transform.DOScale(.25f, .2f).SetEase(Ease.OutBounce));
+                            s.Append(padlock_Close.transform.DOScale(.2f, .2f).SetEase(Ease.Linear));
+                            s.Play();
+                        }
+
+
 
                         
                     }

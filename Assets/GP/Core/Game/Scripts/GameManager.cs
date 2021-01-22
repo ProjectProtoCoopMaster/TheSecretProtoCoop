@@ -10,7 +10,7 @@ namespace Gameplay
 {
     public enum Platform { Mobile, VR }
 
-    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4 };
+    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 };
 
     public class GameManager : MonoBehaviour
     {
@@ -64,6 +64,10 @@ namespace Gameplay
 
                     case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
                         loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
+                        break;
+                    case LoseType.MissSymbols:
+                        loseText.text = _loseText.Value = "You failed to enter the right Code !";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
                         break;
                 }
 

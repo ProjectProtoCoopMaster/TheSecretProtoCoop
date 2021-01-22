@@ -12,7 +12,6 @@ namespace Gameplay
         [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private CallableFunction _sendOnJammerDestroyedToOthers;
         [SerializeField] private List<SwitcherBehavior> switchers;
-        private Camera cam;
         private VideoPlayer video;
         [Range(0, 10)] public int ID;
         
@@ -54,9 +53,6 @@ namespace Gameplay
 
             yield return new WaitForSeconds(.5f);
             video = FindObjectOfType<VideoPlayer>();
-            cam = video.GetComponent<Camera>();
-            if (cam.gameObject.GetComponent<VideoPlayer>() != null)
-                video = cam.gameObject.GetComponent<VideoPlayer>();
             State = true;
         }
 

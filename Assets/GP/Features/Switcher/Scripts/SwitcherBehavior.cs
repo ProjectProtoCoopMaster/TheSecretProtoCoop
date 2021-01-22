@@ -13,7 +13,7 @@ namespace Gameplay
         public CallableFunction _sendSwitcherChange = default;
         [SerializeField] private Button button;
         [SerializeField] private Animator anim;
-        
+        [SerializeField] private Text timerText;
         [SerializeField] private Image timerEnable;
         public List<Object> nodes = default;
 
@@ -81,6 +81,11 @@ namespace Gameplay
 
         public void OnEnable() => SwitcherManager.switchers.Add(this);
         public void OnDisable() => SwitcherManager.switchers.Remove(this);
+
+        private void Start()
+        {
+            ResetTimer();
+        }
 
         public void StartSwitcher() 
         {
@@ -209,13 +214,18 @@ namespace Gameplay
         private void SetTimerDisplayer()
         {
             if (nodes.Count == 0)
+            { 
                 timerEnable.fillAmount = currentTimer / timer;
+                timerText.text = (timer - currentTimer).ToString("F1");
+            }
+
         }
 
         private void ResetTimer() 
         {
             if (nodes.Count == 0)
             {
+                timerText.text = timer.ToString();
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
                 anim.SetBool("OnTimer", false);
