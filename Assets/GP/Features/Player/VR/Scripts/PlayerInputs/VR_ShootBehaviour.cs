@@ -38,6 +38,7 @@ namespace Gameplay.VR.Player
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent hitEnemy = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloading = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunReloaded = null;
+        [SerializeField] [FoldoutGroup("Shooting")] AnimationClip reloadAnimation = null;
         [SerializeField] [FoldoutGroup("Shooting")] GameEvent gunEmpty = null;
 
         [SerializeField] [FoldoutGroup("Internal Values")] FloatVariable shootingCooldown;
@@ -59,7 +60,8 @@ namespace Gameplay.VR.Player
             if (timePassed >= 0)
             {
                 timePassed -= Time.unscaledDeltaTime;
-                if (timePassed <= 0) gunReloaded.Raise();
+                // call the reload animation event when the gun is reloaded - the time it takes to animate the reload
+                if (timePassed <= 0 + reloadAnimation.length) gunReloaded.Raise();
             }
 
             if (shootAction.GetStateDown(handSource))
