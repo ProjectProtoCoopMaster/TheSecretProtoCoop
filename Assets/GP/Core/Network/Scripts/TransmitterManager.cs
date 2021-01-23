@@ -62,9 +62,9 @@ namespace Networking
         [PunRPC] private void SendWin() => _onWin.Raise();
 
         public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
-        [PunRPC] private void SendRestart() { Destroy(gameManager.loseCanvas); gameManager.gameOver = false; _onLevelRestart.Raise(); }
+        [PunRPC] private void SendRestart() { SendLoadSameSceneToAll(); }
 
-        public void SendLoadNextSceneToAll() => photonView.RPC("SendLoadNextScene", RpcTarget.All);
+        public void SendLoadNextSceneToAll() => photonView.RPC("SendLoadNextScene", RpcTarget.AllViaServer);
         [PunRPC] private void SendLoadNextScene() { _loadNextScene.Raise(); }
         public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.AllViaServer);
         [PunRPC] private void SendLoadSameScene() { _loadSameScene.Raise(); }

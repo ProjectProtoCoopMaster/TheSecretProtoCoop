@@ -8,6 +8,9 @@ namespace Gameplay.VR
     {
         public RoomManager currentRoom { get; set; }
 
+        private bool _isDead;
+        public bool isDead { get { return _isDead; } set { _isDead = value; } }
+
         [SerializeField] private Transform rigTransform;
 
         [SerializeField] private GameEvent playerHitTrap, raiseAlarm;
@@ -21,7 +24,6 @@ namespace Gameplay.VR
 
         [SerializeField] private GameObjectVariable _player;
 
-        private bool isDead;
 
         public void Die(Vector3 direction = default)
         {
