@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6826437072511744741}
   - component: {fileID: 8958192908289284741}
   - component: {fileID: 6306960275784692587}
+  - component: {fileID: 6860747876073234230}
   m_Layer: 11
   m_Name: Static Guard Light
   m_TagString: Enemy/Light Guard
@@ -135,6 +136,7 @@ MonoBehaviour:
   pingFrequency: 5
   framesPassed: 0
   poweredOn: 1
+  animationManager: {fileID: 0}
   detectionMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -410,6 +412,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6860747876073234230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785165413479417936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df486608e052574abb011a871a6763a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2486494400065184333}
+  animator: {fileID: 4162811791456522307}
 --- !u!1 &6424637464478035194
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be870d727c6db01488ea1cb8ca8ce22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationManager: {fileID: 0}
   target: {fileID: 785165413479417951}
   navMeshAgent: {fileID: 1374405838736023053}
   angular: 120
@@ -771,6 +788,11 @@ PrefabInstance:
 --- !u!4 &4237055941234575885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+  m_PrefabInstance: {fileID: 9030036424836045402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4162811791456522307 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4941685801191868953, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
   m_PrefabInstance: {fileID: 9030036424836045402}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1851293868460933452 stripped

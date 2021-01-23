@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 1219852604363815338}
   - component: {fileID: 8668388833559456506}
   - component: {fileID: 6146927010924072766}
+  - component: {fileID: 8423117328588722402}
   m_Layer: 11
   m_Name: Patrol Guard Light
   m_TagString: Enemy/Light Guard
@@ -153,6 +154,7 @@ MonoBehaviour:
   pingFrequency: 5
   framesPassed: 0
   poweredOn: 1
+  animationManager: {fileID: 0}
   detectionMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -428,6 +430,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8423117328588722402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078856768317732911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df486608e052574abb011a871a6763a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2782208830428516914}
+  animator: {fileID: 7147310051196829313}
 --- !u!1 &6392722476762608136
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be870d727c6db01488ea1cb8ca8ce22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationManager: {fileID: 0}
   target: {fileID: 1078856768317732896}
   navMeshAgent: {fileID: 1661678313587011186}
   angular: 120
@@ -644,6 +661,11 @@ PrefabInstance:
 --- !u!4 &6933313851501208783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+  m_PrefabInstance: {fileID: 2856475762251822232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7147310051196829313 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4941685801191868953, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
   m_PrefabInstance: {fileID: 2856475762251822232}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4847001494236540814 stripped

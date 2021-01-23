@@ -51,7 +51,7 @@ namespace Gameplay.AI
             }
         }
 
-        protected void SwitchAgentState(Usage _usage, StateType _state = StateType.None, bool resumeAfterwards = false)
+        public void SwitchAgentState(Usage _usage, StateType _state = StateType.None, bool resumeAfterwards = false)
         {
             if (isDead) return;
 
@@ -72,7 +72,7 @@ namespace Gameplay.AI
             currentState = _state;
         }
 
-        protected void StopAgent()
+        public void StopAgent()
         {
             foreach (AgentBehavior agentBehavior in agentBehaviors.Values)
             {
