@@ -114,7 +114,7 @@ namespace Gameplay
         IEnumerator WaitLoadNextScene()
         {
             _fadeTransition.Raise();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.2f);
             SceneManager.UnloadSceneAsync(_sceneID.Value);
             yield return new WaitForEndOfFrame();
             _sceneID.Value += 2;
