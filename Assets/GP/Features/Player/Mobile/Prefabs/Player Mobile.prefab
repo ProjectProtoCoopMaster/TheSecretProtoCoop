@@ -100,6 +100,21 @@ MonoBehaviour:
   _player: {fileID: 11400000, guid: dd1019a1a8255ea43873e7e8e2dd8c89, type: 2}
   _hidePlayer: {fileID: 11400000, guid: 445ab5a4eccd36b4eb099b9ea801030c, type: 2}
   playerTransform: {fileID: 8048453322120509208}
+  _OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8d41bafa3842f174087729fa18c74f11, type: 2}
+        m_TargetAssemblyTypeName: Gameplay.CallableFunction, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8696602607261053183
 MonoBehaviour:
   m_ObjectHideFlags: 0

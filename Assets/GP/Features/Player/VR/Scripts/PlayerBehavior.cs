@@ -23,7 +23,7 @@ namespace Gameplay.VR
         [SerializeField] private QuaternionVariable _playerRotation;
 
         [SerializeField] private GameObjectVariable _player;
-
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
 
         public void Die(Vector3 direction = default)
         {
@@ -41,6 +41,12 @@ namespace Gameplay.VR
         {
             raiseAlarm.Raise();
             playerHitTrap.Raise();
+        }
+
+        private void Start()
+        {
+
+            _OnStart.Invoke();
         }
 
         void Update()
