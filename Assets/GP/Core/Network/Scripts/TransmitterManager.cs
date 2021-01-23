@@ -135,8 +135,8 @@ namespace Networking
             _levelHolder.LevelRoomsData = new List<RoomData>();
             for (int i = 0; i < size; i++) _levelHolder.LevelRoomsData.Add(new RoomData());
         }
-        [PunRPC] private void SendRoomName(string name, int index) => _levelHolder.LevelRoomsData[index].roomName = name;
-        [PunRPC] private void SendRoomModifier(ModifierType modifier, int index) => _levelHolder.LevelRoomsData[index].roomModifier = modifier;
+        [PunRPC] private void SendRoomName(string name, int index) { Debug.Log("Send Room Name"); _levelHolder.LevelRoomsData[index].roomName = name; }
+        [PunRPC] private void SendRoomModifier(ModifierType modifier, int index) { Debug.Log("Send Room Modifier"); _levelHolder.LevelRoomsData[index].roomModifier = modifier; }
 
         public void SendBuildLevelToAll() => photonView.RPC("SendBuildLevel", RpcTarget.All);
         [PunRPC] private void SendBuildLevel() => _buildLevel.Raise();
