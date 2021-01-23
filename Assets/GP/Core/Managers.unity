@@ -918,10 +918,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRFeedbackManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4049425095497932152, guid: fb555567d260a0746a80efded5961758, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb555567d260a0746a80efded5961758, type: 3}
 --- !u!1001 &1525769403186798941
@@ -989,12 +985,16 @@ PrefabInstance:
       objectReference: {fileID: 1678654529}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: startGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
       propertyPath: _fadeTransition
       value: 
       objectReference: {fileID: 11400000, guid: 4170ce1abde672643ac50e1939d3f653, type: 2}
+    - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+      propertyPath: _refreshScene
+      value: 
+      objectReference: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
 --- !u!1001 &2906806235926443014
