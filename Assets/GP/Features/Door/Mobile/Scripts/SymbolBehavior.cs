@@ -134,7 +134,7 @@ namespace Gameplay.Mobile
 
         IEnumerator WaitCloseSymbolCanvas()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
             door.GetComponent<DoorBehavior>().hints.SetActive(false);
             canvas.enabled = false;
             gameObject.SetActive(false);
@@ -156,6 +156,10 @@ namespace Gameplay.Mobile
             if (missNumber == 2)
             {
                 Networking.TransmitterManager.instance.SendLoseToAll(5);
+                door.GetComponent<DoorBehavior>().hints.SetActive(false);
+                canvas.enabled = false;
+                gameObject.SetActive(false);
+
             }
         }
 
