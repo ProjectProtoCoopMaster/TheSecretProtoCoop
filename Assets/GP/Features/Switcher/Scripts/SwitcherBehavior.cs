@@ -15,6 +15,9 @@ namespace Gameplay
         [SerializeField] private Animator anim;
         [SerializeField] private Text timerText;
         [SerializeField] private Image timerEnable;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip successPushClip;
+        [SerializeField] private AudioClip failPushClip;
         public List<Object> nodes = default;
 
         [Header("---IMPORTANT---")]
@@ -146,7 +149,9 @@ namespace Gameplay
                 SwitchNode();
             }
 
-            
+            LaunchSound();
+
+
         }
 
         public void SwitchChildrens()
@@ -230,10 +235,12 @@ namespace Gameplay
         {
             if (nodes.Count == 0)
             {
+                if (currentTimer > 0) LaunchEndSound();
                 timerText.text = timer.ToString();
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
                 anim.SetBool("OnTimer", false);
+
             }
 
 
@@ -251,6 +258,24 @@ namespace Gameplay
 
             }
 
+        }
+
+        private void LaunchSound()
+        {
+            if (button != null && button.interactable)
+            {
+                audioSource.PlayOneShot(successPushClip);
+            }
+            else if (button != null && !button.interactable)
+            {
+                audioSource.PlayOneShot(failPushClip);
+            }
+
+            
+        }
+        private void LaunchEndSound()
+        {
+            audioSource.PlayOneShot(failPushClip);
         }
     }
 
