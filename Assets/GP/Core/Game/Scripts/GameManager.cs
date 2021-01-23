@@ -24,6 +24,8 @@ namespace Gameplay
 
         public Transform UICanvas;
 
+        [SerializeField] private CallableFunction _fadeTransition;
+
         [Title("Lose")]
         public Transform loseCanvas;
         public StringVariable _loseText;
@@ -111,6 +113,8 @@ namespace Gameplay
 
         IEnumerator WaitLoadNextScene()
         {
+            _fadeTransition.Raise();
+            yield return new WaitForSeconds(1);
             SceneManager.UnloadSceneAsync(_sceneID.Value);
             yield return new WaitForEndOfFrame();
             _sceneID.Value += 2;

@@ -17,9 +17,12 @@ namespace Gameplay.Mobile
 
         [SerializeField] private Transform playerTransform;
 
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
+
 
         void Start()
-        { 
+        {
+            _OnStart.Invoke();
             _player.Value = this.gameObject;
             playerTransform.localScale = new Vector3(2, 2, 2);
         
