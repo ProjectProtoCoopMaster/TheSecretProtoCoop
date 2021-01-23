@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,24 +12,19 @@ namespace Gameplay
         public CallableFunction Function;
         [InfoBox("Number of target in response in which you want to pass the callable function parameter")]
         public int ID;
-        //public GameEventPass Event2;
+
         public UnityEvent Response;
         public Type[] type;
-        [HideInInspector]
-        public string[] methodName;
-        [HideInInspector]
-        public Component[] component;
+        [HideInInspector] public string[] methodName;
+        [HideInInspector] public Component[] component;
 
         public void OnEventRaised()
         {
             Response.Invoke();
-
         }
-
 
         private void OnEnable()
         {
-            
             Function.RegisterListener(this);
             type = new Type[ID];
             methodName = new string[ID];
@@ -42,7 +36,6 @@ namespace Gameplay
                 methodName[i] = Response.GetPersistentMethodName(i);
                 component[i] = GetComponent(type[i]);
             }
-
         }
 
         private void OnDisable()
@@ -50,6 +43,4 @@ namespace Gameplay
             Function.UnRegisterListener(this);
         }
     }
-
 }
-

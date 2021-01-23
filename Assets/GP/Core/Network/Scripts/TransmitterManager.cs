@@ -129,9 +129,11 @@ namespace Networking
         [PunRPC] private void SendLevelHolder(int size, string[] names, int[] modifierTypes)
         {
             Debug.Log("Send Level Holder Mobile");
+
             _levelHolder.LevelRoomsData = new List<RoomData>();
             for (int i = 0; i < size; i++)
             {
+                Debug.Log("with room :" + names[i] + "and modifier :" + (ModifierType)modifierTypes[i]);
                 _levelHolder.LevelRoomsData.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
             }
 
