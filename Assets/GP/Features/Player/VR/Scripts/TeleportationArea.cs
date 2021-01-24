@@ -14,40 +14,51 @@ namespace Gameplay.VR.Player
         float timeElapsed;
         float startValue = 0, endValue = 1;
         float valueToLerp;
-        
+
+        private Renderer _renderer;
+        private MaterialPropertyBlock _propBlock;
+
+        void Awake()
+        {
+            _propBlock = new MaterialPropertyBlock();
+            _renderer = GetComponent<Renderer>();
+        }
+
         public void On()
-        {/*
+        {
             startValue = 0;
             endValue = 1;
 
             timeElapsed = 0f;
 
-            StartCoroutine(Lerp()); */
+            StartCoroutine(Lerp());
         }
 
         public void Off()
-        {/*
+        {
             startValue = 1;
             endValue = 0;
 
             timeElapsed = 0f;
 
-            StartCoroutine(Lerp());*/
+            StartCoroutine(Lerp());
         }
 
         IEnumerator Lerp()
         {
-            yield return null;/*
             while (timeElapsed < lerpDuration)
             {
                 valueToLerp = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);
+                _renderer.GetPropertyBlock(_propBlock);
+                _propBlock.SetFloat("_GlowState", valueToLerp);
+                _renderer.SetPropertyBlock(_propBlock);
                 timeElapsed += Time.deltaTime;
-                teleportationMaterial.SetFloat("_GlowState", valueToLerp);
                 yield return null;
             }
 
             valueToLerp = endValue;
-            teleportationMaterial.SetFloat("_GlowState", valueToLerp);*/
+            _propBlock.SetFloat("_GlowState", valueToLerp);
+            _renderer.SetPropertyBlock(_propBlock);
         }
     } 
 }
