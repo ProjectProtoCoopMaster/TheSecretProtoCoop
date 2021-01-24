@@ -8,13 +8,16 @@ namespace Gameplay
     {
         public static JammerManager instance;
 
-        public static List<JammerBehavior> jammers = new List<JammerBehavior>();
+
+        [SerializeField] private JammerBehavior[] jammers;
 
         void OnEnable() { if (instance == null) instance = this; }
 
         public void DestroyJammer(int ID)
         {
-            for (int i = 0; i < jammers.Count; i++)
+            SearchJammersInScene();
+
+            for (int i = 0; i < jammers.Length; i++)
             {
                 if (jammers[i].ID == ID)
                 {
@@ -30,6 +33,8 @@ namespace Gameplay
                 jammer.SetState(true);
             }
         }
+
+        public void SearchJammersInScene() => jammers = FindObjectsOfType<JammerBehavior>();
     }
 
 }

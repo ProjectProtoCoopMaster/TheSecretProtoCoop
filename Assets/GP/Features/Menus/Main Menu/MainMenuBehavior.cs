@@ -26,7 +26,9 @@ namespace Gameplay
         {
             lobbyMobile.SetActive(false);
             lobbyVR.SetActive(false);
-            index = 2;
+            if (_isMobile.Value)
+                index = 3;
+            else index = 2;
         }
 
         public void SetIndex(int ID) => index = ID;

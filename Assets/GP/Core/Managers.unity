@@ -153,17 +153,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &230033386 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6129269782710857282, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
-  m_PrefabInstance: {fileID: 2906806235926443014}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86d09b348497bf43b7f418bee32d6c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &475836316
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,6 +702,112 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6269878309487729354, guid: 683eae02f624f534791a34a767b2255e, type: 3}
   m_PrefabInstance: {fileID: 1678654528}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1697329100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697329101}
+  - component: {fileID: 1697329103}
+  - component: {fileID: 1697329102}
+  m_Layer: 0
+  m_Name: FakeCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1697329101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697329100}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.331436, y: 5.280781, z: -0.19998075}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1525769403186798942}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1697329102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697329100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+--- !u!20 &1697329103
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697329100}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -100
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1929216592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1157,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRFeedbackManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6625624444017045400, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809330102333434123, guid: fb555567d260a0746a80efded5961758, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb555567d260a0746a80efded5961758, type: 3}
 --- !u!1001 &1525769403186798941
@@ -1141,6 +1244,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+--- !u!4 &1525769403186798942 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1525769403144350534, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+  m_PrefabInstance: {fileID: 1525769403186798941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2906806235926443014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1273,150 +1381,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SymbolManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.size
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: transmitterManager
-      value: 
-      objectReference: {fileID: 230033386}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 98483f84a5c8ff34db0bf1afd82e4327, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 31cd68d219a468a47883c9dc3ae7b306, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 50201d39d84ec574baf4f99208a05beb, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: bf7fcb5db4c8d8a458ccb48f506dac36, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8f9c9ab6cc211774eaa7ac60eaacfdde, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: cb1d1accbfcb98940b8ad6a72302a7d6, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: b0b4b9a01fdc9e94c816c1c7be3e735b, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300000, guid: a18d9e1f409b93142ab3d3b87457c69f, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[8]
-      value: 
-      objectReference: {fileID: 21300000, guid: 7c915c20e8a70414d8d215ac8730e74a, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[9]
-      value: 
-      objectReference: {fileID: 21300000, guid: 40a1f87cb262c2f4eb0a67a7e57b8997, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[10]
-      value: 
-      objectReference: {fileID: 21300000, guid: f80cf92d8f8c844429048e6f1c6919e3, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[11]
-      value: 
-      objectReference: {fileID: 21300000, guid: 77f90473c8ea55f4d8e85006a7cb0540, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[12]
-      value: 
-      objectReference: {fileID: 21300000, guid: 31c1ee92c8c31504a8805145c36d4ff0, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[13]
-      value: 
-      objectReference: {fileID: 21300000, guid: c19215b77f816d9499ff47f301f672fe, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[14]
-      value: 
-      objectReference: {fileID: 21300000, guid: 13c584916be71cb4f9b942b02d6397c2, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[15]
-      value: 
-      objectReference: {fileID: 21300000, guid: b1881747d0c121245b3a206d8fda9bf1, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[16]
-      value: 
-      objectReference: {fileID: 21300000, guid: 4ef673f9e0a76df4c80ababbc4ea265e, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[17]
-      value: 
-      objectReference: {fileID: 21300000, guid: 2d13a470403da154d84f9e988992bebf, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[18]
-      value: 
-      objectReference: {fileID: 21300000, guid: 70f973c0ab4393f4294d23c4bdcbcb81, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[19]
-      value: 
-      objectReference: {fileID: 21300000, guid: da4063e4bfb746446a4e9b6204967ba5, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[20]
-      value: 
-      objectReference: {fileID: 21300000, guid: 9e6ad6ef1c897a64fa8e7a2285ec808a, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[21]
-      value: 
-      objectReference: {fileID: 21300000, guid: 7a9cbba420bb5a044b0c1f5373e3df2d, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[22]
-      value: 
-      objectReference: {fileID: 21300000, guid: 53894789e8eec1449a974ba1b5b2e9f4, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[23]
-      value: 
-      objectReference: {fileID: 21300000, guid: b056cb6e86e2e2a4a8c7955f582a2fdd, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[24]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8d3434547a028224e82a77bb954ed334, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[25]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0e800d43cc1df4041a78fac0bf7f8b54, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[26]
-      value: 
-      objectReference: {fileID: 21300000, guid: f929287c82d9f0f4a9522640058e28ba, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[27]
-      value: 
-      objectReference: {fileID: 21300000, guid: 29f7c78434a03b84a877d8bad27ddf66, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[28]
-      value: 
-      objectReference: {fileID: 21300000, guid: 96d3791990ed4ed49987689095dfa3c3, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[29]
-      value: 
-      objectReference: {fileID: 21300000, guid: 3e996e6efcdd1b445b27fab5bfe74fb4, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[30]
-      value: 
-      objectReference: {fileID: 21300000, guid: aa3f38e0e9bc2f6468bf38663a19385c, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[31]
-      value: 
-      objectReference: {fileID: 21300000, guid: bac662113df222747b73e2dc382fa535, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[32]
-      value: 
-      objectReference: {fileID: 21300000, guid: 9228d12e9b9ed5e438afe8c06d21f8c3, type: 3}
-    - target: {fileID: 3938265781617762622, guid: 53969a3469730c242908e3f38c141f62, type: 3}
-      propertyPath: iconsAsset.Array.data[33]
-      value: 
-      objectReference: {fileID: 21300000, guid: 874685156cb803e478cbd055fc184b4f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53969a3469730c242908e3f38c141f62, type: 3}
 --- !u!1001 &4951206299957941935
