@@ -23,18 +23,20 @@ namespace Gameplay.VR
         {
             base.Update();
 
-            /*if (isOnGround)
+            if (generator.active)
             {
-                if (currentTime <= 0.0f)
+                if (isOnGround)
                 {
-                    isOnGround = false;
+                    if (currentTime <= 0.0f)
+                    {
+                        isOnGround = false;
 
-                    generator.PoolObject(gameObject);
-                    generator.SpawnObject();
-                }
-
-                currentTime -= Time.deltaTime;
-            }*/
+                        generator.PoolObject(gameObject);
+                        generator.SpawnObject();
+                    }
+                    currentTime -= Time.deltaTime;
+                } 
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
