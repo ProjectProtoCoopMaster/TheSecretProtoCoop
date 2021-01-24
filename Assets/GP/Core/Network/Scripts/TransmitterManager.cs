@@ -42,6 +42,7 @@ namespace Networking
         [SerializeField] private GameEvent _onLevelRestart;
         [SerializeField] private CallableFunction _loadNextScene;
         [SerializeField] private CallableFunction _loadSameScene;
+        [SerializeField] private CallableFunction _loadMainMenu;
 
         [Title("Symbol Door")]
         public SymbolManager symbolManager;
@@ -69,6 +70,8 @@ namespace Networking
         public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.AllViaServer);
         [PunRPC] private void SendLoadSameScene() { _loadSameScene.Raise(); }
 
+        public void SendLoadMainMenuToAll() => photonView.RPC("SendLoadMainMenu", RpcTarget.AllViaServer);
+        [PunRPC] private void SendLoadMainMenu() { _loadMainMenu.Raise(); }
         #endregion
 
         #region Player Position
