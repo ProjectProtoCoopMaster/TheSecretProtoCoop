@@ -16,28 +16,28 @@ namespace Gameplay.VR.Player
         float valueToLerp;
         
         public void On()
-        {/*
+        {
             startValue = 0;
             endValue = 1;
 
             timeElapsed = 0f;
 
-            StartCoroutine(Lerp()); */
+            StartCoroutine(Lerp());
         }
 
         public void Off()
-        {/*
+        {
             startValue = 1;
             endValue = 0;
 
             timeElapsed = 0f;
 
-            StartCoroutine(Lerp());*/
+            StartCoroutine(Lerp());
         }
 
         IEnumerator Lerp()
         {
-            yield return null;/*
+            yield return null;
             while (timeElapsed < lerpDuration)
             {
                 valueToLerp = Mathf.Lerp(startValue, endValue, timeElapsed / lerpDuration);
@@ -47,7 +47,7 @@ namespace Gameplay.VR.Player
             }
 
             valueToLerp = endValue;
-            teleportationMaterial.SetFloat("_GlowState", valueToLerp);*/
+            teleportationMaterial.SetFloat("_GlowState", valueToLerp);
         }
     } 
 }
