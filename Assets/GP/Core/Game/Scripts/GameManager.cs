@@ -50,7 +50,11 @@ namespace Gameplay
             winCanvas.gameObject.SetActive(false);
             loseCanvas.gameObject.SetActive(false);
 
-            if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
+            if (startGame)
+            {
+                _sceneID.Value = 1;
+                SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            }
         }
 
         [Button]

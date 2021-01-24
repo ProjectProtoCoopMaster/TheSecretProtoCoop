@@ -6,6 +6,8 @@ namespace Gameplay.VR
 {
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
+        public GameEvent _refreshScene;
+
         public RoomManager currentRoom { get; set; }
 
         private bool _isDead;
@@ -45,6 +47,7 @@ namespace Gameplay.VR
 
         private void Start()
         {
+            _refreshScene.Raise();
 
             _OnStart.Invoke();
         }
