@@ -28,7 +28,6 @@ namespace Gameplay
         public Transform UICanvas;
 
         [SerializeField] private CallableFunction _fadeTransition;
-        [SerializeField] private GameEvent _refreshScene;
 
         [Title("Lose")]
         public Transform loseCanvas;
@@ -117,7 +116,6 @@ namespace Gameplay
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
             SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
             loseCanvas.gameObject.SetActive(false);
-            _refreshScene.Raise();
             yield return new WaitForSeconds(2f);
             gameOver = false;
             yield break;
@@ -132,7 +130,7 @@ namespace Gameplay
             _sceneID.Value = sceneID;
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
             yield return new WaitForSeconds(1.0f);
-            _refreshScene.Raise();
+            
             yield break;
         }
 
