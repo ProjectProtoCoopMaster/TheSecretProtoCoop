@@ -45,6 +45,13 @@ namespace Gameplay.VR
                 Debug.Log(other.gameObject.name);
                 other.GetComponent<IKillable>().Die(Vector3.zero);
             }
+
+            if(other.GetComponentInParent<PlayerBehavior>() != null)
+            {
+                ps.Play();
+                audioSource.Play();
+                other.GetComponentInParent<IKillable>().Die(Vector3.zero);
+            }
         }
 
         [Button]
