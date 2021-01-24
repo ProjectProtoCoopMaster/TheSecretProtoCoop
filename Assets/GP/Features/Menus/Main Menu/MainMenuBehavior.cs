@@ -19,8 +19,13 @@ namespace Gameplay
         [SerializeField] private GameObject lobbyVR;
         [SerializeField] private Text codeVR;
         [SerializeField] private Text codeMobile;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
         private int index = -1;
-        
+
+        private void Start()
+        {
+            _OnStart.Invoke();
+        }
 
         private void OnEnable()
         {
