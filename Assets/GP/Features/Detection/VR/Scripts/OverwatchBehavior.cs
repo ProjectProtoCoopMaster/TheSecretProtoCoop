@@ -5,7 +5,7 @@ namespace Gameplay.VR
 {
     public class OverwatchBehavior : EntityVisionData
     {
-        [SerializeField] Transform myDetectableBody;
+        [SerializeField] internal Transform myDetectableBody;
         [SerializeField] public LayerMask overwatchMask;
         private RaycastHit hitInfo;
         private bool detectedBody = false;
@@ -71,6 +71,8 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
+            myDetectableBody = GetComponentInChildren<DetectableBodyBehaviour>().transform;
+
             // if you were detecting the player, remove this object from the list of alarm raisers
             if (awarenessManager.alarmRaisers.Contains(this.gameObject))
                 awarenessManager.alarmRaisers.Remove(this.gameObject);

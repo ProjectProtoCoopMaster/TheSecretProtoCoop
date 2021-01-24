@@ -23,7 +23,7 @@ namespace Gameplay.VR
         {
             base.Update();
 
-            if (isOnGround)
+            /*if (isOnGround)
             {
                 if (currentTime <= 0.0f)
                 {
@@ -34,7 +34,7 @@ namespace Gameplay.VR
                 }
 
                 currentTime -= Time.deltaTime;
-            }
+            }*/
         }
 
         private void OnCollisionEnter(Collision collision)

@@ -35,7 +35,7 @@ namespace Gameplay
         [Button]
         public void CreateRoom()
         {
-            int roomName = Random.Range(0, 10);
+            int roomName = Random.Range(10000, 100000);
             codeVR.text = roomName.ToString();
             _CreateRoom.Raise(roomName.ToString());
 
@@ -45,13 +45,13 @@ namespace Gameplay
         {
             if (_isMobile.Value)
             {
-                SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
-                _sceneID.Value = index + 1;
+                _sceneID.Value = index;
             }
             else
             {
-                SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
             }

@@ -10,7 +10,7 @@ namespace Gameplay
 {
     public enum Platform { Mobile, VR }
 
-    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4 };
+    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 };
 
     public class GameManager : MonoBehaviour
     {
@@ -18,9 +18,14 @@ namespace Gameplay
 
         public bool startGame;
 
+        [SerializeField] private IntVariable _sceneID;
+
         public bool gameOver { get; set; } = false;
 
         public Transform UICanvas;
+
+        [SerializeField] private CallableFunction _fadeTransition;
+        [SerializeField] private GameEvent _refreshScene;
 
         [Title("Lose")]
         public Transform loseCanvas;
@@ -32,7 +37,7 @@ namespace Gameplay
 
         void Start()
         {
-            winCanvas.gameObject.SetActive(false);
+           // winCanvas.gameObject.SetActive(false);
             loseCanvas.gameObject.SetActive(false);
 
             if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
@@ -68,9 +73,14 @@ namespace Gameplay
                     case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
                         loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
                         break;
+                    case LoseType.MissSymbols:
+                        loseText.text = _loseText.Value = "You failed to enter the right Code !";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
+                        break;
                 }
 
                 loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
+
             }
         }
 
@@ -82,6 +92,45 @@ namespace Gameplay
         public void Restart()
         {
             TransmitterManager.instance.SendRestartToAll();
+        }
+
+
+        public void LaunchSameLevel()
+        {
+
+
+
+            StartCoroutine(WaitSceneDestruction()); ;
+
+        }
+
+        IEnumerator WaitSceneDestruction()
+        {
+            yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
+            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+            gameOver = false;
+            loseCanvas.gameObject.SetActive(false);
+            _refreshScene.Raise();
+            yield return new WaitForSeconds(2f);
+            yield break;
+        }
+
+        IEnumerator WaitLoadNextScene()
+        {
+            _fadeTransition.Raise();
+            yield return new WaitForSeconds(1.2f);
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            yield return new WaitForEndOfFrame();
+            _sceneID.Value += 2;
+            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            _refreshScene.Raise();
+            yield break;
+        }
+
+        public void LoadNextScene()
+        {
+            StartCoroutine(WaitLoadNextScene());
+
         }
     }
 }

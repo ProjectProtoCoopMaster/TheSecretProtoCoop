@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 1219852604363815338}
   - component: {fileID: 8668388833559456506}
   - component: {fileID: 6146927010924072766}
+  - component: {fileID: 3840684890171252943}
+  - component: {fileID: 7939693774198999118}
   m_Layer: 11
   m_Name: Patrol Guard Light
   m_TagString: Enemy/Light Guard
@@ -39,7 +41,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6933313851501208783}
+  - {fileID: 908710137075234138}
   - {fileID: 7335650797898148023}
   - {fileID: 8189852327429967630}
   m_Father: {fileID: 0}
@@ -57,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3d3d7d5cf215a478e1ea6879049547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentRig: {fileID: 6933313851501208783}
+  agentRig: {fileID: 908710137075234138}
   ragdollPrefab: {fileID: 690280265387845079, guid: fa764e66e45b5d74ca2c408cd6ca5274, type: 3}
   guardType: 0
   patrolBehavior: {fileID: 1078856768317732903}
@@ -153,6 +155,7 @@ MonoBehaviour:
   pingFrequency: 5
   framesPassed: 0
   poweredOn: 1
+  animationManager: {fileID: 3840684890171252943}
   detectionMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -428,6 +431,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3840684890171252943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078856768317732911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df486608e052574abb011a871a6763a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2782208830428516914}
+  animator: {fileID: 6520174160819760928}
+--- !u!65 &7939693774198999118
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078856768317732911}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8864889, z: 1}
+  m_Center: {x: 0, y: 0.7983613, z: 0}
 --- !u!1 &6392722476762608136
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be870d727c6db01488ea1cb8ca8ce22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationManager: {fileID: 3840684890171252943}
   target: {fileID: 1078856768317732896}
   navMeshAgent: {fileID: 1661678313587011186}
   angular: 120
@@ -584,65 +615,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 0.05
   target: {fileID: 1078856768317732896}
---- !u!1001 &2856475762251822232
+--- !u!1001 &7425148611186257259
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1078856768317732896}
     m_Modifications:
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 6979698648525816459, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
+      propertyPath: m_Name
+      value: Guard Dummy Anim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
+    - target: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5537168081362504429, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
-      propertyPath: m_Name
-      value: Guard Dummy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
---- !u!4 &6933313851501208783 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
+--- !u!4 &908710137075234138 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5160045061665067095, guid: 5cd6385a4ba5d1b4fb285eb15f66af5e, type: 3}
-  m_PrefabInstance: {fileID: 2856475762251822232}
+  m_CorrespondingSourceObject: {fileID: 7752681072950220849, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
+  m_PrefabInstance: {fileID: 7425148611186257259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6520174160819760928 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4429046729398698571, guid: 7a429e0b380fcb441a3302f57f82ca19, type: 3}
+  m_PrefabInstance: {fileID: 7425148611186257259}
   m_PrefabAsset: {fileID: 0}

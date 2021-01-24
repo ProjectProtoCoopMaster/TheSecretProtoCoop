@@ -12,9 +12,12 @@ namespace Gameplay
         public CallableFunction _switch = default;
         public CallableFunction _sendSwitcherChange = default;
         [SerializeField] private Button button;
-        [SerializeField] private Image image;
-        
+        [SerializeField] private Animator anim;
+        [SerializeField] private Text timerText;
         [SerializeField] private Image timerEnable;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip successPushClip;
+        [SerializeField] private AudioClip failPushClip;
         public List<Object> nodes = default;
 
         [Header("---IMPORTANT---")]
@@ -79,8 +82,17 @@ namespace Gameplay
 
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
 
-        public void OnEnable() => SwitcherManager.switchers.Add(this);
-        public void OnDisable() => SwitcherManager.switchers.Remove(this);
+        //public void OnEnable() => SwitcherManager.switchers.Add(this);
+        //public void OnDisable() => SwitcherManager.switchers.Remove(this);
+
+        private void Start()
+        {
+            if (anim != null)
+            {
+                ResetTimer();
+            }
+
+        }
 
         public void StartSwitcher() 
         {
@@ -127,6 +139,8 @@ namespace Gameplay
             {
                 StartCoroutine(DelaySwitchNode());
                 DOTween.To(() => currentTimer, x => currentTimer = x, timer, timer).SetEase(Ease.Linear).OnUpdate(SetTimerDisplayer).OnComplete(ResetTimer);
+                if(anim != null)
+                    anim.SetBool("OnTimer", true);
 
             }
             else
@@ -135,7 +149,9 @@ namespace Gameplay
                 SwitchNode();
             }
 
-            
+            LaunchSound();
+
+
         }
 
         public void SwitchChildrens()
@@ -208,15 +224,23 @@ namespace Gameplay
         private void SetTimerDisplayer()
         {
             if (nodes.Count == 0)
+            { 
                 timerEnable.fillAmount = currentTimer / timer;
+                timerText.text = (timer - currentTimer).ToString("F1");
+            }
+
         }
 
         private void ResetTimer() 
         {
             if (nodes.Count == 0)
             {
+                if (currentTimer > 0) LaunchEndSound();
+                timerText.text = timer.ToString();
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
+                anim.SetBool("OnTimer", false);
+
             }
 
 
@@ -234,6 +258,24 @@ namespace Gameplay
 
             }
 
+        }
+
+        private void LaunchSound()
+        {
+            if (button != null && button.interactable)
+            {
+                audioSource.PlayOneShot(successPushClip);
+            }
+            else if (button != null && !button.interactable)
+            {
+                audioSource.PlayOneShot(failPushClip);
+            }
+
+            
+        }
+        private void LaunchEndSound()
+        {
+            audioSource.PlayOneShot(failPushClip);
         }
     }
 

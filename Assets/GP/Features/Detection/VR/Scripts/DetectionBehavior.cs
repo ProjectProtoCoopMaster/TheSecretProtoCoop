@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using Gameplay.AI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Gameplay.VR
 {
     public class DetectionBehavior : EntityVisionData
     {
+        public AnimationManager animationManager;
+
         [SerializeField] public LayerMask detectionMask;
         private RaycastHit hitInfo;
         private bool detectedPlayer = false;
@@ -52,7 +55,13 @@ namespace Gameplay.VR
                             detectionFeedback.PlayDetectionFeedback();
 
                             if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
+                            {
                                 awarenessManager.alarmRaisers.Add(this.gameObject);
+
+                                // Animation, Léonard kiffe bien à réecrire ça bruuuh
+                                animationManager.SetAlertAnim();
+                                GetComponent<AgentManager>().StopAgent();
+                            }
 
                             spottedPlayer.Raise();
                             Debug.Log(gameObject.name + " spotted the player !");
