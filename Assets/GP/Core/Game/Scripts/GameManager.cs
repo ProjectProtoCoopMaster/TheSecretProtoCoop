@@ -110,10 +110,10 @@ namespace Gameplay
         {
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
             SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
-            gameOver = false;
             loseCanvas.gameObject.SetActive(false);
             _refreshScene.Raise();
             yield return new WaitForSeconds(2f);
+            gameOver = false;
             yield break;
         }
 
