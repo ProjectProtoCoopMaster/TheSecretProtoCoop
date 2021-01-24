@@ -36,12 +36,14 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.GetComponentInParent<IKillable>() != null && !other.transform.parent.GetComponentInParent<IKillable>().isDead)
+            Debug.Log("I collided with " + other.gameObject.name);
+
+            if (other.GetComponent<IKillable>() != null && !other.GetComponent<IKillable>().isDead)
             {
                 ps.Play();
                 audioSource.Play();
                 Debug.Log(other.gameObject.name);
-                other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
+                other.GetComponent<IKillable>().Die(Vector3.zero);
             }
         }
 
