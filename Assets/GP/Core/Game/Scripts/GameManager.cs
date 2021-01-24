@@ -51,6 +51,7 @@ namespace Gameplay
 
             if (startGame)
             {
+                currentLevelIndex = 1;
                 _sceneID.Value = 1;
                 SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
             }
@@ -136,12 +137,16 @@ namespace Gameplay
 
         public void LoadMainMenu()
         {
-            currentLevelIndex = 0;
+            winCanvas.gameObject.SetActive(false);
+            loseCanvas.gameObject.SetActive(false);
+
+            currentLevelIndex = 1;
             StartCoroutine(WaitLoadNextScene(1));
         }
 
         public void LoadNextScene()
         {
+            currentLevelIndex++;
             int id = _sceneID.Value + 2;
             StartCoroutine(WaitLoadNextScene(id));
         }

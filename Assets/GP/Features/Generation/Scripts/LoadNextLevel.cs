@@ -20,8 +20,6 @@ namespace Gameplay.VR
                 {
                     Debug.Log("a la zeub" + GameManager.instance.currentLevelIndex);
 
-                    GameManager.instance.currentLevelIndex++;
-
                     LoadNextScene();
                     passed = true;
                 }
