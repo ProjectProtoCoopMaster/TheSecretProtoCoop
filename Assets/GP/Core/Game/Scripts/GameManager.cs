@@ -125,6 +125,7 @@ namespace Gameplay
             yield return new WaitForEndOfFrame();
             _sceneID.Value = sceneID;
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            yield return new WaitForSeconds(1.0f);
             _refreshScene.Raise();
             yield break;
         }

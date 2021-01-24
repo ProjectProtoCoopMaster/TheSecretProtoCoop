@@ -23,7 +23,7 @@ namespace Gameplay.VR
         {
             base.Update();
 
-            if (generator.active)
+            if (generator != null)
             {
                 if (isOnGround)
                 {

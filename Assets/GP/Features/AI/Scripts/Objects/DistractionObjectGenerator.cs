@@ -6,8 +6,6 @@ namespace Gameplay.VR
 {
     public class DistractionObjectGenerator : MonoBehaviour
     {
-        public bool active;
-
         public Transform dispenserPool;
         public Transform dispenserSpawn;
 
