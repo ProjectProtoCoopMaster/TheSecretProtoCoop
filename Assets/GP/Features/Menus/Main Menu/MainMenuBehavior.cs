@@ -35,7 +35,7 @@ namespace Gameplay
         [Button]
         public void CreateRoom()
         {
-            int roomName = Random.Range(0, 10);
+            int roomName = Random.Range(10000, 100000);
             codeVR.text = roomName.ToString();
             _CreateRoom.Raise(roomName.ToString());
 

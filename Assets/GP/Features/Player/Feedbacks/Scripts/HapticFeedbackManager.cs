@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR;
 using Valve.VR;
 
 public class HapticFeedbackManager : MonoBehaviour
@@ -62,7 +63,7 @@ public class HapticFeedbackManager : MonoBehaviour
 
     private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources inputSource)
     {
-        hapticAction.Execute(0, duration, frequency, amplitude, inputSource);
+        if (XRSettings.enabled) hapticAction.Execute(0, duration, frequency, amplitude, inputSource);
     }
 }
 #endif

@@ -6,6 +6,8 @@ namespace Gameplay.AI
 {
     public class MoveAction : ActionBehavior
     {
+        public AnimationManager animationManager;
+
         [SerializeField] protected Transform target;
 
         public Vector3 destination { get; protected set; }
@@ -36,6 +38,10 @@ namespace Gameplay.AI
         protected virtual void SetMove(Vector3 direction, bool _move)
         {
             destination = direction;
+
+            // Animation
+            if (_move) animationManager.SetMoveAnim();
+            else animationManager.SetIdleAnim();
         }
 
         protected bool IsInArea(Vector3 objectPos, Vector3 destPos, float area)

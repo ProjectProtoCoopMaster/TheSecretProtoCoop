@@ -21,6 +21,9 @@ namespace Gameplay.Mobile
         [SerializeField] Sprite cross;
         [SerializeField] Sprite winImage;
 
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnMiss;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnSucceed;
+
         private int missNumber;
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
@@ -123,6 +126,7 @@ namespace Gameplay.Mobile
         [Button]
         private void Succeed()
         {
+            _OnSucceed.Invoke();
             hasWin = true;
             door.Unlock();
             results[missNumber].gameObject.SetActive(true);
@@ -134,7 +138,7 @@ namespace Gameplay.Mobile
 
         IEnumerator WaitCloseSymbolCanvas()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
             door.GetComponent<DoorBehavior>().hints.SetActive(false);
             canvas.enabled = false;
             gameObject.SetActive(false);
@@ -144,6 +148,7 @@ namespace Gameplay.Mobile
         [Button]
         private void Miss()
         {
+            _OnMiss.Invoke();
             missNumber++;
             results[missNumber - 1].gameObject.SetActive(true);
             results[missNumber - 1].overrideSprite = cross;
@@ -156,6 +161,10 @@ namespace Gameplay.Mobile
             if (missNumber == 2)
             {
                 Networking.TransmitterManager.instance.SendLoseToAll(5);
+                door.GetComponent<DoorBehavior>().hints.SetActive(false);
+                canvas.enabled = false;
+                gameObject.SetActive(false);
+
             }
         }
 

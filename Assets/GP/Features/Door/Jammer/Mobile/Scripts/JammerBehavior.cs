@@ -13,6 +13,9 @@ namespace Gameplay
         [SerializeField] private CallableFunction _sendOnJammerDestroyedToOthers;
         [SerializeField] private List<SwitcherBehavior> switchers;
         private VideoPlayer video;
+
+        private bool _isDead = false;
+        public bool isDead { get { return _isDead; } set { _isDead = value; } }
         [Range(0, 10)] public int ID;
         
         [SerializeField] 
@@ -44,6 +47,7 @@ namespace Gameplay
                 }
             }
         }
+
 
         public void OnEnable() => JammerManager.jammers.Add(this);
         public void OnDisable() => JammerManager.jammers.Remove(this);
