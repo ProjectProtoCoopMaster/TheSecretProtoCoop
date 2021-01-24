@@ -5671,7 +5671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80936b59bcbd6ff4abad636cb54d77bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigTransform: {fileID: 6003109435717295971}
+  rigTransform: {fileID: 0}
   playerHitTrap: {fileID: 11400000, guid: 86d8d57eee7c00d41a8fe79b76cc7756, type: 2}
   raiseAlarm: {fileID: 11400000, guid: 15adfaae4f84013469cf36c5dbac547d, type: 2}
   _gameOver: {fileID: 11400000, guid: fae0e47f48aaea943b5e72a226a431b6, type: 2}
@@ -5679,6 +5679,21 @@ MonoBehaviour:
   _playerPosition: {fileID: 11400000, guid: 022819879da18ee499aef7e7df899f57, type: 2}
   _playerRotation: {fileID: 11400000, guid: 228acc25534fbc642bc538b815c93a41, type: 2}
   _player: {fileID: 11400000, guid: dd1019a1a8255ea43873e7e8e2dd8c89, type: 2}
+  _OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8d41bafa3842f174087729fa18c74f11, type: 2}
+        m_TargetAssemblyTypeName: Gameplay.CallableFunction, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7409026258412376008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7051,15 +7066,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8077968769321981327, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8077968769321981327, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8077968769321981327, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8885995034454953781, guid: eaaadfa4074b7ec46aeba272a582f7eb, type: 3}
       propertyPath: m_Name
