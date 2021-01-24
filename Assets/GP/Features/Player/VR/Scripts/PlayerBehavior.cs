@@ -45,11 +45,11 @@ namespace Gameplay.VR
             playerHitTrap.Raise();
         }
 
-        private void Start()
+        IEnumerator Start()
         {
-            _refreshScene.Raise();
-
             _OnStart.Invoke();
+            yield return new WaitForSeconds(5.0f);
+            _refreshScene.Raise();
         }
 
         void Update()
