@@ -64,7 +64,7 @@ namespace Gameplay.VR
                                 {
                                     // Animation, Léonard kiffe bien à réecrire ça bruuuh
                                     animationManager.SetAlertAnim();
-                                    GetComponent<AgentManager>().StopAgent(); 
+                                    GetComponent<AgentManager>().StopAgent();
                                 }
                             }
 
