@@ -960,7 +960,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
   m_PrefabInstance: {fileID: 1525769403186798941}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525769403186798942}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6f5f78e3a374fb4ab97bd2ec7c69c9f, type: 3}
@@ -1739,48 +1739,8 @@ PrefabInstance:
       propertyPath: winCanvas
       value: 
       objectReference: {fileID: 1543258702}
-    - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
-      propertyPath: _isMobile
-      value: 
-      objectReference: {fileID: 11400000, guid: 2224b1345099de94e9ce6ed8c63d1b8f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
---- !u!1 &1525769403186798942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1525769403144350532, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
-  m_PrefabInstance: {fileID: 1525769403186798941}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1525769403186798943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525769403186798942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: f65e058c9dc754d4fa463a140406ce2e, type: 2}
-  ID: 0
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1645317100}
-        m_TargetAssemblyTypeName: Gameplay.GameManager, Assembly-CSharp
-        m_MethodName: LoadMainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  methodName: []
-  component: []
 --- !u!1001 &2906806235926443014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1788,10 +1748,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 584391201, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
-      propertyPath: ID
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 712942561, guid: cca71f5a9eea02044b0e0853e3f8fa32, type: 3}
       propertyPath: viewIdField
       value: 1
