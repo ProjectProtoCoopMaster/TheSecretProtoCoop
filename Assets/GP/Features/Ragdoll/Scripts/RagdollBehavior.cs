@@ -16,6 +16,7 @@ namespace Gameplay.VR
             for (int i = 0; i < rigidbodies.Length; i++) rigidbodies[i].isKinematic = true;
         }
 
+        [Button]
         public void ActivateRagdoll()
         {
             for (int i = 0; i < rigidbodies.Length; i++) rigidbodies[i].isKinematic = false;
