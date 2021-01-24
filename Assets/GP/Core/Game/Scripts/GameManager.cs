@@ -23,6 +23,8 @@ namespace Gameplay
 
         public bool gameOver { get; set; } = false;
 
+        public BoolVariable _isMobile;
+
         public Transform UICanvas;
 
         [SerializeField] private CallableFunction _fadeTransition;
@@ -58,7 +60,7 @@ namespace Gameplay
             {
                 gameOver = true;
 
-                loseCanvas.gameObject.SetActive(true);
+                if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
 
                 Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
 
