@@ -66,7 +66,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8098218842331729494}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Gameplay.JammerBehavior, Assembly-CSharp
         m_MethodName: StopGlitch
         m_Mode: 1
@@ -78,19 +78,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5141860981937410310}
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Gameplay.JammerBehavior, Assembly-CSharp
+        m_MethodName: SetState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 0d1c592fd11196848aa69fc91bca521e, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 0d1c592fd11196848aa69fc91bca521e, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 8a572c70777b54443a986d3bbcad68b6, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5141860981937410310}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: set_loop
         m_Mode: 6
@@ -112,11 +124,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2c5697a7cb80dfb4896e49e09583e8ae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -21,6 +21,9 @@ namespace Gameplay.Mobile
         [SerializeField] Sprite cross;
         [SerializeField] Sprite winImage;
 
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnMiss;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnSucceed;
+
         private int missNumber;
         [Header("---IMPORTANT---")]
         [SerializeField] private DoorBehavior door;
@@ -123,6 +126,7 @@ namespace Gameplay.Mobile
         [Button]
         private void Succeed()
         {
+            _OnSucceed.Invoke();
             hasWin = true;
             door.Unlock();
             results[missNumber].gameObject.SetActive(true);
@@ -144,6 +148,7 @@ namespace Gameplay.Mobile
         [Button]
         private void Miss()
         {
+            _OnMiss.Invoke();
             missNumber++;
             results[missNumber - 1].gameObject.SetActive(true);
             results[missNumber - 1].overrideSprite = cross;

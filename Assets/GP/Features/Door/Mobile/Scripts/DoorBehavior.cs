@@ -32,6 +32,7 @@ namespace Gameplay.Mobile
         private Vector3 initialPadlockScale;
         [SerializeField] private GameObject door;
         [SerializeField] private Animator anim;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnTouch;
         [SerializeField] private Canvas symbolCanvas;
         private Sequence s;
         private bool isSelected = false;
@@ -81,6 +82,7 @@ namespace Gameplay.Mobile
                             s.Append(padlock_Close.transform.DOScale(.2f, .2f).SetEase(Ease.Linear));
                             s.Play();
                             StartCoroutine(WaitBounceIDLE());
+                            _OnTouch.Invoke();
 
                         }
 
