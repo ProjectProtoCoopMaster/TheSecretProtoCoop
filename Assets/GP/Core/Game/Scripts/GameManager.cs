@@ -18,7 +18,8 @@ namespace Gameplay
 
         public bool startGame;
 
-        [SerializeField] private IntVariable _sceneID;
+        public int currentLevelIndex { get; set; }
+        [SerializeField] private IntVariable _sceneID; public IntVariable SceneID { get => _sceneID; set => _sceneID = value; }
 
         public bool gameOver { get; set; } = false;
 
@@ -35,9 +36,16 @@ namespace Gameplay
         [Title("Win")]
         public Transform winCanvas;
 
+        public static GameManager instance;
+
+        private void OnEnable()
+        {
+            if (instance == null) instance = this;
+        }
+
         void Start()
         {
-           // winCanvas.gameObject.SetActive(false);
+            winCanvas.gameObject.SetActive(false);
             loseCanvas.gameObject.SetActive(false);
 
             if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
@@ -80,7 +88,6 @@ namespace Gameplay
                 }
 
                 loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
-
             }
         }
 
@@ -94,14 +101,9 @@ namespace Gameplay
             TransmitterManager.instance.SendRestartToAll();
         }
 
-
         public void LaunchSameLevel()
         {
-
-
-
-            StartCoroutine(WaitSceneDestruction()); ;
-
+            StartCoroutine(WaitSceneDestruction());
         }
 
         IEnumerator WaitSceneDestruction()
@@ -115,22 +117,28 @@ namespace Gameplay
             yield break;
         }
 
-        IEnumerator WaitLoadNextScene()
+        IEnumerator WaitLoadNextScene(int sceneID)
         {
             _fadeTransition.Raise();
             yield return new WaitForSeconds(1.2f);
             SceneManager.UnloadSceneAsync(_sceneID.Value);
             yield return new WaitForEndOfFrame();
-            _sceneID.Value += 2;
+            _sceneID.Value = sceneID;
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
             _refreshScene.Raise();
             yield break;
         }
 
+        public void LoadMainMenu()
+        {
+            currentLevelIndex = 0;
+            StartCoroutine(WaitLoadNextScene(1));
+        }
+
         public void LoadNextScene()
         {
-            StartCoroutine(WaitLoadNextScene());
-
+            int id = _sceneID.Value + 2;
+            StartCoroutine(WaitLoadNextScene(id));
         }
     }
 }
