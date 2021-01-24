@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 4605352206057338154}
   - component: {fileID: 4605352206057338157}
   - component: {fileID: 1379281556072007816}
-  - component: {fileID: 7946297560870905156}
   - component: {fileID: 1219852604363815338}
   - component: {fileID: 8668388833559456506}
   - component: {fileID: 6146927010924072766}
@@ -196,24 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exclamationMark: {fileID: 3968929243909163910}
---- !u!114 &7946297560870905156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078856768317732911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0ed56bdf1e5e874e923cc0893076d69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  skinnedMesh: {fileID: 0}
-  glowEffect: {fileID: 2100000, guid: ea7684964c7be69429d6e24f37646c51, type: 2}
 --- !u!114 &1219852604363815338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,18 +294,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1219852604363815338}
         m_TargetAssemblyTypeName: Gameplay.VR.DeathSoundBehaviour, Assembly-CSharp
         m_MethodName: GE_CryOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7946297560870905156}
-        m_TargetAssemblyTypeName: Gameplay.VR.Feedbacks.ActivateGlow, Assembly-CSharp
-        m_MethodName: UE_ActivateGow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
