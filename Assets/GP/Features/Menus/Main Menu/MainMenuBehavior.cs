@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
+
 namespace Gameplay
 {
     public class MainMenuBehavior : MonoBehaviour
@@ -17,7 +19,7 @@ namespace Gameplay
         [SerializeField] private BoolVariable _isMobile;
         [SerializeField] private GameObject lobbyMobile;
         [SerializeField] private GameObject lobbyVR;
-        [SerializeField] private Text codeVR;
+        [SerializeField] private TMP_Text codeVR;
         [SerializeField] private Text codeMobile;
         [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
         private int index = -1;
