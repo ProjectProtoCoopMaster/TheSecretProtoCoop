@@ -23,6 +23,7 @@ namespace Gameplay
         [SerializeField] private Text codeMobile;
         [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
         private int index = -1;
+        private bool isRoomCreate = false;
 
         private void Start()
         {
@@ -44,9 +45,14 @@ namespace Gameplay
         [Button]
         public void CreateRoom()
         {
-            int roomName = Random.Range(10000, 100000);
-            codeVR.text = roomName.ToString();
-            _CreateRoom.Raise(roomName.ToString());
+            if (!isRoomCreate)
+            {
+                int roomName = Random.Range(10000, 100000);
+                codeVR.text = roomName.ToString();
+                _CreateRoom.Raise(roomName.ToString());
+                isRoomCreate = true;
+            }
+
         }
 
         public void OpenScene()
