@@ -6,15 +6,15 @@ namespace Gameplay
 {
     public class SwitcherManager : MonoBehaviour
     {
-        public static SwitcherManager instance;
+        [SerializeField] private SwitcherBehavior[] switchers;
 
-        public static List<SwitcherBehavior> switchers = new List<SwitcherBehavior>();
-
-        void OnEnable() { if (instance == null) instance = this; }
+        
 
         public void RaiseSwitch(float ID)
         {
-            for (int i = 0; i < switchers.Count; i++)
+            /*if (switchers.Length == 0 )*/
+            SearchSwitchersInScene();
+            for (int i = 0; i < switchers.Length; i++)
             {
                 if (switchers[i].ID == ID)
                 {
@@ -23,13 +23,7 @@ namespace Gameplay
             }
         }
 
-        public void StartAllSwitchers()
-        {
-            foreach (SwitcherBehavior switcher in switchers)
-            {
-                switcher.StartSwitcher();
-            }
-        }
+        public void SearchSwitchersInScene() => switchers = FindObjectsOfType<SwitcherBehavior>();
     }
 }
 

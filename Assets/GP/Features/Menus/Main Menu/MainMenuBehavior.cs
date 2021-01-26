@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
+
 namespace Gameplay
 {
     public class MainMenuBehavior : MonoBehaviour
@@ -17,16 +19,24 @@ namespace Gameplay
         [SerializeField] private BoolVariable _isMobile;
         [SerializeField] private GameObject lobbyMobile;
         [SerializeField] private GameObject lobbyVR;
-        [SerializeField] private Text codeVR;
+        [SerializeField] private TMP_Text codeVR;
         [SerializeField] private Text codeMobile;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
         private int index = -1;
-        
+        private bool isRoomCreate = false;
+
+        private void Start()
+        {
+            _OnStart.Invoke();
+        }
 
         private void OnEnable()
         {
             lobbyMobile.SetActive(false);
             lobbyVR.SetActive(false);
-            index = 2;
+            if (_isMobile.Value)
+                index = 3;
+            else index = 2;
         }
 
         public void SetIndex(int ID) => index = ID;
@@ -35,9 +45,13 @@ namespace Gameplay
         [Button]
         public void CreateRoom()
         {
-            int roomName = Random.Range(0, 10);
-            codeVR.text = roomName.ToString();
-            _CreateRoom.Raise(roomName.ToString());
+            if (!isRoomCreate)
+            {
+                int roomName = Random.Range(10000, 100000);
+                codeVR.text = roomName.ToString();
+                _CreateRoom.Raise(roomName.ToString());
+                isRoomCreate = true;
+            }
 
         }
 
@@ -45,13 +59,13 @@ namespace Gameplay
         {
             if (_isMobile.Value)
             {
-                SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
-                _sceneID.Value = index + 1;
+                _sceneID.Value = index;
             }
             else
             {
-                SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("MainMenu");
                 _sceneID.Value = index;
             }

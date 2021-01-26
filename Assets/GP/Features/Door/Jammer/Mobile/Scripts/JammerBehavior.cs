@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Video;
 namespace Gameplay
 {
     public class JammerBehavior : MonoBehaviour, IKillable
@@ -11,6 +12,10 @@ namespace Gameplay
         [SerializeField] private CallableFunction _destroyJammer;
         [SerializeField] private CallableFunction _sendOnJammerDestroyedToOthers;
         [SerializeField] private List<SwitcherBehavior> switchers;
+        private VideoPlayer video;
+
+        private bool _isDead = false;
+        public bool isDead { get { return _isDead; } set { _isDead = value; } }
         [Range(0, 10)] public int ID;
         
         [SerializeField] 
@@ -43,12 +48,14 @@ namespace Gameplay
             }
         }
 
-        public void OnEnable() => JammerManager.jammers.Add(this);
-        public void OnDisable() => JammerManager.jammers.Remove(this);
 
         private IEnumerator Start()
         {
+
             yield return new WaitForSeconds(.5f);
+            video = FindObjectOfType<VideoPlayer>();
+            if(video != null)
+                video.enabled = true;
             State = true;
         }
 
@@ -59,14 +66,24 @@ namespace Gameplay
         [Button]
         public void Die() 
         {
-            _destroyJammer.Raise(ID);
             _sendOnJammerDestroyedToOthers.Raise(ID);
+            _destroyJammer.Raise(ID);
+            
 
         }
 
         public void Die(Vector3 force = default)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void StopGlitch()
+        {
+            if(video != null)
+            {
+                video.enabled = false;
+            }
+
         }
     }
 }

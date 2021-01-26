@@ -10,7 +10,7 @@ namespace Gameplay
 {
     public enum Platform { Mobile, VR }
 
-    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4 };
+    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 };
 
     public class GameManager : MonoBehaviour
     {
@@ -18,9 +18,16 @@ namespace Gameplay
 
         public bool startGame;
 
+        public int currentLevelIndex { get; set; }
+        [SerializeField] private IntVariable _sceneID; public IntVariable SceneID { get => _sceneID; set => _sceneID = value; }
+
         public bool gameOver { get; set; } = false;
 
+        public BoolVariable _isMobile;
+
         public Transform UICanvas;
+
+        [SerializeField] private CallableFunction _fadeTransition;
 
         [Title("Lose")]
         public Transform loseCanvas;
@@ -30,12 +37,24 @@ namespace Gameplay
         [Title("Win")]
         public Transform winCanvas;
 
+        public static GameManager instance;
+
+        private void OnEnable()
+        {
+            if (instance == null) instance = this;
+        }
+
         void Start()
         {
             winCanvas.gameObject.SetActive(false);
             loseCanvas.gameObject.SetActive(false);
 
-            if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
+            if (startGame)
+            {
+                currentLevelIndex = 1;
+                _sceneID.Value = 1;
+                SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            }
         }
 
         [Button]
@@ -45,7 +64,7 @@ namespace Gameplay
             {
                 gameOver = true;
 
-                loseCanvas.gameObject.SetActive(true);
+                if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
 
                 Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
 
@@ -68,6 +87,10 @@ namespace Gameplay
                     case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
                         loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
                         break;
+                    case LoseType.MissSymbols:
+                        loseText.text = _loseText.Value = "You failed to enter the right Code !";
+                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
+                        break;
                 }
 
                 loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
@@ -82,6 +105,50 @@ namespace Gameplay
         public void Restart()
         {
             TransmitterManager.instance.SendRestartToAll();
+        }
+
+        public void LaunchSameLevel()
+        {
+            StartCoroutine(WaitSceneDestruction());
+        }
+
+        IEnumerator WaitSceneDestruction()
+        {
+            yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
+            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
+            loseCanvas.gameObject.SetActive(false);
+            yield return new WaitForSeconds(2f);
+            gameOver = false;
+            yield break;
+        }
+
+        IEnumerator WaitLoadNextScene(int sceneID)
+        {
+            _fadeTransition.Raise();
+            yield return new WaitForSeconds(1.2f);
+            SceneManager.UnloadSceneAsync(_sceneID.Value);
+            yield return new WaitForEndOfFrame();
+            _sceneID.Value = sceneID;
+            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            yield return new WaitForSeconds(1.0f);
+            
+            yield break;
+        }
+
+        public void LoadMainMenu()
+        {
+            winCanvas.gameObject.SetActive(false);
+            loseCanvas.gameObject.SetActive(false);
+
+            currentLevelIndex = 1;
+            StartCoroutine(WaitLoadNextScene(1));
+        }
+
+        public void LoadNextScene()
+        {
+            currentLevelIndex++;
+            int id = _sceneID.Value + 2;
+            StartCoroutine(WaitLoadNextScene(id));
         }
     }
 }

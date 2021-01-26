@@ -23,6 +23,8 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
+        public GameEvent _refreshScene;
+
         public Platform platform;
 
         [ShowIf("platform", Platform.VR)]
@@ -34,6 +36,11 @@ namespace Gameplay
         public RoomMobile roomMobile;
 
         public Room room { get; private set; }
+
+        private void Awake()
+        {
+            _refreshScene.Raise();
+        }
 
         public void StartRoom()
         {
@@ -126,7 +133,7 @@ namespace Gameplay
 
             /// Initialize Elements
             
-            SwitcherManager.instance.StartAllSwitchers();
+           // SwitcherManager.instance.StartAllSwitchers();
             JammerManager.instance.StartAllJammers();
 
             SymbolManager.instance.LoadSymbols();
@@ -172,7 +179,7 @@ namespace Gameplay
 
             /// Initialize Switchers
 
-            SwitcherManager.instance.StartAllSwitchers();
+            //SwitcherManager.instance.StartAllSwitchers();
             JammerManager.instance.StartAllJammers();
         }
     }

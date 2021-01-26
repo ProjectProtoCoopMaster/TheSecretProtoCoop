@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8292352564282697497}
   - component: {fileID: 3212903935684567009}
-  - component: {fileID: 5293499622304935273}
   - component: {fileID: 1989611467}
   m_Layer: 0
   m_Name: Jammer Manager
@@ -46,38 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jammers: []
---- !u!114 &5293499622304935273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9077197271577919461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Function: {fileID: 11400000, guid: 6e55d01f9ae685647a7ef133e818cf50, type: 2}
-  ID: 1
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3212903935684567009}
-        m_TargetAssemblyTypeName: Gameplay.JammerManager, Assembly-CSharp
-        m_MethodName: DestroyJammer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  methodName: []
-  component:
-  - {fileID: 0}
 --- !u!114 &1989611467
 MonoBehaviour:
   m_ObjectHideFlags: 0

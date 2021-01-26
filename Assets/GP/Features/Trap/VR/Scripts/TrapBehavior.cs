@@ -36,15 +36,21 @@ namespace Gameplay.VR
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<RagdollBehavior>() != null)
+            Debug.Log("I collided with " + other.gameObject.name);
+
+            if (other.GetComponent<IKillable>() != null && !other.GetComponent<IKillable>().isDead)
             {
-                if (other.transform.parent.GetComponentInParent<IKillable>() != null)
-                {
-                    ps.Play();
-                    audioSource.Play();
-                    Debug.Log(other.gameObject.name);
-                    other.transform.parent.GetComponentInParent<IKillable>().Die(Vector3.zero);
-                }
+                ps.Play();
+                audioSource.Play();
+                Debug.Log(other.gameObject.name);
+                other.GetComponent<IKillable>().Die(Vector3.zero);
+            }
+
+            if(other.GetComponentInParent<PlayerBehavior>() != null)
+            {
+                ps.Play();
+                audioSource.Play();
+                other.GetComponentInParent<IKillable>().Die(Vector3.zero);
             }
         }
 

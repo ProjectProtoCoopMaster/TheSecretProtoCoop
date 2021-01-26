@@ -6,8 +6,6 @@ namespace Gameplay.VR
 {
     public class DistractionObjectGenerator : MonoBehaviour
     {
-        public List<SoundMaker> distractionObjects;
-
         public Transform dispenserPool;
         public Transform dispenserSpawn;
 
@@ -52,11 +50,6 @@ namespace Gameplay.VR
 
                 currentTime -= Time.deltaTime;
             }
-        }
-
-        IEnumerator Wait()
-        {
-            yield return new WaitForSeconds(1f);
         }
     } 
 }

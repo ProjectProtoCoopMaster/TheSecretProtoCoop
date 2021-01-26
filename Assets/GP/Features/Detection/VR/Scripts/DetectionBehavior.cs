@@ -7,6 +7,8 @@ namespace Gameplay.VR
 {
     public class DetectionBehavior : EntityVisionData
     {
+        public bool isGuard;
+
         public AnimationManager animationManager;
 
         [SerializeField] public LayerMask detectionMask;
@@ -58,9 +60,12 @@ namespace Gameplay.VR
                             {
                                 awarenessManager.alarmRaisers.Add(this.gameObject);
 
-                                // Animation, Léonard kiffe bien à réecrire ça bruuuh
-                                animationManager.SetAlertAnim();
-                                GetComponent<AgentManager>().StopAgent();
+                                if (isGuard)
+                                {
+                                    // Animation, Léonard kiffe bien à réecrire ça bruuuh
+                                    animationManager.SetAlertAnim();
+                                    GetComponent<AgentManager>().StopAgent();
+                                }
                             }
 
                             spottedPlayer.Raise();
