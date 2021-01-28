@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 3753619818626835888}
   - component: {fileID: 1663653444}
   - component: {fileID: 1663653445}
+  - component: {fileID: 1525769403186798943}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -156,9 +157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGame: 1
   _sceneID: {fileID: 11400000, guid: 402a6ff0bf327fe4f859ff3b404f799e, type: 2}
+  _isMobile: {fileID: 11400000, guid: 2224b1345099de94e9ce6ed8c63d1b8f, type: 2}
   UICanvas: {fileID: 0}
   _fadeTransition: {fileID: 11400000, guid: 4170ce1abde672643ac50e1939d3f653, type: 2}
-  _refreshScene: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
   loseCanvas: {fileID: 0}
   _loseText: {fileID: 11400000, guid: 1bf64f71af61ee044a86b0aaacee7d96, type: 2}
   deathIcons:
@@ -201,6 +202,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Gameplay.BoolVariable, Assembly-CSharp
         m_MethodName: SetValue
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 4170ce1abde672643ac50e1939d3f653, type: 2}
+        m_TargetAssemblyTypeName: Gameplay.CallableFunction, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -300,6 +313,37 @@ MonoBehaviour:
       - m_Target: {fileID: 1525769403144350535}
         m_TargetAssemblyTypeName: Gameplay.GameManager, Assembly-CSharp
         m_MethodName: LaunchSameLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  methodName: []
+  component: []
+--- !u!114 &1525769403186798943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525769403144350532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0495881fcb2a8c458606d5a16ec5fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Function: {fileID: 11400000, guid: f65e058c9dc754d4fa463a140406ce2e, type: 2}
+  ID: 0
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1525769403144350535}
+        m_TargetAssemblyTypeName: Gameplay.GameManager, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

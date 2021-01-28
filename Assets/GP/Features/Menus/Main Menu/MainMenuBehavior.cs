@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
+
 namespace Gameplay
 {
     public class MainMenuBehavior : MonoBehaviour
@@ -17,10 +19,16 @@ namespace Gameplay
         [SerializeField] private BoolVariable _isMobile;
         [SerializeField] private GameObject lobbyMobile;
         [SerializeField] private GameObject lobbyVR;
-        [SerializeField] private Text codeVR;
+        [SerializeField] private TMP_Text codeVR;
         [SerializeField] private Text codeMobile;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
         private int index = -1;
-        
+        private bool isRoomCreate = false;
+
+        private void Start()
+        {
+            _OnStart.Invoke();
+        }
 
         private void OnEnable()
         {
@@ -37,9 +45,13 @@ namespace Gameplay
         [Button]
         public void CreateRoom()
         {
-            int roomName = Random.Range(10000, 100000);
-            codeVR.text = roomName.ToString();
-            _CreateRoom.Raise(roomName.ToString());
+            if (!isRoomCreate)
+            {
+                int roomName = Random.Range(10000, 100000);
+                codeVR.text = roomName.ToString();
+                _CreateRoom.Raise(roomName.ToString());
+                isRoomCreate = true;
+            }
 
         }
 

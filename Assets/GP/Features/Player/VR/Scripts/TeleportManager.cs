@@ -15,7 +15,7 @@ namespace Gameplay.VR.Player
         [Tooltip("The Teleportation's movement curve.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] TweenFunctions tweenFunction;
         [Tooltip("The Particle Effect to play when the player teleports.")]
-        [SerializeField] [FoldoutGroup("Teleportation Transition")] VisualEffect dashEffect;
+        [SerializeField] [FoldoutGroup("Teleportation Transition")] ParticleSystem dashEffect;
         [Tooltip("The GameEvent that is called when the player presses down on the teleport input.")]
         [SerializeField] [FoldoutGroup("Teleportation Transition")] GameEvent teleportAiming;
         [Tooltip("The GameEvent that is called when the player releases the teleport input.")]
