@@ -35,7 +35,6 @@ namespace Gameplay.VR
 
                 isDead = true;
             }
-
         }
 
         public void Die() { }
