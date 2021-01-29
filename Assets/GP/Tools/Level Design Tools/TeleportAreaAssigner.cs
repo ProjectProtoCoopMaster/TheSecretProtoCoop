@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using Gameplay.VR.Player;
 
 public class TeleportAreaAssigner : Editor
 {
-    TeleportationArea[] teleportationAreas;
-
     [MenuItem("Tools/Assign Teleport Materials %t")]
-    private void AssignTeleportationAreas()
+    static void AssignTeleportationAreas()
     {
-        teleportationAreas = FindObjectsOfType<TeleportationArea>();
+        TeleportationArea[] teleportationAreas = FindObjectsOfType<TeleportationArea>();
 
         for (int i = 0; i < teleportationAreas.Length; i++)
         {
