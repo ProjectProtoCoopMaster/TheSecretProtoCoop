@@ -90,6 +90,14 @@ namespace Gameplay.AI
             isDead = true;
 
             agentRig.gameObject.SetActive(false);
+
+            // Child Object Feedbacks
+                // Sound Feedbacks
+                // VFX Feedbcaks
+                // Animation Feedbacks
+
+            // 
+            // 
         }
 
         public void DeletePreviousRagdoll()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+
 namespace Gameplay
 {
     [CreateAssetMenu]
@@ -10,8 +11,6 @@ namespace Gameplay
     {
         [SerializeField] private List<CallableFunctionListener> listeners = new List<CallableFunctionListener>();
         
-
-
         [Button]
         public void Raise()
         {
