@@ -34,7 +34,15 @@ namespace Gameplay
     [System.Serializable]
     public abstract class Assembler
     {
-        public List<RoomManager> roomChunks;
+        [Button]
+        public void FindAllRoomChunks()
+        {
+            roomChunks.Clear();
+            RoomManager[] rooms = Object.FindObjectsOfType<RoomManager>();
+            foreach (RoomManager room in rooms) roomChunks.Add(room);
+        }
+
+        public List<RoomManager> roomChunks = new List<RoomManager>();
 
         public LevelVariable levelHolder;
         public List<RoomManager> pickedRooms { get; protected set; } = new List<RoomManager>();
