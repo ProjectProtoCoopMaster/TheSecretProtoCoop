@@ -14,6 +14,7 @@ public class PrefabLightmapData : MonoBehaviour
         public int lightmapIndex;
         public Vector4 lightmapOffsetScale;
     }
+
     [System.Serializable]
     struct LightInfo
     {
@@ -22,17 +23,11 @@ public class PrefabLightmapData : MonoBehaviour
         public int mixedLightingMode;
     }
 
-    [SerializeField]
-    RendererInfo[] m_RendererInfo;
-    [SerializeField]
-    Texture2D[] m_Lightmaps;
-    [SerializeField]
-    Texture2D[] m_LightmapsDir;
-    [SerializeField]
-    Texture2D[] m_ShadowMasks;
-    [SerializeField]
-    LightInfo[] m_LightInfo;
-
+    [SerializeField] RendererInfo[] m_RendererInfo;
+    [SerializeField] Texture2D[] m_Lightmaps;
+    [SerializeField] Texture2D[] m_LightmapsDir;
+    [SerializeField] Texture2D[] m_ShadowMasks;
+    [SerializeField] LightInfo[] m_LightInfo;
 
     void Awake()
     {
@@ -76,10 +71,7 @@ public class PrefabLightmapData : MonoBehaviour
                 combinedLightmaps.Add(newlightmapdata);
 
                 counttotal += 1;
-
-
             }
-
         }
 
         var combinedLightmaps2 = new LightmapData[counttotal];
@@ -105,9 +97,7 @@ public class PrefabLightmapData : MonoBehaviour
 
     void OnEnable()
     {
-
         SceneManager.sceneLoaded += OnSceneLoaded;
-
     }
 
     // called second
@@ -121,8 +111,6 @@ public class PrefabLightmapData : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-
 
     static void ApplyRendererInfo(RendererInfo[] infos, int[] lightmapOffsetIndex, LightInfo[] lightsInfo)
     {
@@ -140,7 +128,6 @@ public class PrefabLightmapData : MonoBehaviour
                 if (mat[j] != null && Shader.Find(mat[j].shader.name) != null)
                     mat[j].shader = Shader.Find(mat[j].shader.name);
             }
-
         }
 
         for (int i = 0; i < lightsInfo.Length; i++)
@@ -153,8 +140,6 @@ public class PrefabLightmapData : MonoBehaviour
             lightsInfo[i].light.bakingOutput = bakingOutput;
 
         }
-
-
     }
 
 #if UNITY_EDITOR
@@ -186,7 +171,7 @@ public class PrefabLightmapData : MonoBehaviour
             instance.m_LightmapsDir = lightmapsDir.ToArray();
             instance.m_LightInfo = lightsInfos.ToArray();
             instance.m_ShadowMasks = shadowMasks.ToArray();
-#if UNITY_2018_3_OR_NEWER
+
             var targetPrefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(instance.gameObject) as GameObject;
             if (targetPrefab != null)
             {
@@ -215,17 +200,7 @@ public class PrefabLightmapData : MonoBehaviour
                     PrefabUtility.ApplyPrefabInstance(instance.gameObject, InteractionMode.AutomatedAction);
                 }
             }
-#else
-            var targetPrefab = UnityEditor.PrefabUtility.GetPrefabParent(gameObject) as GameObject;
-            if (targetPrefab != null)
-            {
-                //UnityEditor.Prefab
-                UnityEditor.PrefabUtility.ReplacePrefab(gameObject, targetPrefab);
-            }
-#endif
         }
-
-
     }
 
     static void GenerateLightmapInfo(GameObject root, List<RendererInfo> rendererInfos, List<Texture2D> lightmaps, List<Texture2D> lightmapsDir, List<Texture2D> shadowMasks, List<LightInfo> lightsInfo)
@@ -254,10 +229,8 @@ public class PrefabLightmapData : MonoBehaviour
                         lightmapsDir.Add(lightmapDir);
                         shadowMasks.Add(shadowMask);
                     }
-
                     rendererInfos.Add(info);
                 }
-
             }
         }
 
@@ -268,17 +241,12 @@ public class PrefabLightmapData : MonoBehaviour
             LightInfo lightInfo = new LightInfo();
             lightInfo.light = l;
             lightInfo.lightmapBaketype = (int)l.lightmapBakeType;
-#if UNITY_2020_1_OR_NEWER
-            lightInfo.mixedLightingMode = (int)UnityEditor.Lightmapping.lightingSettings.mixedBakeMode;            
-#elif UNITY_2018_1_OR_NEWER
-            lightInfo.mixedLightingMode = (int)UnityEditor.LightmapEditorSettings.mixedBakeMode;
-#else
-            lightInfo.mixedLightingMode = (int)l.bakingOutput.lightmapBakeType;            
-#endif
+
+            lightInfo.mixedLightingMode = (int)UnityEditor.Lightmapping.lightingSettings.mixedBakeMode;                     
+
             lightsInfo.Add(lightInfo);
 
         }
     }
 #endif
-
 }
