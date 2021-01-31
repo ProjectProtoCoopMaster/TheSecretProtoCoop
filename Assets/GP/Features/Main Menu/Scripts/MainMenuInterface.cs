@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,9 @@ namespace Gameplay
 {
     public class MainMenuInterface : MonoBehaviour
     {
+        public bool testNotInVR;
+        [ShowIf("testNotInVR")] public Button generateCodeButton;
+
         public GameEvent onMainMenuStart;
 
         public CallableFunction _JoinRoom;
@@ -24,9 +28,17 @@ namespace Gameplay
         public TMP_Text codeVRComponent;
         public Text codeMobileComponent;
 
-        private bool created;
+        private bool created = false;
 
         void Start() => onMainMenuStart.Raise();
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!_isMobile.Value) { generateCodeButton.onClick.Invoke(); }
+            }
+        }
 
         void OnEnable()
         {
