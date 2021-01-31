@@ -55,7 +55,6 @@ namespace Networking
 
         #region Game Management
 
-        [Button]
         public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
         [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
 

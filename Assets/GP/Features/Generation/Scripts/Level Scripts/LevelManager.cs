@@ -26,6 +26,13 @@ namespace Gameplay
         public LevelMobile levelMobile;
 
         public Level level { get; private set; }
+        //public Level _level
+        //{
+        //    get {
+        //        if (platform == Platform.VR) return levelVR;
+        //        else return levelMobile;
+        //    }
+        //}
 
         void OnEnable() { if (instance == null) instance = this; }
 

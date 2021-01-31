@@ -10,7 +10,7 @@ namespace Gameplay
 {
     public enum Platform { Mobile, VR }
 
-    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 };
+    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 }
 
     public class GameManager : MonoBehaviour
     {
@@ -52,8 +52,7 @@ namespace Gameplay
             if (startGame)
             {
                 currentLevelIndex = 1;
-                _sceneID.Value = 1;
-                SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+                SceneManager.LoadScene("GameSceneMainMenu", LoadSceneMode.Additive);
             }
         }
 
