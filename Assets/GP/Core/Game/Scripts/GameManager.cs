@@ -23,10 +23,11 @@ namespace Gameplay
 
         public bool gameOver { get; set; } = false;
 
+        public BoolVariable _isMobile;
+
         public Transform UICanvas;
 
         [SerializeField] private CallableFunction _fadeTransition;
-        [SerializeField] private GameEvent _refreshScene;
 
         [Title("Lose")]
         public Transform loseCanvas;
@@ -48,7 +49,12 @@ namespace Gameplay
             winCanvas.gameObject.SetActive(false);
             loseCanvas.gameObject.SetActive(false);
 
-            if (startGame) SceneManager.LoadScene(1, LoadSceneMode.Additive);
+            if (startGame)
+            {
+                currentLevelIndex = 1;
+                _sceneID.Value = 1;
+                SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+            }
         }
 
         [Button]
@@ -58,7 +64,7 @@ namespace Gameplay
             {
                 gameOver = true;
 
-                loseCanvas.gameObject.SetActive(true);
+                if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
 
                 Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
 
@@ -111,7 +117,6 @@ namespace Gameplay
             yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
             SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
             loseCanvas.gameObject.SetActive(false);
-            _refreshScene.Raise();
             yield return new WaitForSeconds(2f);
             gameOver = false;
             yield break;
@@ -126,18 +131,22 @@ namespace Gameplay
             _sceneID.Value = sceneID;
             SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
             yield return new WaitForSeconds(1.0f);
-            _refreshScene.Raise();
+            
             yield break;
         }
 
         public void LoadMainMenu()
         {
-            currentLevelIndex = 0;
+            winCanvas.gameObject.SetActive(false);
+            loseCanvas.gameObject.SetActive(false);
+
+            currentLevelIndex = 1;
             StartCoroutine(WaitLoadNextScene(1));
         }
 
         public void LoadNextScene()
         {
+            currentLevelIndex++;
             int id = _sceneID.Value + 2;
             StartCoroutine(WaitLoadNextScene(id));
         }
