@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 2605596787377137388}
   - component: {fileID: 2605596787377137379}
   - component: {fileID: 2605596787377137378}
-  - component: {fileID: 2605596787377137377}
-  - component: {fileID: 2605596787377137376}
   m_Layer: 0
-  m_Name: Level Manager
+  m_Name: Level Manager VR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2605596787377137389}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -48,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onGameSceneStart: {fileID: 11400000, guid: 6bcab1ceee242d848892b583a4e08a1b, type: 2}
+  levelAssembler: {fileID: 2605596787377137378}
   platform: 1
   levelVR:
     refreshScene: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
@@ -77,62 +76,6 @@ MonoBehaviour:
     roomChunks: []
     levelHolder: {fileID: 0}
     LevelParent: {fileID: 0}
---- !u!114 &2605596787377137377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2605596787377137389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: e17b5321ace7d9a4f9a73d921f7b39ed, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2605596787377137378}
-        m_TargetAssemblyTypeName: Gameplay.LevelAssembler, Assembly-CSharp
-        m_MethodName: BuildLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2605596787377137376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2605596787377137389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 4b02b9eef013b2c4eb7d52bf6bfa79bc, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2605596787377137379}
-        m_TargetAssemblyTypeName: Gameplay.LevelManager, Assembly-CSharp
-        m_MethodName: RestartLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &2605596787722332841
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3938265781617762609}
   - component: {fileID: 3938265781617762622}
   - component: {fileID: 3938265781617762623}
-  - component: {fileID: 3938265781617762608}
   m_Layer: 0
   m_Name: Symbol Manager
   m_TagString: Untagged
@@ -46,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSymbolLoaded: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
+  onOpenDoor: {fileID: 11400000, guid: d6032a02634764a4cae45e41c7a40a1d, type: 2}
+  onResetCodes: {fileID: 11400000, guid: 6b62b1612016dec47b42644bcef27186, type: 2}
   iconsAsset:
   - {fileID: 21300000, guid: 98483f84a5c8ff34db0bf1afd82e4327, type: 3}
   - {fileID: 21300000, guid: 31cd68d219a468a47883c9dc3ae7b306, type: 3}
@@ -144,31 +145,3 @@ MonoBehaviour:
         m_CallState: 2
   methodName: []
   component: []
---- !u!114 &3938265781617762608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3938265781617762620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 7b4f0b1952a4ff0488f75f2b1cf595ca, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: f369923a5bd64cd489080ca28b262864, type: 2}
-        m_TargetAssemblyTypeName: Gameplay.BoolVariable, Assembly-CSharp
-        m_MethodName: SetValue
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

@@ -13,30 +13,26 @@ namespace Networking
         [SerializeField] private GameEvent _OnJoinRoomFailed;
         [SerializeField] private GameEvent _OnRoomFulled;
 
-        private void Start()
+        void Start()
         {
-
-            //PhotonNetwork.ConnectToMaster("192.168.56.1", 5055, "bc760756-d6bd-48aa-b511-8d3c5cca5aef");
             PhotonNetwork.ConnectUsingSettings();
-
         }
+
         public void JoinRoom(string roomName)
         {
             PhotonNetwork.JoinRoom(roomName);
-
         }
 
         public void CreateRoom(string roomName)
         {
             RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
             PhotonNetwork.CreateRoom(roomName, roomOptions);
-            
-
         }
 
         public override void OnJoinedRoom()
         {
             Debug.Log(PhotonNetwork.CurrentRoom);
+
             if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 _OnRoomFulled.Raise();
@@ -55,14 +51,13 @@ namespace Networking
         {
             _OnJoinRoomFailed.Raise();
         }
+
         public override void OnConnectedToMaster()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
             _OnConnectedToServer.Raise();
+
             Debug.Log(PhotonNetwork.ServerAddress);
         }
-
-        
     }
 }
-

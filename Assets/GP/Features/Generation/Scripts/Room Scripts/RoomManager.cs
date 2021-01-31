@@ -35,17 +35,17 @@ namespace Gameplay
         [Title("Room Mobile")]
         public RoomMobile roomMobile;
 
-        public Room room { get; private set; }
+        public Room room
+        {
+            get {
+                if (platform == Platform.VR) return roomVR;
+                else return roomMobile;
+            }
+        }
 
         private void Awake()
         {
             _refreshScene.Raise();
-        }
-
-        public void StartRoom()
-        {
-            if (platform == Platform.VR) room = roomVR;
-            else if (platform == Platform.Mobile) room = roomMobile;
         }
     }
 
@@ -132,11 +132,11 @@ namespace Gameplay
             aIManager.StartAllAgents();
 
             /// Initialize Elements
-            
-           // SwitcherManager.instance.StartAllSwitchers();
-            JammerManager.instance.StartAllJammers();
 
-            SymbolManager.instance.LoadSymbols();
+            //TransmitterManager.instance.switcherManager.StartAllSwitchers();
+            TransmitterManager.instance.jammerManager.StartAllJammers();
+
+            TransmitterManager.instance.symbolManager.LoadSymbols();
         }
 
         public override void OnDisableRoom()
@@ -179,8 +179,8 @@ namespace Gameplay
 
             /// Initialize Switchers
 
-            //SwitcherManager.instance.StartAllSwitchers();
-            JammerManager.instance.StartAllJammers();
+            //TransmitterManager.instance.switcherManager.StartAllSwitchers();
+            TransmitterManager.instance.jammerManager.StartAllJammers();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Gameplay
 {
     public class SymbolManager : MonoBehaviour
     {
-        public static SymbolManager instance;
-        
         public BoolVariable isSymbolLoaded;
+        public GameEvent onOpenDoor;
+        public GameEvent onResetCodes;
 
         public List<Sprite> iconsAsset;
 
@@ -25,9 +25,8 @@ namespace Gameplay
 
         public ISymbol symbol;
 
+        public static SymbolManager instance;
         void OnEnable() { if (instance == null) instance = this; }
-
-        void Awake() => instance = this;
 
         void OnDisable() => isSymbolLoaded.Value = false;
 
@@ -149,8 +148,8 @@ namespace Gameplay
                     }
                 }
             }
+
             TransmitterManager.instance.SendCodeNameToOthers(pickedNames);
         }
     }
 }
-

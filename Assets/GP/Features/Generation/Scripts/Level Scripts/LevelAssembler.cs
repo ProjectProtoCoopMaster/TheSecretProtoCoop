@@ -16,13 +16,16 @@ namespace Gameplay
         [Title("Assembler Mobile")]
         public AssemblerMobile assemblerMobile;
 
-        public Assembler assembler { get; private set; }
-
-        public void BuildLevel()
+        public Assembler assembler
         {
-            if (platform == Platform.VR) assembler = assemblerVR;
-            else if (platform == Platform.Mobile) assembler = assemblerMobile;
+            get {
+                if (platform == Platform.VR) return assemblerVR;
+                else return assemblerMobile;
+            }
+        }
 
+        public void AssembleLevel()
+        {
             assembler.PickRooms();
 
             assembler.CreateLevel();
@@ -53,8 +56,6 @@ namespace Gameplay
         {
             foreach (RoomManager roomManager in roomChunks)
             {
-                roomManager.StartRoom();
-
                 foreach (RoomData roomData in levelHolder.LevelRoomsData)
                 {
                     if (roomManager.room.roomName == roomData.roomName)

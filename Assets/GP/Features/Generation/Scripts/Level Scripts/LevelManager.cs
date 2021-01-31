@@ -12,10 +12,11 @@ namespace Gameplay
     {
         public GameEvent onGameSceneStart;
 
-        public Platform platform;
+        public LevelAssembler levelAssembler;
 
-        public static LevelManager instance;
         public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
+
+        public Platform platform;
 
         [ShowIf("platform", Platform.VR)]
         [Title("Level VR")]
@@ -25,24 +26,23 @@ namespace Gameplay
         [Title("Level Mobile")]
         public LevelMobile levelMobile;
 
-        public Level level { get; private set; }
-        //public Level _level
-        //{
-        //    get {
-        //        if (platform == Platform.VR) return levelVR;
-        //        else return levelMobile;
-        //    }
-        //}
+        public Level level
+        {
+            get {
+                if (platform == Platform.VR) return levelVR;
+                else return levelMobile;
+            }
+        }
 
+        public static LevelManager instance;
         void OnEnable() { if (instance == null) instance = this; }
 
         void Start() => onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
 
+        public void BuildLevel() => levelAssembler.AssembleLevel();
+
         public void StartLevel()
         {
-            if (platform == Platform.VR) level = levelVR;
-            else if (platform == Platform.Mobile) level = levelMobile;
-
             level.rooms = levelRooms;
 
             level.StartAt(0);
@@ -116,8 +116,6 @@ namespace Gameplay
 
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
-
-            TransmitterManager.instance.SendRoomChangeToOthers();
         }
 
         protected override void SetCenterToRoom(RoomManager _currentRoom)

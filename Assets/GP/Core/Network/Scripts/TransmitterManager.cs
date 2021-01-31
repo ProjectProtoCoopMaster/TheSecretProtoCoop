@@ -11,21 +11,15 @@ namespace Networking
     {
         [SerializeField] private PhotonView photonView;
 
-        public GameManager gameManager;
-
         [SerializeField] private BoolVariable _isMobile;
-
-        [Title("Win/Lose")]
-        [SerializeField] private GameEvent _onLose;
-        [SerializeField] private GameEvent _onWin;
 
         [Title("Player")]
         [SerializeField] private Vector3Variable _playerVRPosition;
         [SerializeField] private QuaternionVariable _playerVRRotation;
 
         [Title("Elements")]
-        [SerializeField] private CallableFunction _switch;
-        [SerializeField] private CallableFunction _destroyJammer;
+        public SwitcherManager switcherManager;
+        public JammerManager jammerManager;
 
         [Title("Modifiers")]
         [SerializeField] private BoolVariable _shake;
@@ -34,43 +28,28 @@ namespace Networking
         [SerializeField] private FloatVariable _oxygenTimer;
 
         [Title("Level Generation")]
+        public LevelGenerator levelGenerator;
         [SerializeField] private LevelVariable _levelHolder;
-        [SerializeField] private GameEvent _buildLevel;
-
-        [Title("Level Management")]
-        [SerializeField] private GameEvent _changeRoomMobile;
-        [SerializeField] private GameEvent _onLevelRestart;
-        [SerializeField] private CallableFunction _loadNextScene;
-        [SerializeField] private CallableFunction _loadSameScene;
-        [SerializeField] private CallableFunction _loadMainMenu;
 
         [Title("Symbol Door")]
         public SymbolManager symbolManager;
-        [SerializeField] private GameEvent _onOpenDoor;
-        [SerializeField] private GameEvent _onResetCodes;
 
         public static TransmitterManager instance;
-
-        private void Awake() => instance = this;
+        void OnEnable() { if (instance == null) instance = this; }
 
         #region Game Management
 
         public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
-        [PunRPC] private void SendLose(int loseType) { gameManager.loseType = (LoseType)loseType; _onLose.Raise(); }
+        [PunRPC] private void SendLose(int loseType) { GameManager.instance.Lose((LoseType)loseType); }
 
         public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
-        [PunRPC] private void SendWin() => _onWin.Raise();
+        [PunRPC] private void SendWin() { GameManager.instance.Win(); }
 
         public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
-        [PunRPC] private void SendRestart() { SendLoadSameSceneToAll(); }
-
-        public void SendLoadNextSceneToAll() => photonView.RPC("SendLoadNextScene", RpcTarget.AllViaServer);
-        [PunRPC] private void SendLoadNextScene() { _loadNextScene.Raise(); }
-        public void SendLoadSameSceneToAll() => photonView.RPC("SendLoadSameScene", RpcTarget.AllViaServer);
-        [PunRPC] private void SendLoadSameScene() { _loadSameScene.Raise(); }
+        [PunRPC] private void SendRestart() { LevelManager.instance.RestartLevel(); }
 
         public void SendLoadMainMenuToAll() => photonView.RPC("SendLoadMainMenu", RpcTarget.AllViaServer);
-        [PunRPC] private void SendLoadMainMenu() { _loadMainMenu.Raise(); }
+        [PunRPC] private void SendLoadMainMenu() { GameManager.instance.LoadMainMenu(); }
         #endregion
 
         #region Player Position
@@ -80,12 +59,12 @@ namespace Networking
 
         #region Switcher
         public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
-        [PunRPC] private void SendSwitcherChange(float ID) { Debug.Log("Switch Changed with ID :" + ID); _switch.Raise(ID); }
+        [PunRPC] private void SendSwitcherChange(float ID) { Debug.Log("Switch Changed with ID :" + ID); switcherManager.RaiseSwitch(ID); }
         #endregion
 
         #region Jammer
         public void SendDestroyJammerToOthers(int ID) => photonView.RPC("SendDestroyJammer", RpcTarget.Others, ID);
-        [PunRPC] private void SendDestroyJammer(int ID) => _destroyJammer.Raise(ID);
+        [PunRPC] private void SendDestroyJammer(int ID) { jammerManager.DestroyJammer(ID); }
         #endregion
 
         #region Symbol Door
@@ -100,14 +79,14 @@ namespace Networking
         private void SendCodeName(string[] pickedNames)
         {
             for (int i = 0; i < 3; i++) { symbolManager.pickedNames[i] = pickedNames[i]; }
-            if (!_isMobile.Value) _onResetCodes.Raise();
+            if (!_isMobile.Value) symbolManager.onResetCodes.Raise();
         }
 
         public void SendIconsSelectedToOthers(int i, int ID) => photonView.RPC("SendIconsSelected", RpcTarget.Others, i, ID);
         [PunRPC] private void SendIconsSelected(int i, int ID) => symbolManager.iconsSelected[i] = symbolManager.iconsStashed[ID];
 
         public void SendOnOpenDoorToOther() => photonView.RPC("SendOnOpenDoor", RpcTarget.Others);
-        [PunRPC] private void SendOnOpenDoor() => _onOpenDoor.Raise();
+        [PunRPC] private void SendOnOpenDoor() => symbolManager.onOpenDoor.Raise();
         #endregion
 
         #region Modifiers
@@ -122,7 +101,7 @@ namespace Networking
         #endregion
 
         #region Level
-        public void SendLevelHolderToOthers(LevelVariable levelVariable)
+        public void SendBuildLevelToOther(LevelVariable levelVariable)
         {
             Debug.Log("Send Level Holder VR");
             foreach(RoomData roomData in levelVariable.LevelRoomsData) { Debug.Log("with room :" + roomData.roomName + "and modifier :" + roomData.roomModifier); }
@@ -136,9 +115,9 @@ namespace Networking
                 _types[i] = (int)levelVariable.LevelRoomsData[i].roomModifier;
             }
 
-            photonView.RPC("SendLevelHolder", RpcTarget.Others, levelVariable.LevelRoomsData.Count, _names as object, _types as object);
+            photonView.RPC("SendBuildLevel", RpcTarget.Others, levelVariable.LevelRoomsData.Count, _names as object, _types as object);
         }
-        [PunRPC] private void SendLevelHolder(int size, string[] names, int[] modifierTypes)
+        [PunRPC] private void SendBuildLevel(int size, string[] names, int[] modifierTypes)
         {
             Debug.Log("Send Level Holder Mobile");
 
@@ -149,12 +128,11 @@ namespace Networking
                 _levelHolder.LevelRoomsData.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
             }
 
-            BuildLevel();
+            LevelManager.instance.BuildLevel();
         }
-        public void BuildLevel() => _buildLevel.Raise();
 
-        public void SendRoomChangeToOthers() => photonView.RPC("SendRoomChange", RpcTarget.Others);
-        [PunRPC] private void SendRoomChange() => _changeRoomMobile.Raise();
+        public void SendRoomChangeToAll() => photonView.RPC("SendRoomChange", RpcTarget.AllViaServer);
+        [PunRPC] private void SendRoomChange() { LevelManager.instance.ChangeRoom(); }
         #endregion
     }
 }

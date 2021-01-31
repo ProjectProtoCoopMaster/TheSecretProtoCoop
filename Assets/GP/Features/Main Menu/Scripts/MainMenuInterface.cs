@@ -22,16 +22,9 @@ namespace Gameplay
         public TMP_Text codeVRComponent;
         public Text codeMobileComponent;
 
-        [SerializeField] private UnityEvent _OnStart;
-
         private bool created;
 
-        private void Start()
-        {
-            _OnStart.Invoke();
-        }
-
-        private void OnEnable()
+        void OnEnable()
         {
             lobbyMobile.SetActive(false);
             lobbyVR.SetActive(false);
@@ -56,11 +49,9 @@ namespace Gameplay
 
         public void OpenScene()
         {
-            if (platform == Platform.Mobile) SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
+            if (platform == Platform.Mobile) GameManager.instance.LoadScene("GameSceneMobile");
 
-            else if (platform == Platform.VR) SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
-
-            SceneManager.UnloadSceneAsync("GameSceneMainMenu");
+            else if (platform == Platform.VR) GameManager.instance.LoadScene("GameSceneVR");
         }
 
         public void OpenLobbyCanvas()

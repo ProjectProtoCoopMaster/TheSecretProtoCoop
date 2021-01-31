@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +7,7 @@ namespace Gameplay
 {
     public class JammerManager : MonoBehaviour
     {
-        public static JammerManager instance;
-
-        [SerializeField] private JammerBehavior[] jammers;
-
-        void OnEnable() { if (instance == null) instance = this; }
+        [ReadOnly] public JammerBehavior[] jammers;
 
         public void DestroyJammer(int ID)
         {
@@ -35,5 +32,4 @@ namespace Gameplay
 
         public void SearchJammersInScene() => jammers = FindObjectsOfType<JammerBehavior>();
     }
-
 }
