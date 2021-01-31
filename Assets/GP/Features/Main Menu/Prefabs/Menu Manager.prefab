@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4aae1e34fbe424997f625af670060b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onMainMenuStart: {fileID: 11400000, guid: fe972a7b245f56f4994067da1cf61658, type: 2}
   _JoinRoom: {fileID: 11400000, guid: 0f87945011578764a8c35e8837d2ea02, type: 2}
   _CreateRoom: {fileID: 11400000, guid: e3b6f14f092a3574382fab4be9f7043d, type: 2}
   _isMobile: {fileID: 11400000, guid: 2224b1345099de94e9ce6ed8c63d1b8f, type: 2}
@@ -53,21 +54,6 @@ MonoBehaviour:
   lobbyVR: {fileID: 0}
   codeVRComponent: {fileID: 0}
   codeMobileComponent: {fileID: 0}
-  _OnStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 8d41bafa3842f174087729fa18c74f11, type: 2}
-        m_TargetAssemblyTypeName: Gameplay.CallableFunction, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5303214728042377227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,18 +126,6 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 4170ce1abde672643ac50e1939d3f653, type: 2}
-        m_TargetAssemblyTypeName: Gameplay.CallableFunction, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5303214728042377228}
         m_TargetAssemblyTypeName: Gameplay.MainMenuInterface, Assembly-CSharp
         m_MethodName: OpenScene

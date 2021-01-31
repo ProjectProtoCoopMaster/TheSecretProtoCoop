@@ -67,7 +67,7 @@ namespace Gameplay
 
         protected bool init = true;
 
-        public virtual void OnInitRoom() => init = false;
+        protected virtual void OnInitRoom() => init = false;
 
         public virtual void OnEnterRoom() { if (init) OnInitRoom(); }
         public virtual void OnDisableRoom() { }
@@ -88,7 +88,7 @@ namespace Gameplay
 
         public Transform playerStart;
 
-        public override void OnInitRoom()
+        protected override void OnInitRoom()
         {
             /// Initialize AI
 
@@ -133,7 +133,7 @@ namespace Gameplay
 
             /// Initialize Elements
 
-            //TransmitterManager.instance.switcherManager.StartAllSwitchers();
+            TransmitterManager.instance.switcherManager.StartAllSwitchers();
             TransmitterManager.instance.jammerManager.StartAllJammers();
 
             TransmitterManager.instance.symbolManager.LoadSymbols();
@@ -156,7 +156,7 @@ namespace Gameplay
 
         private CameraManager cameraManager;
 
-        public override void OnInitRoom()
+        protected override void OnInitRoom()
         {
             /// Initialize Camera
 
@@ -179,7 +179,7 @@ namespace Gameplay
 
             /// Initialize Switchers
 
-            //TransmitterManager.instance.switcherManager.StartAllSwitchers();
+            TransmitterManager.instance.switcherManager.StartAllSwitchers();
             TransmitterManager.instance.jammerManager.StartAllJammers();
         }
     }

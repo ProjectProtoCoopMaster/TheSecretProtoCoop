@@ -10,6 +10,8 @@ namespace Gameplay
 {
     public class MainMenuInterface : MonoBehaviour
     {
+        public GameEvent onMainMenuStart;
+
         public CallableFunction _JoinRoom;
         public CallableFunction _CreateRoom;
 
@@ -23,6 +25,8 @@ namespace Gameplay
         public Text codeMobileComponent;
 
         private bool created;
+
+        void Start() => onMainMenuStart.Raise();
 
         void OnEnable()
         {

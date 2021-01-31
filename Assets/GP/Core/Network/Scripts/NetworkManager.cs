@@ -13,7 +13,7 @@ namespace Networking
         [SerializeField] private GameEvent _OnJoinRoomFailed;
         [SerializeField] private GameEvent _OnRoomFulled;
 
-        void Start()
+        public void ConnectToServer()
         {
             PhotonNetwork.ConnectUsingSettings();
         }
@@ -57,7 +57,7 @@ namespace Networking
             PhotonNetwork.AutomaticallySyncScene = true;
             _OnConnectedToServer.Raise();
 
-            Debug.Log(PhotonNetwork.ServerAddress);
+            Debug.Log("Adress : " + PhotonNetwork.ServerAddress);
         }
     }
 }
