@@ -34,7 +34,7 @@ namespace Gameplay
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (testNotInVR && Input.GetKeyDown(KeyCode.Space))
             {
                 if (!_isMobile.Value) { generateCodeButton.onClick.Invoke(); }
             }
