@@ -56,7 +56,7 @@ namespace Gameplay
 
         [InfoBox(@"@""Modifier : "" + this.roomModifier.ToString()")]
 
-        public Transform roomHolder;
+        public Transform transform;
 
         public Transform roomCenter;
         public Transform roomOrigin;

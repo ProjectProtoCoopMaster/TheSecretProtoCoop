@@ -75,18 +75,18 @@ namespace Gameplay
             currentRoomIndex = index;
             currentRoom = rooms[currentRoomIndex];
 
-            SetCenterToRoom(currentRoom);
+            SetPlayerRoom(currentRoom);
 
-            room.roomHolder.gameObject.SetActive(true);
+            room.transform.gameObject.SetActive(true);
             room.OnEnterRoom();
         }
         protected virtual void UnloadRoom(int index)
         {
-            rooms[index].room.roomHolder.gameObject.SetActive(false);
+            rooms[index].room.transform.gameObject.SetActive(false);
             room.OnDisableRoom();
         }
 
-        protected abstract void SetCenterToRoom(RoomManager _currentRoom);
+        protected abstract void SetPlayerRoom(RoomManager _currentRoom);
     }
 
     [System.Serializable]
@@ -118,7 +118,7 @@ namespace Gameplay
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
         }
 
-        protected override void SetCenterToRoom(RoomManager _currentRoom)
+        protected override void SetPlayerRoom(RoomManager _currentRoom)
         {
             playerBehavior.currentRoom = _currentRoom;
         }
@@ -140,7 +140,7 @@ namespace Gameplay
             else Debug.Log("You won the game and one million pesos ! Congratulations !");
         }
 
-        protected override void SetCenterToRoom(RoomManager _currentRoom)
+        protected override void SetPlayerRoom(RoomManager _currentRoom)
         {
             playerBehavior.currentRoom = _currentRoom;
         }

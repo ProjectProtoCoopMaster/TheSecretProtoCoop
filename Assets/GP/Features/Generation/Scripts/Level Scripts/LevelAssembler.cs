@@ -90,13 +90,13 @@ namespace Gameplay
                 indexRoomVR = (RoomVR)pickedRooms[i].room;
 
                 Vector3 translation = currentAnchor.position - indexRoomVR.entranceAnchor.localPosition;
-                indexRoomVR.roomHolder.position = translation;
+                indexRoomVR.transform.position = translation;
 
                 float angle = currentAnchor.rotation.eulerAngles.y - indexRoomVR.entranceAnchor.localRotation.eulerAngles.y;
-                indexRoomVR.roomHolder.RotateAround(currentAnchor.position, Vector3.up, angle);
+                indexRoomVR.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
 
-                indexRoomVR.roomHolder.parent = LevelParent;
-                indexRoomVR.roomHolder.gameObject.SetActive(false);
+                indexRoomVR.transform.parent = LevelParent;
+                indexRoomVR.transform.gameObject.SetActive(false);
 
                 currentAnchor = indexRoomVR.exitAnchor;
             }
@@ -118,8 +118,8 @@ namespace Gameplay
             {
                 indexRoomMobile = (RoomMobile)pickedRooms[i].room;
 
-                indexRoomMobile.roomHolder.parent = LevelParent;
-                indexRoomMobile.roomHolder.gameObject.SetActive(false);
+                indexRoomMobile.transform.parent = LevelParent;
+                indexRoomMobile.transform.gameObject.SetActive(false);
             }
         }
     }
