@@ -15,7 +15,7 @@ namespace Gameplay
         [Range(0, 3)]
         public int maximumModifiersInLevel;
         
-        private List<ModifierType> modifierTypes;
+        private List<ModifierType> modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
 
         public LevelVariable levelHolder;
 
@@ -30,12 +30,7 @@ namespace Gameplay
                 Debug.Log("Generate");
                 levelHolder.LevelRoomsData.Clear();
 
-                List<PoolData> pools = new List<PoolData>();
-                foreach (PoolData pool in levelFile.roomPools.Values) pools.Add(pool);
-
-                SelectRooms(pools);
-
-                modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
+                SelectRooms();
 
                 ApplyModifiers();
 
@@ -47,27 +42,31 @@ namespace Gameplay
         }
 
         #region Rooms
-        private void SelectRooms(List<PoolData> pools)
+        private void SelectRooms()
         {
-            foreach (PoolData pool in pools)
+            foreach (PoolData pool in levelFile.pools.Values)
             {
                 PickRoom(pool);
             }
         }
         private void PickRoom(PoolData pool)
         {
-            List<RoomData> availableRoomsInPool = new List<RoomData>();
-            foreach (RoomData room in pool.rooms) availableRoomsInPool.Add(room);
+            List<RoomData> availableRooms = new List<RoomData>();
+            foreach (RoomData room in pool.rooms) availableRooms.Add(room);
+
+            int amountToPick;
+            if (availableRooms.Count < pool.amountOfRoomsToPick) amountToPick = availableRooms.Count;
+            else amountToPick = pool.amountOfRoomsToPick;
 
             int pick;
 
-            for (int p = 0; p < pool.amountOfRoomsToPick; p++)
+            for (int p = 0; p < amountToPick; p++)
             {
-                pick = Random.Range(0, availableRoomsInPool.Count);
+                pick = Random.Range(0, availableRooms.Count);
 
-                levelHolder.LevelRoomsData.Add(availableRoomsInPool[pick]);
+                levelHolder.LevelRoomsData.Add(availableRooms[pick]);
 
-                availableRoomsInPool.RemoveAt(pick);
+                availableRooms.RemoveAt(pick);
             }
         }
         #endregion

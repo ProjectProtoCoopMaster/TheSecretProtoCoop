@@ -26,6 +26,6 @@ namespace Gameplay
     [CreateAssetMenu(fileName = "New Level File", menuName = "Level/Level File")]
     public class LevelFile : SerializedScriptableObject
     {
-        public Dictionary<Difficulty, PoolData> roomPools = new Dictionary<Difficulty, PoolData>();
+        public Dictionary<Difficulty, PoolData> pools = new Dictionary<Difficulty, PoolData>();
     }
 }
