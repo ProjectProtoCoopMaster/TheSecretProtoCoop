@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onGameSceneStart: {fileID: 11400000, guid: 6bcab1ceee242d848892b583a4e08a1b, type: 2}
+  poolTransform: {fileID: 0}
   levelAssembler: {fileID: 2605596787377137378}
   platform: 1
   levelVR:
@@ -68,7 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platform: 1
   assemblerVR:
-    roomChunks: []
+    roomChunks:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     levelHolder: {fileID: 11400000, guid: 0a035a19ba9bc7f4a95d085f8ea52091, type: 2}
     LevelParent: {fileID: 2605596787377137388}
     levelEntranceAnchor: {fileID: 2605596787722332840}

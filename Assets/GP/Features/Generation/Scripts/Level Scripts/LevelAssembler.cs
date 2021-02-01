@@ -48,7 +48,7 @@ namespace Gameplay
         public List<RoomManager> roomChunks = new List<RoomManager>();
 
         public LevelVariable levelHolder;
-        public List<RoomManager> pickedRooms { get; protected set; } = new List<RoomManager>();
+        public List<RoomManager> selectedRooms { get; protected set; } = new List<RoomManager>();
 
         public Transform LevelParent;
 
@@ -61,7 +61,7 @@ namespace Gameplay
                     if (roomManager.room.roomName == roomData.roomName)
                     {
                         roomManager.room.roomModifier = roomData.roomModifier;
-                        pickedRooms.Add(roomManager);
+                        selectedRooms.Add(roomManager);
                     }
                 }
             }
@@ -79,15 +79,15 @@ namespace Gameplay
         public override void CreateLevel()
         {
             LevelManager.instance.levelRooms.Clear();
-            LevelManager.instance.levelRooms = pickedRooms;
+            LevelManager.instance.levelRooms = selectedRooms;
 
             Transform currentAnchor = levelEntranceAnchor;
 
             RoomVR indexRoomVR;
 
-            for (int i = 0; i < pickedRooms.Count; i++)
+            for (int i = 0; i < selectedRooms.Count; i++)
             {
-                indexRoomVR = (RoomVR)pickedRooms[i].room;
+                indexRoomVR = (RoomVR)selectedRooms[i].room;
 
                 Vector3 translation = currentAnchor.position - indexRoomVR.entranceAnchor.localPosition;
                 indexRoomVR.transform.position = translation;
@@ -110,13 +110,13 @@ namespace Gameplay
         public override void CreateLevel()
         {
             LevelManager.instance.levelRooms.Clear();
-            LevelManager.instance.levelRooms = pickedRooms;
+            LevelManager.instance.levelRooms = selectedRooms;
 
             RoomMobile indexRoomMobile;
 
-            for (int i = 0; i < pickedRooms.Count; i++)
+            for (int i = 0; i < selectedRooms.Count; i++)
             {
-                indexRoomMobile = (RoomMobile)pickedRooms[i].room;
+                indexRoomMobile = (RoomMobile)selectedRooms[i].room;
 
                 indexRoomMobile.transform.parent = LevelParent;
                 indexRoomMobile.transform.gameObject.SetActive(false);

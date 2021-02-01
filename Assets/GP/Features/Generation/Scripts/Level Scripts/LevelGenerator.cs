@@ -32,7 +32,7 @@ namespace Gameplay
 
                 SelectRooms();
 
-                if (levelHolder.pickedRooms.Count > 0) { Debug.Log("The Level File is Empty. Assign Rooms Data to it in order to generate a level"); return; }
+                if (levelHolder.pickedRooms.Count == 0) { Debug.Log("The Level File is Empty. Assign Rooms Data to it in order to generate a level"); return; }
 
                 ApplyModifiers();
 

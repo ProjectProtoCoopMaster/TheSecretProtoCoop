@@ -12,6 +12,8 @@ namespace Gameplay
     {
         public GameEvent onGameSceneStart;
 
+        public Transform poolTransform;
+
         public LevelAssembler levelAssembler;
 
         public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
@@ -37,7 +39,11 @@ namespace Gameplay
         public static LevelManager instance;
         void OnEnable() { if (instance == null) instance = this; }
 
-        void Start() => onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
+        void Start()
+        {
+            onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
+            poolTransform.gameObject.SetActive(false);
+        }
 
         public void BuildLevel() => levelAssembler.AssembleLevel();
 
