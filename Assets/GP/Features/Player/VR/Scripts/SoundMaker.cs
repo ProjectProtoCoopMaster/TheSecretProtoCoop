@@ -44,14 +44,14 @@ namespace Gameplay.VR
                     {
                         if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Window")) currNoiseRange *= wallDampenMultiplier;
                         else currNoiseRange *= wallDampenMultiplier;
-                        Debug.Log("I had to hit " + hitInfo.collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
+                        //Debug.Log("I had to hit " + hitInfo.collider.gameObject.name + " to reach " + agentsInScene[i].gameObject.name);
                     }
                 }
 
                 // if the agent is within range of the sound
                 if ((agentsInScene[i].transform.position - transform.position).sqrMagnitude < currNoiseRange * currNoiseRange)
                 {
-                    Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
+                    //Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
 
                     GuardManager guard = agentsInScene[i].GetComponent<GuardManager>();
 

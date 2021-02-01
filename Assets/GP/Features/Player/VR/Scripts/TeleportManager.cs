@@ -71,7 +71,7 @@ namespace Gameplay.VR.Player
                     Collider[] hitColliders = Physics.OverlapBox(playerRig.position, transform.localScale, Quaternion.identity);
                     for (int i = 0; i < hitColliders.Length; i++)
                     {
-                        Debug.Log(hitColliders[i].name);
+                        //Debug.Log(hitColliders[i].name);
 
                         if (hitColliders[i].GetComponentInChildren<VisualEffect>() != null)
                             oldArea = hitColliders[i].GetComponentInChildren<VisualEffect>();
