@@ -21,7 +21,7 @@ namespace Gameplay.VR
             sm = SymbolManager.instance;
             sm.symbol = this;
             _loadSymbols.Raise();
-            Debug.Log("Load");
+            //Debug.Log("Load");
         }
 
         public void SetSymbols()

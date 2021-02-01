@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Gameplay.AI
     {
         public bool testAI;
 
-        public static List<AgentManager> agents { get; protected set; } = new List<AgentManager>();
+        [ReadOnly] public static List<AgentManager> agents = new List<AgentManager>();
 
         void Start()
         {

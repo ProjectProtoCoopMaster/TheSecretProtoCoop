@@ -121,7 +121,8 @@ namespace Gameplay
             if (currentRoomIndex >= 1) UnloadRoom(currentRoomIndex - 1);
 
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
-            else Debug.Log("You won the game and one million pesos ! Congratulations !");
+
+            else TransmitterManager.instance.SendWinToAll();
         }
 
         protected override void SetPlayerRoom(RoomManager _currentRoom)
@@ -143,7 +144,6 @@ namespace Gameplay
             if (currentRoomIndex >= 0) UnloadRoom(currentRoomIndex);
 
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
-            else Debug.Log("You won the game and one million pesos ! Congratulations !");
         }
 
         protected override void SetPlayerRoom(RoomManager _currentRoom)

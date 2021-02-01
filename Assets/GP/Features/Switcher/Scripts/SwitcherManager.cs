@@ -7,13 +7,11 @@ namespace Gameplay
 {
     public class SwitcherManager : MonoBehaviour
     {
-        [ReadOnly] public SwitcherBehavior[] switchers;
+        [ReadOnly] public static List<SwitcherBehavior> switchers = new List<SwitcherBehavior>();
 
         public void RaiseSwitch(float ID)
         {
-            SearchSwitchersInScene();
-
-            for (int i = 0; i < switchers.Length; i++)
+            for (int i = 0; i < switchers.Count; i++)
             {
                 if (switchers[i].ID == ID)
                 {
@@ -29,7 +27,5 @@ namespace Gameplay
                 switcher.StartSwitcher();
             }
         }
-
-        public void SearchSwitchersInScene() => switchers = FindObjectsOfType<SwitcherBehavior>();
     }
 }

@@ -96,7 +96,7 @@ namespace Gameplay
 
                 for (int i = 0; i < indexes.Count; i++)
                 {
-                    Debug.Log("ID");
+                    //Debug.Log("ID");
                     TransmitterManager.instance.SendSymbolIDToOther(indexes[i]);
                 }
 
