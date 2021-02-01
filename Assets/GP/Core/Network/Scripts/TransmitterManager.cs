@@ -38,7 +38,6 @@ namespace Networking
         void OnEnable() { if (instance == null) instance = this; }
 
         #region Game Management
-
         public void SendLoseToAll(int loseType) { photonView.RPC("SendLose", RpcTarget.AllViaServer, loseType); }
         [PunRPC] private void SendLose(int loseType) { GameManager.instance.Lose((LoseType)loseType); }
 
