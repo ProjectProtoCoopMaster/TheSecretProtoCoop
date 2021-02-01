@@ -103,28 +103,28 @@ namespace Networking
         public void SendBuildLevelToOther(LevelVariable levelVariable)
         {
             Debug.Log("Send Level Holder VR");
-            foreach(RoomData roomData in levelVariable.LevelRoomsData) { Debug.Log("with room :" + roomData.roomName + "and modifier :" + roomData.roomModifier); }
+            foreach(RoomData roomData in levelVariable.pickedRooms) { Debug.Log("with room :" + roomData.roomName + "and modifier :" + roomData.roomModifier); }
 
-            string[] _names = new string[levelVariable.LevelRoomsData.Count];
-            int[] _types = new int[levelVariable.LevelRoomsData.Count];
+            string[] _names = new string[levelVariable.pickedRooms.Count];
+            int[] _types = new int[levelVariable.pickedRooms.Count];
 
-            for (int i = 0; i < levelVariable.LevelRoomsData.Count; i++)
+            for (int i = 0; i < levelVariable.pickedRooms.Count; i++)
             {
-                _names[i] = levelVariable.LevelRoomsData[i].roomName;
-                _types[i] = (int)levelVariable.LevelRoomsData[i].roomModifier;
+                _names[i] = levelVariable.pickedRooms[i].roomName;
+                _types[i] = (int)levelVariable.pickedRooms[i].roomModifier;
             }
 
-            photonView.RPC("SendBuildLevel", RpcTarget.Others, levelVariable.LevelRoomsData.Count, _names as object, _types as object);
+            photonView.RPC("SendBuildLevel", RpcTarget.Others, levelVariable.pickedRooms.Count, _names as object, _types as object);
         }
         [PunRPC] private void SendBuildLevel(int size, string[] names, int[] modifierTypes)
         {
             Debug.Log("Send Level Holder Mobile");
 
-            _levelHolder.LevelRoomsData = new List<RoomData>();
+            _levelHolder.pickedRooms = new List<RoomData>();
             for (int i = 0; i < size; i++)
             {
                 Debug.Log("with room :" + names[i] + "and modifier :" + (ModifierType)modifierTypes[i]);
-                _levelHolder.LevelRoomsData.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
+                _levelHolder.pickedRooms.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
             }
 
             LevelManager.instance.BuildLevel();

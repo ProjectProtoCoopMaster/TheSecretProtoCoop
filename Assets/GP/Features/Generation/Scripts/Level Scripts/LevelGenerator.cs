@@ -28,9 +28,11 @@ namespace Gameplay
             if (!isMobile.Value)
             {
                 Debug.Log("Generate");
-                levelHolder.LevelRoomsData.Clear();
+                levelHolder.pickedRooms.Clear();
 
                 SelectRooms();
+
+                if (levelHolder.pickedRooms.Count > 0) { Debug.Log("The Level File is Empty. Assign Rooms Data to it in order to generate a level"); return; }
 
                 ApplyModifiers();
 
@@ -64,7 +66,7 @@ namespace Gameplay
             {
                 pick = Random.Range(0, availableRooms.Count);
 
-                levelHolder.LevelRoomsData.Add(availableRooms[pick]);
+                levelHolder.pickedRooms.Add(availableRooms[pick]);
 
                 availableRooms.RemoveAt(pick);
             }
@@ -78,7 +80,7 @@ namespace Gameplay
             int[] modifiedRooms = new int[modifiersAmount];
 
             List<RoomData> unmodifiedRooms = new List<RoomData>();
-            foreach (RoomData room in levelHolder.LevelRoomsData) unmodifiedRooms.Add(room);
+            foreach (RoomData room in levelHolder.pickedRooms) unmodifiedRooms.Add(room);
 
             for (int r = 0; r < modifiedRooms.Length; r++)
             {

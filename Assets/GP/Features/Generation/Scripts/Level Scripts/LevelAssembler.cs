@@ -56,7 +56,7 @@ namespace Gameplay
         {
             foreach (RoomManager roomManager in roomChunks)
             {
-                foreach (RoomData roomData in levelHolder.LevelRoomsData)
+                foreach (RoomData roomData in levelHolder.pickedRooms)
                 {
                     if (roomManager.room.roomName == roomData.roomName)
                     {
