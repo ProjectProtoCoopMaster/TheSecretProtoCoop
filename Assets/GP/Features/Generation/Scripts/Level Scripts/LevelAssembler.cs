@@ -54,9 +54,9 @@ namespace Gameplay
 
         public void PickRooms()
         {
-            foreach (RoomManager roomManager in roomChunks)
+            foreach (RoomData roomData in levelHolder.pickedRooms)
             {
-                foreach (RoomData roomData in levelHolder.pickedRooms)
+                foreach (RoomManager roomManager in roomChunks)
                 {
                     if (roomManager.room.roomName == roomData.roomName)
                     {
