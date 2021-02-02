@@ -65,6 +65,7 @@ namespace Gameplay
                     }
                 }
             }
+            selectedRooms.Reverse();
         }
 
         public abstract void CreateLevel();

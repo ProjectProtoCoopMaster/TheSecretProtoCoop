@@ -46,10 +46,11 @@ namespace Gameplay
         #region Rooms
         private void SelectRooms()
         {
-            for (int i = 2; i >= 0; i--)
+            foreach (PoolData pool in levelFile.pools.Values)
             {
-                PickRoom(levelFile.pools[(Difficulty)i]);
+                PickRoom(pool);
             }
+            levelHolder.pickedRooms.Reverse();
         }
         private void PickRoom(PoolData pool)
         {
