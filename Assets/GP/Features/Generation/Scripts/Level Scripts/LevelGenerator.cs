@@ -46,9 +46,9 @@ namespace Gameplay
         #region Rooms
         private void SelectRooms()
         {
-            foreach (Difficulty difficulty in levelFile.pools.Keys)
+            for (int i = 2; i >= 0; i--)
             {
-                PickRoom(levelFile.pools[difficulty]);
+                PickRoom(levelFile.pools[(Difficulty)i]);
             }
         }
         private void PickRoom(PoolData pool)
