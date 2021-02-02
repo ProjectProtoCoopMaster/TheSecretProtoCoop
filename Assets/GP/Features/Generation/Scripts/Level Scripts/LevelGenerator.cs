@@ -46,9 +46,9 @@ namespace Gameplay
         #region Rooms
         private void SelectRooms()
         {
-            foreach (PoolData pool in levelFile.pools.Values)
+            foreach (Difficulty difficulty in levelFile.pools.Keys)
             {
-                PickRoom(pool);
+                PickRoom(levelFile.pools[difficulty]);
             }
         }
         private void PickRoom(PoolData pool)
@@ -67,6 +67,7 @@ namespace Gameplay
                 pick = Random.Range(0, availableRooms.Count);
 
                 levelHolder.pickedRooms.Add(availableRooms[pick]);
+                Debug.Log(availableRooms[pick].roomName + " was picked");
 
                 availableRooms.RemoveAt(pick);
             }

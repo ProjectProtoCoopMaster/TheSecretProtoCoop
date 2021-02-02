@@ -123,7 +123,7 @@ namespace Networking
             _levelHolder.pickedRooms = new List<RoomData>();
             for (int i = 0; i < size; i++)
             {
-                Debug.Log("with room :" + names[i] + "and modifier :" + (ModifierType)modifierTypes[i]);
+                //Debug.Log("with room :" + names[i] + "and modifier :" + (ModifierType)modifierTypes[i]);
                 _levelHolder.pickedRooms.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
             }
 
