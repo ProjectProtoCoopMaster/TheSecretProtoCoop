@@ -141,7 +141,7 @@ namespace Gameplay
 
         public override void OnDisableRoom()
         {
-            if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
+            //if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
         }
     }
 
