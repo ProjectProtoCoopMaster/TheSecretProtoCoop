@@ -16,6 +16,8 @@ namespace Gameplay.VR
         [SerializeField] private Material red, green, blue;
         [SerializeField] private Renderer keyPassRenderer;
         [SerializeField] private Animator anim;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnTurnOn;
+        [SerializeField] private UnityEngine.Events.UnityEvent _OnTurnOff;
 
         public int State
         {
@@ -45,8 +47,7 @@ namespace Gameplay.VR
 
         public void TurnOn()
         {
-            if (lockState == LockState.Locked) keyPassRenderer.material = red;
-            else keyPassRenderer.material = green;
+            _OnTurnOn.Invoke();
 
             anim.ResetTrigger("Open");
             anim.SetTrigger("Close");
@@ -56,12 +57,11 @@ namespace Gameplay.VR
         {
             if (lockState == LockState.Unlocked)
             {
+                _OnTurnOff.Invoke();
                 anim.ResetTrigger("Close");
                 anim.SetTrigger("Open");
 
-                keyPassRenderer.material = blue;
             }
-            else keyPassRenderer.material = red;
         }
 
         [Button("Unlock")]

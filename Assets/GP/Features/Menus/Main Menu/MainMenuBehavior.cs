@@ -40,7 +40,6 @@ namespace Gameplay
             int roomName = Random.Range(10000, 100000);
             codeVR.text = roomName.ToString();
             _CreateRoom.Raise(roomName.ToString());
-
         }
 
         public void OpenScene()

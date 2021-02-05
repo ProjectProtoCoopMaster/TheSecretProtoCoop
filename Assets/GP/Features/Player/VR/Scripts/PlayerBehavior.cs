@@ -6,6 +6,8 @@ namespace Gameplay.VR
 {
     public class PlayerBehavior : MonoBehaviour, IKillable
     {
+        public GameEvent _refreshScene;
+
         public RoomManager currentRoom { get; set; }
 
         private bool _isDead;
@@ -43,10 +45,11 @@ namespace Gameplay.VR
             playerHitTrap.Raise();
         }
 
-        private void Start()
+        IEnumerator Start()
         {
-
             _OnStart.Invoke();
+            yield return new WaitForSeconds(3.0f);
+            _refreshScene.Raise();
         }
 
         void Update()

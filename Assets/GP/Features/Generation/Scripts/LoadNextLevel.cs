@@ -18,7 +18,7 @@ namespace Gameplay.VR
             {
                 if (GameManager.instance.currentLevelIndex < 3)
                 {
-                    GameManager.instance.currentLevelIndex++;
+                    Debug.Log("a la zeub" + GameManager.instance.currentLevelIndex);
 
                     LoadNextScene();
                     passed = true;
