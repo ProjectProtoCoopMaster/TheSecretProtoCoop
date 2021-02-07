@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Gameplay;
+using UnityEngine.UI;
 
 namespace Networking
 {
@@ -60,4 +61,6 @@ namespace Networking
             Debug.Log("Adress : " + PhotonNetwork.ServerAddress);
         }
     }
+
+    
 }

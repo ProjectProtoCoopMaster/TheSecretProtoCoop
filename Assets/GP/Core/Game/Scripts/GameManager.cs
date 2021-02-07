@@ -124,7 +124,7 @@ namespace Gameplay
             loseCanvas.gameObject.SetActive(false);
 
             currentLevelIndex = 1;
-            LoadScene("GameSceneMainMenu");
+            LoadScene("MainMenu");
         }
     }
 }

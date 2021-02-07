@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Gameplay;
 using Sirenix.OdinInspector;
-
+using UnityEngine.UI;
 namespace Networking
 {
     public class TransmitterManager : MonoBehaviour
@@ -86,6 +86,25 @@ namespace Networking
 
         public void SendOnOpenDoorToOther() => photonView.RPC("SendOnOpenDoor", RpcTarget.Others);
         [PunRPC] private void SendOnOpenDoor() => symbolManager.onOpenDoor.Raise();
+
+        public void SendChangeSymbolsToOthers()=> photonView.RPC("ChangeSymbols", RpcTarget.Others);
+        [PunRPC] private void ChangeSymbols() => FindObjectOfType<Gameplay.VR.SymbolBehavior>().ChangeSymbols();
+
+
+        public void SendCodeNameAndSpritesToOthers(string pickedName, int ID, int ID2,int ID3) => photonView.RPC("SendCodeNameAndSprites", RpcTarget.Others, pickedName, ID, ID2, ID3);
+        [PunRPC]
+        private void SendCodeNameAndSprites(string pickedName, int ID, int ID2, int ID3)
+        {
+            symbolManager.pickedNames[0] = pickedName;
+            FindObjectOfType<Gameplay.Mobile.SymbolBehavior>().ChangeCode();
+            symbolManager.iconsSelected[0] = symbolManager.iconsAsset[ID];
+            symbolManager.iconsSelected[1] = symbolManager.iconsAsset[ID2];
+            symbolManager.iconsSelected[2] = symbolManager.iconsAsset[ID3];
+        }
+        public void SendDigitToAll(int digit) => photonView.RPC("SendDigit", RpcTarget.All, digit);
+
+        [PunRPC]
+        public void SendDigit(int digit) => symbolManager.digit = digit;
         #endregion
 
         #region Modifiers
