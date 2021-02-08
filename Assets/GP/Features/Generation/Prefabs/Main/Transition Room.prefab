@@ -1505,6 +1505,7 @@ GameObject:
   - component: {fileID: 6250484786262351819}
   - component: {fileID: 5330226040919271705}
   - component: {fileID: 103904314978818164}
+  - component: {fileID: 1884575469915999779}
   m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
@@ -1551,8 +1552,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bb700234ae77143b9e7ade884880f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passed: 0
   door: {fileID: 4065962850878374998}
+--- !u!114 &1884575469915999779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949627187007420810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f169b02e6bdd5ae4d83968d2de52ecd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sendLoadNextRoom: {fileID: 11400000, guid: 8d184be93c9e31c449c0a8681987f8c9, type: 2}
 --- !u!1001 &696075927309570915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1692,6 +1705,14 @@ PrefabInstance:
     - target: {fileID: 4568364011495356595, guid: bd879636ae9556a489eacd65e7d07b42, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568364011495356599, guid: bd879636ae9556a489eacd65e7d07b42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537501363255264528, guid: bd879636ae9556a489eacd65e7d07b42, type: 3}
+      propertyPath: teleportationMaterial
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8636833083197300747, guid: bd879636ae9556a489eacd65e7d07b42, type: 3}
       propertyPath: m_Materials.Array.data[0]
