@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using Valve.VR;
 using Sirenix.OdinInspector;
-using UnityEngine.Events;
 using UnityEngine.VFX;
 
 namespace Gameplay.VR.Player
