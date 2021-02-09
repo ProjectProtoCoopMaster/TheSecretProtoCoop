@@ -16,13 +16,16 @@ namespace Gameplay
         [Title("Assembler Mobile")]
         public AssemblerMobile assemblerMobile;
 
-        public Assembler assembler { get; private set; }
-
-        public void BuildLevel()
+        public Assembler assembler
         {
-            if (platform == Platform.VR) assembler = assemblerVR;
-            else if (platform == Platform.Mobile) assembler = assemblerMobile;
+            get {
+                if (platform == Platform.VR) return assemblerVR;
+                else return assemblerMobile;
+            }
+        }
 
+        public void AssembleLevel()
+        {
             assembler.PickRooms();
 
             assembler.CreateLevel();
@@ -34,10 +37,18 @@ namespace Gameplay
     [System.Serializable]
     public abstract class Assembler
     {
-        public List<RoomManager> roomChunks;
+        [Button]
+        public void FindAllRoomChunks()
+        {
+            roomChunks.Clear();
+            RoomManager[] rooms = Object.FindObjectsOfType<RoomManager>();
+            foreach (RoomManager room in rooms) roomChunks.Add(room);
+        }
+
+        public List<RoomManager> roomChunks = new List<RoomManager>();
 
         public LevelVariable levelHolder;
-        public List<RoomManager> pickedRooms { get; protected set; } = new List<RoomManager>();
+        public List<RoomManager> selectedRooms { get; protected set; } = new List<RoomManager>();
 
         public Transform LevelParent;
 
@@ -45,14 +56,12 @@ namespace Gameplay
         {
             foreach (RoomManager roomManager in roomChunks)
             {
-                roomManager.StartRoom();
-
-                foreach (RoomData roomData in levelHolder.LevelRoomsData)
+                foreach (RoomData roomData in levelHolder.pickedRooms)
                 {
                     if (roomManager.room.roomName == roomData.roomName)
                     {
                         roomManager.room.roomModifier = roomData.roomModifier;
-                        pickedRooms.Add(roomManager);
+                        selectedRooms.Add(roomManager);
                     }
                 }
             }
@@ -70,24 +79,24 @@ namespace Gameplay
         public override void CreateLevel()
         {
             LevelManager.instance.levelRooms.Clear();
-            LevelManager.instance.levelRooms = pickedRooms;
+            LevelManager.instance.levelRooms = selectedRooms;
 
             Transform currentAnchor = levelEntranceAnchor;
 
             RoomVR indexRoomVR;
 
-            for (int i = 0; i < pickedRooms.Count; i++)
+            for (int i = 0; i < selectedRooms.Count; i++)
             {
-                indexRoomVR = (RoomVR)pickedRooms[i].room;
+                indexRoomVR = (RoomVR)selectedRooms[i].room;
 
                 Vector3 translation = currentAnchor.position - indexRoomVR.entranceAnchor.localPosition;
-                indexRoomVR.roomHolder.position = translation;
+                indexRoomVR.transform.position = translation;
 
                 float angle = currentAnchor.rotation.eulerAngles.y - indexRoomVR.entranceAnchor.localRotation.eulerAngles.y;
-                indexRoomVR.roomHolder.RotateAround(currentAnchor.position, Vector3.up, angle);
+                indexRoomVR.transform.RotateAround(currentAnchor.position, Vector3.up, angle);
 
-                indexRoomVR.roomHolder.parent = LevelParent;
-                indexRoomVR.roomHolder.gameObject.SetActive(false);
+                indexRoomVR.transform.parent = LevelParent;
+                indexRoomVR.transform.gameObject.SetActive(false);
 
                 currentAnchor = indexRoomVR.exitAnchor;
             }
@@ -101,16 +110,16 @@ namespace Gameplay
         public override void CreateLevel()
         {
             LevelManager.instance.levelRooms.Clear();
-            LevelManager.instance.levelRooms = pickedRooms;
+            LevelManager.instance.levelRooms = selectedRooms;
 
             RoomMobile indexRoomMobile;
 
-            for (int i = 0; i < pickedRooms.Count; i++)
+            for (int i = 0; i < selectedRooms.Count; i++)
             {
-                indexRoomMobile = (RoomMobile)pickedRooms[i].room;
+                indexRoomMobile = (RoomMobile)selectedRooms[i].room;
 
-                indexRoomMobile.roomHolder.parent = LevelParent;
-                indexRoomMobile.roomHolder.gameObject.SetActive(false);
+                indexRoomMobile.transform.parent = LevelParent;
+                indexRoomMobile.transform.gameObject.SetActive(false);
             }
         }
     }

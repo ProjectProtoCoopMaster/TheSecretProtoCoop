@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Networking;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Gameplay.VR
         {
             if (other.name == "[HeadCollider]" && !passed)
             {
-                LevelManager.instance.ChangeRoom();
+                TransmitterManager.instance.SendRoomChangeToAll();
 
                 door.Power = 0;
                 door.Unlock();

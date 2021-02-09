@@ -1,21 +1,17 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace Gameplay
 {
     public class SwitcherManager : MonoBehaviour
     {
-        [SerializeField] private SwitcherBehavior[] switchers;
-
-        
+        [ReadOnly] public static List<SwitcherBehavior> switchers = new List<SwitcherBehavior>();
 
         public void RaiseSwitch(float ID)
         {
-            /*if (switchers.Length == 0 )*/
-            SearchSwitchersInScene();
-            for (int i = 0; i < switchers.Length; i++)
+            for (int i = 0; i < switchers.Count; i++)
             {
                 if (switchers[i].ID == ID)
                 {
@@ -24,7 +20,12 @@ namespace Gameplay
             }
         }
 
-        public void SearchSwitchersInScene() => switchers = FindObjectsOfType<SwitcherBehavior>();
+        public void StartAllSwitchers()
+        {
+            foreach (SwitcherBehavior switcher in switchers)
+            {
+                switcher.StartSwitcher();
+            }
+        }
     }
 }
-

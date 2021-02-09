@@ -6,7 +6,7 @@ using Networking;
 
 namespace Gameplay
 {
-    public enum ModifierType { DarkZone, Thermic, Oxygen, None }
+    public enum ModifierType { DarkZone = 0, Thermic = 1, Oxygen = 2, None = 3 }
 
     public class LevelGenerator : SerializedMonoBehaviour
     {
@@ -15,7 +15,7 @@ namespace Gameplay
         [Range(0, 3)]
         public int maximumModifiersInLevel;
         
-        private List<ModifierType> modifierTypes;
+        private List<ModifierType> modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
 
         public LevelVariable levelHolder;
 
@@ -28,44 +28,47 @@ namespace Gameplay
             if (!isMobile.Value)
             {
                 Debug.Log("Generate");
-                levelHolder.LevelRoomsData.Clear();
+                levelHolder.pickedRooms.Clear();
 
-                List<PoolData> pools = new List<PoolData>();
-                foreach (PoolData pool in levelFile.roomPools.Values) pools.Add(pool);
+                SelectRooms();
 
-                SelectRooms(pools);
-
-                modifierTypes = new List<ModifierType> { ModifierType.DarkZone, ModifierType.Thermic, ModifierType.Oxygen };
+                if (levelHolder.pickedRooms.Count == 0) { Debug.Log("The Level File is Empty. Assign Rooms Data to it in order to generate a level"); return; }
 
                 ApplyModifiers();
 
-                TransmitterManager.instance.SendLevelHolderToOthers(levelHolder);
-                TransmitterManager.instance.SendBuildLevelToAll();
+                // Build the Level in Mobile
+                TransmitterManager.instance.SendBuildLevelToOther(levelHolder);
+                // Build the Level in VR
+                LevelManager.instance.BuildLevel();
             }
         }
 
         #region Rooms
-        private void SelectRooms(List<PoolData> pools)
+        private void SelectRooms()
         {
-            foreach (PoolData pool in pools)
+            foreach (PoolData pool in levelFile.pools.Values)
             {
                 PickRoom(pool);
             }
         }
         private void PickRoom(PoolData pool)
         {
-            List<RoomData> availableRoomsInPool = new List<RoomData>();
-            foreach (RoomData room in pool.rooms) availableRoomsInPool.Add(room);
+            List<RoomData> availableRooms = new List<RoomData>();
+            foreach (RoomData room in pool.rooms) availableRooms.Add(room);
+
+            int amountToPick;
+            if (availableRooms.Count < pool.amountOfRoomsToPick) amountToPick = availableRooms.Count;
+            else amountToPick = pool.amountOfRoomsToPick;
 
             int pick;
 
-            for (int p = 0; p < pool.amountOfRoomsToPick; p++)
+            for (int p = 0; p < amountToPick; p++)
             {
-                pick = Random.Range(0, availableRoomsInPool.Count);
+                pick = Random.Range(0, availableRooms.Count);
 
-                levelHolder.LevelRoomsData.Add(availableRoomsInPool[pick]);
+                levelHolder.pickedRooms.Add(availableRooms[pick]);
 
-                availableRoomsInPool.RemoveAt(pick);
+                availableRooms.RemoveAt(pick);
             }
         }
         #endregion
@@ -77,7 +80,7 @@ namespace Gameplay
             int[] modifiedRooms = new int[modifiersAmount];
 
             List<RoomData> unmodifiedRooms = new List<RoomData>();
-            foreach (RoomData room in levelHolder.LevelRoomsData) unmodifiedRooms.Add(room);
+            foreach (RoomData room in levelHolder.pickedRooms) unmodifiedRooms.Add(room);
 
             for (int r = 0; r < modifiedRooms.Length; r++)
             {

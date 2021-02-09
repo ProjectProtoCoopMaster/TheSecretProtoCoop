@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Gameplay;
+
 namespace Gameplay.VR
 {
     public class AgentDeath : MonoBehaviour, IKillable
@@ -34,7 +35,6 @@ namespace Gameplay.VR
 
                 isDead = true;
             }
-
         }
 
         public void Die() { }

@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,6 +11,11 @@ namespace Gameplay
 {
     public class MainMenuInterface : MonoBehaviour
     {
+        public bool testNotInVR;
+        [ShowIf("testNotInVR")] public Button generateCodeButton;
+
+        public GameEvent onMainMenuStart;
+
         public CallableFunction _JoinRoom;
         public CallableFunction _CreateRoom;
 
@@ -17,10 +25,22 @@ namespace Gameplay
         public GameObject lobbyMobile;
         public GameObject lobbyVR;
 
-        public Text codeVRComponent;
+        public TMP_Text codeVRComponent;
         public Text codeMobileComponent;
 
-        private void OnEnable()
+        private bool created = false;
+
+        void Start() => onMainMenuStart.Raise();
+
+        void Update()
+        {
+            if (testNotInVR && Input.GetKeyDown(KeyCode.Space))
+            {
+                if (!_isMobile.Value) { generateCodeButton.onClick.Invoke(); }
+            }
+        }
+
+        void OnEnable()
         {
             lobbyMobile.SetActive(false);
             lobbyVR.SetActive(false);
@@ -33,18 +53,21 @@ namespace Gameplay
 
         public void CreateRoom()
         {
-            int roomName = Random.Range(0, 10);
-            codeVRComponent.text = roomName.ToString();
-            _CreateRoom.Raise(codeVRComponent.text);
+            if (!created)
+            {
+                int roomName = Random.Range(10000, 100000);
+                codeVRComponent.text = roomName.ToString();
+
+                _CreateRoom.Raise(codeVRComponent.text);
+                created = true;
+            }
         }
 
         public void OpenScene()
         {
-            if (platform == Platform.Mobile) SceneManager.LoadSceneAsync("GameSceneMobile", LoadSceneMode.Additive);
+            if (platform == Platform.Mobile) GameManager.instance.LoadScene("GameSceneMobile");
 
-            else if (platform == Platform.VR) SceneManager.LoadSceneAsync("GameSceneVR", LoadSceneMode.Additive);
-
-            SceneManager.UnloadSceneAsync("GameSceneMainMenu");
+            else if (platform == Platform.VR) GameManager.instance.LoadScene("GameSceneVR");
         }
 
         public void OpenLobbyCanvas()

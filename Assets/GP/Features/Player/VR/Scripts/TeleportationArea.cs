@@ -9,7 +9,6 @@ namespace Gameplay.VR.Player
     [RequireComponent(typeof(MeshCollider))]
     public class TeleportationArea : MonoBehaviour
     {
-        [SerializeField] Material teleportationMaterial;
         [SerializeField] float lerpDuration = .75f;
         float timeElapsed;
         float startValue = 0, endValue = 1;

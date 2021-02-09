@@ -49,7 +49,7 @@ namespace Gameplay.VR
 
         IEnumerator Start()
         {
-            if(numberOfLoad != null &&  numberOfLoad.Value == 0)
+            if (numberOfLoad != null &&  numberOfLoad.Value == 0)
             {
                 SendLoadSameScene.Raise();
                 numberOfLoad.Value++;
@@ -63,17 +63,16 @@ namespace Gameplay.VR
         {
             // Rotation
             _playerRotation.Value = transform.localRotation;
-            _playerPosition.Value = transform.position;
 
             // Position
-            //if (currentRoom != null)
-            //{
-            //    // Sets the Position of the Player in the Room to the position of the Player in the World
-            //    currentRoom.room.LocalPlayer.position = rigTransform.position;
+            if (currentRoom != null)
+            {
+                // Sets the Position of the Player in the Room to the position of the Player in the World
+                currentRoom.room.LocalPlayer.position = rigTransform.position;
 
-            //    // Sets the Position Variable to the Local Position of the Player (Relative to the Room)
-            //    _playerPosition.Value = currentRoom.room.LocalPlayer.localPosition;
-            //}
+                // Sets the Position Variable to the Local Position of the Player (Relative to the Room)
+                _playerPosition.Value = currentRoom.room.LocalPlayer.localPosition;
+            }
 
             _sendPlayerPosAndRot.Raise();
         }

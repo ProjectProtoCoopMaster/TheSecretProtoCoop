@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Networking;
+using Gameplay.Mobile;
 
 namespace Gameplay
 {
@@ -35,11 +37,12 @@ namespace Gameplay
         [HideInInspector]
         public JammerBehavior jammer;
         private float currentTimer = 0;
+
         public int State 
         { 
-            get { return state; } 
-            set 
-            {
+            get { return state; }
+
+            set {
                 state = value;
 
                 if(state == 0)
@@ -52,24 +55,23 @@ namespace Gameplay
                     else TurnOn();
                 }
             }
-        
         }
 
         public int Power
         {
             get { return power; }
-            set 
-            { 
+
+            set { 
                 power = value;
+
                 if (power == 1)
                 {
                     if (state == 1) 
                     {
                         TurnOn();
-                        
                     }
                     else 
-                    { 
+                    {
                         TurnOff(); 
                     }
                 }
@@ -82,8 +84,8 @@ namespace Gameplay
 
         public GameObject MyGameObject { get { return this.gameObject; } set { MyGameObject = value; } }
 
-        //public void OnEnable() => SwitcherManager.switchers.Add(this);
-        //public void OnDisable() => SwitcherManager.switchers.Remove(this);
+        public void OnEnable() => SwitcherManager.switchers.Add(this);
+        public void OnDisable() => SwitcherManager.switchers.Remove(this);
 
         private void Start()
         {
@@ -91,16 +93,13 @@ namespace Gameplay
             {
                 ResetTimer();
             }
-
         }
 
         public void StartSwitcher() 
         {
             if (timerEnable != null)
             {
-                if (switchTimer == SwitchTimer.Fixed) {  ResetTimer(); }
-
-
+                if (switchTimer == SwitchTimer.Fixed) ResetTimer();
             }
 
             if (hasJammer) jammer.AddSwitcher(this);
@@ -108,72 +107,55 @@ namespace Gameplay
             Power = power;
         }
 
-
         public void CallSwitchManager()
-        { 
+        {
             _switch.Raise(ID);
-            _sendSwitcherChange.Raise(ID);
+            TransmitterManager.instance.SendSwicherChangeToOthers(ID);
         }
 
         private void SwitchNode()
         {
-            if(nodes.Count != 0)
+            if (nodes.Count != 0)
             {
                 foreach (ISwitchable node in nodes)
                 {
                     if (node.Power == 1) node.Power = 0;
                     else node.Power = 1;
-                    if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null)
-                        node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
+
+                    if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null) node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
                 }
-
-
-
             }
-
         }
 
         public void TriggerSwitch()
         {
-            if(switchTimer == SwitchTimer.Fixed)
+            if (switchTimer == SwitchTimer.Fixed)
             {
                 StartCoroutine(DelaySwitchNode());
                 DOTween.To(() => currentTimer, x => currentTimer = x, timer, timer).SetEase(Ease.Linear).OnUpdate(SetTimerDisplayer).OnComplete(ResetTimer);
-                if(anim != null)
-                    anim.SetBool("OnTimer", true);
 
+                if (anim != null) anim.SetBool("OnTimer", true);
             }
-            else
-            {
-
-                SwitchNode();
-            }
+            else SwitchNode();
 
             LaunchSound();
-
-
         }
 
         public void SwitchChildrens()
         {
-
             foreach (ISwitchable node in nodes)
             {
                 if (Power == 1)
                 {
                     if (node.Power == 1) node.TurnOn();
                     else node.TurnOff();
-
-
                 }
                 else
                 {
                     node.TurnOff();
                 }
 
-                if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null)
-                    node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
-
+                if (node.MyGameObject.GetComponent<SwitcherBehavior>() != null) node.MyGameObject.GetComponent<SwitcherBehavior>().SwitchChildrens();
             }
         }
 
@@ -182,43 +164,38 @@ namespace Gameplay
             SwitchNode();
             TurnOff();
             yield return new WaitForSeconds(timer);
+
             SwitchNode();
             TurnOn();
-            
             yield break;
         }
 
-
         public void SearchReferences()
         {
-            if (nodes.Count > 0)
-                nodes.Clear();
+            if (nodes.Count > 0) nodes.Clear();
+
             for (int i = 0; i < transform.childCount; i++)
             {
                 if (transform.GetChild(i).gameObject.GetComponent<ISwitchable>() != null)
                 {
                     nodes.Add(transform.GetChild(i).gameObject.GetComponent<ISwitchable>() as Object);
                 }
-
             }
         }
 
         public void TurnOn()
         {
             ChangeSwitch(true);
-
         }
 
         public void TurnOff()
         {
             ChangeSwitch(false);
-            
         }
 
         void ChangeSwitch(bool buttonState)
         {
-            if (button != null)
-                button.interactable = buttonState;
+            if (button != null) button.interactable = buttonState;
         }
 
         private void SetTimerDisplayer()
@@ -228,7 +205,6 @@ namespace Gameplay
                 timerEnable.fillAmount = currentTimer / timer;
                 timerText.text = (timer - currentTimer).ToString("F1");
             }
-
         }
 
         private void ResetTimer() 
@@ -240,24 +216,19 @@ namespace Gameplay
                 currentTimer = 0;
                 timerEnable.fillAmount = 0;
                 anim.SetBool("OnTimer", false);
-
             }
-
-
         }
 
         public void ShowLines(bool value)
         {
             for (int i = 0; i < nodes.Count; i++)
             {
-                if(nodes[i].GetType() == typeof(Gameplay.Mobile.ElectricalLineBehavior))
+                if (nodes[i].GetType() == typeof(ElectricalLineBehavior))
                 {
-                    Gameplay.Mobile.ElectricalLineBehavior node = nodes[i] as Gameplay.Mobile.ElectricalLineBehavior;
+                    ElectricalLineBehavior node = nodes[i] as ElectricalLineBehavior;
                     node.gameObject.GetComponent<LineRenderer>().enabled = value;
                 }
-
             }
-
         }
 
         private void LaunchSound()
@@ -270,13 +241,11 @@ namespace Gameplay
             {
                 audioSource.PlayOneShot(failPushClip);
             }
-
-            
         }
+
         private void LaunchEndSound()
         {
             audioSource.PlayOneShot(failPushClip);
         }
     }
-
 }

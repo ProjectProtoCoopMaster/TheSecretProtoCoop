@@ -35,20 +35,5 @@ namespace Gameplay.VR
         {
             _sendLoadNextRoom.Raise();
         }
-
-        public void Event_LoadNextLevel()
-        {
-            if (GameManager.instance.currentLevelIndex < 3)
-            {
-                Debug.Log("a la zeub" + GameManager.instance.currentLevelIndex);
-
-                LoadNextScene();
-                passed = true;
-            }
-            else
-            {
-                TransmitterManager.instance.SendWinToAll();
-            }
-        }
     }
 }

@@ -19,31 +19,30 @@ namespace Gameplay.Mobile
 
         [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
 
-
         void Start()
         {
             _OnStart.Invoke();
             _player.Value = this.gameObject;
             playerTransform.localScale = new Vector3(2, 2, 2);
-        
         }
 
         void Update()
         {
             if (!_hidePlayer.Value)
             {
-                //if (currentRoom != null)
-                //{
-                //    // Sets the Local Position of the Player (Relative to the Room) to the Position Variable
-                //    currentRoom.room.LocalPlayer.localPosition = _playerPosition.Value;
+                // Position
+                if (currentRoom != null)
+                {
+                    // Sets the Local Position of the Player (Relative to the Room) to the Position Variable
+                    currentRoom.room.LocalPlayer.localPosition = _playerPosition.Value;
 
-                //    // Sets the Position of the Player in the World to the Position of the Player in the Room;
-                //    playerTransform.position = currentRoom.room.LocalPlayer.position;
-                //}
+                    // Sets the Position of the Player in the World to the Position of the Player in the Room;
+                    playerTransform.position = currentRoom.room.LocalPlayer.position;
+                }
 
-                //playerTransform.forward = _player.Value.transform.forward;
-                transform.position = _playerPosition.Value;
-                transform.rotation = _playerRotation.Value;
+                playerTransform.forward = _player.Value.transform.forward;
+
+                // Rotation
                 playerTransform.eulerAngles = new Vector3(-90, playerTransform.eulerAngles.y, 0);
             }
         }

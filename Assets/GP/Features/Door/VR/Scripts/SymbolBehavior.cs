@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using TMPro;
+
 namespace Gameplay.VR
 {
     public class SymbolBehavior : MonoBehaviour, ISymbol
     {
-
+        private int digit;
+        [SerializeField] private TMP_Text digitText;
         private SymbolManager sm;
         [SerializeField] private CallableFunction _loadSymbols;
         public CodeLine[] codeLines;
         [SerializeField] private List<string> codes;
         [SerializeField] private List<Sprite> icons;
         [SerializeField] private List<int> randoms;
+        [SerializeField] private CallableFunction _sendOnOpenDoor;
+        [SerializeField] private GameObject[] digits;
         private int random;
 
         private IEnumerator Start()
@@ -21,7 +27,6 @@ namespace Gameplay.VR
             sm = SymbolManager.instance;
             sm.symbol = this;
             _loadSymbols.Raise();
-            Debug.Log("Load");
         }
 
         public void SetSymbols()
@@ -76,9 +81,9 @@ namespace Gameplay.VR
                             randoms.Add(random);
                             for (int k = 0; k < codeLines[random].symbols.Length; k++)
                             {
-                                int newRand2 = Random.Range(0, icons.Count);
-                                codeLines[random].symbols[k].overrideSprite = icons[newRand2];
-                                icons.Remove(icons[newRand2]);
+                                int newRand2 = Random.Range(0, sm.iconsStashed.Count);
+                                codeLines[random].symbols[k].overrideSprite = sm.iconsStashed[newRand2];
+                                sm.iconsStashed.Remove(sm.iconsStashed[newRand2]);
                             }
                             break;
                         }
@@ -89,33 +94,83 @@ namespace Gameplay.VR
             }
 
         }
-
-
-        public void ResetSymbols()
+        [Button]
+        public void ChangeSymbols()
         {
-            SetSymbols();
+            Debug.Log("Change Symbols");
 
-            for (int i = 0; i < codeLines.Length; i++)
+            int newRand = Random.Range(0, 3);
+
+            sm.pickedNames[0] = codeLines[newRand].codeText.text;
+            
+            sm.iconsSelected[0] = codeLines[newRand].symbols[0].overrideSprite;
+            sm.iconsSelected[1] = codeLines[newRand].symbols[1].overrideSprite;
+            sm.iconsSelected[2] = codeLines[newRand].symbols[2].overrideSprite;
+
+            int ID = 0;
+            int ID2 = 0;
+            int ID3 = 0;
+
+            for (int i = 0; i < sm.iconsAsset.Count; i++)
             {
-                if(codeLines[i].symbols[0].overrideSprite == sm.iconsSelected[0])
+                if(sm.iconsSelected[0] == sm.iconsAsset[i])
                 {
-                    if (i == 0)
-                    {
-                        string textReminder = codeLines[2].codeText.text;
-                        codeLines[2].codeText.text = codeLines[i].codeText.text;
-                        codeLines[i].codeText.text = textReminder;
-                    }
-                    else
-                    {
-                        string textReminder = codeLines[i - 1].codeText.text;
-                        codeLines[i - 1].codeText.text = codeLines[i].codeText.text;
-                        codeLines[i].codeText.text = textReminder;
-                    }
+                    ID = i;
+                }
 
+                if (sm.iconsSelected[1] == sm.iconsAsset[i])
+                {
+                    ID2 = i;
+                }
 
+                if (sm.iconsSelected[2] == sm.iconsAsset[i])
+                {
+                    ID3 = i;
                 }
             }
+            Networking.TransmitterManager.instance.SendCodeNameAndSpritesToOthers(sm.pickedNames[0],ID,ID2,ID3) ;
+            
+            
         }
+
+        [Button]
+        public void EnterDigit(int value)
+        {
+
+            digitText.text += value.ToString();
+            if(digitText.text.Length == 3)
+            {
+
+                digit = int.Parse(digitText.text);
+                if(digit == sm.digit)
+                {
+                    OpenDoor();
+                    Debug.Log("Open");
+                }
+                else
+                {
+                    ResetDigit();
+                    Debug.Log("Reset");
+                }
+            }
+
+        }
+
+        private void OpenDoor()
+        {
+            _sendOnOpenDoor.Raise();
+            for (int i = 0; i < digits.Length; i++)
+            {
+                digits[i].SetActive(false);
+            }
+        }
+
+        private void ResetDigit()
+        {
+            digitText.text = "";
+            digit = -1;
+        }
+
 
 
         [System.Serializable]

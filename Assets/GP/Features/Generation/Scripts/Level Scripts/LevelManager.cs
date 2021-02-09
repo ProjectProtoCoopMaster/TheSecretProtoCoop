@@ -12,10 +12,13 @@ namespace Gameplay
     {
         public GameEvent onGameSceneStart;
 
-        public Platform platform;
+        public Transform poolTransform;
 
-        public static LevelManager instance;
+        public LevelAssembler levelAssembler;
+
         public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
+
+        public Platform platform;
 
         [ShowIf("platform", Platform.VR)]
         [Title("Level VR")]
@@ -25,17 +28,27 @@ namespace Gameplay
         [Title("Level Mobile")]
         public LevelMobile levelMobile;
 
-        public Level level { get; private set; }
+        public Level level
+        {
+            get {
+                if (platform == Platform.VR) return levelVR;
+                else return levelMobile;
+            }
+        }
 
+        public static LevelManager instance;
         void OnEnable() { if (instance == null) instance = this; }
 
-        void Start() => onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
+        void Start()
+        {
+            onGameSceneStart.Raise(); /// LevelGenerator.GenerateLevel();
+            poolTransform.gameObject.SetActive(false);
+        }
+
+        public void BuildLevel() => levelAssembler.AssembleLevel();
 
         public void StartLevel()
         {
-            if (platform == Platform.VR) level = levelVR;
-            else if (platform == Platform.Mobile) level = levelMobile;
-
             level.rooms = levelRooms;
 
             level.StartAt(0);
@@ -68,18 +81,18 @@ namespace Gameplay
             currentRoomIndex = index;
             currentRoom = rooms[currentRoomIndex];
 
-            SetCenterToRoom(currentRoom);
+            SetPlayerRoom(currentRoom);
 
-            room.roomHolder.gameObject.SetActive(true);
+            room.transform.gameObject.SetActive(true);
             room.OnEnterRoom();
         }
         protected virtual void UnloadRoom(int index)
         {
-            rooms[index].room.roomHolder.gameObject.SetActive(false);
+            rooms[index].room.transform.gameObject.SetActive(false);
             room.OnDisableRoom();
         }
 
-        protected abstract void SetCenterToRoom(RoomManager _currentRoom);
+        protected abstract void SetPlayerRoom(RoomManager _currentRoom);
     }
 
     [System.Serializable]
@@ -108,12 +121,11 @@ namespace Gameplay
             if (currentRoomIndex >= 1) UnloadRoom(currentRoomIndex - 1);
 
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
-            else Debug.Log("You won the game and one million pesos ! Congratulations !");
 
-            TransmitterManager.instance.SendRoomChangeToOthers();
+            else TransmitterManager.instance.SendWinToAll();
         }
 
-        protected override void SetCenterToRoom(RoomManager _currentRoom)
+        protected override void SetPlayerRoom(RoomManager _currentRoom)
         {
             playerBehavior.currentRoom = _currentRoom;
         }
@@ -132,10 +144,9 @@ namespace Gameplay
             if (currentRoomIndex >= 0) UnloadRoom(currentRoomIndex);
 
             if (currentRoomIndex < rooms.Count - 1) LoadRoom(currentRoomIndex + 1);
-            else Debug.Log("You won the game and one million pesos ! Congratulations !");
         }
 
-        protected override void SetCenterToRoom(RoomManager _currentRoom)
+        protected override void SetPlayerRoom(RoomManager _currentRoom)
         {
             playerBehavior.currentRoom = _currentRoom;
         }

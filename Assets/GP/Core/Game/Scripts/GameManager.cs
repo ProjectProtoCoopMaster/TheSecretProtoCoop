@@ -10,16 +10,14 @@ namespace Gameplay
 {
     public enum Platform { Mobile, VR }
 
-    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 };
+    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 }
 
     public class GameManager : MonoBehaviour
     {
-        public LoseType loseType { get; set; }
-
         public bool startGame;
 
         public int currentLevelIndex { get; set; }
-        [SerializeField] private IntVariable _sceneID; public IntVariable SceneID { get => _sceneID; set => _sceneID = value; }
+        private string currentScene;
 
         public bool gameOver { get; set; } = false;
 
@@ -28,6 +26,7 @@ namespace Gameplay
         public Transform UICanvas;
 
         [SerializeField] private CallableFunction _fadeTransition;
+        [SerializeField] private CallableFunction _unfadeTransition;
 
         [Title("Lose")]
         public Transform loseCanvas;
@@ -38,27 +37,19 @@ namespace Gameplay
         public Transform winCanvas;
 
         public static GameManager instance;
-
-        private void OnEnable()
-        {
-            if (instance == null) instance = this;
-        }
+        void OnEnable() { if (instance == null) instance = this; }
 
         void Start()
         {
-            winCanvas.gameObject.SetActive(false);
-            loseCanvas.gameObject.SetActive(false);
-
             if (startGame)
             {
-                currentLevelIndex = 1;
-                _sceneID.Value = 1;
-                SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
+                currentScene = null;
+                LoadMainMenu();
             }
         }
 
         [Button]
-        public void Lose()
+        public void Lose(LoseType loseType)
         {
             if (!gameOver)
             {
@@ -87,52 +78,44 @@ namespace Gameplay
                     case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
                         loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
                         break;
-                    case LoseType.MissSymbols:
-                        loseText.text = _loseText.Value = "You failed to enter the right Code !";
+
+                    case LoseType.MissSymbols: loseText.text = _loseText.Value = "You failed to enter the right Code !";
                         loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
                         break;
                 }
 
-                loseCanvas.GetComponentInChildren<Button>().onClick.AddListener(delegate { Restart(); });
+                // Reset the symbols
+                TransmitterManager.instance.symbolManager.isSymbolLoaded.Value = false;
             }
         }
 
+        [Button]
         public void Win()
         {
-            winCanvas.gameObject.SetActive(true);
+            if (_isMobile.Value) winCanvas.gameObject.SetActive(true);
         }
 
-        public void Restart()
-        {
-            TransmitterManager.instance.SendRestartToAll();
-        }
-
-        public void LaunchSameLevel()
-        {
-            StartCoroutine(WaitSceneDestruction());
-        }
-
-        IEnumerator WaitSceneDestruction()
-        {
-            yield return new WaitUntil(() => SceneManager.UnloadScene(_sceneID.Value));
-            SceneManager.LoadSceneAsync(_sceneID.Value, LoadSceneMode.Additive);
-            loseCanvas.gameObject.SetActive(false);
-            yield return new WaitForSeconds(2f);
-            gameOver = false;
-            yield break;
-        }
-
-        IEnumerator WaitLoadNextScene(int sceneID)
+        IEnumerator WaitLoadScene(string scene)
         {
             _fadeTransition.Raise();
-            yield return new WaitForSeconds(1.2f);
-            SceneManager.UnloadSceneAsync(_sceneID.Value);
-            yield return new WaitForEndOfFrame();
-            _sceneID.Value = sceneID;
-            SceneManager.LoadScene(_sceneID.Value, LoadSceneMode.Additive);
             yield return new WaitForSeconds(1.0f);
+
+            if (currentScene != null) SceneManager.UnloadSceneAsync(currentScene);
+
+            yield return new WaitForEndOfFrame();
+
+            SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+            currentScene = scene;
             
+            yield return new WaitForSeconds(1.0f);
+            _unfadeTransition.Raise();
+
             yield break;
+        }
+
+        public void LoadScene(string scene)
+        {
+            StartCoroutine(WaitLoadScene(scene));
         }
 
         public void LoadMainMenu()
@@ -141,14 +124,7 @@ namespace Gameplay
             loseCanvas.gameObject.SetActive(false);
 
             currentLevelIndex = 1;
-            StartCoroutine(WaitLoadNextScene(1));
-        }
-
-        public void LoadNextScene()
-        {
-            currentLevelIndex++;
-            int id = _sceneID.Value + 2;
-            StartCoroutine(WaitLoadNextScene(id));
+            LoadScene("MainMenu");
         }
     }
 }

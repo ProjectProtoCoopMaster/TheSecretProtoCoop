@@ -1,4 +1,4 @@
-﻿
+﻿using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -11,18 +11,25 @@ namespace Gameplay
 {
     public class MainMenuBehavior : MonoBehaviour
     {
-        public Transform playerVR;
         public Vector3Variable playerVRPos;
+
         [SerializeField] private CallableFunction _JoinRoom;
         [SerializeField] private CallableFunction _CreateRoom;
+
         [SerializeField] private IntVariable _sceneID;
+
         [SerializeField] private BoolVariable _isMobile;
+
         [SerializeField] private GameObject lobbyMobile;
         [SerializeField] private GameObject lobbyVR;
+
         [SerializeField] private TMP_Text codeVR;
         [SerializeField] private Text codeMobile;
-        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
+
+        [SerializeField] private UnityEvent _OnStart;
+
         private int index = -1;
+
         private bool isRoomCreate = false;
 
         private void Start()
@@ -34,8 +41,9 @@ namespace Gameplay
         {
             lobbyMobile.SetActive(false);
             lobbyVR.SetActive(false);
-            if (_isMobile.Value)
-                index = 3;
+
+            if (_isMobile.Value) index = 3;
+
             else index = 2;
         }
 
@@ -48,11 +56,11 @@ namespace Gameplay
             if (!isRoomCreate)
             {
                 int roomName = Random.Range(10000, 100000);
+
                 codeVR.text = roomName.ToString();
                 _CreateRoom.Raise(roomName.ToString());
                 isRoomCreate = true;
             }
-
         }
 
         public void OpenScene()
@@ -80,12 +88,7 @@ namespace Gameplay
             else
             {
                 lobbyVR.SetActive(true);
-
             }
         }
-
-        
-
     }
 }
-

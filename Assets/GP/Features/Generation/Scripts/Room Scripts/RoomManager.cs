@@ -35,17 +35,17 @@ namespace Gameplay
         [Title("Room Mobile")]
         public RoomMobile roomMobile;
 
-        public Room room { get; private set; }
+        public Room room
+        {
+            get {
+                if (platform == Platform.VR) return roomVR;
+                else return roomMobile;
+            }
+        }
 
         private void Awake()
         {
             _refreshScene.Raise();
-        }
-
-        public void StartRoom()
-        {
-            if (platform == Platform.VR) room = roomVR;
-            else if (platform == Platform.Mobile) room = roomMobile;
         }
     }
 
@@ -56,7 +56,7 @@ namespace Gameplay
 
         [InfoBox(@"@""Modifier : "" + this.roomModifier.ToString()")]
 
-        public Transform roomHolder;
+        public Transform transform;
 
         public Transform roomCenter;
         public Transform roomOrigin;
@@ -67,7 +67,7 @@ namespace Gameplay
 
         protected bool init = true;
 
-        public virtual void OnInitRoom() => init = false;
+        protected virtual void OnInitRoom() => init = false;
 
         public virtual void OnEnterRoom() { if (init) OnInitRoom(); }
         public virtual void OnDisableRoom() { }
@@ -88,7 +88,7 @@ namespace Gameplay
 
         public Transform playerStart;
 
-        public override void OnInitRoom()
+        protected override void OnInitRoom()
         {
             /// Initialize AI
 
@@ -132,11 +132,11 @@ namespace Gameplay
             aIManager.StartAllAgents();
 
             /// Initialize Elements
-            
-           // SwitcherManager.instance.StartAllSwitchers();
-            JammerManager.instance.StartAllJammers();
 
-            SymbolManager.instance.LoadSymbols();
+            TransmitterManager.instance.switcherManager.StartAllSwitchers();
+            TransmitterManager.instance.jammerManager.StartAllJammers();
+
+            TransmitterManager.instance.symbolManager.LoadSymbols();
         }
 
         public override void OnDisableRoom()
@@ -156,7 +156,7 @@ namespace Gameplay
 
         private CameraManager cameraManager;
 
-        public override void OnInitRoom()
+        protected override void OnInitRoom()
         {
             /// Initialize Camera
 
@@ -179,8 +179,8 @@ namespace Gameplay
 
             /// Initialize Switchers
 
-            //SwitcherManager.instance.StartAllSwitchers();
-            JammerManager.instance.StartAllJammers();
+            TransmitterManager.instance.switcherManager.StartAllSwitchers();
+            TransmitterManager.instance.jammerManager.StartAllJammers();
         }
     }
 }
