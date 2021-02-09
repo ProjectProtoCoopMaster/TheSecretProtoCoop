@@ -16,12 +16,14 @@ namespace Gameplay.VR.Player
         [SerializeField] float pickupOffset = 0.2f;
         [SerializeField] LureObjectBehaviour interactableObject = null;
 
-        FixedJoint myJoint;
+        //FixedJoint myJoint;
+        SpringJoint myJoint;
 
         private void Awake()
         {
             controllerPose = GetComponent<SteamVR_Behaviour_Pose>();
-            myJoint = GetComponent<FixedJoint>();
+            //myJoint = GetComponent<FixedJoint>();
+            myJoint = GetComponent<SpringJoint>();
             handSource = controllerPose.inputSource;
         }
 
