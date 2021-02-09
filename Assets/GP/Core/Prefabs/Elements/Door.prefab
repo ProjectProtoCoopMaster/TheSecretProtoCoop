@@ -57,36 +57,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: de29e3f99653dd247b97b35181989291, type: 2}
   keyPassRenderer: {fileID: 3586491437039781865}
   anim: {fileID: 3586491436179560247}
-  _OnTurnOn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2120005483325664184}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 7a56b8a99c9059d49b735b47450f4555, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _OnTurnOff:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2120005483325664184}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 3982961d0f61f3246bf67937aac4b9bd, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &3586491436179560247
 Animator:
   serializedVersion: 3
@@ -358,15 +328,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405652181493195094, guid: fd75ddf92000cc9459b99a4da543920d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.02
+      value: -1.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 405652181493195094, guid: fd75ddf92000cc9459b99a4da543920d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 405652181493195094, guid: fd75ddf92000cc9459b99a4da543920d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.3
+      value: -0.3000002
       objectReference: {fileID: 0}
     - target: {fileID: 405652181493195094, guid: fd75ddf92000cc9459b99a4da543920d, type: 3}
       propertyPath: m_LocalRotation.x
