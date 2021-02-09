@@ -57,7 +57,7 @@ namespace Networking
         #endregion
 
         #region Switcher
-        public void SendSwicherChangeToOthers(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.Others, ID);
+        public void SendSwitcherChangeToAll(float ID) => photonView.RPC("SendSwitcherChange", RpcTarget.AllViaServer, ID);
         [PunRPC] private void SendSwitcherChange(float ID) { Debug.Log("Switch Changed with ID :" + ID); switcherManager.RaiseSwitch(ID); }
         #endregion
 
