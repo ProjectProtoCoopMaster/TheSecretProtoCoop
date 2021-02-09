@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &88902407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2005989276, guid: fc38fdf2f245e794baa48d2f61c408af, type: 3}
+  m_PrefabInstance: {fileID: 695740354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &127064799
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127064801}
+  - component: {fileID: 127064800}
+  m_Layer: 0
+  m_Name: QHierarchyObjectList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &127064800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127064799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845e8bd83609e3549af5a311ad811681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockedObjects:
+  - {fileID: 1574319716}
+  editModeVisibileObjects: []
+  editModeInvisibleObjects: []
+  wireframeHiddenObjects: []
+  gameObjectColorKeys: []
+  gameObjectColorValues: []
+--- !u!4 &127064801
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127064799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518088426
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,11 +570,15 @@ PrefabInstance:
     - target: {fileID: 7769574331233080038, guid: fc38fdf2f245e794baa48d2f61c408af, type: 3}
       propertyPath: codeNameText
       value: 
-      objectReference: {fileID: 1158189843}
+      objectReference: {fileID: 88902407}
     - target: {fileID: 7769574331233080038, guid: fc38fdf2f245e794baa48d2f61c408af, type: 3}
       propertyPath: door
       value: 
       objectReference: {fileID: 1158189842}
+    - target: {fileID: 7769574331233080038, guid: fc38fdf2f245e794baa48d2f61c408af, type: 3}
+      propertyPath: symbolAreaCodeName
+      value: 
+      objectReference: {fileID: 1158189843}
     - target: {fileID: 7769574331233080045, guid: fc38fdf2f245e794baa48d2f61c408af, type: 3}
       propertyPath: m_Name
       value: SymbolsDoor_Canvas
@@ -582,7 +647,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 259040996859140251, guid: 8b5737eb45332034ea4a066a32348f9b, type: 3}
   m_PrefabInstance: {fileID: 1158189841}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1574319716}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e79aef5e48a76a447b6a7bf3d86d794a, type: 3}
@@ -714,3 +779,8 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1574319716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 259040996859140260, guid: 8b5737eb45332034ea4a066a32348f9b, type: 3}
+  m_PrefabInstance: {fileID: 1158189841}
+  m_PrefabAsset: {fileID: 0}

@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using TMPro;
 
 namespace Gameplay.VR
 {
     public class SymbolBehavior : MonoBehaviour, ISymbol
     {
-
+        private int digit;
+        [SerializeField] private TMP_Text digitText;
         private SymbolManager sm;
         [SerializeField] private CallableFunction _loadSymbols;
         public CodeLine[] codeLines;
         [SerializeField] private List<string> codes;
         [SerializeField] private List<Sprite> icons;
         [SerializeField] private List<int> randoms;
+        [SerializeField] private CallableFunction _sendOnOpenDoor;
+        [SerializeField] private GameObject[] digits;
         private int random;
 
         private IEnumerator Start()
@@ -94,6 +98,7 @@ namespace Gameplay.VR
         public void ChangeSymbols()
         {
             Debug.Log("Change Symbols");
+
             int newRand = Random.Range(0, 3);
 
             sm.pickedNames[0] = codeLines[newRand].codeText.text;
@@ -127,6 +132,45 @@ namespace Gameplay.VR
             
             
         }
+
+        [Button]
+        public void EnterDigit(int value)
+        {
+
+            digitText.text += value.ToString();
+            if(digitText.text.Length == 3)
+            {
+
+                digit = int.Parse(digitText.text);
+                if(digit == sm.digit)
+                {
+                    OpenDoor();
+                    Debug.Log("Open");
+                }
+                else
+                {
+                    ResetDigit();
+                    Debug.Log("Reset");
+                }
+            }
+
+        }
+
+        private void OpenDoor()
+        {
+            _sendOnOpenDoor.Raise();
+            for (int i = 0; i < digits.Length; i++)
+            {
+                digits[i].SetActive(false);
+            }
+        }
+
+        private void ResetDigit()
+        {
+            digitText.text = "";
+            digit = -1;
+        }
+
 
 
         [System.Serializable]

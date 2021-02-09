@@ -39,6 +39,7 @@ namespace Gameplay.Mobile
 
         private IEnumerator Start()
         {
+            digit.text = "";
             yield return new WaitForEndOfFrame();
             sm = SymbolManager.instance;
             sm.symbol = this;
@@ -137,6 +138,7 @@ namespace Gameplay.Mobile
             door.GetComponent<DoorBehavior>().hints.SetActive(false);
             //_sendOnOpenDoor.Raise();
             int digitValue = Random.Range(100, 1000);
+            
             digit.text = digitValue.ToString();
             transmitterManager.SendDigitToAll(digitValue);
         }
