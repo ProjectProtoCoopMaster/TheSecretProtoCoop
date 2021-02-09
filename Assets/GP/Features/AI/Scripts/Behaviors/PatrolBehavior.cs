@@ -25,6 +25,9 @@ namespace Gameplay.AI
             if (Utility.SafeCheck(path, msg))
             {
                 actions = ConvertPath(path);
+                string debugMsg = "";
+                foreach (Waypoint waypoint in path.waypoints) debugMsg += " " + waypoint.gameObject.name;
+                Debug.Log("Converting Path, with : " + debugMsg);
             }
         }
 
