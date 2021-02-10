@@ -568,19 +568,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionData: {fileID: 6751881119888829654}
   detectionFeedback: {fileID: 2935219182776058096}
-  guardManager: {fileID: 2782208830428516914}
-  entityType: 0
   visionLayerMask:
     serializedVersion: 2
     m_Bits: 19712
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  detected: 0
   pingFrequency: 12
   framesPassed: 0
+  detected: 0
   updating: 0
+  entityType: 0
+  guardManager: {fileID: 2782208830428516914}
   animationManager: {fileID: 5890509609340962848}
+  playerHead: {fileID: 11400000, guid: fc4086dc6f8485446aebb626600542d9, type: 2}
+  playerHandLeft: {fileID: 11400000, guid: 081fa034172a0d94db98e5f22efde086, type: 2}
+  playerHandRight: {fileID: 11400000, guid: 12a2b33e6cec1f64c9bbb1ff8748576f, type: 2}
 --- !u!114 &1043542672354439373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,18 +598,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionData: {fileID: 6751881119888829654}
   detectionFeedback: {fileID: 2935219182776058096}
-  guardManager: {fileID: 2782208830428516914}
-  entityType: 0
   visionLayerMask:
     serializedVersion: 2
     m_Bits: 0
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  detected: 0
   pingFrequency: 21
   framesPassed: 0
+  detected: 0
   updating: 0
+  entityType: 0
+  guardManager: {fileID: 2782208830428516914}
+  animationManager: {fileID: 0}
 --- !u!1 &7769499305370502674
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ namespace Gameplay.VR
 {
     public class DetectionBehavior : VisionBehavior
     {
-        Vector3Variable playerHead, playerHandLeft, playerHandRight;
+        [SerializeField] Vector3Variable playerHead, playerHandLeft, playerHandRight;
 
         public override void Ping()
         {
