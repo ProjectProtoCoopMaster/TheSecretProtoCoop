@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_STANDALONE
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,3 +38,4 @@ namespace Gameplay.VR.Feedbacks
 
     }
 }
+#endif

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#if UNITY_STANDALONE
 using Gameplay;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -25,3 +24,4 @@ namespace Gameplay.VR.Feedbacks
         }
     }
 }
+#endif

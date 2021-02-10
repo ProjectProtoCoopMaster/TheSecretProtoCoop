@@ -1,4 +1,5 @@
-﻿using Networking;
+﻿#if UNITY_STANDALONE
+using Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,3 +34,4 @@ namespace Gameplay.VR
         }
     }
 }
+#endif
