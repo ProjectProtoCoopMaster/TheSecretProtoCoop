@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Networking;
 using Gameplay.Mobile;
+using Sirenix.OdinInspector;
 
 namespace Gameplay
 {
@@ -127,6 +128,7 @@ namespace Gameplay
             }
         }
 
+        
         public void TriggerSwitch()
         {
             if (switchTimer == SwitchTimer.Fixed)

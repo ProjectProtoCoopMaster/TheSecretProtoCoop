@@ -46,7 +46,6 @@ namespace Gameplay.VR
             raiseAlarm.Raise();
             playerHitTrap.Raise();
         }
-
         IEnumerator Start()
         {
             if (numberOfLoad != null &&  numberOfLoad.Value == 0)

@@ -9,6 +9,7 @@ namespace Gameplay
     {
         [ReadOnly] public static List<SwitcherBehavior> switchers = new List<SwitcherBehavior>();
 
+        [Button]
         public void RaiseSwitch(float ID)
         {
             for (int i = 0; i < switchers.Count; i++)
