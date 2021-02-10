@@ -74,8 +74,9 @@ namespace Gameplay.VR
                 //...if the angle between the looking dir of the entity and a target element is less than the cone of vision, then you can see him
                 if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detected == false)
                 {
-                    if (Physics.Linecast(transform.position, targetPosition, out hitInfo, visionLayerMask))
+                    if (Physics.Linecast(visionPosition, targetPosition, out hitInfo, visionLayerMask))
                     {
+                        Debug.Log(hitInfo.collider.name);
                         if (hitInfo.collider.gameObject.layer == targetLayerMask) return true;
                         else return false;
                     }
