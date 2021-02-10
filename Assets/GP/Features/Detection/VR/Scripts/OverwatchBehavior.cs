@@ -6,11 +6,29 @@ namespace Gameplay.VR
     public class OverwatchBehavior : VisionBehavior
     {
         [SerializeField] internal Transform myDetectableBody;
-        [SerializeField] public LayerMask overwatchMask;
-        private RaycastHit hitInfo;
-        private bool detectedBody = false;
 
         public override void Ping()
+        {
+            for (int i = 0; i < awarenessManager.deadGuards.Count; i++)
+            {
+                if (CanSeeTarget(awarenessManager.deadGuards[i].position))
+                {
+                    detected = true;
+
+                    detectionFeedback.PlayDetectionFeedback();
+
+                    if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
+                        awarenessManager.alarmRaisers.Add(this.gameObject);
+
+                    spottedDeadBody.Raise();
+                }
+                else continue;
+            }
+        }
+
+
+        /*
+        public void Ping2()
         {
             myPos.x = transform.position.x;
             myPos.y = transform.position.z;
@@ -19,17 +37,14 @@ namespace Gameplay.VR
             {
                 if (awarenessManager.deadGuards[i] != null)
                 {
-                    Awoke(i);
-                }
-            }
+                    targetPosition.x = awarenessManager.deadGuards[i].position.x;
+                    targetPosition.y = awarenessManager.deadGuards[i].position.z;
 
-            Debug.LogWarning(gameObject.name + " is checking for dead friendlies");
-        }
+                    visionPosition.x = transform.position.x;
+                    visionPosition.y = awarenessManager.deadGuards[i].position.y;
+                    visionPosition.z = transform.position.z;
 
-        private void Awoke(int i)
-        {
-            targetPos.x = awarenessManager.deadGuards[i].position.x;
-            targetPos.y = awarenessManager.deadGuards[i].position.z;
+                    sqrDistToTarget = (targetPosition - myPos).sqrMagnitude;
 
             myFinalPos.x = transform.position.x;
             myFinalPos.y = awarenessManager.deadGuards[i].position.y;
@@ -48,7 +63,11 @@ namespace Gameplay.VR
                 {
                     if (Physics.Linecast(this.transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
                     {
-                        if (hitInfo.collider.gameObject.CompareTag("Dead"))
+                        // get the entity's direction relative to you...
+                        targetDir = awarenessManager.deadGuards[i].position - visionPosition;
+
+                        //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
+                        if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedBody == false)
                         {
                             detectedBody = true; // stop overwatch from looping
 
@@ -66,7 +85,9 @@ namespace Gameplay.VR
                     }
                 }
             }
-        }
+
+            Debug.LogWarning(gameObject.name + " is checking for dead friendlies");
+        }*/
 
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
@@ -94,19 +115,14 @@ namespace Gameplay.VR
         // called from VR_CameraBehavior
         public void UE_OverwatchOn()
         {
-            poweredOn = true;
+            updating = true;
         }
 
         public void UE_OverwatchOff()
         {
-            poweredOn = false;
+            updating = false;
         }
         #endregion
-
-        public void GE_RefreshScene()
-        {
-            detectedBody = false;
-        }
     }
 }
 #endif
