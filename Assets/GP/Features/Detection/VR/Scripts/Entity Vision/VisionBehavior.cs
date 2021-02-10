@@ -20,7 +20,7 @@ namespace Gameplay.VR
         protected Vector3 myPos, targetPosition, visionPosition;
         internal float sqrDistToTarget;
 
-        protected GameEvent playerPeeking { get => visionData.spottedPlayer; }
+        protected GameEvent playerPeeking { get => visionData.playerPeeking; }
 
         protected AlertManager alertManager = null;
 
