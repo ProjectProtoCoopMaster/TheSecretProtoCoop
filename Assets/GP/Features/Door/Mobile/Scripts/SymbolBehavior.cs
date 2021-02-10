@@ -137,10 +137,12 @@ namespace Gameplay.Mobile
             results[missNumber].color = Color.green;
             door.GetComponent<DoorBehavior>().hints.SetActive(false);
             //_sendOnOpenDoor.Raise();
-            int digitValue = Random.Range(100, 1000);
+            int digitValue1 = Random.Range(1, 10);
+            int digitValue2 = Random.Range(1, 10);
+            int digitValue3 = Random.Range(1, 10);
             
-            digit.text = digitValue.ToString();
-            transmitterManager.SendDigitToAll(digitValue);
+            digit.text = digitValue1.ToString() + digitValue2.ToString() + digitValue3.ToString();
+            transmitterManager.SendDigitToAll(int.Parse(digit.text));
         }
 
         IEnumerator WaitCloseSymbolCanvas()
