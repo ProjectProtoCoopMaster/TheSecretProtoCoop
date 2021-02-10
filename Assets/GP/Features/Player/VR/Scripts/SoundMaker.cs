@@ -24,7 +24,6 @@ namespace Gameplay.VR
         protected void Awake()
         {
             audioSource = GetComponent<AudioSource>();
-            agentsInScene.AddRange(FindObjectsOfType<DistractionBehavior>());
         }
 
         protected void Update() { }
@@ -51,10 +50,7 @@ namespace Gameplay.VR
                 // if the agent is within range of the sound
                 if ((agentsInScene[i].transform.position - transform.position).sqrMagnitude < currNoiseRange * currNoiseRange)
                 {
-                    //Debug.Log(agentsInScene[i].gameObject.name + " heard that and is reacting");
-
                     GuardManager guard = agentsInScene[i].GetComponent<GuardManager>();
-
                     guard.DistractTo(transform.position);
                 }
             }

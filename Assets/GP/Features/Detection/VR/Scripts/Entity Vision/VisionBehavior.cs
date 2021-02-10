@@ -22,7 +22,7 @@ namespace Gameplay.VR
 
         protected GameEvent playerPeeking { get => visionData.playerPeeking; }
 
-        protected AlertManager alertManager = null;
+        protected AlertManager alertManager { get => GameManager.instance.alertManager; }
 
         [SerializeField] protected DetectionFeedback detectionFeedback;
 
@@ -33,16 +33,14 @@ namespace Gameplay.VR
         RaycastHit hitInfo;
 
         // has the entity detected a target ? 
-        [ReadOnly] protected bool detected;
+        [SerializeField] protected bool detected;
 
         // used to update the entity's update every X frames
-        [ReadOnly] protected int pingFrequency;
-        [ReadOnly] protected int framesPassed;
+        [SerializeField] protected int pingFrequency;
+        [SerializeField] protected int framesPassed;
 
         // used to know if the entity of type Camera is active
-        [ReadOnly] internal bool updating;
-
-        protected void Start() => alertManager = GameManager.instance.alertManager;
+        [SerializeField] internal bool updating;
 
         private void OnEnable() => updating = true;
 
