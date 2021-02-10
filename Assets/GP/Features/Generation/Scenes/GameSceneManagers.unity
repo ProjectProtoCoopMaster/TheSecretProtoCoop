@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1241699002
 Transform:
   m_ObjectHideFlags: 0
@@ -452,6 +452,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1434751489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2651522416651946683, guid: f71bf1f10b61d4445a76f49ff2177609, type: 3}
+  m_PrefabInstance: {fileID: 4951206299957941935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3915db054a9b4ca4d9f7b828737d01e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1538922510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8077612107428191925, guid: 9b53b037544f059428c040dc7863d4f6, type: 3}
@@ -911,6 +922,14 @@ PrefabInstance:
       propertyPath: winCanvas
       value: 
       objectReference: {fileID: 4629260329665606556}
+    - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+      propertyPath: startGame
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525769403144350535, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
+      propertyPath: alertManager
+      value: 
+      objectReference: {fileID: 1434751489}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7696dbd4dc514c64c8899dd0607249a7, type: 3}
 --- !u!4 &1525769403186798942 stripped

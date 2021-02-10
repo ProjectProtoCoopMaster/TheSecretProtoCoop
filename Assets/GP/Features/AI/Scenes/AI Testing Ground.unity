@@ -379,6 +379,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 362902038}
     m_Modifications:
+    - target: {fileID: 1043542672354439373, guid: 6c4d18ed2379fab41a69fb2dbc93224a, type: 3}
+      propertyPath: pingFrequency
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 1078856768317732896, guid: 6c4d18ed2379fab41a69fb2dbc93224a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -431,6 +435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patrol Guard Light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9000765130917124650, guid: 6c4d18ed2379fab41a69fb2dbc93224a, type: 3}
+      propertyPath: pingFrequency
+      value: 21
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c4d18ed2379fab41a69fb2dbc93224a, type: 3}
 --- !u!1 &362902036
@@ -463,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testAI: 1
+  agents: []
 --- !u!4 &362902038
 Transform:
   m_ObjectHideFlags: 0
