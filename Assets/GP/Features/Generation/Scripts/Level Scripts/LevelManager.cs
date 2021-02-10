@@ -37,6 +37,7 @@ namespace Gameplay
         }
 
         public static LevelManager instance;
+
         void OnEnable() { if (instance == null) instance = this; }
 
         void Start()

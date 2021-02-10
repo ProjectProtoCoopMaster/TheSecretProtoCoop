@@ -23,8 +23,6 @@ namespace Gameplay
 
     public class RoomManager : MonoBehaviour
     {
-        public GameEvent _refreshScene;
-
         public Platform platform;
 
         [ShowIf("platform", Platform.VR)]
@@ -41,11 +39,6 @@ namespace Gameplay
                 if (platform == Platform.VR) return roomVR;
                 else return roomMobile;
             }
-        }
-
-        private void Awake()
-        {
-            _refreshScene.Raise();
         }
     }
 
