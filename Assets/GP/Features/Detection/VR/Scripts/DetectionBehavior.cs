@@ -1,6 +1,4 @@
 ﻿#if UNITY_STANDALONE
-using Gameplay.AI;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay.VR
