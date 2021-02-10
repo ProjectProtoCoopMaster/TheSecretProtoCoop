@@ -6,12 +6,11 @@ namespace Gameplay.VR
 {
     public class CameraBehavior : MonoBehaviour, ISwitchable
     {
+        [SerializeField] CameraPowerBehaviour cameraPowerBehaviour;
         public UnityEvent camerasOff, camerasOn;
 
         [Range(0, 1), SerializeField] private int state;
         [Range(0, 1), SerializeField] private int power;
-
-        private int baseState, basePower;
 
         public int State
         {
@@ -34,27 +33,11 @@ namespace Gameplay.VR
 
         private void Awake()
         {
-            baseState = state;
-            basePower = power;
             Power = power;
         }
 
-        [Button]
-        public void TurnOff()
-        {
-            camerasOff.Invoke();
-        }
+        [Button] public void TurnOff() => cameraPowerBehaviour.PowerOff();
 
-        [Button]
-        public void TurnOn()
-        {
-            camerasOn.Invoke();
-        }
-
-        public void GE_RefreshScene()
-        {
-            State = baseState;
-            Power = basePower;
-        }
+        [Button] public void TurnOn() => cameraPowerBehaviour.PowerOn();
     }
 }

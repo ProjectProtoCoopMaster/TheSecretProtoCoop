@@ -7,41 +7,64 @@ namespace Gameplay.VR
 {
     public class DetectionBehavior : VisionBehavior
     {
-        public bool isGuard;
+        [SerializeField] AnimationManager animationManager;
 
-        public AnimationManager animationManager;
+        [SerializeField] [FoldoutGroup("Debugging")] bool bIsGuard;
+        Vector3Variable playerHead, playerHandLeft, playerHandRight;
 
-        [SerializeField] public LayerMask detectionMask;
-        private RaycastHit hitInfo;
-        private bool detectedPlayer = false;
-
-        public Vector3Variable playerHead, playerHandLeft, playerHandRight;
-
-        new void Awake()
+        public override void Ping()
         {
-            base.Awake();
+            if (CanSeeTarget(playerHead.Value) && CanSeeTarget(playerHead.Value) && CanSeeTarget(playerHead.Value))
+            {
+                detected = true; // stop the detection from looping
+
+                detectionFeedback.PlayDetectionFeedback();
+
+                if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
+                {
+                    awarenessManager.alarmRaisers.Add(this.gameObject);
+
+                    if (bIsGuard)
+                    {
+                        // Animation, Léonard kiffe bien à réecrire ça bruuuh
+                        animationManager.SetAlertAnim();
+                        GetComponent<AgentManager>().StopAgent();
+                    }
+                }
+
+                spottedPlayer.Raise();
+                Debug.Log(gameObject.name + " spotted the player !");
+            }
+
+            //...otherwise, it means that the player is "peeking"
+            else
+            {
+                playerPeeking.Raise();
+                Debug.Log("The player is peeking !");
+            }
         }
 
+        /*
         // check if the player is in range 
-        public override void Ping()
+        public void Ping2()
         {
             myPos.x = transform.position.x;
             myPos.z = transform.position.z;
 
-            targetPos.x = playerHead.Value.x;
-            targetPos.z = playerHead.Value.z;
+            targetPosition.x = playerHead.Value.x;
+            targetPosition.z = playerHead.Value.z;
 
-            myFinalPos.x = transform.position.x;
-            myFinalPos.y = playerHead.Value.y;
-            myFinalPos.z = transform.position.z;
+            visionPosition.x = transform.position.x;
+            visionPosition.y = playerHead.Value.y;
+            visionPosition.z = transform.position.z;
 
-            sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
+            sqrDistToTarget = (targetPosition - myPos).sqrMagnitude;
 
             // if the player is within the vision range
             if (sqrDistToTarget < rangeOfVision * rangeOfVision)
             {
                 // get the direction of the player's head...
-                targetDir = playerHead.Value - myFinalPos;
+                targetDir = playerHead.Value - visionPosition;
 
                 //...if the angle between the looking dir of the cam and the player is less than the cone of vision, then you are inside the cone of vision
                 if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedPlayer == false)
@@ -93,6 +116,7 @@ namespace Gameplay.VR
             }
             else return false;
         }
+        */
 
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
@@ -104,23 +128,18 @@ namespace Gameplay.VR
             enabled = false;
         }
 
-        #region Mobile Camera Power
+        /*   #region Mobile Camera Power
         // called from VR_CameraBehavior
         public void UE_DetectionOn()
         {
-            poweredOn = true;
+            updating = true;
         }
 
         public void UE_DetectionOff()
         {
-            poweredOn = false;
+            updating = false;
         }
-        #endregion
-
-        public void GE_RefreshScene()
-        {
-            detectedPlayer = false;
-        }
+        #endregion*/
     }
 }
 #endif

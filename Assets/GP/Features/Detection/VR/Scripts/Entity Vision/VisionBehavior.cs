@@ -1,9 +1,6 @@
 ﻿#if UNITY_STANDALONE
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
@@ -19,37 +16,40 @@ namespace Gameplay.VR
 
         // cached cone of vision/detection values
         protected Vector3 targetDir;
-        protected Vector3 myPos, targetPos, myFinalPos;
+        protected Vector3 myPos, targetPosition, visionPosition;
         internal float sqrDistToTarget;
 
-        protected GameEvent spottedPlayer, spottedDeadBody, playerPeeking;
+        protected GameEvent spottedPlayer { get => visionData.spottedPlayer; }
+        protected GameEvent spottedDeadBody { get => visionData.spottedPlayer; }
+        protected GameEvent playerPeeking { get => visionData.spottedPlayer; }
+
         protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
         protected AwarenessManager awarenessManager = null;
+
+        [SerializeField] protected DetectionFeedback detectionFeedback;
+
+        [SerializeField] LayerMask visionLayerMask;
+        [SerializeField] LayerMask targetLayerMask;
+        RaycastHit hitInfo;
+
+        // has the entity detected a target ? 
+        [SerializeField] [FoldoutGroup("Debugging")] protected bool detected;
 
         // used to update the entity's update every X frames
         [SerializeField] [FoldoutGroup("Debugging")] protected int pingFrequency;
         [SerializeField] [FoldoutGroup("Debugging")] protected int framesPassed;
 
         // used to know if the entity of type Camera is active
-        [SerializeField] [FoldoutGroup("Debugging")] protected bool poweredOn;
+        [SerializeField] [FoldoutGroup("Debugging")] internal bool updating;
 
-        protected DetectionFeedback detectionFeedback;
+        protected void Awake() => awarenessManager = FindObjectOfType<AwarenessManager>();
 
-        protected void Awake()
-        {
-            detectionFeedback = GetComponent<DetectionFeedback>();
-
-            spottedPlayer = visionData.spottedPlayer;
-            spottedDeadBody = visionData.spottedDeadBody;
-            playerPeeking = visionData.playerPeeking;
-
-            awarenessManager = FindObjectOfType<AwarenessManager>();
-        }
+        private void OnEnable() => updating = true;
 
         private void Update()
         {
-            if (poweredOn)
+            if (updating)
             {
                 framesPassed++;
                 if (framesPassed % pingFrequency == 0)
@@ -60,7 +60,42 @@ namespace Gameplay.VR
             }
         }
 
+        // Called every couple of frames to save on performance. Determines who the target is.
         public abstract void Ping();
+
+        // Called by Ping() under certain conditions. Checks if a target is in range.
+        public bool CanSeeTarget(Vector3 targetPosition)
+        {
+            visionPosition.x = transform.position.x;
+            visionPosition.y = targetPosition.y;
+            visionPosition.z = transform.position.z;
+
+            sqrDistToTarget = (targetPosition - visionPosition).sqrMagnitude;
+
+            // if the player is within the vision range
+            if (sqrDistToTarget < rangeOfVision * rangeOfVision)
+            {
+                // get the direction of the player's head...
+                targetDir = targetPosition - visionPosition;
+
+                //...if the angle between the looking dir of the entity and a target element is less than the cone of vision, then you can see him
+                if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detected == false)
+                {
+                    if (Physics.Linecast(transform.position, targetPosition, out hitInfo, visionLayerMask))
+                    {
+                        if (hitInfo.collider.gameObject.layer == targetLayerMask) return true;
+                        else return false;
+                    }
+                    else return true;
+                }
+                else return false;
+            }
+            else return false;
+        }
+
+        public void GE_RefreshScene() => detected = false;
+
+        private void OnDisable() => updating = false;
     }
 }
 #endif
