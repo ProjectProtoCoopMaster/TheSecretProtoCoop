@@ -3,17 +3,12 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    public class OverwatchBehavior : EntityVisionData
+    public class OverwatchBehavior : VisionBehavior
     {
         [SerializeField] internal Transform myDetectableBody;
         [SerializeField] public LayerMask overwatchMask;
         private RaycastHit hitInfo;
         private bool detectedBody = false;
-
-        new void Awake()
-        {
-            base.Awake();
-        }
 
         public override void Ping()
         {

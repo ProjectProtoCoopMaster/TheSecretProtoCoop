@@ -9,7 +9,7 @@ namespace Tools.Debugging
 {
     [ExecuteAlways]
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(EntityVisionData))]
+    [CustomEditor(typeof(VisionBehavior))]
     public class EntityVisionDataInspector : Editor
     {
         static int playerMask = 0;
@@ -19,13 +19,13 @@ namespace Tools.Debugging
         bool existingData, localData;
         SerializedProperty entityVisionScriptableProp, rangeOfVisionProp, coneOfVisionProp, playerTransformProp, playerDetectionLayerProp;
 
-        EntityVisionData entityVisionDataInterface;
+        VisionBehavior entityVisionDataInterface;
         DetectionBehavior detectionBehavior;
         OverwatchBehavior overwatchBehavior;
 
         private void OnEnable()
         {
-            entityVisionDataInterface = target as EntityVisionData;
+            entityVisionDataInterface = target as VisionBehavior;
             detectionBehavior = entityVisionDataInterface.gameObject.GetComponent<DetectionBehavior>();
             overwatchBehavior = entityVisionDataInterface.gameObject.GetComponent<OverwatchBehavior>();
 

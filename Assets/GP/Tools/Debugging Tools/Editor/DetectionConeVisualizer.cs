@@ -6,16 +6,16 @@ using Gameplay.VR;
 namespace Tools.Debugging
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(EntityDataInterface))]
+    [CustomEditor(typeof(VisionData))]
     public class DetectionConeVisualizer : Editor
     {
         //DetectionBehavior detectionBehavior;
-        EntityDataInterface detectionBehavior;
+        VisionData detectionBehavior;
         Vector3 leftPoint, rightPoint;
 
         private void OnEnable()
         {
-            detectionBehavior = target as EntityDataInterface;
+            detectionBehavior = target as VisionData;
             //visionInterface = target as 
         }
 

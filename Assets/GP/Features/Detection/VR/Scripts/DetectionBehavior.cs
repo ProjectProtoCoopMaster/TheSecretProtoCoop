@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.VR
 {
-    public class DetectionBehavior : EntityVisionData
+    public class DetectionBehavior : VisionBehavior
     {
         public bool isGuard;
 

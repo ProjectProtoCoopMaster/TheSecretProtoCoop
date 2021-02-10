@@ -2,7 +2,7 @@
 
 namespace Gameplay.VR
 {
-    public class EntityDataInterface : MonoBehaviour
+    public class VisionData : MonoBehaviour
     {
         // need to be identical across both Detection and Overwatch
         [SerializeField] public float rangeOfVision;

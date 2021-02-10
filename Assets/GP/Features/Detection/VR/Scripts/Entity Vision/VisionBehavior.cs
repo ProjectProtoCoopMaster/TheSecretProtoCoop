@@ -7,15 +7,15 @@ using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
-    [RequireComponent(typeof(EntityDataInterface))]
-    public abstract class EntityVisionData : MonoBehaviour
+    [RequireComponent(typeof(VisionData))]
+    public abstract class VisionBehavior : MonoBehaviour
     {
         // a reference to the interface
-        EntityDataInterface entityDataInterface = null;
+        public VisionData visionData;
 
         // need to be identical across both Detection and Overwatch
-        [HideInInspector] public float rangeOfVision;
-        [HideInInspector] public float coneOfVision;
+        public float rangeOfVision { get => visionData.rangeOfVision; set => visionData.rangeOfVision = value; }
+        public float coneOfVision { get => visionData.coneOfVision; set => visionData.coneOfVision = value; }
 
         // cached cone of vision/detection values
         protected Vector3 targetDir;
@@ -38,15 +38,11 @@ namespace Gameplay.VR
 
         protected void Awake()
         {
-            entityDataInterface = GetComponent<EntityDataInterface>();
             detectionFeedback = GetComponent<DetectionFeedback>();
 
-            rangeOfVision = entityDataInterface.rangeOfVision;
-            coneOfVision = entityDataInterface.coneOfVision;
-
-            spottedPlayer = entityDataInterface.spottedPlayer;
-            spottedDeadBody = entityDataInterface.spottedDeadBody;
-            playerPeeking = entityDataInterface.playerPeeking;
+            spottedPlayer = visionData.spottedPlayer;
+            spottedDeadBody = visionData.spottedDeadBody;
+            playerPeeking = visionData.playerPeeking;
 
             awarenessManager = FindObjectOfType<AwarenessManager>();
         }
