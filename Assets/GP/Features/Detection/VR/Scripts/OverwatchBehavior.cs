@@ -5,22 +5,30 @@ namespace Gameplay.VR
 {
     public class OverwatchBehavior : VisionBehavior
     {
-        [SerializeField] internal Transform myDetectableBody;
-
         public override void Ping()
         {
-            for (int i = 0; i < awarenessManager.deadGuards.Count; i++)
+            for (int i = 0; i < alertManager.deadGuards.Count; i++)
             {
-                if (CanSeeTarget(awarenessManager.deadGuards[i].position))
+                if (CanSeeTarget(alertManager.deadGuards[i].transform.position))
                 {
                     detected = true;
 
                     detectionFeedback.PlayDetectionFeedback();
 
-                    if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
-                        awarenessManager.alarmRaisers.Add(this.gameObject);
+                    if (!alertManager.alarmRaisers.Contains(guardManager))
+                        alertManager.alarmRaisers.Add(guardManager);
 
-                    spottedDeadBody.Raise();
+                    if (entityType == EntityType.Guard)
+                    {
+                        alertManager.loseType = LoseType.BodySpottedByGuard;
+                        alertManager.Alert();
+                    }
+
+                    else if (entityType == EntityType.Camera)
+                    {
+                        alertManager.loseType = LoseType.BodySpottedByCam;
+                        alertManager.Detected();
+                    }
                 }
                 else continue;
             }
@@ -29,21 +37,13 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
-            myDetectableBody = GetComponentInChildren<DetectableBodyBehaviour>().transform;
-
             // if you were detecting the player, remove this object from the list of alarm raisers
-            if (awarenessManager.alarmRaisers.Contains(this.gameObject))
-                awarenessManager.alarmRaisers.Remove(this.gameObject);
+            if (alertManager.alarmRaisers.Contains(guardManager))
+                alertManager.alarmRaisers.Remove(guardManager);
 
             // add this entity to the list of dead guards
-            if (!awarenessManager.deadGuards.Contains(myDetectableBody))
-                awarenessManager.deadGuards.Add(myDetectableBody);
-
-            // change the object's tags to "Dead"
-            myDetectableBody.gameObject.tag = "Dead";
-
-            for (int i = 0; i < myDetectableBody.childCount; i++)
-                myDetectableBody.GetChild(i).tag = "Dead";
+            if (!alertManager.deadGuards.Contains(guardManager))
+                alertManager.deadGuards.Add(guardManager);
 
             enabled = false;
         }
