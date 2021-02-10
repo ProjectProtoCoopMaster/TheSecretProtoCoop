@@ -50,7 +50,6 @@ namespace Gameplay
             {
                 PickRoom(pool);
             }
-            levelHolder.pickedRooms.Reverse();
         }
         private void PickRoom(PoolData pool)
         {
@@ -68,7 +67,6 @@ namespace Gameplay
                 pick = Random.Range(0, availableRooms.Count);
 
                 levelHolder.pickedRooms.Add(availableRooms[pick]);
-                Debug.Log(availableRooms[pick].roomName + " was picked");
 
                 availableRooms.RemoveAt(pick);
             }

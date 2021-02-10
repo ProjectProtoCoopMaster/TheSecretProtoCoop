@@ -9,16 +9,7 @@ namespace Gameplay.AI
     {
         public bool testAI;
 
-        [ReadOnly] public List<AgentManager> agents = new List<AgentManager>();
-        public List<AgentManager> Agents { get => agents; }
-
-        [Button]
-        public void FindAllAgents()
-        {
-            agents.Clear();
-            AgentManager[] agentsFound = FindObjectsOfType<AgentManager>();
-            foreach (AgentManager agent in agentsFound) agents.Add(agent);
-        }
+        [ReadOnly] public static List<AgentManager> agents = new List<AgentManager>();
 
         void Start()
         {

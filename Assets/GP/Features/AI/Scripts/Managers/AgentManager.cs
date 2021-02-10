@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Gameplay.AI
 {
@@ -24,11 +23,13 @@ namespace Gameplay.AI
 
         [Title("Agent")]
 
-        public NavMeshAgent navMeshAgent;
-
         public Transform agentRig;
         public GameObject ragdollPrefab; public GameObject ragdoll { get; set; }
         
+        void OnEnable() => AIManager.agents.Add(this);
+
+        void OnDisable() => AIManager.agents.Remove(this);
+
         void Awake()
         {
             InitializeAgent();

@@ -54,9 +54,9 @@ namespace Gameplay
 
         public void PickRooms()
         {
-            foreach (RoomData roomData in levelHolder.pickedRooms)
+            foreach (RoomManager roomManager in roomChunks)
             {
-                foreach (RoomManager roomManager in roomChunks)
+                foreach (RoomData roomData in levelHolder.pickedRooms)
                 {
                     if (roomManager.room.roomName == roomData.roomName)
                     {
@@ -65,7 +65,6 @@ namespace Gameplay
                     }
                 }
             }
-            selectedRooms.Reverse();
         }
 
         public abstract void CreateLevel();

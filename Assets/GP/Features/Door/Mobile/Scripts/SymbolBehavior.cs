@@ -16,6 +16,7 @@ namespace Gameplay.Mobile
         [SerializeField] private Image[] results;
         [SerializeField] private Image[] iconsGame;
         [SerializeField] Text codeNameText;
+        [SerializeField] Text digit;
         [SerializeField] Text timerText;
         [SerializeField] Image timerImage;
         [SerializeField] Sprite cross;
@@ -38,10 +39,12 @@ namespace Gameplay.Mobile
 
         private IEnumerator Start()
         {
+            digit.text = "";
             yield return new WaitForEndOfFrame();
             sm = SymbolManager.instance;
             sm.symbol = this;
             transmitterManager = Networking.TransmitterManager.instance;
+
         }
 
         private void Update()
@@ -132,14 +135,17 @@ namespace Gameplay.Mobile
             results[missNumber].gameObject.SetActive(true);
             results[missNumber].overrideSprite = winImage;
             results[missNumber].color = Color.green;
-            StartCoroutine(WaitCloseSymbolCanvas());
-            _sendOnOpenDoor.Raise();
+            door.GetComponent<DoorBehavior>().hints.SetActive(false);
+            //_sendOnOpenDoor.Raise();
+            int digitValue = Random.Range(100, 1000);
+            
+            digit.text = digitValue.ToString();
+            transmitterManager.SendDigitToAll(digitValue);
         }
 
         IEnumerator WaitCloseSymbolCanvas()
         {
             yield return new WaitForSeconds(.5f);
-            door.GetComponent<DoorBehavior>().hints.SetActive(false);
             canvas.enabled = false;
             gameObject.SetActive(false);
             yield break;
@@ -204,14 +210,15 @@ namespace Gameplay.Mobile
 
         private void ResetCodes()
         {
-            sm.PickCodeName();
+            transmitterManager.SendChangeSymbolsToOthers();
+        }
 
+        public void ChangeCode()
+        {
             codeNameText.text = sm.pickedNames[0];
             symbolAreaCodeName.text = sm.pickedNames[0];
-
-            transmitterManager.SendCodeNameToOthers(sm.pickedNames);
-
             door.GetComponent<DoorBehavior>().code.text = sm.pickedNames[0];
+
         }
     }
 }

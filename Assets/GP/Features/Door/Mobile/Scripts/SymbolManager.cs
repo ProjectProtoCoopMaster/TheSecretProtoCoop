@@ -11,6 +11,7 @@ namespace Gameplay
         public BoolVariable isSymbolLoaded;
         public GameEvent onOpenDoor;
         public GameEvent onResetCodes;
+        public int digit;
 
         public List<Sprite> iconsAsset;
 
@@ -151,5 +152,8 @@ namespace Gameplay
 
             TransmitterManager.instance.SendCodeNameToOthers(pickedNames);
         }
+
+        
+
     }
 }

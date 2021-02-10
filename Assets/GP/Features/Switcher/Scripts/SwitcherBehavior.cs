@@ -107,7 +107,11 @@ namespace Gameplay
             Power = power;
         }
 
-        public void Switch() => TransmitterManager.instance.SendSwitcherChangeToAll(ID);
+        public void CallSwitchManager()
+        {
+            _switch.Raise(ID);
+            TransmitterManager.instance.SendSwicherChangeToOthers(ID);
+        }
 
         private void SwitchNode()
         {

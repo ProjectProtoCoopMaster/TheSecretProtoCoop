@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 }
+    public enum Difficulty { Easy, Medium, Hard }
 
     [System.Serializable]
     [HideReferenceObjectPicker]

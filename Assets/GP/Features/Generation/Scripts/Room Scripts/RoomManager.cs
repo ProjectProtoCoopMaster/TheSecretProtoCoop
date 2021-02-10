@@ -97,10 +97,10 @@ namespace Gameplay
             aIPositions = new List<Vector3>();
             aIRotations = new List<Quaternion>();
 
-            for (int i = 0; i < aIManager.Agents.Count; i++)
+            for (int i = 0; i < AIManager.agents.Count; i++)
             {
-                aIPositions.Add(aIManager.Agents[i].transform.position);
-                aIRotations.Add(aIManager.Agents[i].transform.rotation);
+                aIPositions.Add(AIManager.agents[i].transform.position);
+                aIRotations.Add(AIManager.agents[i].transform.rotation);
             }
 
             base.OnInitRoom();
@@ -116,20 +116,18 @@ namespace Gameplay
 
             /// Initialize AI
 
-            for (int i = 0; i < aIManager.Agents.Count; i++)
+            for (int i = 0; i < AIManager.agents.Count; i++)
             {
                 Debug.Log("resetting guards");
 
-                aIManager.Agents[i].DeletePreviousRagdoll();
-                aIManager.Agents[i].agentRig.gameObject.SetActive(true);
+                AIManager.agents[i].DeletePreviousRagdoll();
+                AIManager.agents[i].agentRig.gameObject.SetActive(true);
 
-                aIManager.Agents[i].transform.position = aIPositions[i];
-                aIManager.Agents[i].transform.rotation = aIRotations[i];
+                AIManager.agents[i].transform.position = aIPositions[i];
+                AIManager.agents[i].transform.rotation = aIRotations[i];
             }
 
-            //roomNavigationSurface.BuildNavMesh();
-
-            //foreach (AgentManager agent in aIManager.agents) { agent.navMeshAgent.enabled = false; agent.navMeshAgent.enabled = true; }
+            roomNavigationSurface.BuildNavMesh();
 
             aIManager.StartAllAgents();
 
@@ -143,19 +141,8 @@ namespace Gameplay
 
         public override void OnDisableRoom()
         {
-            var Yes = new { myMan = "Boi" };
-            var type = Yes.GetType();
-            Debug.Log(type.Name);
-
-            //if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
+            if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
         }
-    }
-
-    public class Bunker
-    {
-        /// Real Singleton Pattern
-        private Bunker() { }
-        public static Bunker instance { get; } = new Bunker();
     }
 
     [System.Serializable]
