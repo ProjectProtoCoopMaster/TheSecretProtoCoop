@@ -19,13 +19,9 @@ namespace Gameplay.VR
         protected Vector3 myPos, targetPosition, visionPosition;
         internal float sqrDistToTarget;
 
-        protected GameEvent spottedPlayer { get => visionData.spottedPlayer; }
-        protected GameEvent spottedDeadBody { get => visionData.spottedPlayer; }
         protected GameEvent playerPeeking { get => visionData.spottedPlayer; }
 
-        protected CallableFunction raiseAlarm2;
-        protected StringVariable loseReason;
-        protected AlertManager awarenessManager = null;
+        protected AlertManager alertManager = null;
 
         [SerializeField] protected DetectionFeedback detectionFeedback;
 
@@ -44,7 +40,7 @@ namespace Gameplay.VR
         // used to know if the entity of type Camera is active
         [ReadOnly] internal bool updating;
 
-        protected void Awake() => awarenessManager = FindObjectOfType<AlertManager>();
+        protected void Start() => alertManager = GameManager.instance.alertManager;
 
         private void OnEnable() => updating = true;
 
