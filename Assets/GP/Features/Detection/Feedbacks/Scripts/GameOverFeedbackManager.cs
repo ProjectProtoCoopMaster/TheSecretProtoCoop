@@ -7,7 +7,6 @@ namespace Gameplay.VR
 {
     public class GameOverFeedbackManager : MonoBehaviour
     {
-        [SerializeField] CallableFunction gameOver;
         [SerializeField] Light redAlarmLight;
         [SerializeField] Vector3Variable playerRigPosition;
 

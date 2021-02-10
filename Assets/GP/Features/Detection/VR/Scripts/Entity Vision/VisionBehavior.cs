@@ -79,7 +79,7 @@ namespace Gameplay.VR
                         if (hitInfo.collider.gameObject.layer == targetLayerMask) return true;
                         else return false;
                     }
-                    else return true;
+                    else return false;
                 }
                 else return false;
             }
