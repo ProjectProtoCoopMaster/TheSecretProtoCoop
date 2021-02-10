@@ -63,6 +63,7 @@ namespace Gameplay.VR
         {
             // Rotation
             _playerRotation.Value = transform.localRotation;
+            _playerPosition.Value = transform.position;
 
             // Position
             if (currentRoom != null)

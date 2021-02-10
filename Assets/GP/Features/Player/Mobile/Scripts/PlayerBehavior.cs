@@ -40,6 +40,8 @@ namespace Gameplay.Mobile
                     playerTransform.position = currentRoom.room.LocalPlayer.position;
                 }
 
+                playerTransform.position = _playerPosition.Value;
+
                 playerTransform.forward = _player.Value.transform.forward;
 
                 // Rotation
