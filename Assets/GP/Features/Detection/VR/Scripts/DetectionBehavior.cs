@@ -18,8 +18,8 @@ namespace Gameplay.VR
 
                 detectionFeedback.PlayDetectionFeedback();
 
-                if (!alertManager.alarmRaisers.Contains(this.gameObject)) 
-                    alertManager.alarmRaisers.Add(this.gameObject);
+                if (!alertManager.alarmRaisers.Contains(guardManager)) 
+                    alertManager.alarmRaisers.Add(guardManager);
 
                 if (entityType == EntityType.Guard)
                 {
@@ -49,8 +49,8 @@ namespace Gameplay.VR
         public void UE_GuardDied()
         {
             // if you were detecting the player, remove this object from the list of alarm raisers
-            if (alertManager.alarmRaisers.Contains(this.gameObject))
-                alertManager.alarmRaisers.Remove(this.gameObject);
+            if (alertManager.alarmRaisers.Contains(guardManager))
+                alertManager.alarmRaisers.Remove(guardManager);
 
             enabled = false;
         }

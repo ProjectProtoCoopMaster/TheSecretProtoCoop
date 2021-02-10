@@ -1,4 +1,5 @@
 ﻿#if UNITY_STANDALONE
+using Gameplay.AI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace Gameplay.VR
 
         [SerializeField] protected DetectionFeedback detectionFeedback;
 
+        [SerializeField] protected GuardManager guardManager;
         [SerializeField] protected EntityType entityType;
         [SerializeField] LayerMask visionLayerMask;
         [SerializeField] LayerMask targetLayerMask;
