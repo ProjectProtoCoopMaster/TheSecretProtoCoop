@@ -42,8 +42,6 @@ namespace Gameplay.VR
         // used to know if the entity of type Camera is active
         [SerializeField] internal bool updating;
 
-        private void OnEnable() => updating = true;
-
         private void Update()
         {
             if (updating)
@@ -91,8 +89,6 @@ namespace Gameplay.VR
         }
 
         public void GE_RefreshScene() => detected = false;
-
-        private void OnDisable() => updating = false;
     }
 }
 #endif
