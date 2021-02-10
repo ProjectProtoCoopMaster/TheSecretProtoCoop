@@ -14,7 +14,7 @@ namespace Networking
         [SerializeField] private GameEvent _OnJoinRoomFailed;
         [SerializeField] private GameEvent _OnRoomFulled;
 
-        public void ConnectToServer()
+        public void Start()
         {
             PhotonNetwork.ConnectUsingSettings();
         }

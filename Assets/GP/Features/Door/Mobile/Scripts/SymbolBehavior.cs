@@ -135,7 +135,7 @@ namespace Gameplay.Mobile
             results[missNumber].gameObject.SetActive(true);
             results[missNumber].overrideSprite = winImage;
             results[missNumber].color = Color.green;
-            door.GetComponent<DoorBehavior>().hints.SetActive(false);
+            //door.GetComponent<DoorBehavior>().hints.SetActive(false);
             //_sendOnOpenDoor.Raise();
             int digitValue = Random.Range(100, 1000);
             

@@ -44,7 +44,7 @@ namespace Gameplay
             if (startGame)
             {
                 currentScene = null;
-                LoadMainMenu();
+                FirstLoad();
             }
         }
 
@@ -125,6 +125,17 @@ namespace Gameplay
 
             currentLevelIndex = 1;
             LoadScene("MainMenu");
+        }
+
+        public void FirstLoad()
+        {
+
+            winCanvas.gameObject.SetActive(false);
+            loseCanvas.gameObject.SetActive(false);
+
+            currentLevelIndex = 1;
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+            currentScene = "MainMenu";
         }
     }
 }

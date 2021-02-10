@@ -176,7 +176,7 @@ namespace Gameplay.Mobile
             selectable = false;
 
             padlock_Close.SetActive(false);
-            hints.SetActive(false);
+            //hints.SetActive(false);
             StopAllCoroutines();
             s.Kill();
 

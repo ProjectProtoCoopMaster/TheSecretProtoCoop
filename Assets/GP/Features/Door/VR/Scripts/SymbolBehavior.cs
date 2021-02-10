@@ -97,39 +97,49 @@ namespace Gameplay.VR
         [Button]
         public void ChangeSymbols()
         {
-            Debug.Log("Change Symbols");
-
-            int newRand = Random.Range(0, 3);
-
-            sm.pickedNames[0] = codeLines[newRand].codeText.text;
-            
-            sm.iconsSelected[0] = codeLines[newRand].symbols[0].overrideSprite;
-            sm.iconsSelected[1] = codeLines[newRand].symbols[1].overrideSprite;
-            sm.iconsSelected[2] = codeLines[newRand].symbols[2].overrideSprite;
-
-            int ID = 0;
-            int ID2 = 0;
-            int ID3 = 0;
-
-            for (int i = 0; i < sm.iconsAsset.Count; i++)
+            for (int i = 0; i < 1; i++)
             {
-                if(sm.iconsSelected[0] == sm.iconsAsset[i])
+                int newRand = Random.Range(0, 3);
+                if(sm.pickedNames[0] == codeLines[newRand].codeText.text)
                 {
-                    ID = i;
+                    i--;
                 }
-
-                if (sm.iconsSelected[1] == sm.iconsAsset[i])
+                else
                 {
-                    ID2 = i;
-                }
+                    sm.pickedNames[0] = codeLines[newRand].codeText.text;
 
-                if (sm.iconsSelected[2] == sm.iconsAsset[i])
-                {
-                    ID3 = i;
+                    sm.iconsSelected[0] = codeLines[newRand].symbols[0].overrideSprite;
+                    sm.iconsSelected[1] = codeLines[newRand].symbols[1].overrideSprite;
+                    sm.iconsSelected[2] = codeLines[newRand].symbols[2].overrideSprite;
+
+                    int ID = 0;
+                    int ID2 = 0;
+                    int ID3 = 0;
+
+                    for (int j = 0; j < sm.iconsAsset.Count; j++)
+                    {
+                        if (sm.iconsSelected[0] == sm.iconsAsset[j])
+                        {
+                            ID = j;
+                        }
+
+                        if (sm.iconsSelected[1] == sm.iconsAsset[j])
+                        {
+                            ID2 = j;
+                        }
+
+                        if (sm.iconsSelected[2] == sm.iconsAsset[j])
+                        {
+                            ID3 = j;
+                        }
+                    }
+                    Networking.TransmitterManager.instance.SendCodeNameAndSpritesToOthers(sm.pickedNames[0], ID, ID2, ID3);
+                    break;
+
                 }
             }
-            Networking.TransmitterManager.instance.SendCodeNameAndSpritesToOthers(sm.pickedNames[0],ID,ID2,ID3) ;
-            
+
+
             
         }
 

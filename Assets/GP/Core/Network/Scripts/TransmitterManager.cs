@@ -87,11 +87,11 @@ namespace Networking
         public void SendOnOpenDoorToOther() => photonView.RPC("SendOnOpenDoor", RpcTarget.Others);
         [PunRPC] private void SendOnOpenDoor() => symbolManager.onOpenDoor.Raise();
 
-        public void SendChangeSymbolsToOthers()=> photonView.RPC("ChangeSymbols", RpcTarget.Others);
+        public void SendChangeSymbolsToOthers() => photonView.RPC("ChangeSymbols", RpcTarget.Others);
         [PunRPC] private void ChangeSymbols() => FindObjectOfType<Gameplay.VR.SymbolBehavior>().ChangeSymbols();
 
 
-        public void SendCodeNameAndSpritesToOthers(string pickedName, int ID, int ID2,int ID3) => photonView.RPC("SendCodeNameAndSprites", RpcTarget.Others, pickedName, ID, ID2, ID3);
+        public void SendCodeNameAndSpritesToOthers(string pickedName, int ID, int ID2, int ID3) => photonView.RPC("SendCodeNameAndSprites", RpcTarget.Others, pickedName, ID, ID2, ID3);
         [PunRPC]
         private void SendCodeNameAndSprites(string pickedName, int ID, int ID2, int ID3)
         {
@@ -135,7 +135,8 @@ namespace Networking
 
             photonView.RPC("SendBuildLevel", RpcTarget.Others, levelVariable.pickedRooms.Count, _names as object, _types as object);
         }
-        [PunRPC] private void SendBuildLevel(int size, string[] names, int[] modifierTypes)
+        [PunRPC]
+        private void SendBuildLevel(int size, string[] names, int[] modifierTypes)
         {
             Debug.Log("Send Level Holder Mobile");
 
