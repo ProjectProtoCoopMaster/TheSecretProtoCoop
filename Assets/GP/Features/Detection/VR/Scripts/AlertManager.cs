@@ -1,4 +1,5 @@
-﻿using Networking;
+﻿using Gameplay.AI;
+using Networking;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -15,31 +16,37 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Player Detection State")] GameEvent playerSpotted, playerIncognito;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
-        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<Transform> deadGuards = new List<Transform>();
-        [SerializeField] [FoldoutGroup("Alarm Raising")] internal List<GameObject> alarmRaisers = new List<GameObject>();
+
+        [ReadOnly] [FoldoutGroup("Alarm Raising")]
+        internal List<GuardManager> deadGuards = new List<GuardManager>();
+        [ReadOnly] [FoldoutGroup("Alarm Raising")]
+        internal List<GuardManager> alarmRaisers = new List<GuardManager>();
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
 
         [SerializeField] [FoldoutGroup("Debugging")] float timePassed;
+
+        public LoseType loseType { get; set; }
 
         #region Game Events
         public void Alert()
         {
             if (!alert)
             {
-                // Call the Alert
+                // Call the Alert Feedback Text
             }
             alert = true;
         }
         public void Detected()
         {
-
+            TransmitterManager.instance.SendLoseToAll((int)loseType);
+            gameOverAlarm.Raise();
         }
 
         public void Incognito()
         {
             alert = false;
-            // Call Incognito
+            // Call Incognito Feedback Text
             timePassed = 0.0f;
         }
 
@@ -90,27 +97,12 @@ namespace Gameplay.VR
                     // if there are still entities raising the alarm, it's game over
                     if (alarmRaisers.Count > 0)
                     {
-                        if (spottedDeadBody)
-                        {
-                            Debug.Log("Restarting the game, a guard saw a body");
-                            GameOver(LoseType.BodySpottedByGuard);
-                        }
-                        if (spottedPlayer)
-                        {
-                            Debug.Log("Restarting the game, a guard saw me");
-                            GameOver(LoseType.PlayerSpottedByGuard);
-                        }
+                        Detected();
 
                         GE_RefreshScene();
                     }
                 }
             }
-        }
-
-        private void GameOver(LoseType loseType)
-        {
-            TransmitterManager.instance.SendLoseToAll((int)loseType);
-            gameOverAlarm.Raise();
         }
 
         public void GE_RefreshScene()
