@@ -44,10 +44,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 916951753350548343}
-  - {fileID: 2542718682431822484}
-  - {fileID: 1956466280068623176}
   - {fileID: 2395967983520254998}
+  - {fileID: 2542718682431822484}
   - {fileID: 5098078747751436206}
+  - {fileID: 1956466280068623176}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63,12 +63,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3d3d7d5cf215a478e1ea6879049547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 0}
-  agentRig: {fileID: 0}
+  navMeshAgent: {fileID: 806750063604888264}
+  agentRig: {fileID: 916951753350548343}
   ragdollPrefab: {fileID: 6087318401039403507, guid: 904e1e8768c24b044b6b8a8332a4abab, type: 3}
   guardType: 1
   patrolBehavior: {fileID: 0}
-  distractionBehavior: {fileID: 0}
+  distractionBehavior: {fileID: 4615798133903831129}
 --- !u!114 &8958192908289284741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 785165413479417951}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2908988362146197441
 MonoBehaviour:
@@ -293,7 +293,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 785165413479417951}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5745942434264226236
 BoxCollider:
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationManager: {fileID: 6538709883808093760}
-  target: {fileID: 0}
+  target: {fileID: 785165413479417951}
   navMeshAgent: {fileID: 806750063604888264}
   angular: 120
 --- !u!114 &4974446460415326703
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 0.05
-  target: {fileID: 0}
+  target: {fileID: 785165413479417951}
 --- !u!1 &3880915662334235452
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +527,7 @@ Transform:
   m_Children:
   - {fileID: 4536546010763759275}
   m_Father: {fileID: 785165413479417951}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8300372807669194392
 MonoBehaviour:
@@ -616,7 +616,7 @@ Transform:
   - {fileID: 7364713971511613185}
   - {fileID: 2862866349204185343}
   m_Father: {fileID: 785165413479417951}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5475835389372115566
 GameObject:
