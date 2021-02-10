@@ -7,9 +7,11 @@ using UnityEngine.Events;
 
 namespace Gameplay.VR
 {
-    public class AwarenessManager : MonoBehaviour
+    public class AlertManager : MonoBehaviour
     {
 #if UNITY_STANDALONE
+        public bool alert { get; set; }
+
         [SerializeField] [FoldoutGroup("Player Detection State")] GameEvent playerSpotted, playerIncognito;
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] float alarmRaiseDuration;
@@ -18,14 +20,31 @@ namespace Gameplay.VR
 
         [SerializeField] [FoldoutGroup("Alarm Raising")] GameEvent gameOverAlarm;
 
-        [SerializeField] bool raisingAlarm = false, spottedPlayer = false, spottedDeadBody = false, gameOver = false;
-        [SerializeField] [FoldoutGroup("Debugging")] float timePassed = 0f;
+        [SerializeField] [FoldoutGroup("Debugging")] float timePassed;
 
         #region Game Events
+        public void Alert()
+        {
+            if (!alert)
+            {
+                // Call the Alert
+            }
+            alert = true;
+        }
+        public void Detected()
+        {
+
+        }
+
+        public void Incognito()
+        {
+            alert = false;
+            // Call Incognito
+            timePassed = 0.0f;
+        }
+
         public void GE_PlayerDetectedByGuard()
         {
-            spottedPlayer = true;
-
             if (raisingAlarm != true)
             {
                 raisingAlarm = true; // prevent the event from being raised more than once
@@ -41,8 +60,6 @@ namespace Gameplay.VR
 
         public void GE_BodyDetectedByGuard()
         {
-            spottedDeadBody = true;
-
             if (raisingAlarm != true)
             {
                 raisingAlarm = true; // prevent the event from being raised more than once
@@ -59,13 +76,13 @@ namespace Gameplay.VR
 
         private void Update()
         {
-            if (raisingAlarm)
+            if (alert)
             {
                 // increase the time that is currently passing
                 timePassed += Time.unscaledDeltaTime;
 
                 // if you kill all the alarm raising entities
-                if (alarmRaisers.Count == 0) KillAlarm();
+                if (alarmRaisers.Count == 0) Incognito();
 
                 // if the alarm has passed its limit
                 if (timePassed >= alarmRaiseDuration)
@@ -90,30 +107,15 @@ namespace Gameplay.VR
             }
         }
 
-        private void KillAlarm()
-        {
-            raisingAlarm = false;
-            playerIncognito.Raise();
-
-            spottedDeadBody = false;
-            spottedPlayer = false;
-
-            timePassed = 0f;
-        }
-
         private void GameOver(LoseType loseType)
         {
-            if (!gameOver) gameOver = true;
             TransmitterManager.instance.SendLoseToAll((int)loseType);
             gameOverAlarm.Raise();
         }
 
         public void GE_RefreshScene()
         {
-            raisingAlarm = false;
-            spottedPlayer = false;
-            spottedDeadBody = false;
-            gameOver = false;
+            alert = false;
 
             deadGuards.Clear();
             alarmRaisers.Clear();

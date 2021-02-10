@@ -25,7 +25,7 @@ namespace Gameplay.VR
         protected GameEvent spottedPlayer, spottedDeadBody, playerPeeking;
         protected CallableFunction raiseAlarm2;
         protected StringVariable loseReason;
-        protected AwarenessManager awarenessManager = null;
+        protected AlertManager awarenessManager = null;
 
         // used to update the entity's update every X frames
         [SerializeField] [FoldoutGroup("Debugging")] protected int pingFrequency;
@@ -44,7 +44,7 @@ namespace Gameplay.VR
             spottedDeadBody = visionData.spottedDeadBody;
             playerPeeking = visionData.playerPeeking;
 
-            awarenessManager = FindObjectOfType<AwarenessManager>();
+            awarenessManager = FindObjectOfType<AlertManager>();
         }
 
         private void Update()

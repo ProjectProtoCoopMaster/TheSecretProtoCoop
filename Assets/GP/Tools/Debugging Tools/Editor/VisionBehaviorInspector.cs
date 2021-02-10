@@ -10,7 +10,7 @@ namespace Tools.Debugging
     [ExecuteAlways]
     [CanEditMultipleObjects]
     [CustomEditor(typeof(VisionBehavior))]
-    public class EntityVisionDataInspector : Editor
+    public class VisionBehaviorInspector : Editor
     {
         static int playerMask = 0;
         static List<string> layers;
