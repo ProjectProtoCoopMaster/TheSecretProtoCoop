@@ -12,7 +12,8 @@ namespace Gameplay.VR
         [Tooltip("Define which layers the sound will affect")] [SerializeField] protected LayerMask guardHearingLayermask;
         protected RaycastHit hitInfo;
 
-        List<DistractionBehavior> agentsInScene = new List<DistractionBehavior>();
+        List<AgentManager> agents { get => AIManager.agents; }
+
         [Tooltip("How much sound will be reduced when passing through a wall")] [SerializeField] [FoldoutGroup("Noise Values")] protected float wallDampenMultiplier = .5f;
         [Tooltip("How much sound will be reduced when passing through a wall")] [SerializeField] [FoldoutGroup("Noise Values")] protected float windowDampenMultiplier = .75f;
         [Tooltip("How far sound will travel")] [SerializeField] [FoldoutGroup("Noise Values")] protected float noiseRange = 7f;
@@ -33,11 +34,11 @@ namespace Gameplay.VR
             audioSource.Play();
 
             // check to see if the sound has to pass through walls to reach each enemy in the scene
-            for (int i = 0; i < agentsInScene.Count; i++)
+            for (int i = 0; i < agents.Count; i++)
             {
                 currNoiseRange = noiseRange;
 
-                if (Physics.Linecast(transform.position, agentsInScene[i].transform.position, out hitInfo, guardHearingLayermask))
+                if (Physics.Linecast(transform.position, agents[i].transform.position, out hitInfo, guardHearingLayermask))
                 {
                     if (hitInfo.collider.gameObject.layer != LayerMask.NameToLayer("Entity"))
                     {
@@ -48,9 +49,9 @@ namespace Gameplay.VR
                 }
 
                 // if the agent is within range of the sound
-                if ((agentsInScene[i].transform.position - transform.position).sqrMagnitude < currNoiseRange * currNoiseRange)
+                if ((agents[i].transform.position - transform.position).sqrMagnitude < currNoiseRange * currNoiseRange)
                 {
-                    GuardManager guard = agentsInScene[i].GetComponent<GuardManager>();
+                    GuardManager guard = agents[i].GetComponent<GuardManager>();
                     guard.DistractTo(transform.position);
                 }
             }
