@@ -34,13 +34,15 @@ namespace Gameplay.VR
             {
                 // Call the Alert Feedback Text
                 playerSpotted.Raise();
+                alert = true;
             }
-            alert = true;
         }
+
         public void Detected()
         {
             TransmitterManager.instance.SendLoseToAll((int)loseType);
             gameOverAlarm.Raise();
+            alert = false;
         }
 
         public void Incognito()
@@ -65,10 +67,8 @@ namespace Gameplay.VR
                 if (currentTime >= alertDuration)
                 {
                     // if there are still entities raising the alarm, it's game over
-                    if (alarmRaisers.Count > 0)
-                    {
+                    if (alarmRaisers.Count > 0) 
                         Detected();
-                    }
                 }
             }
         }
