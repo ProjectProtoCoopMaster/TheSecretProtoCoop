@@ -22,6 +22,9 @@ namespace Gameplay.VR
                     {
                         alertManager.loseType = LoseType.BodySpottedByGuard;
                         alertManager.Alert();
+
+                        animationManager.SetAlertAnim();
+                        guardManager.StopAgent();
                     }
 
                     else if (entityType == EntityType.Camera)

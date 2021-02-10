@@ -8,10 +8,26 @@ namespace Gameplay.VR
     [RequireComponent(typeof(VisionData))]
     public abstract class VisionBehavior : MonoBehaviour
     {
-        // a reference to the interface
+        [Title("Common")]
+
         public VisionData visionData;
 
-        // need to be identical across both Detection and Overwatch
+        [SerializeField] protected DetectionFeedback detectionFeedback;
+
+        [SerializeField] LayerMask visionLayerMask;
+        [SerializeField] LayerMask targetLayerMask;
+        RaycastHit hitInfo;
+
+        [SerializeField] protected int pingFrequency;
+
+        [SerializeField] [FoldoutGroup("Debug")] [ReadOnly] protected int framesPassed;
+        [SerializeField] [FoldoutGroup("Debug")] [ReadOnly] protected bool detected;
+        [SerializeField] [FoldoutGroup("Debug")] [ReadOnly] internal bool updating;
+
+        [SerializeField] protected EntityType entityType;
+        [SerializeField] [ShowIf("entityType", EntityType.Guard)] protected GuardManager guardManager;
+        [SerializeField] [ShowIf("entityType", EntityType.Guard)] protected AnimationManager animationManager;
+
         public float rangeOfVision { get => visionData.rangeOfVision; set => visionData.rangeOfVision = value; }
         public float coneOfVision { get => visionData.coneOfVision; set => visionData.coneOfVision = value; }
 
@@ -23,24 +39,6 @@ namespace Gameplay.VR
         protected GameEvent playerPeeking { get => visionData.playerPeeking; }
 
         protected AlertManager alertManager { get => GameManager.instance.alertManager; }
-
-        [SerializeField] protected DetectionFeedback detectionFeedback;
-
-        [SerializeField] protected GuardManager guardManager;
-        [SerializeField] protected EntityType entityType;
-        [SerializeField] LayerMask visionLayerMask;
-        [SerializeField] LayerMask targetLayerMask;
-        RaycastHit hitInfo;
-
-        // has the entity detected a target ? 
-        [SerializeField] protected bool detected;
-
-        // used to update the entity's update every X frames
-        [SerializeField] protected int pingFrequency;
-        [SerializeField] protected int framesPassed;
-
-        // used to know if the entity of type Camera is active
-        [SerializeField] internal bool updating;
 
         private void Update()
         {

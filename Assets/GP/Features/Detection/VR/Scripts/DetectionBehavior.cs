@@ -1,13 +1,12 @@
 ﻿#if UNITY_STANDALONE
 using Gameplay.AI;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay.VR
 {
     public class DetectionBehavior : VisionBehavior
     {
-        [SerializeField] AnimationManager animationManager;
-
         Vector3Variable playerHead, playerHandLeft, playerHandRight;
 
         public override void Ping()
@@ -18,7 +17,7 @@ namespace Gameplay.VR
 
                 detectionFeedback.PlayDetectionFeedback();
 
-                if (!alertManager.alarmRaisers.Contains(guardManager)) 
+                if (!alertManager.alarmRaisers.Contains(guardManager))
                     alertManager.alarmRaisers.Add(guardManager);
 
                 if (entityType == EntityType.Guard)
@@ -27,7 +26,7 @@ namespace Gameplay.VR
                     alertManager.Alert();
 
                     animationManager.SetAlertAnim();
-                    GetComponent<AgentManager>().StopAgent();
+                    guardManager.StopAgent();
                 }
 
                 else if(entityType == EntityType.Camera)
