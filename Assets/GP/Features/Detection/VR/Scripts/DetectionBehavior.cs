@@ -15,6 +15,8 @@ namespace Gameplay.VR
             {
                 detected = true; // stop the detection from looping
 
+                Debug.Log("player is detected !");
+
                 detectionFeedback.PlayDetectionFeedback();
 
                 if (!alertManager.alarmRaisers.Contains(guardManager))
@@ -29,7 +31,7 @@ namespace Gameplay.VR
                     guardManager.StopAgent();
                 }
 
-                else if(entityType == EntityType.Camera)
+                else if (entityType == EntityType.Camera)
                 {
                     alertManager.loseType = LoseType.PlayerSpottedByCam;
                     alertManager.Detected();
