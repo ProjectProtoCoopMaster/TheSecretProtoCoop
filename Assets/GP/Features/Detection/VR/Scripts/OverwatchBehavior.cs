@@ -26,69 +26,6 @@ namespace Gameplay.VR
             }
         }
 
-
-        /*
-        public void Ping2()
-        {
-            myPos.x = transform.position.x;
-            myPos.y = transform.position.z;
-
-            for (int i = 0; i < awarenessManager.deadGuards.Count; i++)
-            {
-                if (awarenessManager.deadGuards[i] != null)
-                {
-                    targetPosition.x = awarenessManager.deadGuards[i].position.x;
-                    targetPosition.y = awarenessManager.deadGuards[i].position.z;
-
-                    visionPosition.x = transform.position.x;
-                    visionPosition.y = awarenessManager.deadGuards[i].position.y;
-                    visionPosition.z = transform.position.z;
-
-                    sqrDistToTarget = (targetPosition - myPos).sqrMagnitude;
-
-            myFinalPos.x = transform.position.x;
-            myFinalPos.y = awarenessManager.deadGuards[i].position.y;
-            myFinalPos.z = transform.position.z;
-
-            sqrDistToTarget = (targetPos - myPos).sqrMagnitude;
-
-            // if the target guard is within the vision range
-            if (sqrDistToTarget < rangeOfVision * rangeOfVision)
-            {
-                // get the entity's direction relative to you...
-                targetDir = awarenessManager.deadGuards[i].position - myFinalPos;
-
-                //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
-                if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedBody == false)
-                {
-                    if (Physics.Linecast(this.transform.position, awarenessManager.deadGuards[i].position, out hitInfo, overwatchMask))
-                    {
-                        // get the entity's direction relative to you...
-                        targetDir = awarenessManager.deadGuards[i].position - visionPosition;
-
-                        //...if the angle between the looking dir of the entity and a dead guard is less than the cone of vision, then you can see him
-                        if (Vector3.Angle(targetDir, transform.forward) <= coneOfVision * 0.5f && detectedBody == false)
-                        {
-                            detectedBody = true; // stop overwatch from looping
-
-                            detectionFeedback.PlayDetectionFeedback();
-
-                            Debug.Log(gameObject.name + " is Incrementing the number of Alarm Raisers");
-
-                            if (!awarenessManager.alarmRaisers.Contains(this.gameObject))
-                                awarenessManager.alarmRaisers.Add(this.gameObject);
-
-                            spottedDeadBody.Raise();
-                        }
-
-                        //else if (hitInfo.collider != null) Debug.Log(gameObject.name + "'s Overwatch hit " + hitInfo.collider.GetComponentInParent<AudioSource>().gameObject.name + "'s " + hitInfo.collider.gameObject.name);
-                    }
-                }
-            }
-
-            Debug.LogWarning(gameObject.name + " is checking for dead friendlies");
-        }*/
-
         //called by Unity Event when the guard is killed
         public void UE_GuardDied()
         {
@@ -110,19 +47,6 @@ namespace Gameplay.VR
 
             enabled = false;
         }
-
-        #region Mobile Camera Power
-        // called from VR_CameraBehavior
-        public void UE_OverwatchOn()
-        {
-            updating = true;
-        }
-
-        public void UE_OverwatchOff()
-        {
-            updating = false;
-        }
-        #endregion
     }
 }
 #endif

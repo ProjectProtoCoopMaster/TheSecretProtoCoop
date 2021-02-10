@@ -29,21 +29,22 @@ namespace Gameplay.VR
 
         [SerializeField] protected DetectionFeedback detectionFeedback;
 
+        [SerializeField] protected EntityType entityType;
         [SerializeField] LayerMask visionLayerMask;
         [SerializeField] LayerMask targetLayerMask;
         RaycastHit hitInfo;
 
         // has the entity detected a target ? 
-        [SerializeField] [FoldoutGroup("Debugging")] protected bool detected;
+        [ReadOnly] protected bool detected;
 
         // used to update the entity's update every X frames
-        [SerializeField] [FoldoutGroup("Debugging")] protected int pingFrequency;
-        [SerializeField] [FoldoutGroup("Debugging")] protected int framesPassed;
+        [ReadOnly] protected int pingFrequency;
+        [ReadOnly] protected int framesPassed;
 
         // used to know if the entity of type Camera is active
-        [SerializeField] [FoldoutGroup("Debugging")] internal bool updating;
+        [ReadOnly] internal bool updating;
 
-        protected void Awake() => awarenessManager = FindObjectOfType<AwarenessManager>();
+        protected void Awake() => awarenessManager = FindObjectOfType<AlertManager>();
 
         private void OnEnable() => updating = true;
 
