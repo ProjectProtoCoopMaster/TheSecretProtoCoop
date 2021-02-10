@@ -28,7 +28,10 @@ namespace Gameplay.AI
 
         public Transform agentRig;
         public GameObject ragdollPrefab; public GameObject ragdoll { get; set; }
-        
+
+        private void OnEnable() => AIManager.agents.Add(this);
+        private void OnDisable() => AIManager.agents.Remove(this);
+
         void Awake()
         {
             InitializeAgent();

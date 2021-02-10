@@ -12,7 +12,7 @@ namespace Gameplay.AI
         public static List<AgentManager> agents = new List<AgentManager>();
         public List<AgentManager> Agents { get => agents; }
 
-        [Button]
+        // Unused
         public void FindAllAgents()
         {
             agents.Clear();
