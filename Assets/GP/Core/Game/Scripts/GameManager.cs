@@ -20,8 +20,6 @@ namespace Gameplay
         public int currentLevelIndex { get; set; }
         private string currentScene;
 
-        public bool gameOver { get; set; } = false;
-
         public BoolVariable _isMobile;
 
         public Transform UICanvas;
@@ -54,42 +52,43 @@ namespace Gameplay
         [Button]
         public void Lose(LoseType loseType)
         {
-            if (!gameOver)
+            if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
+
+            Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
+
+            switch (loseType)
             {
-                gameOver = true;
+                case LoseType.PlayerSpottedByGuard:
+                    loseText.text = _loseText.Value = "You were spotted by a Guard";
+                    loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[0];
+                    break;
+                case LoseType.PlayerSpottedByCam:
+                    loseText.text = _loseText.Value = "You were spotted by a Camera";
+                    loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[1];
+                    break;
 
-                if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
+                case LoseType.BodySpottedByCam:
+                    loseText.text = _loseText.Value = "A dead body was spotted by a Camera";
+                    loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[2];
+                    break;
+                case LoseType.BodySpottedByGuard:
+                    loseText.text = _loseText.Value = "A dead body was spotted by a Guard";
+                    loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[3];
+                    break;
 
-                Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
+                case LoseType.PlayerHitTrap:
+                    loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
+                    loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
+                    break;
 
-                switch (loseType)
-                {
-                    case LoseType.PlayerSpottedByGuard: loseText.text = _loseText.Value = "You were spotted by a Guard";
-                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[0];
-                        break;
-                    case LoseType.PlayerSpottedByCam: loseText.text = _loseText.Value = "You were spotted by a Camera";
-                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[1];
-                        break;
-
-                    case LoseType.BodySpottedByCam: loseText.text = _loseText.Value = "A dead body was spotted by a Camera";
-                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[2];
-                        break;
-                    case LoseType.BodySpottedByGuard: loseText.text = _loseText.Value = "A dead body was spotted by a Guard";
-                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[3];
-                        break;
-
-                    case LoseType.PlayerHitTrap: loseText.text = _loseText.Value = "You ran into a Hidden Trap !";
-                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[4];
-                        break;
-
-                    case LoseType.MissSymbols: loseText.text = _loseText.Value = "You failed to enter the right Code !";
-                        loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
-                        break;
-                }
-
-                // Reset the symbols
-                TransmitterManager.instance.symbolManager.isSymbolLoaded.Value = false;
+                case LoseType.MissSymbols:
+                    loseText.text = _loseText.Value = "You failed to enter the right Code !";
+                    loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
+                    break;
             }
+
+            // Reset the symbols
+            TransmitterManager.instance.symbolManager.isSymbolLoaded.Value = false;
         }
 
         [Button]
