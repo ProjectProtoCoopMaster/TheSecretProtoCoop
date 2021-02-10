@@ -13,15 +13,16 @@ namespace Gameplay.VR
 #if UNITY_STANDALONE
         public bool alert { get; set; }
 
-        [SerializeField] GameEvent playerSpotted, playerIncognito;
+        [SerializeField] GameEvent playerSpotted;
+        [SerializeField] GameEvent playerIncognito;
+
         [SerializeField] GameEvent gameOverAlarm;
 
-        [SerializeField] [FoldoutGroup("Alarm Raising")] float alertDuration;
+        [SerializeField] float alertDuration;
 
-        [ReadOnly] [FoldoutGroup("Alarm Raising")]
-        internal List<GuardManager> deadGuards = new List<GuardManager>();
-        [ReadOnly] [FoldoutGroup("Alarm Raising")]
-        internal List<GuardManager> alarmRaisers = new List<GuardManager>();
+        [Title("Debug")]
+        [ReadOnly] public List<GuardManager> deadGuards = new List<GuardManager>();
+        [ReadOnly] public List<GuardManager> alarmRaisers = new List<GuardManager>();
 
         private float currentTime;
 
