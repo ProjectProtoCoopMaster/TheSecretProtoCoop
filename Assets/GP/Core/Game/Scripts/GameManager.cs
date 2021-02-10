@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Networking;
 using Sirenix.OdinInspector;
+using Gameplay.VR;
 
 namespace Gameplay
 {
@@ -27,6 +28,8 @@ namespace Gameplay
 
         [SerializeField] private CallableFunction _fadeTransition;
         [SerializeField] private CallableFunction _unfadeTransition;
+
+        public AlertManager alertManager;
 
         [Title("Lose")]
         public Transform loseCanvas;
