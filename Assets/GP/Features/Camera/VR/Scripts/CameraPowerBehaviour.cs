@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#if UNITY_STANDALONE
 using UnityEngine;
 
 namespace Gameplay.VR
@@ -22,3 +21,4 @@ namespace Gameplay.VR
         }
     } 
 }
+#endif

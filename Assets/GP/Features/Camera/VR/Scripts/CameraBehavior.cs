@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
 using UnityEngine.Events;
 using UnityEngine;
 
@@ -41,3 +42,4 @@ namespace Gameplay.VR
         [Button] public void TurnOn() => cameraPowerBehaviour.PowerOn();
     }
 }
+#endif
