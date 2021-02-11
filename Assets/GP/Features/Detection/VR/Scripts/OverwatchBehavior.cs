@@ -11,6 +11,8 @@ namespace Gameplay.VR
             {
                 if (CanSeeTarget(alertManager.deadGuards[i].transform.position))
                 {
+                    Debug.Log(gameObject.name + " has spotted a dead guard !!!");
+
                     detected = true;
 
                     detectionFeedback.PlayDetectionFeedback();

@@ -25,6 +25,7 @@ namespace Gameplay.VR
         [SerializeField] [FoldoutGroup("Debug")] [ReadOnly] internal bool updating;
 
         [SerializeField] protected EntityType entityType;
+        [ShowIf("entityType", EntityType.Guard)] [Title("Guard")]
         [SerializeField] [ShowIf("entityType", EntityType.Guard)] protected GuardManager guardManager;
         [SerializeField] [ShowIf("entityType", EntityType.Guard)] protected AnimationManager animationManager;
 
@@ -76,8 +77,18 @@ namespace Gameplay.VR
                 {
                     if (Physics.Linecast(transform.position, targetPosition, out hitInfo, visionLayerMask))
                     {
-                        if (hitInfo.collider.gameObject.layer == targetLayerMask) return true;
-                        else return false;
+                        // check if the hitObject is on the target LayerMask
+                        if ((targetLayerMask.value & (1 << hitInfo.collider.gameObject.layer)) > 0)
+                        {
+                            Debug.DrawLine(transform.position, targetPosition, Color.green, 1f);
+                            return true;
+                        }
+
+                        else
+                        {
+                            Debug.DrawLine(transform.position, targetPosition, Color.red, 1f);
+                            return false;
+                        }
                     }
                     else return false;
                 }

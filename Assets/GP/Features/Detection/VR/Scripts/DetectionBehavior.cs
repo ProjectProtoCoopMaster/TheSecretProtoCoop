@@ -13,7 +13,7 @@ namespace Gameplay.VR
             {
                 detected = true; // stop the detection from looping
 
-                Debug.Log("player is detected !");
+                Debug.Log(gameObject.name + " has spotted a the player !!!");
 
                 detectionFeedback.PlayDetectionFeedback();
 
