@@ -9,38 +9,43 @@ namespace Gameplay.VR
 
         public override void Ping()
         {
-            if (CanSeeTarget(playerHead.Value) && CanSeeTarget(playerHandLeft.Value) && CanSeeTarget(playerHandRight.Value))
+            // if you can see the head...
+            if (CanSeeTarget(playerHead.Value))
             {
-                detected = true; // stop the detection from looping
-
-                Debug.Log(gameObject.name + " has spotted a the player !!!");
-
-                detectionFeedback.PlayDetectionFeedback();
-
-                if (!alertManager.alarmRaisers.Contains(guardManager))
-                    alertManager.alarmRaisers.Add(guardManager);
-
-                if (entityType == EntityType.Guard)
+                // ...and you also see the hands...
+                if (CanSeeTarget(playerHandLeft.Value) && CanSeeTarget(playerHandRight.Value))
                 {
-                    alertManager.loseType = LoseType.PlayerSpottedByGuard;
-                    alertManager.Alert();
+                    detected = true; // stop the detection from looping
 
-                    animationManager.SetAlertAnim();
-                    guardManager.StopAgent();
+                    Debug.Log(gameObject.name + " has spotted a the player !!!");
+
+                    detectionFeedback.PlayDetectionFeedback();
+
+                    if (!alertManager.alarmRaisers.Contains(guardManager))
+                        alertManager.alarmRaisers.Add(guardManager);
+
+                    if (entityType == EntityType.Guard)
+                    {
+                        alertManager.loseType = LoseType.PlayerSpottedByGuard;
+                        alertManager.Alert();
+
+                        animationManager.SetAlertAnim();
+                        guardManager.StopAgent();
+                    }
+
+                    else if (entityType == EntityType.Camera)
+                    {
+                        alertManager.loseType = LoseType.PlayerSpottedByCam;
+                        alertManager.Detected();
+                    }
                 }
 
-                else if (entityType == EntityType.Camera)
+                //...otherwise, it means that the player is "peeking"
+                else
                 {
-                    alertManager.loseType = LoseType.PlayerSpottedByCam;
-                    alertManager.Detected();
+                    playerPeeking.Raise();
+                    Debug.Log("The player is peeking !");
                 }
-            }
-
-            //...otherwise, it means that the player is "peeking"
-            else
-            {
-                playerPeeking.Raise();
-                Debug.Log("The player is peeking !");
             }
         }
 
