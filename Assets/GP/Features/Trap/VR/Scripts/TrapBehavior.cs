@@ -38,19 +38,12 @@ namespace Gameplay.VR
         {
             Debug.Log("I collided with " + other.gameObject.name);
 
-            if (other.GetComponent<IKillable>() != null && !other.GetComponent<IKillable>().isDead)
+            if (other.GetComponentInParent<IKillable>() != null && !other.GetComponentInParent<IKillable>().isDead)
             {
                 ps.Play();
                 audioSource.Play();
                 Debug.Log(other.gameObject.name);
                 other.GetComponent<IKillable>().Die(Vector3.zero);
-            }
-
-            if(other.GetComponentInParent<PlayerBehavior>() != null)
-            {
-                ps.Play();
-                audioSource.Play();
-                other.GetComponentInParent<IKillable>().Die(Vector3.zero);
             }
         }
 
