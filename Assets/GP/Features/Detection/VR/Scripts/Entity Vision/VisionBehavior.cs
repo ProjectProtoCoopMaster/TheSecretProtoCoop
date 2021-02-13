@@ -103,14 +103,14 @@ namespace Gameplay.VR
             if (alertManager.alarmRaisers.Contains(guardManager))
                 alertManager.alarmRaisers.Remove(guardManager);
 
-            enabled = false;
+            updating = false;
+            detected = false;
         }
 
         public void GE_RefreshScene()
         {
             updating = (entityType == EntityType.Guard) ? true : updating;
             detected = false;
-            enabled = true;
         }
     }
 }

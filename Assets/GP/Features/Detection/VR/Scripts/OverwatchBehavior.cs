@@ -42,11 +42,11 @@ namespace Gameplay.VR
         //called by Unity Event when the guard is killed
         public override void UE_GuardDied()
         {
+            base.UE_GuardDied();
+
             // add this entity to the list of dead guards
             if (!alertManager.deadGuards.Contains(guardManager))
                 alertManager.deadGuards.Add(guardManager);
-
-            base.UE_GuardDied();
         }
     }
 }
