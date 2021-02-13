@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1078856768317732896}
   - component: {fileID: 2782208830428516914}
-  - component: {fileID: 8668388833559456506}
   - component: {fileID: 5644999184313053363}
   m_Layer: 11
   m_Name: Patrol Guard Light
@@ -53,38 +52,9 @@ MonoBehaviour:
   navMeshAgent: {fileID: 5644999184313053363}
   agentRig: {fileID: 2393533254127219212}
   ragdollPrefab: {fileID: 6087318401039403507, guid: 904e1e8768c24b044b6b8a8332a4abab, type: 3}
-  guardType: 0
-  patrolBehavior: {fileID: 3329627162941776498}
-  distractionBehavior: {fileID: 8159280794720283947}
-  animationManager: {fileID: 5890509609340962848}
---- !u!114 &8668388833559456506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078856768317732911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d9a223479c71b44b53cdda969ee01c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 2782208830428516914}
   deathEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2782208830428516914}
-        m_TargetAssemblyTypeName: Gameplay.AI.AgentManager, Assembly-CSharp
-        m_MethodName: KillAgent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2935219182776058096}
         m_TargetAssemblyTypeName: DetectionFeedback, Assembly-CSharp
         m_MethodName: StopDetectionFeedback
@@ -134,6 +104,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   thrust: 1
+  guardType: 0
+  patrolBehavior: {fileID: 3329627162941776498}
+  distractionBehavior: {fileID: 8159280794720283947}
+  animationManager: {fileID: 5890509609340962848}
 --- !u!195 &5644999184313053363
 NavMeshAgent:
   m_ObjectHideFlags: 0

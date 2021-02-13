@@ -101,28 +101,20 @@ namespace Gameplay
 
         public override void OnEnterRoom()
         {
+            Debug.Log("Room Start");
+
             base.OnEnterRoom();
 
-            /// Initialize Modifier
-
-            //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
+            /// Initialize Modifier //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             /// Initialize AI
 
             for (int i = 0; i < aIManager.Agents.Count; i++)
             {
-                Debug.Log("resetting guards");
-
-                aIManager.Agents[i].DeletePreviousRagdoll();
-                aIManager.Agents[i].agentRig.gameObject.SetActive(true);
-
-                aIManager.Agents[i].transform.position = aIPositions[i];
-                aIManager.Agents[i].transform.rotation = aIRotations[i];
+                aIManager.Agents[i].Revive(aIPositions[i], aIRotations[i]);
             }
 
             roomNavigationSurface.BuildNavMesh();
-
-            //foreach (AgentManager agent in aIManager.Agents) { agent.navMeshAgent.enabled = false; agent.navMeshAgent.enabled = true; }
 
             aIManager.StartAllAgents();
 
@@ -133,22 +125,6 @@ namespace Gameplay
 
             TransmitterManager.instance.symbolManager.LoadSymbols();
         }
-
-        public override void OnDisableRoom()
-        {
-            var Yes = new { myMan = "Boi" };
-            var type = Yes.GetType();
-            Debug.Log(type.Name);
-
-            //if (roomNavigationSurface != null) roomNavigationSurface.RemoveData();
-        }
-    }
-
-    public class Bunker
-    {
-        /// Real Singleton Pattern
-        private Bunker() { }
-        public static Bunker instance { get; } = new Bunker();
     }
 
     [System.Serializable]
