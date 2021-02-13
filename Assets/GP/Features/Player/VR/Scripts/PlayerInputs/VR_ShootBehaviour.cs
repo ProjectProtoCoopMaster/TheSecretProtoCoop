@@ -83,7 +83,7 @@ namespace Gameplay.VR.Player
                     if (hitInfo.collider.CompareTag("Enemy/Light Guard"))
                     {
                         hitEnemy.Raise();
-                        hitInfo.collider.GetComponentInParent<AgentDeath>().Die((transform.forward) * bulletForce.Value);
+                        hitInfo.collider.GetComponentInParent<IKillable>().Die((transform.forward) * bulletForce.Value);
                     }
 
                     else if (hitInfo.collider.CompareTag("Enemy/Heavy Guard"))

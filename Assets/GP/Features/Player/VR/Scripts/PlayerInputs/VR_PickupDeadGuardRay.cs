@@ -1,4 +1,6 @@
 ﻿#if UNITY_STANDALONE
+using Gameplay.AI;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +10,7 @@ namespace Gameplay.VR.Player
 {
     public class VR_PickupDeadGuardRay : VR_Raycaster
     {
-        [SerializeField] AgentDeath currentGuard;
+        [SerializeField, ReadOnly] AgentManager currentGuard;
 
         private void Update()
         {
@@ -34,10 +36,10 @@ namespace Gameplay.VR.Player
             {
                 // if you touch a new button
                 if (hitInfo.collider != null &&
-                    hitInfo.collider.gameObject.GetComponentInParent<AgentDeath>() != null &&
-                    hitInfo.collider.gameObject.GetComponentInParent<AgentDeath>() != currentGuard)
+                    hitInfo.collider.gameObject.GetComponentInParent<AgentManager>() != null &&
+                    hitInfo.collider.gameObject.GetComponentInParent<AgentManager>() != currentGuard)
                 {
-                    currentGuard = hitInfo.collider.gameObject.GetComponentInParent<AgentDeath>();
+                    currentGuard = hitInfo.collider.gameObject.GetComponentInParent<AgentManager>();
                     onHover.Raise();
                     Debug.Log("Raising");
                 }

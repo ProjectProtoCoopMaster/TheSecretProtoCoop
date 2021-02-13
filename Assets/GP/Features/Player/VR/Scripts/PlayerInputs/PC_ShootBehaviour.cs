@@ -64,7 +64,7 @@ namespace Gameplay.PC.Player
 
                 if (Physics.SphereCast(shootOrigin.position, bulletRadius.Value, (crossHair.position - shootOrigin.position).normalized, out hitInfo, 100f, shootingLayer))
                 {
-                    if (hitInfo.collider.CompareTag("Enemy/Light Guard")) hitInfo.collider.GetComponentInParent<AgentDeath>().Die((transform.forward) * bulletForce.Value);
+                    if (hitInfo.collider.CompareTag("Enemy/Light Guard")) hitInfo.collider.GetComponentInParent<IKillable>().Die((transform.forward) * bulletForce.Value);
 
                     else if (hitInfo.collider.CompareTag("Enemy/Heavy Guard")) ricochet.Raise();
 
