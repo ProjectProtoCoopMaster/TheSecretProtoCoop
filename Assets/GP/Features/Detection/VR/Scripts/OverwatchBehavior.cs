@@ -40,17 +40,13 @@ namespace Gameplay.VR
         }
 
         //called by Unity Event when the guard is killed
-        public void UE_GuardDied()
+        public override void UE_GuardDied()
         {
-            // if you were detecting the player, remove this object from the list of alarm raisers
-            if (alertManager.alarmRaisers.Contains(guardManager))
-                alertManager.alarmRaisers.Remove(guardManager);
-
             // add this entity to the list of dead guards
             if (!alertManager.deadGuards.Contains(guardManager))
                 alertManager.deadGuards.Add(guardManager);
 
-            enabled = false;
+            base.UE_GuardDied();
         }
     }
 }

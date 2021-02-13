@@ -41,11 +41,6 @@ namespace Gameplay.VR
 
         protected AlertManager alertManager { get => GameManager.instance.alertManager; }
 
-        void Awake()
-        {
-            updating = (entityType == EntityType.Guard) ? true : updating;
-        }
-
         private void Update()
         {
             if (updating)
@@ -102,7 +97,21 @@ namespace Gameplay.VR
             else return false;
         }
 
-        public void GE_RefreshScene() => detected = false;
+        public virtual void UE_GuardDied()
+        {
+            // if you were detecting the player, remove this object from the list of alarm raisers
+            if (alertManager.alarmRaisers.Contains(guardManager))
+                alertManager.alarmRaisers.Remove(guardManager);
+
+            enabled = false;
+        }
+
+        public void GE_RefreshScene()
+        {
+            updating = (entityType == EntityType.Guard) ? true : updating;
+            detected = false;
+            enabled = true;
+        }
     }
 }
 #endif
