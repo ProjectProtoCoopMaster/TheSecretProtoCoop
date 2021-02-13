@@ -44,6 +44,7 @@ namespace Networking
         public void SendWinToAll() => photonView.RPC("SendWin", RpcTarget.AllViaServer);
         [PunRPC] private void SendWin() { GameManager.instance.Win(); }
 
+        [Button("Restart Level")]
         public void SendRestartToAll() => photonView.RPC("SendRestart", RpcTarget.AllViaServer);
         [PunRPC] private void SendRestart() { LevelManager.instance.RestartLevel(); }
 

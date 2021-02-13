@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 2908988362146197441}
   - component: {fileID: 5924429855004598520}
   - component: {fileID: 3650257923400164750}
+  - component: {fileID: 2291996433368160500}
   m_Layer: 11
   m_Name: Vision (Detection)
   m_TagString: Untagged
@@ -274,6 +275,46 @@ MonoBehaviour:
   entityType: 0
   guardManager: {fileID: 2486494400065184333}
   animationManager: {fileID: 0}
+--- !u!114 &2291996433368160500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574421585066173470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5924429855004598520}
+        m_TargetAssemblyTypeName: Gameplay.VR.VisionBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3650257923400164750}
+        m_TargetAssemblyTypeName: Gameplay.VR.VisionBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2514533107557686605
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,11 +834,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2810d8b42f1c0e94586278c3336bf94a, type: 3}
---- !u!1 &572654717441790413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 931290670466568294, guid: 2810d8b42f1c0e94586278c3336bf94a, type: 3}
-  m_PrefabInstance: {fileID: 801325724930294187}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &807010472878365246 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 12932728936012693, guid: 2810d8b42f1c0e94586278c3336bf94a, type: 3}
@@ -806,6 +842,11 @@ Animator:
 --- !u!4 &916951753350548343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 551492228925344476, guid: 2810d8b42f1c0e94586278c3336bf94a, type: 3}
+  m_PrefabInstance: {fileID: 801325724930294187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &572654717441790413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 931290670466568294, guid: 2810d8b42f1c0e94586278c3336bf94a, type: 3}
   m_PrefabInstance: {fileID: 801325724930294187}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5531363634968883203
