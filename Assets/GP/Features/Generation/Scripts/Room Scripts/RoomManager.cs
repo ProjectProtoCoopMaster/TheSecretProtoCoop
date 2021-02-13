@@ -122,7 +122,7 @@ namespace Gameplay
 
             roomNavigationSurface.BuildNavMesh();
 
-            foreach (AgentManager agent in aIManager.Agents) { agent.navMeshAgent.enabled = false; agent.navMeshAgent.enabled = true; }
+            //foreach (AgentManager agent in aIManager.Agents) { agent.navMeshAgent.enabled = false; agent.navMeshAgent.enabled = true; }
 
             aIManager.StartAllAgents();
 
