@@ -41,6 +41,11 @@ namespace Gameplay.VR
 
         protected AlertManager alertManager { get => GameManager.instance.alertManager; }
 
+        void Awake()
+        {
+            updating = (entityType == EntityType.Guard) ? true : updating;
+        }
+
         private void Update()
         {
             if (updating)
