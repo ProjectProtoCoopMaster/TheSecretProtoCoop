@@ -13,6 +13,8 @@ namespace Gameplay
 
         public void Raise()
         {
+            Debug.LogWarning(name);
+
             for (int i = listeners.Count - 1; i >= 0; i--)
             {
                 listeners[i].OnEventRaised();
