@@ -137,6 +137,7 @@ namespace Gameplay.AI
         {
             agentRig.gameObject.SetActive(true);
 
+            Debug.Log(pos);
             transform.position = pos;
             transform.rotation = rot;
 

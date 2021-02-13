@@ -60,9 +60,8 @@ namespace Gameplay
 
         protected bool init = true;
 
-        protected virtual void OnInitRoom() => init = false;
-
-        public virtual void OnEnterRoom() { if (init) OnInitRoom(); }
+        protected abstract void OnInitRoom();
+        public abstract void OnEnterRoom();
         public virtual void OnDisableRoom() { }
     }
 
@@ -73,8 +72,9 @@ namespace Gameplay
         public NavMeshSurface roomNavigationSurface;
 
         public AIManager aIManager;
-        public List<Vector3> aIPositions { get; set; }
-        public List<Quaternion> aIRotations { get; set; }
+
+        [ReadOnly] public List<Vector3> aIPositions;
+        [ReadOnly] public List<Quaternion> aIRotations;
 
         public Transform entranceAnchor;
         public Transform exitAnchor;
@@ -96,21 +96,24 @@ namespace Gameplay
                 aIRotations.Add(aIManager.Agents[i].transform.rotation);
             }
 
-            base.OnInitRoom();
+            init = false;
         }
 
         public override void OnEnterRoom()
         {
             Debug.Log("Room Start");
 
-            base.OnEnterRoom();
+            if (init) OnInitRoom();
 
             /// Initialize Modifier //if (roomModifier != ModifierType.None) ModifiersManager.instance.Send("Init", RpcTarget.All, roomModifier);
 
             /// Initialize AI
 
+            Debug.Log("resetting guards");
+
             for (int i = 0; i < aIManager.Agents.Count; i++)
             {
+                Debug.Log("yes les petits potes");
                 aIManager.Agents[i].Revive(aIPositions[i], aIRotations[i]);
             }
 
@@ -144,12 +147,12 @@ namespace Gameplay
 
             cameraManager = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
 
-            base.OnInitRoom();
+            init = false;
         }
 
         public override void OnEnterRoom()
         {
-            base.OnEnterRoom();
+            if (init) OnInitRoom();
 
             /// Initialize Camera
 
