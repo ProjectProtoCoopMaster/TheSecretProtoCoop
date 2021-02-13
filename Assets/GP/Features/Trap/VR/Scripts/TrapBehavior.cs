@@ -43,7 +43,7 @@ namespace Gameplay.VR
                 ps.Play();
                 audioSource.Play();
                 Debug.Log(other.gameObject.name);
-                other.GetComponent<IKillable>().Die(Vector3.zero);
+                other.GetComponentInParent<IKillable>().Die(Vector3.zero);
             }
         }
 
