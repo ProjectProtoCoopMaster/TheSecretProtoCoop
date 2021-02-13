@@ -16,6 +16,8 @@ namespace Gameplay.AI
 
         [SerializeField] private DistractionBehavior distractionBehavior;
 
+        public AnimationManager animationManager;
+
         protected override void InitializeAgent()
         {
             agentBehaviors = new Dictionary<StateType, AgentBehavior>();
@@ -26,6 +28,8 @@ namespace Gameplay.AI
 
         public override void StartAgent()
         {
+            animationManager.SetIdleAnim();
+
             if (guardType == GuardType.Patrol)
             {
                 SwitchAgentState(Usage.Start, StateType.Patrol);
