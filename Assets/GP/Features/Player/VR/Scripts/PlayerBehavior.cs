@@ -76,5 +76,7 @@ namespace Gameplay.VR
 
             _sendPlayerPosAndRot.Raise();
         }
+
+        public void ResetPlayer() => isDead = false;
     }
 }

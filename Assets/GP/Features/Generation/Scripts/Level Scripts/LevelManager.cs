@@ -111,6 +111,8 @@ namespace Gameplay
         {
             LoadRoom(roomIndex);
 
+            playerBehavior.ResetPlayer();
+
             playerRig.position = currentRoomVR.playerStart.position;
             playerRig.rotation = currentRoomVR.playerStart.rotation;
 
