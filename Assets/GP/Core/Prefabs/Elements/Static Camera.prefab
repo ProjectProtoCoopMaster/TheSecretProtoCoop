@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6734529643668475166}
   - component: {fileID: 3340561288250468278}
   - component: {fileID: 5151282222398012667}
+  - component: {fileID: 4624244806939327260}
   m_Layer: 11
   m_Name: Camera Functions
   m_TagString: Camera/Static Camera
@@ -272,6 +273,46 @@ MonoBehaviour:
   lightMesh: {fileID: 5736856155733467423}
   activeMat: {fileID: 2100000, guid: 6f7b34ce739692e43bd9309d0ae38186, type: 2}
   disabledMat: {fileID: 2100000, guid: 6ed1464c0db56be4b9fb7ea381543d2d, type: 2}
+--- !u!114 &4624244806939327260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4859161265381388714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b050f1f874b0d5498a0b48727c3f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 99c9c78504f57fc4795d70ced6417e00, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1426856480474875317}
+        m_TargetAssemblyTypeName: Gameplay.VR.VisionBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6734529643668475166}
+        m_TargetAssemblyTypeName: Gameplay.VR.VisionBehavior, Assembly-CSharp
+        m_MethodName: GE_RefreshScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7272883303542268953
 GameObject:
   m_ObjectHideFlags: 0
