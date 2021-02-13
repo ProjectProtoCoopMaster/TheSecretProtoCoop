@@ -54,4 +54,3 @@ namespace Gameplay.VR
         }
     }
 }
-

@@ -113,26 +113,6 @@ namespace Gameplay.AI
             }
         }
 
-        public void Die()
-        {
-            if (!isDead)
-            {
-                Debug.Log("Kill Agent");
-
-                StopAgent();
-
-                agentRig.gameObject.SetActive(false);
-
-                ragdoll = Instantiate(ragdollPrefab);
-                ragdoll.transform.parent = transform;
-                ragdoll.transform.position = transform.position;
-
-                deathEvent.Invoke();
-
-                isDead = true;
-            }
-        }
-
         public void Revive(Vector3 pos, Quaternion rot)
         {
             agentRig.gameObject.SetActive(true);

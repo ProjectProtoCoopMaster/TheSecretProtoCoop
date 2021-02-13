@@ -203,8 +203,6 @@ namespace Gameplay.VR.Player
         // show the pointer, using the referenced controller's transform.forward
         internal void TallRayPointer(SteamVR_Behaviour_Pose _controllerPose)
         {
-            Debug.Log("Aiming");
-
             if (_controllerPose != null && VRPlatform == false)
                 VRPlatform = true;
 

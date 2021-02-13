@@ -95,10 +95,10 @@ namespace Gameplay.AI
         #region Set
         public void Begin()
         {
-            string msg = "There are no actions registered for " + this.name + ", likely, the behavior did not initialize correctly";
+            string msg = "There are no actions registered for " + this + ", likely, the behavior did not initialize correctly";
             if (Utility.SafeCheck(actions, msg))
             {
-                Debug.Log("Beginning behavior :" + this.name + " for " + gameObject.name);
+                Debug.Log("Beginning behavior : " + this + " for " + agent.name);
                 active = true;
                 actionIndex = 0;
                 SetAction(actionIndex);

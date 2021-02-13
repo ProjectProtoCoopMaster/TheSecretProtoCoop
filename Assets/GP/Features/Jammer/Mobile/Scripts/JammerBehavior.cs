@@ -21,12 +21,10 @@ namespace Gameplay
         [SerializeField] 
         private bool State 
         {
-            get
-            {
+            get {
                 return state;
             }
-            set
-            {
+            set {
                 state = value;
 
                 if (state)
@@ -48,14 +46,13 @@ namespace Gameplay
             }
         }
 
-
         private IEnumerator Start()
         {
-
             yield return new WaitForSeconds(.5f);
+
             video = FindObjectOfType<VideoPlayer>();
-            if(video != null)
-                video.enabled = true;
+            if (video != null) video.enabled = true;
+
             State = true;
         }
 
@@ -64,27 +61,18 @@ namespace Gameplay
         public void SetState(bool value) => State = value;
 
         [Button]
-        public void Die() 
+        public void Die(Vector3 force = default)
         {
             _sendOnJammerDestroyedToOthers.Raise(ID);
             _destroyJammer.Raise(ID);
-            
-
-        }
-
-        public void Die(Vector3 force = default)
-        {
-            throw new System.NotImplementedException();
         }
 
         public void StopGlitch()
         {
-            if(video != null)
+            if (video != null)
             {
                 video.enabled = false;
             }
-
         }
     }
 }
-

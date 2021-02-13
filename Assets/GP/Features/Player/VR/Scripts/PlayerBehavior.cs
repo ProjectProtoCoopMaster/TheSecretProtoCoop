@@ -24,11 +24,6 @@ namespace Gameplay.VR
         [SerializeField] private Vector3Variable _playerPosition;
         [SerializeField] private QuaternionVariable _playerRotation;
 
-        [SerializeField] private GameObjectVariable _player;
-        [SerializeField] private UnityEngine.Events.UnityEvent _OnStart;
-        public IntVariable numberOfLoad;
-        public CallableFunction SendLoadSameScene;
-
         public void Die(Vector3 direction = default)
         {
             if (!isDead)
@@ -39,24 +34,6 @@ namespace Gameplay.VR
 
                 isDead = true;
             }
-        }
-
-        public void Die()
-        {
-            raiseAlarm.Raise();
-            playerHitTrap.Raise();
-        }
-
-        IEnumerator Start()
-        {
-            if (numberOfLoad != null &&  numberOfLoad.Value == 0)
-            {
-                SendLoadSameScene.Raise();
-                numberOfLoad.Value++;
-            }
-            _OnStart.Invoke();
-            yield return new WaitForSeconds(3.0f);
-            _refreshScene.Raise();
         }
 
         void Update()

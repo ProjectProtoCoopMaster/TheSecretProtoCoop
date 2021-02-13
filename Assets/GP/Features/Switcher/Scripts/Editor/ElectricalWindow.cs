@@ -19,8 +19,6 @@ public class ElectricalWindow : EditorWindow
         window.Show();
     }
 
-  
-
     private void OnGUI()
     {
         switcher = EditorGUILayout.ObjectField(switcher, typeof(GameObject)) as GameObject;

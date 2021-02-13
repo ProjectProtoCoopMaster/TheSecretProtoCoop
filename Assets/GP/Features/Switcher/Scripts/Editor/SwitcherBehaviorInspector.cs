@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Gameplay.Mobile;
+
 namespace Gameplay
 {
     [CustomEditor(typeof(SwitcherBehavior))]
     public class SwitcherBehaviorInspector : Editor
     {
-        
         SwitcherBehavior switcher;
+
         int numberOfChilds;
+
         private void OnEnable()
         {
             switcher = target as SwitcherBehavior;
-            
         }
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-           
 
             if(switcher.switchTimer == SwitcherBehavior.SwitchTimer.Fixed)
             {
@@ -28,7 +29,7 @@ namespace Gameplay
 
             if (switcher.hasJammer)
             {
-                switcher.jammer = EditorGUILayout.ObjectField("Jammer",switcher.jammer,typeof(JammerBehavior)) as JammerBehavior;
+                switcher.jammer = EditorGUILayout.ObjectField("Jammer", switcher.jammer, typeof(JammerBehavior)) as JammerBehavior;
             }
 
             switcher.SearchReferences();
@@ -40,13 +41,10 @@ namespace Gameplay
                     switcher.transform.GetChild(i).gameObject.GetComponent<SwitcherBehavior>().SearchReferences();
                     EditorUtility.SetDirty(switcher.transform.GetChild(i).gameObject.GetComponent<SwitcherBehavior>());
                 }
-
             }
-
 
             Repaint();
             EditorUtility.SetDirty(switcher);
         }
     }
 }
-

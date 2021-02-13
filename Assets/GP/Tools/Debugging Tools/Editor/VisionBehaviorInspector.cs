@@ -12,10 +12,6 @@ namespace Tools.Debugging
     [CustomEditor(typeof(VisionBehavior))]
     public class VisionBehaviorInspector : Editor
     {
-        static int playerMask = 0;
-        static List<string> layers;
-        static string[] layerOptions;
-
         bool existingData, localData;
         SerializedProperty entityVisionScriptableProp, rangeOfVisionProp, coneOfVisionProp, playerTransformProp, playerDetectionLayerProp;
 
