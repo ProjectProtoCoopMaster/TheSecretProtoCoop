@@ -82,7 +82,11 @@ namespace Gameplay
             int[] modifiedRooms = new int[modifiersAmount];
 
             List<RoomData> unmodifiedRooms = new List<RoomData>();
-            foreach (RoomData room in levelHolder.pickedRooms) unmodifiedRooms.Add(room);
+            foreach (RoomData room in levelHolder.pickedRooms)
+            {
+                unmodifiedRooms.Add(room);
+                room.roomModifier = 0;
+            }
 
             for (int r = 0; r < modifiersAmount; r++)
             {
@@ -90,6 +94,8 @@ namespace Gameplay
 
                 int m = Random.Range(0, modifierTypes.Count);
                 ModifierType modifier = modifierTypes[m];
+
+                Debug.Log(modifierTypes[m]);
 
                 unmodifiedRooms[modifiedRooms[r]].roomModifier = modifier;
 
