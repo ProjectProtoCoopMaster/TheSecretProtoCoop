@@ -10,7 +10,7 @@ public class Utility
     {
         if (element == null || element.Equals(null))
         {
-            Debug.Log(message);
+            Debug.LogError(message);
             return false;
         }
         else return true;
@@ -20,7 +20,7 @@ public class Utility
     {
         if (list.Count == 0)
         {
-            Debug.Log(message);
+            Debug.LogError(message);
             return false;
         }
         else return true;
@@ -95,14 +95,12 @@ namespace Gameplay.AI
         #region Set
         public void Begin()
         {
-            string msg = "There are no actions registered for " + this + ", likely, the behavior did not initialize correctly";
-            if (Utility.SafeCheck(actions, msg))
-            {
-                Debug.Log("Beginning behavior : " + this + " for " + agent.name);
-                active = true;
-                actionIndex = 0;
-                SetAction(actionIndex);
-            }
+            Debug.Log("Beginning behavior : " + GetType() + " for " + agent.name);
+
+            active = true;
+            actionIndex = 0;
+
+            SetAction(actionIndex);
         }
 
         protected void SetAction(int index)
@@ -115,10 +113,7 @@ namespace Gameplay.AI
 
         protected void SetActionBehavior(ActionType actionType)
         {
-            if (Utility.SafeCheck(actions, "There is no Action Behavior associated to the Action Type :" + actionType))
-            {
-                actionBehaviors[actionType].StartActionBehavior(currentAction);
-            }
+            actionBehaviors[actionType].StartActionBehavior(currentAction);
         }
         #endregion
 
@@ -140,7 +135,7 @@ namespace Gameplay.AI
         {
             actionIndex++;
 
-            Debug.Log(actionIndex + " / " + actions.Count + " " + this);
+            Debug.Log(actionIndex + " / " + actions.Count + " " + GetType() + " " + agent.name);
             if (actions.Count == actionIndex)
             {
                 if (loop) Begin();

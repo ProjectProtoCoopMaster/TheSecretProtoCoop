@@ -20,7 +20,7 @@ namespace Gameplay
     public class RoomData
     {
         public string roomName;
-        public ModifierType roomModifier { get; set; }
+        public ModifierType roomModifier { get; set; } = 0;
     }
 
     [CreateAssetMenu(fileName = "New Level File", menuName = "Level/Level File")]

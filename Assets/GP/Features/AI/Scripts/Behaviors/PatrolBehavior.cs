@@ -21,14 +21,12 @@ namespace Gameplay.AI
                 { ActionType.Watch, watchBehavior }
             };
 
-            string msg = "There is no path attached to " + gameObject.name + " patrol behavior, the behavior did not initalize";
-            if (Utility.SafeCheck(path, msg))
-            {
-                actions = ConvertPath(path);
-                string debugMsg = "";
-                foreach (Waypoint waypoint in path.waypoints) debugMsg += " " + waypoint.gameObject.name;
-                Debug.Log("Converting Path, with : " + debugMsg);
-            }
+            actions = ConvertPath(path);
+
+            // Debug
+            string debugMsg = "";
+            foreach (Waypoint waypoint in path.waypoints) debugMsg += " " + waypoint.gameObject.name;
+            Debug.Log("Converting Path, with : " + debugMsg);
         }
 
         private List<_Action> ConvertPath(PatrolPath _path)

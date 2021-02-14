@@ -79,8 +79,8 @@ namespace Gameplay
         
         public override void CreateLevel()
         {
-            LevelManager.instance.levelRooms.Clear();
-            LevelManager.instance.levelRooms = selectedRooms;
+            LevelManager.instance.LevelRooms.Clear();
+            LevelManager.instance.LevelRooms = selectedRooms;
 
             Transform currentAnchor = levelEntranceAnchor;
 
@@ -110,8 +110,8 @@ namespace Gameplay
     {
         public override void CreateLevel()
         {
-            LevelManager.instance.levelRooms.Clear();
-            LevelManager.instance.levelRooms = selectedRooms;
+            LevelManager.instance.LevelRooms.Clear();
+            LevelManager.instance.LevelRooms = selectedRooms;
 
             RoomMobile indexRoomMobile;
 

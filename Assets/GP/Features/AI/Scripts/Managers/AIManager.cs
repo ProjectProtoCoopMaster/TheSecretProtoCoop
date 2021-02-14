@@ -9,7 +9,7 @@ namespace Gameplay.AI
     {
         public bool testAI;
 
-        [ShowInInspector]
+        [ShowInInspector, ReadOnly]
         public static List<AgentManager> agents = new List<AgentManager>();
         public List<AgentManager> Agents { get => agents; }
 

@@ -6,7 +6,7 @@ using Networking;
 
 namespace Gameplay
 {
-    public enum ModifierType { DarkZone = 0, Thermic = 1, Oxygen = 2, None = 3 }
+    public enum ModifierType { None = 0, DarkZone = 1, Oxygen = 2, Thermic = 3 }
 
     public class LevelGenerator : SerializedMonoBehaviour
     {
@@ -84,7 +84,7 @@ namespace Gameplay
             List<RoomData> unmodifiedRooms = new List<RoomData>();
             foreach (RoomData room in levelHolder.pickedRooms) unmodifiedRooms.Add(room);
 
-            for (int r = 0; r < modifiedRooms.Length; r++)
+            for (int r = 0; r < modifiersAmount; r++)
             {
                 modifiedRooms[r] = Random.Range(0, unmodifiedRooms.Count);
 

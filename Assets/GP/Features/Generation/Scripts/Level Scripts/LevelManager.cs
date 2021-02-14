@@ -16,7 +16,7 @@ namespace Gameplay
 
         public LevelAssembler levelAssembler;
 
-        public List<RoomManager> levelRooms { get; set; } = new List<RoomManager>();
+        public List<RoomManager> LevelRooms { get; set; } = new List<RoomManager>();
 
         public Platform platform;
 
@@ -50,7 +50,7 @@ namespace Gameplay
 
         public void StartLevel()
         {
-            level.rooms = levelRooms;
+            level.rooms = LevelRooms;
 
             level.StartAt(0);
         }
