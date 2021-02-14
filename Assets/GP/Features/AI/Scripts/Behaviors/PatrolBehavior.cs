@@ -20,13 +20,11 @@ namespace Gameplay.AI
                 { ActionType.Wait, waitBehavior },
                 { ActionType.Watch, watchBehavior }
             };
+        }
 
+        public void InitializePatrol()
+        {
             actions = ConvertPath(path);
-
-            // Debug
-            string debugMsg = "";
-            foreach (Waypoint waypoint in path.waypoints) debugMsg += " " + waypoint.gameObject.name;
-            Debug.Log("Converting Path, with : " + debugMsg);
         }
 
         private List<_Action> ConvertPath(PatrolPath _path)

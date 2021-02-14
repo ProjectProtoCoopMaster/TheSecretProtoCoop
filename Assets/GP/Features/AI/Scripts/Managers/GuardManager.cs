@@ -32,6 +32,7 @@ namespace Gameplay.AI
 
             if (guardType == GuardType.Patrol)
             {
+                patrolBehavior.InitializePatrol();
                 SwitchAgentState(Usage.Start, StateType.Patrol);
             }
         }

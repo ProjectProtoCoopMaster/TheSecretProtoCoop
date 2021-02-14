@@ -83,9 +83,9 @@ namespace Gameplay
 
         protected override void OnInitRoom()
         {
-            /// Initialize AI
+            Debug.Log("Room Init");
 
-            Debug.Log("setting guards");
+            /// Initialize AI
 
             aIPositions = new List<Vector3>();
             aIRotations = new List<Quaternion>();
@@ -109,11 +109,8 @@ namespace Gameplay
 
             /// Initialize AI
 
-            Debug.Log("resetting guards");
-
             for (int i = 0; i < aIManager.Agents.Count; i++)
             {
-                Debug.Log("yes les petits potes");
                 aIManager.Agents[i].Revive(aIPositions[i], aIRotations[i]);
             }
 
