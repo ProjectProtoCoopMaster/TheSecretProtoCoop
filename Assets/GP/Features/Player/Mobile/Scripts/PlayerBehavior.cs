@@ -43,7 +43,7 @@ namespace Gameplay.Mobile
                 playerTransform.forward = _player.Value.transform.forward;
 
                 // Rotation
-                playerTransform.localRotation = _playerRotation.Value;
+                playerTransform.eulerAngles = new Vector3(-90, _playerRotation.Value.eulerAngles.y, 0);
             }
         }
     }
