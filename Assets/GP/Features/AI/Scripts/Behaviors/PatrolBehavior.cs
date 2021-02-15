@@ -6,7 +6,7 @@ namespace Gameplay.AI
 {
     public class PatrolBehavior : AgentBehavior
     {
-        [SerializeField] private PatrolPath path;
+        [SerializeField] private PatrolPath path; public PatrolPath Path { get => path; }
 
         [SerializeField] private MoveAction moveBehavior;
         [SerializeField] private WaitAction waitBehavior;
