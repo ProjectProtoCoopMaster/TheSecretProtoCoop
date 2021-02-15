@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Networking;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,8 +29,9 @@ namespace Gameplay.VR
         {
             if (!isDead)
             {
+                TransmitterManager.instance.SendLoseToAll((int)LoseType.PlayerHitTrap);
+
                 raiseAlarm.Raise();
-                _gameOver.Raise();
                 playerHitTrap.Raise();
 
                 isDead = true;

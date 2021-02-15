@@ -17,6 +17,9 @@ namespace Gameplay
     {
         public bool startGame;
 
+        [Tooltip("Cannot Lose the Game")]
+        public bool debugGame;
+
         public int currentLevelIndex { get; set; }
         private string currentScene;
 
@@ -52,6 +55,8 @@ namespace Gameplay
         [Button]
         public void Lose(LoseType loseType)
         {
+            if (debugGame) return;
+
             if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
 
             Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
