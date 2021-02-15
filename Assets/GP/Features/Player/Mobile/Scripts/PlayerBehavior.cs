@@ -34,10 +34,14 @@ namespace Gameplay.Mobile
                 if (currentRoom != null)
                 {
                     // Sets the Local Position of the Player (Relative to the Room) to the Position Variable
+                    Debug.Log(_playerPosition.Value);
                     currentRoom.room.LocalPlayer.localPosition = _playerPosition.Value;
+                    Debug.Log(currentRoom.room.LocalPlayer.localPosition);
 
                     // Sets the Position of the Player in the World to the Position of the Player in the Room;
+                    Debug.Log(currentRoom.room.LocalPlayer.position);
                     playerTransform.position = currentRoom.room.LocalPlayer.position;
+                    Debug.Log(playerTransform.position);
                 }
 
                 playerTransform.forward = _player.Value.transform.forward;
