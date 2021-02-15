@@ -28,7 +28,7 @@ namespace Gameplay.AI
     {
         public Color pathColor;
 
-        public List<Waypoint> waypoints;
+        public List<Waypoint> waypoints = new List<Waypoint>();
 
         public float pointArea { get; set; } = 0.5f;
 
