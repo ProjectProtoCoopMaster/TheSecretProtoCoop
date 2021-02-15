@@ -45,10 +45,14 @@ namespace Gameplay.VR
             if (currentRoom != null)
             {
                 // Sets the Position of the Player in the Room to the position of the Player in the World
+                Debug.Log(rigTransform.position);
                 currentRoom.room.LocalPlayer.position = rigTransform.position;
+                Debug.Log(currentRoom.room.LocalPlayer.position);
 
                 // Sets the Position Variable to the Local Position of the Player (Relative to the Room)
+                Debug.Log(currentRoom.room.LocalPlayer.localPosition);
                 _playerPosition.Value = currentRoom.room.LocalPlayer.localPosition;
+                Debug.Log(_playerPosition.Value);
             }
 
             _sendPlayerPosAndRot.Raise();

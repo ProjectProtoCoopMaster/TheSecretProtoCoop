@@ -104,7 +104,7 @@ namespace Networking
         public void SendBuildLevelToOther(LevelVariable levelVariable)
         {
             Debug.Log("Send Level Holder VR");
-            foreach(RoomData roomData in levelVariable.pickedRooms) { Debug.Log("with room : " + roomData.roomName + "and modifier : " + roomData.roomModifier); }
+            foreach(RoomData roomData in levelVariable.pickedRooms) { Debug.Log("with room : " + roomData.roomName + " and modifier : " + roomData.roomModifier); }
 
             string[] _names = new string[levelVariable.pickedRooms.Count];
             int[] _types = new int[levelVariable.pickedRooms.Count];
@@ -124,7 +124,7 @@ namespace Networking
             _levelHolder.pickedRooms = new List<RoomData>();
             for (int i = 0; i < size; i++)
             {
-                Debug.Log("with room : " + names[i] + "and modifier : " + (ModifierType)modifierTypes[i]);
+                Debug.Log("with room : " + names[i] + " and modifier : " + (ModifierType)modifierTypes[i]);
                 _levelHolder.pickedRooms.Add(new RoomData { roomName = names[i], roomModifier = (ModifierType)modifierTypes[i] });
             }
 
