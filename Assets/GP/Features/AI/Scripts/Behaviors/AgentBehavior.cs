@@ -10,7 +10,7 @@ public class Utility
     {
         if (element == null || element.Equals(null))
         {
-            Debug.LogError(message);
+            Debug.Log(message);
             return false;
         }
         else return true;
@@ -20,7 +20,7 @@ public class Utility
     {
         if (list.Count == 0)
         {
-            Debug.LogError(message);
+            Debug.Log(message);
             return false;
         }
         else return true;

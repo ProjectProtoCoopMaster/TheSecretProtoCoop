@@ -32,8 +32,11 @@ namespace Gameplay.AI
 
             if (guardType == GuardType.Patrol)
             {
-                patrolBehavior.InitializePatrol();
-                SwitchAgentState(Usage.Start, StateType.Patrol);
+                if (Utility.SafeCheck(patrolBehavior.Path, "There is no path attached to " + this.gameObject.name + " the guard will not move !"))
+                {
+                    patrolBehavior.InitializePatrol();
+                    SwitchAgentState(Usage.Start, StateType.Patrol);
+                }
             }
         }
 
