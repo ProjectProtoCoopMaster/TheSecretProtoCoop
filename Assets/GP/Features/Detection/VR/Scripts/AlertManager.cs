@@ -18,6 +18,8 @@ namespace Gameplay.VR
 
         [SerializeField] GameEvent gameOverAlarm;
 
+        [SerializeField] BoolVariable _isGameOver;
+
         [SerializeField] float alertDuration;
 
         [Title("Debug")]
@@ -30,7 +32,7 @@ namespace Gameplay.VR
 
         public void Alert()
         {
-            if (!alert)
+            if (alert == false)
             {
                 // Call the Alert Feedback Text
                 playerSpotted.Raise();
@@ -40,17 +42,21 @@ namespace Gameplay.VR
 
         public void Detected()
         {
-            TransmitterManager.instance.SendLoseToAll((int)loseType);
-            gameOverAlarm.Raise();
-            alert = false;
+            // if the game isn't alreay over
+            if(_isGameOver.Value == false)
+            {
+                TransmitterManager.instance.SendLoseToAll((int)loseType);
+                gameOverAlarm.Raise();
+                alert = false;
+            }
         }
 
         public void Incognito()
         {
-            alert = false;
             // Call Incognito Feedback Text
             playerIncognito.Raise();
             currentTime = 0.0f;
+            alert = false;
         }
 
         private void Update()

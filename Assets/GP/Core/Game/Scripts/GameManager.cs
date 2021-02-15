@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,10 +8,6 @@ using Gameplay.VR;
 
 namespace Gameplay
 {
-    public enum Platform { Mobile, VR }
-
-    public enum LoseType { PlayerSpottedByGuard = 0, PlayerSpottedByCam = 1, BodySpottedByCam = 2, BodySpottedByGuard = 3, PlayerHitTrap = 4, MissSymbols = 5 }
-
     public class GameManager : MonoBehaviour
     {
         public bool startGame;
@@ -24,6 +19,7 @@ namespace Gameplay
         private string currentScene;
 
         public BoolVariable _isMobile;
+        public BoolVariable _debuggingGame;
 
         public Transform UICanvas;
 
@@ -45,6 +41,8 @@ namespace Gameplay
 
         void Start()
         {
+            _debuggingGame.Value = debugGame;
+
             if (startGame)
             {
                 currentScene = null;
@@ -57,10 +55,11 @@ namespace Gameplay
         {
             if (debugGame) return;
 
+            // subject to change very soon
             if (_isMobile.Value) loseCanvas.gameObject.SetActive(true);
-
             Text loseText = loseCanvas.Find("ExplanationText").GetComponentInChildren<Text>();
 
+            #region Set LoseText value
             switch (loseType)
             {
                 case LoseType.PlayerSpottedByGuard:
@@ -90,7 +89,8 @@ namespace Gameplay
                     loseText.text = _loseText.Value = "You failed to enter the right Code !";
                     loseCanvas.transform.Find("DeathIcon").GetComponent<Image>().overrideSprite = deathIcons[5];
                     break;
-            }
+            } 
+            #endregion
 
             // Reset the symbols
             TransmitterManager.instance.symbolManager.isSymbolLoaded.Value = false;
